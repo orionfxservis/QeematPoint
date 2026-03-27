@@ -760,3 +760,161 @@ body {
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
 }
+
+/* ===== SOCIAL ICONS (CONTACT) ===== */
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* space between circles */
+    margin-top: 15px;
+}
+
+/* ===== GLASS SOCIAL ICONS ===== */
+
+.social-circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+
+    color: #fff;
+    font-size: 18px;
+
+    transition: all 0.3s ease;
+}
+
+/* Hover glow effect */
+.social-circle:hover {
+    transform: translateY(-6px) scale(1.08);
+    box-shadow: 0 0 15px rgba(255,255,255,0.2);
+}
+
+/* Icon smooth animation */
+.social-circle i {
+    transition: transform 0.3s ease;
+}
+
+.social-circle:hover i {
+    transform: scale(1.2) rotate(5deg);
+}
+
+/* ===== ANIMATED BACKGROUND EFFECT ===== */
+
+.social-circle::before {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 100%;
+    left: 0;
+    top: 0;
+    transition: 0.4s;
+    z-index: 1;
+}
+
+/* FACEBOOK */
+.social-circle.facebook {
+    border: 1px solid #1877f2;
+    color: #1877f2;
+}
+
+.social-circle.facebook::before {
+    background: #1877f2;
+}
+
+.social-circle.facebook:hover {
+    color: #fff;
+}
+
+.social-circle.facebook:hover::before {
+    width: 100%;
+}
+
+/* TIKTOK */
+.social-circle.tiktok {
+    border: 1px solid #000;
+    color: #000;
+}
+
+.social-circle.tiktok::before {
+    background: #000;
+}
+
+.social-circle.tiktok:hover {
+    color: #fff;
+}
+
+.social-circle.tiktok:hover::before {
+    width: 100%;
+}
+
+/* INSTAGRAM (Gradient Feel) */
+.social-circle.instagram {
+    border: 1px solid #e1306c;
+    color: #e1306c;
+}
+
+.social-circle.instagram::before {
+    background: linear-gradient(45deg, #f58529, #e1306c, #833ab4);
+}
+
+.social-circle.instagram:hover {
+    color: #fff;
+}
+
+.social-circle.instagram:hover::before {
+    width: 100%;
+}
+
+/* ===== CONTACT SECTION ANIMATION ===== */
+
+.contact-section {
+    opacity: 0;
+    transform: translateY(60px);
+    transition: all 0.8s ease;
+}
+
+/* When visible */
+.contact-section.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Form inputs animation */
+.contact-form .input-group {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: 0.5s ease;
+}
+
+.contact-section.show .input-group {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Stagger effect */
+.contact-section.show .input-group:nth-child(1) { transition-delay: 0.2s; }
+.contact-section.show .input-group:nth-child(2) { transition-delay: 0.4s; }
+.contact-section.show .input-group:nth-child(3) { transition-delay: 0.6s; }
+
+/* Button animation */
+.contact-section .btn {
+    opacity: 0;
+    transform: scale(0.9);
+    transition: 0.5s ease;
+}
+
+.contact-section.show .btn {
+    opacity: 1;
+    transform: scale(1);
+    transition-delay: 0.8s;
+}
