@@ -1,4 +1,4 @@
-﻿/* =========================
+/* =========================
    Orion FX - FINAL CLEAN CSS
    ========================= */
 
@@ -715,5 +715,48 @@ body {
     .footer { padding: 40px 20px 20px; }
 }
 
+/* ===== GLASS EFFECT (Search Panel + Navbar + Cards optional) ===== */
 
+.search-panel,
+.navbar {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
 
+/* Optional: light glass feel without changing colors */
+.search-panel {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.navbar {
+    background: rgba(0, 0, 0, 0.4);
+}
+
+/* Optional (very subtle on cards) */
+.product-card {
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+}
+
+/* ===== GLASS EFFECT (Search Panel + Navbar + Cards optional) ===== */
+
+.search-panel,
+.navbar {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+/* Optional: light glass feel without changing colors */
+.search-panel {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.navbar {
+    background: rgba(0, 0, 0, 0.4);
+}
+
+/* Optional (very subtle on cards) */
+.product-card {
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+}

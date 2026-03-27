@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -420,15 +420,11 @@
         const boxes = document.querySelectorAll(".cat-box");
 
         boxes.forEach(box => {
-            box.addEventListener("click", () => {
-                boxes.forEach(b => b.classList.remove("active"));
-                box.classList.add("active");
-
-                // Store selected value
-                const selectedCategory = box.getAttribute("data-value");
-                console.log("Selected Category:", selectedCategory);
-            });
-        });
+    box.addEventListener("click", () => {
+        boxes.forEach(b => b.classList.remove("active"));
+        box.classList.add("active");
+    });
+});
 
         // Urdu Typing Detection
         document.getElementById("searchInput").addEventListener("input", function (e) {
