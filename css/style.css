@@ -1095,18 +1095,18 @@ html {
         padding: 15px 20px;
     }
     .logo {
-        font-size: 1.8rem;
+        font-size: 1.5rem;
     }
     .nav-links {
         margin-top: 15px;
         order: 3;
         width: 100%;
-        justify-content: center;
+        justify-content: space-evenly;
         margin-left: 0;
-        gap: 10px;
+        gap: 5px;
     }
     .nav-links a {
-        font-size: 0.9rem;
+        font-size: 0.85rem;
         padding: 5px 8px;
     }
     .login-wrapper {
@@ -1202,21 +1202,32 @@ html {
 
 @media(max-width:480px) {
     /* Extra small mobile devices */
+    .navbar {
+        padding: 10px 15px;
+    }
     .nav-links {
         flex-wrap: wrap;
         justify-content: center;
         gap: 5px;
+        margin-top: 10px;
+    }
+    .nav-links a {
+        font-size: 0.75rem;
+        padding: 4px 5px;
     }
     .logo {
-        font-size: 1.5rem;
+        font-size: 1.25rem;
+        white-space: nowrap;
+    }
+    .login-trigger {
+        width: 35px;
+        height: 35px;
+        font-size: 0.85rem;
     }
     .typed-text {
-        font-size: 1.5rem;
+        font-size: 1.4rem;
     }
     .category-row {
         grid-template-columns: repeat(2, 1fr) !important;
-    }
-    .search-row {
-        grid-template-columns: 1fr;
     }
 }
