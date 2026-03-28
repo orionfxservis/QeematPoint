@@ -1112,10 +1112,22 @@ html {
     .login-wrapper {
         margin-left: auto;
     }
+    .login-dropdown {
+        position: fixed;
+        left: 50%;
+        top: 90px;
+        transform: translate(-50%, -10px);
+        width: 90%;
+        max-width: 340px;
+    }
+    .login-dropdown.show {
+        transform: translate(-50%, 0);
+    }
     
     /* Hero Section Fixes */
     .hero-content {
-        transform: translateY(-10px);
+        transform: translateY(0);
+        margin-top: 90px;
         padding: 0 15px;
     }
     .typed-text {
@@ -1157,6 +1169,14 @@ html {
     
     .search-row {
         gap: 10px;
+    }
+
+    /* Wrap the category bar so it fits on two lines without scrolling */
+    .category-bar {
+        flex-wrap: wrap;
+        overflow-x: visible;
+        justify-content: center;
+        margin-top: 15px;
     }
 }
 
