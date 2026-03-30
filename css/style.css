@@ -357,6 +357,10 @@ body {
     .category-row {
         grid-template-columns: repeat(3,1fr);
     }
+    
+    .category-row.single {
+        grid-template-columns: 1fr;
+    }
 
     .search-row {
         grid-template-columns: 1fr;

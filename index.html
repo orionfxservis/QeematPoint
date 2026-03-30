@@ -887,18 +887,19 @@ barItems.forEach(item => {
 dropdownToggle.addEventListener("click", (e) => {
     e.stopPropagation();
 
-    dropdownMenu.classList.remove("left-open");
-    dropdownMenu.classList.add("show");
-
-    setTimeout(() => {
-        const rect = dropdownMenu.getBoundingClientRect();
-
-        if (rect.right > window.innerWidth) {
-            dropdownMenu.classList.add("left-open");
-        }
-    }, 10);
-
-    document.body.classList.add("dropdown-open");
+    if (dropdownMenu.classList.contains("show")) {
+        dropdownMenu.classList.remove("show", "left-open");
+        document.body.classList.remove("dropdown-open");
+    } else {
+        dropdownMenu.classList.add("show");
+        setTimeout(() => {
+            const rect = dropdownMenu.getBoundingClientRect();
+            if (rect.right > window.innerWidth) {
+                dropdownMenu.classList.add("left-open");
+            }
+        }, 10);
+        document.body.classList.add("dropdown-open");
+    }
 });
 
 
