@@ -1578,13 +1578,16 @@ window.updateBlockOptionsGlobal = function(areaVal, blockNoSelect) {
         });
     } else if (areaVal === 'Landhi') {
         const landhiBlocks = [
-            'Landhi No. 1', 'Landhi No. 2', 'Landhi No. 3', 'Landhi No. 3½', 'Landhi No. 4', 'Landhi No. 5', 'Landhi No. 6',
-            'Sector 36-A', 'Sector 36-B', 'Sector 36-C', 'Sector 36-D',
-            'Sector 37-A', 'Sector 37-B', 'Sector 37-C', 'Sector 37-D',
-            'Sector 35-A', 'Sector 35-B',
-            'Future Colony', 'Sherpao Colony', 'Muslimabad', 'Babar Market', 'Bhains Colony', 'Landhi Industrial Area'
+            'Sector A', 'Sector B', 'Sector C', 'Sector D', 'Sector E', 'Sector F', 'Sector G', 'Sector H'
         ];
         landhiBlocks.forEach(b => {
+            optionsHtml += `<option value="${b}">${b}</option>`;
+        });
+    } else if (areaVal === 'Mehran Town') {
+        const mehranTownBlocks = [
+            'Sector A', 'Sector B', 'Sector C', 'Sector D', 'Sector E', 'Sector F', 'Sector G', 'Sector H'
+        ];
+        mehranTownBlocks.forEach(b => {
             optionsHtml += `<option value="${b}">${b}</option>`;
         });
     } else if (areaVal === 'Saddar') {
@@ -1778,6 +1781,7 @@ function renderDynamicAdminFields() {
                         <option value="Gulistan-e-Johar">Gulistan-e-Johar</option>
                         <option value="Korangi">Korangi</option>
                         <option value="Landhi">Landhi</option>
+                        <option value="Mehran Town">Mehran Town</option>
                         <option value="Liaquatabad">Liaquatabad</option>
                         <option value="Malir">Malir</option>
                         <option value="North Nazimabad">North Nazimabad</option>
