@@ -1498,6 +1498,26 @@ window.updateBlockOptionsGlobal = function(areaVal, blockNoSelect) {
         ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'].forEach(letter => {
             optionsHtml += `<option value="Bhittai Colony - Sector ${letter}">Bhittai Colony - Sector ${letter}</option>`;
         });
+    } else if (areaVal === 'Korangi Industrial Area') {
+        const sectors = [
+            'Sector 6-A', 'Sector 6-B', 'Sector 6-C', 'Sector 6-D', 'Sector 6-E', 'Sector 6-F', 'Sector 6-G', 'Sector 6-H', 'Sector 6-I',
+            'Sector 7-A', 'Sector 7-B',
+            'Sector 19',
+            'Sector 21',
+            'Sector 22',
+            'Sector 23',
+            'Sector 24',
+            'Sector 25',
+            'Sector 26',
+            'Sector 27',
+            'Sector 28',
+            'Sector 30',
+            'Sector 33-B', 'Sector 33-C', 'Sector 33-D', 'Sector 33-E', 'Sector 33-F', 'Sector 33-G',
+            'Sector 38 (Korangi Creek Industrial Park)'
+        ];
+        sectors.forEach(sec => {
+            optionsHtml += `<option value="${sec}">${sec}</option>`;
+        });
     } else if (areaVal === 'Gulshan-e-Iqbal') {
         for (let i = 1; i <= 19; i++) {
             optionsHtml += `<option value="Block ${i}">Block ${i}</option>`;
@@ -1780,6 +1800,7 @@ function renderDynamicAdminFields() {
                         <option value="Gulshan-e-Iqbal">Gulshan-e-Iqbal</option>
                         <option value="Gulistan-e-Johar">Gulistan-e-Johar</option>
                         <option value="Korangi">Korangi</option>
+                        <option value="Korangi Industrial Area">Korangi Industrial Area</option>
                         <option value="Landhi">Landhi</option>
                         <option value="Mehran Town">Mehran Town</option>
                         <option value="Liaquatabad">Liaquatabad</option>
