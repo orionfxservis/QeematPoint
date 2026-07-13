@@ -1443,6 +1443,23 @@ textarea:focus {
     opacity: 0.95;
 }
 
+.food-category{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.food-category img{
+    width:34px;
+    height:34px;
+    object-fit:contain;
+    transition:.3s;
+}
+
+.food-category:hover img{
+    transform:scale(1.1);
+}
+
 /* Different glow accents */
 
 /* FAST FOOD — ORANGE */
