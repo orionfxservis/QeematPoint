@@ -198,7 +198,7 @@ function renderFoodList() {
   }
 
   foodListingsEl.innerHTML = filtered.map(f => {
-    const isSelected = f.id === selectedFoodId;
+    const isSelected = String(f.id) === String(selectedFoodId);
     const activeClass = isSelected ? 'border-[#f97316] shadow-[0_10px_35px_rgba(249,115,22,0.18)] bg-slate-800/90 ring-1 ring-[#f97316]' : 'border-slate-700 hover:border-slate-500 hover:bg-slate-800/80 bg-slate-900/60 shadow-sm';
 
     return `
@@ -237,7 +237,7 @@ function renderFoodList() {
 
 function selectFoodItem(id, preventScroll = false) {
   selectedFoodId = id;
-  const item = foodDeals.find(f => f.id === id);
+  const item = foodDeals.find(f => String(f.id) === String(id));
 
   if (item) {
     // Hide placeholder, show content
@@ -318,7 +318,7 @@ function selectFoodItem(id, preventScroll = false) {
           `;
           
           top5.forEach(comp => {
-            const isCurrent = comp.id === item.id;
+            const isCurrent = String(comp.id) === String(item.id);
             html += `
               <div class="flex justify-between items-center py-1 border-b border-slate-700/30 ${isCurrent ? 'bg-emerald-500/10 px-1 rounded' : ''}">
                 <span class="text-slate-300 font-medium">${comp.brand || comp.variety || 'Unknown'} ${isCurrent ? '<span class="text-[9px] text-emerald-400 font-bold">(Current)</span>' : ''}</span>
@@ -439,162 +439,190 @@ function selectFoodItem(id, preventScroll = false) {
   }
 }
 
+// Helper to process raw products data
+function processProducts(allProducts) {
+  const foodProducts = allProducts.filter(p => p.category && p.category.toLowerCase() === 'food' && (p.status === 'Publish' || p.prodStatus === 'Publish' || (!p.status && !p.prodStatus && (!p.addedBy || p.addedBy.toLowerCase() === 'admin'))));
+  return foodProducts.map(p => {
+    let variety = p.variety || p.brand || p.subCategory || 'No Variety Specified';
+    const parts = [];
+    if (p.qty) parts.push(p.qty);
+    if (p.gram) parts.push(p.gram);
+    if (parts.length > 0) {
+      variety = `${variety} (${parts.join(' - ')})`;
+    }
+    const address = p.address || '';
+    const areaVal = p.area || p.areaBlock || '';
+    const blockVal = p.blockNo || p.block || '';
+    const areaCombined = (areaVal && blockVal) ? `${areaVal} - ${blockVal}` : (areaVal || blockVal || '');
+    const city = p.city || '';
+
+    const fullLocation = [address, areaCombined, city]
+      .filter(Boolean)
+      .join(', ');
+    const distanceKm = parseFloat(p.distance || p.distanceKm) || 2.5;
+    const phone = p.phone || p.contact || '';
+    const whatsapp = p.whatsapp || phone;
+
+    let tags = [];
+    if (Array.isArray(p.tags)) {
+      tags = p.tags;
+    } else if (typeof p.tags === 'string') {
+      tags = p.tags.split(',').map(t => t.trim()).filter(t => t);
+    } else if (p.subCategory) {
+      tags = [p.subCategory];
+    }
+
+    return {
+      id: p.id,
+      name: p.name || 'Unnamed Item',
+      variety: variety,
+      brand: p.brand || p.subCategory || '',
+      category: p.category || '',
+      subCategory: p.subCategory || '',
+      market: p.market || '',
+      unit: p.unit || '',
+      address: address,
+      area: areaVal,
+      city: city,
+      fullLocation: fullLocation,
+      distanceKm: distanceKm,
+      price: parseFloat(p.price || 0),
+      originalPrice: p.originalPrice ? parseFloat(p.originalPrice) : null,
+      image: p.image || 'https://via.placeholder.com/600x400?text=No+Image',
+      description: p.description || p.details || variety,
+      phone: phone,
+      whatsapp: whatsapp,
+      videoLink: p.videoLink || null,
+      tags: tags,
+      standardProductType: p.standardProductType || ''
+    };
+  });
+}
+
 // Initial Setup
 async function initFoodDeals() {
-  if (typeof DataService !== 'undefined') {
-    let allProducts = [];
-    try {
-      allProducts = await DataService.getProducts();
-    } catch (e) {
-      console.warn("Failed to fetch products from service, checking local fallback", e);
-      allProducts = JSON.parse(localStorage.getItem("admin_products")) || [];
+  // 1. Instantly load offline data from localStorage
+  const localProducts = JSON.parse(localStorage.getItem("admin_products")) || [];
+  foodDeals = processProducts(localProducts);
+
+  // Render lists and select default immediately
+  if (foodListingsEl) {
+    renderFoodList();
+    if (foodDeals.length > 0) {
+      selectFoodItem(foodDeals[0].id, true);
     }
-    // Filter for Food Category and Published Status
-    const foodProducts = allProducts.filter(p => p.category && p.category.toLowerCase() === 'food' && (p.status === 'Publish' || p.prodStatus === 'Publish' || (!p.status && !p.prodStatus && (!p.addedBy || p.addedBy.toLowerCase() === 'admin'))));
-    // Map to the format food.js expects
-    foodDeals = foodProducts.map(p => {
-      let variety = p.variety || p.brand || p.subCategory || 'No Variety Specified';
-      const parts = [];
-      if (p.qty) parts.push(p.qty);
-      if (p.gram) parts.push(p.gram);
-      if (parts.length > 0) {
-        variety = `${variety} (${parts.join(' - ')})`;
-      }
-      const address = p.address || '';
-      const areaVal = p.area || p.areaBlock || '';
-      const blockVal = p.blockNo || p.block || '';
-      const areaCombined = (areaVal && blockVal) ? `${areaVal} - ${blockVal}` : (areaVal || blockVal || '');
-      const city = p.city || '';
+  }
 
-      const fullLocation = [address, areaCombined, city]
-        .filter(Boolean)
-        .join(', ');
-      const distanceKm = parseFloat(p.distance || p.distanceKm) || 2.5;
-      const phone = p.phone || p.contact || '';
-      const whatsapp = p.whatsapp || phone;
-
-      // Handle tags
-      let tags = [];
-      if (Array.isArray(p.tags)) {
-        tags = p.tags;
-      } else if (typeof p.tags === 'string') {
-        tags = p.tags.split(',').map(t => t.trim()).filter(t => t);
-      } else if (p.subCategory) {
-        tags = [p.subCategory];
-      }
-
-      return {
-        id: p.id,
-        name: p.name || 'Unnamed Item',
-        variety: variety,
-        brand: p.brand || p.subCategory || '',
-        category: p.category || '',
-        subCategory: p.subCategory || '',
-        market: p.market || '',
-        unit: p.unit || '',
-        address: address,
-        area: areaVal,
-        city: city,
-        fullLocation: fullLocation,
-        distanceKm: distanceKm,
-        price: parseFloat(p.price || 0),
-        originalPrice: p.originalPrice ? parseFloat(p.originalPrice) : null,
-        image: p.image || 'https://via.placeholder.com/600x400?text=No+Image',
-        description: p.description || p.details || variety,
-        phone: phone,
-        whatsapp: whatsapp,
-        videoLink: p.videoLink || null,
-        tags: tags,
-        standardProductType: p.standardProductType || ''
-      };
+  // Populate Select filters
+  const populateSelect = (id, property) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const uniqueVals = [...new Set(foodDeals.map(f => f[property]).filter(Boolean))].sort();
+    el.innerHTML = '<option value="">All</option>';
+    uniqueVals.forEach(val => {
+      const opt = document.createElement('option');
+      opt.value = val;
+      opt.textContent = val;
+      el.appendChild(opt);
     });
+    el.removeEventListener('change', renderFoodList);
+    el.addEventListener('change', renderFoodList);
+  };
 
-    // Populate Filters
-    const populateSelect = (id, property) => {
-      const el = document.getElementById(id);
-      if (!el) return;
-      const uniqueVals = [...new Set(foodDeals.map(f => f[property]).filter(Boolean))].sort();
-      uniqueVals.forEach(val => {
-        const opt = document.createElement('option');
-        opt.value = val;
-        opt.textContent = val;
-        el.appendChild(opt);
-      });
-      el.addEventListener('change', renderFoodList);
-    };
-
+  const populateAllFilters = () => {
     populateSelect('filterCategory', 'category');
     populateSelect('filterSubCategory', 'subCategory');
     populateSelect('filterProduct', 'name');
     populateSelect('filterVariety', 'variety');
     populateSelect('filterBrand', 'brand');
+  };
 
-    // Update dynamic Brand count in stats card
+  const updateBrandCount = () => {
     const uniqueBrands = [...new Set(foodDeals.map(f => f.brand).filter(Boolean))];
     const brandCount = uniqueBrands.length;
     const brandCountEn = document.getElementById('brandCountEn');
     const brandCountUr = document.getElementById('brandCountUr');
     if (brandCountEn) brandCountEn.textContent = brandCount + '+';
     if (brandCountUr) brandCountUr.textContent = brandCount + '+';
+  };
 
-    // Click event for brandStatCard to connect it with filterBrand select in search panel
-    const brandStatCard = document.getElementById('brandStatCard');
-    if (brandStatCard) {
-      brandStatCard.addEventListener('click', () => {
-        const filterBrand = document.getElementById('filterBrand');
-        if (filterBrand) {
-          filterBrand.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          // Highlight the select element with a temporary border style
-          filterBrand.focus();
-          filterBrand.classList.add('ring-2', 'ring-emerald-500', 'border-emerald-500');
-          setTimeout(() => {
-            filterBrand.classList.remove('ring-2', 'ring-emerald-500', 'border-emerald-500');
-          }, 2000);
-        }
-      });
-    }
+  populateAllFilters();
+  updateBrandCount();
 
-    // Update dynamic Live Deals count asynchronously (non-blocking)
-    if (typeof DataService !== 'undefined') {
-      DataService.getDeals().then(mainDeals => {
-        const liveDealsCount = mainDeals.filter(d => (d.category || '').toLowerCase() === 'food').length;
-        const liveDealsCountEn = document.getElementById('liveDealsCountEn');
-        const liveDealsCountUr = document.getElementById('liveDealsCountUr');
-        if (liveDealsCountEn) liveDealsCountEn.textContent = liveDealsCount + '+';
-        if (liveDealsCountUr) liveDealsCountUr.textContent = liveDealsCount + '+';
-      }).catch(e => {
-        console.warn("Failed to fetch live deals count from service, checking local fallback", e);
-        const localDeals = JSON.parse(localStorage.getItem("admin_deals")) || [];
-        const liveDealsCount = localDeals.filter(d => (d.category || '').toLowerCase() === 'food').length;
-        const liveDealsCountEn = document.getElementById('liveDealsCountEn');
-        const liveDealsCountUr = document.getElementById('liveDealsCountUr');
-        if (liveDealsCountEn) liveDealsCountEn.textContent = liveDealsCount + '+';
-        if (liveDealsCountUr) liveDealsCountUr.textContent = liveDealsCount + '+';
-      });
-    }
-
-    // Click event for liveDealsStatCard to redirect to main page and trigger Food Deals modal
-    const liveDealsStatCard = document.getElementById('liveDealsStatCard');
-    if (liveDealsStatCard) {
-      liveDealsStatCard.addEventListener('click', () => {
-        window.location.href = '../index.html?openDeals=Food';
-      });
-    }
-
-    document.getElementById('minPrice')?.addEventListener('input', renderFoodList);
-    document.getElementById('maxPrice')?.addEventListener('input', renderFoodList);
-
-    document.querySelectorAll('.marketFilter, .unitFilter').forEach(el => el.addEventListener('change', renderFoodList));
-
-    document.querySelectorAll('.quickFilterBtn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        btn.classList.toggle('active-filter');
-        btn.classList.toggle('border-emerald-500');
-        btn.classList.toggle('text-emerald-400');
-        renderFoodList();
-      });
+  // Click event for brandStatCard to connect it with filterBrand select in search panel
+  const brandStatCard = document.getElementById('brandStatCard');
+  if (brandStatCard) {
+    brandStatCard.addEventListener('click', () => {
+      const filterBrand = document.getElementById('filterBrand');
+      if (filterBrand) {
+        filterBrand.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        filterBrand.focus();
+        filterBrand.classList.add('ring-2', 'ring-emerald-500', 'border-emerald-500');
+        setTimeout(() => {
+          filterBrand.classList.remove('ring-2', 'ring-emerald-500', 'border-emerald-500');
+        }, 2000);
+      }
     });
   }
+
+  // 2. Fetch fresh products from Supabase in background (Non-blocking!)
+  if (typeof DataService !== 'undefined') {
+    DataService.getProducts().then(freshProducts => {
+      if (freshProducts && freshProducts.length > 0) {
+        foodDeals = processProducts(freshProducts);
+        localStorage.setItem("admin_products", JSON.stringify(freshProducts));
+        
+        // Re-render and update UI with fresh data
+        renderFoodList();
+        populateAllFilters();
+        updateBrandCount();
+        if (foodDeals.length > 0) {
+          selectFoodItem(foodDeals[0].id, true);
+        }
+      }
+    }).catch(e => {
+      console.warn("Failed to fetch fresh products from service", e);
+    });
+
+    // Update dynamic Live Deals count asynchronously (non-blocking)
+    DataService.getDeals().then(mainDeals => {
+      const liveDealsCount = mainDeals.filter(d => (d.category || '').toLowerCase() === 'food').length;
+      const liveDealsCountEn = document.getElementById('liveDealsCountEn');
+      const liveDealsCountUr = document.getElementById('liveDealsCountUr');
+      if (liveDealsCountEn) liveDealsCountEn.textContent = liveDealsCount + '+';
+      if (liveDealsCountUr) liveDealsCountUr.textContent = liveDealsCount + '+';
+    }).catch(e => {
+      console.warn("Failed to fetch live deals count from service, checking local fallback", e);
+      const localDeals = JSON.parse(localStorage.getItem("admin_deals")) || [];
+      const liveDealsCount = localDeals.filter(d => (d.category || '').toLowerCase() === 'food').length;
+      const liveDealsCountEn = document.getElementById('liveDealsCountEn');
+      const liveDealsCountUr = document.getElementById('liveDealsCountUr');
+      if (liveDealsCountEn) liveDealsCountEn.textContent = liveDealsCount + '+';
+      if (liveDealsCountUr) liveDealsCountUr.textContent = liveDealsCount + '+';
+    });
+  }
+
+  // Click event for liveDealsStatCard to redirect to main page and trigger Food Deals modal
+  const liveDealsStatCard = document.getElementById('liveDealsStatCard');
+  if (liveDealsStatCard) {
+    liveDealsStatCard.addEventListener('click', () => {
+      window.location.href = '../index.html?openDeals=Food';
+    });
+  }
+
+  document.getElementById('minPrice')?.addEventListener('input', renderFoodList);
+  document.getElementById('maxPrice')?.addEventListener('input', renderFoodList);
+
+  document.querySelectorAll('.marketFilter, .unitFilter').forEach(el => el.addEventListener('change', renderFoodList));
+
+  document.querySelectorAll('.quickFilterBtn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      btn.classList.toggle('active-filter');
+      btn.classList.toggle('border-emerald-500');
+      btn.classList.toggle('text-emerald-400');
+      renderFoodList();
+    });
+  });
 
   if (foodListingsEl) {
     renderFoodList();
