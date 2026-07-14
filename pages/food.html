@@ -502,18 +502,18 @@ textarea::placeholder{
 
 <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-6 mb-8">
 
-  <div class="miniStatCard bg-gradient-to-br from-emerald-50 to-white">
+  <div class="miniStatCard bg-gradient-to-br from-emerald-50 to-white cursor-pointer hover:scale-105 transition-transform" id="brandStatCard">
     <span>🍔</span>
     <div class="stat-text">
-      <h4><span class="lang-en">120+</span><span class="lang-ur">120+</span></h4>
-      <p><span class="lang-en">Restaurants</span><span class="lang-ur">ریسٹورانٹس</span></p>
+      <h4><span class="lang-en" id="brandCountEn">0</span><span class="lang-ur" id="brandCountUr">0</span></h4>
+      <p><span class="lang-en">Brands</span><span class="lang-ur">برانڈز</span></p>
     </div>
   </div>
 
-  <div class="miniStatCard bg-gradient-to-br from-amber-50 to-white">
+  <div class="miniStatCard bg-gradient-to-br from-amber-50 to-white cursor-pointer hover:scale-105 transition-transform" id="liveDealsStatCard">
     <span>🔥</span>
     <div class="stat-text">
-      <h4><span class="lang-en">450+</span><span class="lang-ur">450+</span></h4>
+      <h4><span class="lang-en" id="liveDealsCountEn">0</span><span class="lang-ur" id="liveDealsCountUr">0</span></h4>
       <p><span class="lang-en">Live Deals</span><span class="lang-ur">لائیو ڈیلز</span></p>
     </div>
   </div>
@@ -548,7 +548,7 @@ textarea::placeholder{
 	  <!-- Quick Filters -->
 <div class="grid grid-cols-2 gap-2 mb-5">
 
-  <button class="quickFilterBtn">🔥 <span class="lang-en">Hot Deals</span><span class="lang-ur">زبردست ڈیلز</span></button>
+  <button class="quickFilterBtn" id="hotDealsBtn">🔥 <span class="lang-en">Hot Deals</span><span class="lang-ur">زبردست ڈیلز</span></button>
   <button class="quickFilterBtn">🚚 <span class="lang-en">Free Delivery</span><span class="lang-ur">مفت ڈیلیوری</span></button>
   <button class="quickFilterBtn">⭐ <span class="lang-en">Top Rated</span><span class="lang-ur">سب سے زیادہ پسندیدہ</span></button>
   <button class="quickFilterBtn">🕒 <span class="lang-en">Open Now</span><span class="lang-ur">اب کھولیں</span></button>
@@ -720,6 +720,7 @@ textarea::placeholder{
                         Posted: 15 Jun 2026
                       </div>
                     </div>
+                    <div id="fRatingDisplay" class="flex items-center gap-1.5 mt-1.5 text-xs text-yellow-400"></div>
                   </div>
 				  
 				  <!-- Description and Video Grid -->
@@ -1078,7 +1079,7 @@ textarea::placeholder{
 
           <!-- JazzCash -->
           <button type="button"
-            class="group rounded-xl border border-slate-200 bg-white py-2.5 px-2 transition hover:-translate-y-1 hover:border-yellow-400 hover:shadow-lg">
+            class="pymt-btn group rounded-xl border border-slate-200 bg-white py-2.5 px-2 transition hover:-translate-y-1 hover:border-yellow-400 hover:shadow-lg">
             <div class="text-lg transition group-hover:scale-110">⚡</div>
             <div class="mt-1 text-[11px] font-bold text-slate-700">
               JazzCash
@@ -1087,7 +1088,7 @@ textarea::placeholder{
 
           <!-- Easypaisa -->
           <button type="button"
-            class="group rounded-2xl border border-slate-200 bg-white py-2.5 px-2 transition hover:-translate-y-1 hover:border-emerald-400 hover:shadow-lg">
+            class="pymt-btn group rounded-2xl border border-slate-200 bg-white py-2.5 px-2 transition hover:-translate-y-1 hover:border-emerald-400 hover:shadow-lg">
             <div class="text-lg transition group-hover:scale-110">📱</div>
             <div class="mt-1 text-[11px] font-bold text-slate-700">
               Easypaisa
@@ -1096,7 +1097,7 @@ textarea::placeholder{
 
           <!-- COD -->
           <button type="button"
-            class="rounded-2xl border border-emerald-500 bg-gradient-to-br from-emerald-50 to-white py-2.5 px-2 shadow-sm">
+            class="pymt-btn rounded-2xl border border-emerald-500 bg-gradient-to-br from-emerald-50 to-white py-2.5 px-2 shadow-sm">
             <div class="text-lg">💵</div>
             <div class="mt-1 text-[11px] font-black text-emerald-700">
               Cash On Delivery
