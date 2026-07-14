@@ -103,6 +103,39 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
   return R * c;
 }
 
+function getAverageRating(id) {
+  const idStr = id ? String(id) : '';
+  let ratings = JSON.parse(localStorage.getItem(`food_ratings_${idStr}`));
+  if (!ratings || ratings.length === 0) {
+    const hash = idStr ? [...idStr].reduce((acc, char) => acc + char.charCodeAt(0), 0) : 0;
+    const defaultRating = 4 + (hash % 11) / 10;
+    ratings = [defaultRating];
+  }
+  const avg = ratings.reduce((sum, r) => sum + r, 0) / ratings.length;
+  return { avg: avg.toFixed(1), count: ratings.length };
+}
+
+function renderStars(id) {
+  const { avg, count } = getAverageRating(id);
+  const ratingVal = parseFloat(avg);
+  let starsHtml = '';
+  for (let i = 1; i <= 5; i++) {
+    if (ratingVal >= i) {
+      starsHtml += '<i class="fas fa-star text-yellow-400"></i>';
+    } else if (ratingVal >= i - 0.5) {
+      starsHtml += '<i class="fas fa-star-half-alt text-yellow-400"></i>';
+    } else {
+      starsHtml += '<i class="far fa-star text-slate-600"></i>';
+    }
+  }
+  return `
+    <div class="flex flex-col items-center gap-0.5 mt-1.5">
+      <div class="flex items-center gap-0.5">${starsHtml}</div>
+      <span class="text-[9px] text-slate-400 font-bold">${avg} (${count})</span>
+    </div>
+  `;
+}
+
 function renderFoodList() {
   if (!foodListingsEl) return;
 
@@ -170,8 +203,11 @@ function renderFoodList() {
 
     return `
       <article data-id="${f.id}" class="food-item rounded-2xl p-3 sm:p-4 cursor-pointer transition-colors duration-300 flex flex-row gap-3 border backdrop-blur-md ${activeClass}">
-        <div class="w-20 h-20 sm:w-24 sm:h-24 shrink-0 rounded-xl overflow-hidden bg-slate-800 shadow-inner">
-          <img src="${f.image}" alt="${f.name}" class="w-full h-full object-cover transition duration-300 hover:scale-105 food-img-filter" />
+        <div class="flex flex-col items-center shrink-0">
+          <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-xl overflow-hidden bg-slate-800 shadow-inner">
+            <img src="${f.image}" alt="${f.name}" class="w-full h-full object-cover transition duration-300 hover:scale-105 food-img-filter" />
+          </div>
+          ${renderStars(f.id)}
         </div>
         <div class="flex-1 flex flex-col justify-between">
           <div>
@@ -220,6 +256,23 @@ function selectFoodItem(id, preventScroll = false) {
     if (fLocation) document.getElementById('fLocation').textContent =
       item.fullLocation || item.address;
     if (fDesc) fDesc.textContent = item.description;
+
+    const fRatingDisplay = document.getElementById('fRatingDisplay');
+    if (fRatingDisplay) {
+      const { avg, count } = getAverageRating(item.id);
+      const ratingVal = parseFloat(avg);
+      let starsHtml = '';
+      for (let i = 1; i <= 5; i++) {
+        if (ratingVal >= i) {
+          starsHtml += '<i class="fas fa-star text-yellow-400"></i>';
+        } else if (ratingVal >= i - 0.5) {
+          starsHtml += '<i class="fas fa-star-half-alt text-yellow-400"></i>';
+        } else {
+          starsHtml += '<i class="far fa-star text-slate-600"></i>';
+        }
+      }
+      fRatingDisplay.innerHTML = `${starsHtml} <span class="text-slate-300 font-bold ml-1">${avg} (${count} reviews)</span>`;
+    }
 
     // Price Comparison Box Logic
     const compBox = document.getElementById('priceComparisonBox');
@@ -389,7 +442,13 @@ function selectFoodItem(id, preventScroll = false) {
 // Initial Setup
 async function initFoodDeals() {
   if (typeof DataService !== 'undefined') {
-    const allProducts = await DataService.getProducts();
+    let allProducts = [];
+    try {
+      allProducts = await DataService.getProducts();
+    } catch (e) {
+      console.warn("Failed to fetch products from service, checking local fallback", e);
+      allProducts = JSON.parse(localStorage.getItem("admin_products")) || [];
+    }
     // Filter for Food Category and Published Status
     const foodProducts = allProducts.filter(p => p.category && p.category.toLowerCase() === 'food' && (p.status === 'Publish' || p.prodStatus === 'Publish' || (!p.status && !p.prodStatus && (!p.addedBy || p.addedBy.toLowerCase() === 'admin'))));
     // Map to the format food.js expects
@@ -469,6 +528,58 @@ async function initFoodDeals() {
     populateSelect('filterProduct', 'name');
     populateSelect('filterVariety', 'variety');
     populateSelect('filterBrand', 'brand');
+
+    // Update dynamic Brand count in stats card
+    const uniqueBrands = [...new Set(foodDeals.map(f => f.brand).filter(Boolean))];
+    const brandCount = uniqueBrands.length;
+    const brandCountEn = document.getElementById('brandCountEn');
+    const brandCountUr = document.getElementById('brandCountUr');
+    if (brandCountEn) brandCountEn.textContent = brandCount + '+';
+    if (brandCountUr) brandCountUr.textContent = brandCount + '+';
+
+    // Click event for brandStatCard to connect it with filterBrand select in search panel
+    const brandStatCard = document.getElementById('brandStatCard');
+    if (brandStatCard) {
+      brandStatCard.addEventListener('click', () => {
+        const filterBrand = document.getElementById('filterBrand');
+        if (filterBrand) {
+          filterBrand.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          // Highlight the select element with a temporary border style
+          filterBrand.focus();
+          filterBrand.classList.add('ring-2', 'ring-emerald-500', 'border-emerald-500');
+          setTimeout(() => {
+            filterBrand.classList.remove('ring-2', 'ring-emerald-500', 'border-emerald-500');
+          }, 2000);
+        }
+      });
+    }
+
+    // Update dynamic Live Deals count asynchronously (non-blocking)
+    if (typeof DataService !== 'undefined') {
+      DataService.getDeals().then(mainDeals => {
+        const liveDealsCount = mainDeals.filter(d => (d.category || '').toLowerCase() === 'food').length;
+        const liveDealsCountEn = document.getElementById('liveDealsCountEn');
+        const liveDealsCountUr = document.getElementById('liveDealsCountUr');
+        if (liveDealsCountEn) liveDealsCountEn.textContent = liveDealsCount + '+';
+        if (liveDealsCountUr) liveDealsCountUr.textContent = liveDealsCount + '+';
+      }).catch(e => {
+        console.warn("Failed to fetch live deals count from service, checking local fallback", e);
+        const localDeals = JSON.parse(localStorage.getItem("admin_deals")) || [];
+        const liveDealsCount = localDeals.filter(d => (d.category || '').toLowerCase() === 'food').length;
+        const liveDealsCountEn = document.getElementById('liveDealsCountEn');
+        const liveDealsCountUr = document.getElementById('liveDealsCountUr');
+        if (liveDealsCountEn) liveDealsCountEn.textContent = liveDealsCount + '+';
+        if (liveDealsCountUr) liveDealsCountUr.textContent = liveDealsCount + '+';
+      });
+    }
+
+    // Click event for liveDealsStatCard to redirect to main page and trigger Food Deals modal
+    const liveDealsStatCard = document.getElementById('liveDealsStatCard');
+    if (liveDealsStatCard) {
+      liveDealsStatCard.addEventListener('click', () => {
+        window.location.href = '../index.html?openDeals=Food';
+      });
+    }
 
     document.getElementById('minPrice')?.addEventListener('input', renderFoodList);
     document.getElementById('maxPrice')?.addEventListener('input', renderFoodList);
@@ -553,6 +664,80 @@ if (paymentBtns) {
       btn.classList.add('border-emerald-500', 'bg-emerald-50/50');
       btn.classList.remove('border-slate-200', 'bg-slate-50');
     });
+  });
+}
+
+// Confirm Order Logic
+const confirmOrderBtn = document.getElementById('confirmOrderBtn');
+if (confirmOrderBtn) {
+  confirmOrderBtn.addEventListener('click', () => {
+    // 1. Get rating value
+    const stars = parseInt(document.getElementById('modalRating').value) || 0;
+    const remarks = document.getElementById('modalRemarks').value || '';
+    
+    // Save rating to localStorage
+    if (selectedFoodId && stars > 0) {
+      let ratings = JSON.parse(localStorage.getItem(`food_ratings_${selectedFoodId}`)) || [];
+      ratings.push(stars);
+      localStorage.setItem(`food_ratings_${selectedFoodId}`, JSON.stringify(ratings));
+    }
+
+    // 2. Fetch all modal fields for order confirmation
+    const dateTime = document.getElementById('modalDateTime')?.textContent || '';
+    const restaurant = document.getElementById('modalRestaurant')?.textContent || '';
+    const productName = document.getElementById('modalProductName')?.textContent || '';
+    const location = document.getElementById('modalLocation')?.textContent || '';
+    const phone = document.getElementById('modalPhone')?.textContent || '';
+    const rate = document.getElementById('modalRate')?.textContent || '';
+    const quantity = document.getElementById('modalQuantity')?.value || '1';
+    const totalAmount = document.getElementById('modalTotalAmount')?.textContent || '';
+
+    // Get input text fields
+    const customerName = document.querySelector('#orderModal input[placeholder*="Ali Khan"]')?.value || '';
+    const customerPhone = document.querySelector('#orderModal input[placeholder*="03"]')?.value || '';
+    const customerAddress = document.querySelector('#orderModal textarea[placeholder*="House"]')?.value || '';
+    
+    // Detect selected payment method
+    let paymentMethod = 'Cash On Delivery';
+    const paymentButtons = document.querySelectorAll('#orderModal .pymt-btn');
+    paymentButtons.forEach(btn => {
+      if (btn.classList.contains('border-emerald-500') || btn.classList.contains('border-yellow-400') || btn.classList.contains('border-emerald-400')) {
+        paymentMethod = btn.textContent.trim().replace(/[\r\n\t]+/g, ' ').replace(/\s+/g, ' ');
+      }
+    });
+
+    // 3. Construct WhatsApp Message
+    const message = `Hello, I would like to place an order:\n\n*Order Date/Time:* ${dateTime}\n*Restaurant:* ${restaurant}\n*Product:* ${productName}\n*Price:* ${rate}\n*Quantity:* ${quantity}\n*Total Amount:* ${totalAmount}\n*Payment Method:* ${paymentMethod}\n*Rating given:* ${stars} Stars\n*Remarks:* ${remarks}\n\n*Customer Details:*\n*Name:* ${customerName}\n*Phone/WhatsApp:* ${customerPhone}\n*Delivery Address:* ${customerAddress}`;
+    const encodedMsg = encodeURIComponent(message);
+
+    // 4. Send message to restaurant
+    const item = foodDeals.find(f => f.id === selectedFoodId);
+    let whatsappNum = item && item.phone ? item.phone.replace(/[^0-9]/g, '') : '923001234567';
+    if (!whatsappNum) whatsappNum = '923001234567';
+
+    window.open(`https://wa.me/${whatsappNum}?text=${encodedMsg}`, '_blank');
+
+    // 5. Hide Modal & reset
+    if (orderModal) orderModal.classList.add('hidden');
+    
+    // Clear rating selection
+    document.getElementById('modalRating').value = 0;
+    const starElements = document.getElementById('orderRatingStars')?.querySelectorAll('i');
+    if (starElements) {
+      starElements.forEach(star => {
+        star.classList.add('text-slate-300');
+        star.classList.remove('text-yellow-400');
+      });
+    }
+    
+    // Reset inputs
+    document.getElementById('modalRemarks').value = '';
+
+    // 6. Refresh lists
+    renderFoodList();
+    if (selectedFoodId) {
+      selectFoodItem(selectedFoodId, true);
+    }
   });
 }
 
