@@ -1453,6 +1453,7 @@
                                             <option>F. B. Area</option>
                                             <option>F. B. Area Block 17</option>
                                             <option>Gulshan-e-Iqbal</option>
+                                            <option>Metroville</option>
                                             <option>North Nazimabad</option>
                                             <option>Johar</option>
                                             <option>Clifton</option>
@@ -4214,6 +4215,21 @@
         updateSuperAdminAlerts();
         loadHomeBlogs();
         setInterval(updateSuperAdminAlerts, 30000);
+
+        // Check for URL parameters to open deals modal on load
+        try {
+            const urlParams = new URLSearchParams(window.location.search);
+            const openDeals = urlParams.get('openDeals');
+            if (openDeals === 'Food') {
+                setTimeout(() => {
+                    if (typeof openDealsModal === 'function') {
+                        openDealsModal('Food', null, '🔥 Food Deals');
+                    }
+                }, 500);
+            }
+        } catch (e) {
+            console.error("Error reading URL search parameters:", e);
+        }
 
         let currentWhatsappNumber = '';
         let currentProductPriceVal = 0;
