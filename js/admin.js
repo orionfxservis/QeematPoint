@@ -1716,10 +1716,18 @@ window.initAddressDropdowns = function() {
     }
 };
 
+const cleanSellerNameStr = (str) => {
+    if (!str) return "";
+    return str.replace(/[\s\u00A0]+/g, ' ').trim().toLowerCase();
+};
+
 window.autofillSellerDetailsForProducts = function(businessName) {
     if (!businessName) return;
     if (typeof sellers === 'undefined') return;
-    const matchedSeller = sellers.find(s => s.businessName && s.businessName.toLowerCase() === businessName.toLowerCase().trim());
+    console.log("Autofill products matching for brand:", businessName, "Sellers array:", sellers);
+    const cleanedSearchName = cleanSellerNameStr(businessName);
+    const matchedSeller = sellers.find(s => s.businessName && cleanSellerNameStr(s.businessName) === cleanedSearchName);
+    console.log("Matched seller for products:", matchedSeller);
     if (matchedSeller) {
         const contactField = document.getElementById('prodContact');
         const whatsappField = document.getElementById('prodWhatsapp');
@@ -1750,7 +1758,10 @@ window.autofillSellerDetailsForProducts = function(businessName) {
 window.autofillSellerDetailsForDeals = function(businessName) {
     if (!businessName) return;
     if (typeof sellers === 'undefined') return;
-    const matchedSeller = sellers.find(s => s.businessName && s.businessName.toLowerCase() === businessName.toLowerCase().trim());
+    console.log("Autofill deals matching for brand:", businessName, "Sellers array:", sellers);
+    const cleanedSearchName = cleanSellerNameStr(businessName);
+    const matchedSeller = sellers.find(s => s.businessName && cleanSellerNameStr(s.businessName) === cleanedSearchName);
+    console.log("Matched seller for deals:", matchedSeller);
     if (matchedSeller) {
         const contactField = document.getElementById('dealContactNo');
         const whatsappField = document.getElementById('dealWhatsapp');
@@ -1762,7 +1773,7 @@ window.autofillSellerDetailsForDeals = function(businessName) {
 
         if (contactField) contactField.value = matchedSeller.mobileNumber || '';
         if (whatsappField) whatsappField.value = matchedSeller.whatsappNumber || '';
-        if (deliveryField) deliveryField.value = matchedSeller.mobileNumber || '';
+        if (deliveryField) deliveryField.value = matchedSeller.branchPhone || matchedSeller.mobileNumber || '';
         if (addressField) addressField.value = matchedSeller.address || '';
         
         if (areaField) {
