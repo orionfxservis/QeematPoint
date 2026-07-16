@@ -1481,7 +1481,11 @@ window.updateBlockOptionsGlobal = function(areaVal, blockNoSelect) {
     const currentBlockVal = blockNoSelect.value;
     let optionsHtml = '<option value="">Select Sub Area / Block / Sector</option>';
     
-    if (areaVal === 'Korangi') {
+    if (areaVal === 'Metroville') {
+        ['Metroville 1st', 'Metroville 2nd', 'Metroville 3rd', 'Metroville 4th'].forEach(sub => {
+            optionsHtml += `<option value="${sub}">${sub}</option>`;
+        });
+    } else if (areaVal === 'Korangi') {
         for (let i = 1; i <= 6; i++) {
             optionsHtml += `<option value="Korangi No.${i}">Korangi No.${i}</option>`;
             if (i <= 5) {
@@ -1793,6 +1797,7 @@ function renderDynamicAdminFields() {
                     <label>Area</label>
                     <select id="prodArea" class="dynamic-admin-field" required>
                         <option value="">Select Area</option>
+                        <option value="Metroville">Metroville</option>
                         <option value="Bahadurabad">Bahadurabad</option>
                         <option value="Clifton">Clifton</option>
                         <option value="Defence">Defence</option>
@@ -2726,7 +2731,7 @@ function renderDynamicAdminFields() {
                 </div>
                 <div class="input-group">
                     <label>Shop / Brand Name</label>
-                    <input type="text" id="prodBrand" class="dynamic-admin-field" placeholder="Shop / Brand Name">
+                    <input type="text" id="prodBrand" class="dynamic-admin-field" placeholder="Shop / Brand Name" list="sellerNamesDatalist">
                 </div>
             </div>
 
@@ -5524,6 +5529,19 @@ window.cancelSellerEdit = function() {
     window.toggleSellerBranchFields();
 };
 
+window.updateSellerDatalist = function() {
+    let dl = document.getElementById('sellerNamesDatalist');
+    if (!dl) {
+        dl = document.createElement('datalist');
+        dl.id = 'sellerNamesDatalist';
+        document.body.appendChild(dl);
+    }
+    if (dl && Array.isArray(sellers)) {
+        const uniqueNames = [...new Set(sellers.map(s => s.businessName).filter(Boolean))];
+        dl.innerHTML = uniqueNames.map(name => `<option value="${name}"></option>`).join('');
+    }
+};
+
 window.renderSellers = function() {
     const list = document.getElementById('sellerList');
     if (!list) return;
@@ -5603,6 +5621,9 @@ window.renderSellers = function() {
         `;
     });
     list.innerHTML = html;
+    if (typeof window.updateSellerDatalist === 'function') {
+        window.updateSellerDatalist();
+    }
 };
 
 window.editSeller = function(index) {
