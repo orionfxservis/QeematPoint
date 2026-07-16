@@ -3095,16 +3095,6 @@ function renderDynamicAdminFields() {
         }
     }
 
-    // Autofill Seller details on typing Shop / Brand Name
-    const prodBrandInput = document.getElementById('prodBrand');
-    if (prodBrandInput) {
-        prodBrandInput.addEventListener('input', (e) => {
-            window.autofillSellerDetailsForProducts(e.target.value);
-        });
-        prodBrandInput.addEventListener('blur', (e) => {
-            window.autofillSellerDetailsForProducts(e.target.value);
-        });
-    }
 }
 
 window.toggleLaptopShopField = function () {
@@ -3195,16 +3185,18 @@ window.toggleLaptopShopField = function () {
         });
     }
 
-    // Autofill Seller details on typing Shop / Brand Name in Deals Form
-    const dealBrandInput = document.getElementById('dealBrand');
-    if (dealBrandInput) {
-        dealBrandInput.addEventListener('input', (e) => {
+    // Global event delegation for autofilling seller details (handles typing, blur, and selecting from datalist)
+    const handleAutofillEvent = (e) => {
+        if (!e.target) return;
+        if (e.target.id === 'dealBrand') {
             window.autofillSellerDetailsForDeals(e.target.value);
-        });
-        dealBrandInput.addEventListener('blur', (e) => {
-            window.autofillSellerDetailsForDeals(e.target.value);
-        });
-    }
+        } else if (e.target.id === 'prodBrand') {
+            window.autofillSellerDetailsForProducts(e.target.value);
+        }
+    };
+    document.addEventListener('input', handleAutofillEvent);
+    document.addEventListener('change', handleAutofillEvent);
+    document.addEventListener('blur', handleAutofillEvent, true);
 
 const adminProductForm = document.getElementById('adminProductForm');
 
