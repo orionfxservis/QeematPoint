@@ -185,8 +185,23 @@ function renderFoodList() {
     return true;
   });
 
-  // Sort by Distance
-  filtered.sort((a, b) => a.distanceKm - b.distanceKm);
+  // Sort by Sort By Dropdown selection (min price to max price by default)
+  const sortBy = document.getElementById('sortProducts')?.value || 'priceLow';
+  if (sortBy === 'priceLow') {
+    filtered.sort((a, b) => a.price - b.price);
+  } else if (sortBy === 'priceHigh') {
+    filtered.sort((a, b) => b.price - a.price);
+  } else if (sortBy === 'latest') {
+    filtered.sort((a, b) => b.id - a.id);
+  } else if (sortBy === 'discount') {
+    filtered.sort((a, b) => {
+      const discountA = a.originalPrice ? (a.originalPrice - a.price) : 0;
+      const discountB = b.originalPrice ? (b.originalPrice - b.price) : 0;
+      return discountB - discountA;
+    });
+  } else {
+    filtered.sort((a, b) => a.distanceKm - b.distanceKm);
+  }
 
   if (filtered.length === 0) {
     foodListingsEl.innerHTML = `
@@ -614,6 +629,7 @@ async function initFoodDeals() {
   document.getElementById('maxPrice')?.addEventListener('input', renderFoodList);
 
   document.querySelectorAll('.marketFilter, .unitFilter').forEach(el => el.addEventListener('change', renderFoodList));
+  document.getElementById('sortProducts')?.addEventListener('change', renderFoodList);
 
   document.querySelectorAll('.quickFilterBtn').forEach(btn => {
     btn.addEventListener('click', () => {
