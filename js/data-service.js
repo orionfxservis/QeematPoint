@@ -570,23 +570,14 @@ const DataService = {
                     status: d.status || 'Draft',
                     added_by: d.addedBy || '',
                     created_date: d.createdDate || new Date().toISOString(),
-                    updated_date: new Date().toISOString(),
-                    category: d.category || '',
-                    sub_category: d.subCategory || '',
-                    product_detail: d.productDetail || '',
-                    brand: d.brand || '',
-                    contact_no: d.contactNo || '',
-                    delivery_no: d.deliveryNo || '',
-                    address: d.address || '',
-                    area: d.area || '',
-                    block_no: d.blockNo || '',
-                    area_block: d.areaBlock || (d.area && d.blockNo ? `${d.area} - ${d.blockNo}` : (d.area || d.blockNo || ''))
+                    updated_date: new Date().toISOString()
                 };
             });
             const { error } = await client.from('deals').upsert(rows);
             if (error) throw error;
         } catch (err) {
             console.error("Failed to sync deals to Supabase", err);
+            alert("Supabase Sync Error (Deals): " + err.message);
         }
         localStorage.setItem("admin_deals", JSON.stringify(data));
         return true;
@@ -691,6 +682,7 @@ const DataService = {
             if (error) throw error;
         } catch (err) {
             console.error("Failed to sync sellers to Supabase", err);
+            alert("Supabase Sync Error (Sellers): " + err.message);
         }
         localStorage.setItem("admin_sellers", JSON.stringify(data));
         return true;
