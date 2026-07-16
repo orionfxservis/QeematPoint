@@ -3512,8 +3512,7 @@
                 deals = JSON.parse(localStorage.getItem("admin_deals")) || [];
             }
 
-            // Only show published deals
-            deals = (deals || []).filter(d => d.status === 'Publish' || !d.status || d.status === 'publish');
+            
 
             if (categoryFilter) {
                 const catFilterLower = categoryFilter.toLowerCase().trim();
