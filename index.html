@@ -380,21 +380,31 @@
         </div>
     </nav>
 
-    <!-- BROADCAST BAR -->
+        <!-- BROADCAST BAR -->
     <div class="w-full bg-black text-white overflow-hidden border-y border-gray-800 
-            fixed top-[96px] left-0 right-0 z-[998] h-[36px] flex items-center">
+            fixed top-[96px] left-0 right-0 z-[998] h-[36px] flex items-center justify-between pr-2">
 
-        <div
-            class="px-4 py-1 mx-2 bg-[#0a7b54] text-white font-bold text-xs rounded-full border-2 border-[#40c988] flex items-center justify-center shrink-0 shadow-sm tracking-wide">
-            News
-        </div>
+        <div class="flex items-center flex-1 overflow-hidden h-full">
+            <div
+                class="px-4 py-1 mx-2 bg-[#0a7b54] text-white font-bold text-xs rounded-full border-2 border-[#40c988] flex items-center justify-center shrink-0 shadow-sm tracking-wide">
+                News
+            </div>
 
-        <div class="flex-1 overflow-hidden relative h-full flex items-center">
-            <div class="ticker-wrapper w-full">
-                <div id="broadcastText" class="ticker-content text-sm">
-                    Loading latest updates...
+            <div class="flex-1 overflow-hidden relative h-full flex items-center">
+                <div class="ticker-wrapper w-full">
+                    <div id="broadcastText" class="ticker-content text-sm">
+                        Loading latest updates...
+                    </div>
                 </div>
             </div>
+        </div>
+
+        <!-- Live Clock Badge -->
+        <div id="liveClockBadge"
+            class="px-3 py-0.5 mx-2 bg-slate-900/80 text-slate-200 font-semibold text-[11px] rounded-full border border-[#40c988] flex items-center gap-1.5 shrink-0 shadow-sm tracking-wide h-[24px]">
+            <span id="clockDate">Thu, 16 Jul 2026</span>
+            <span class="text-[#40c988]/50">|</span>
+            <span id="clockTime" class="text-[#ffb300]">08:47:17 pm</span>
         </div>
     </div>
 
@@ -4546,8 +4556,44 @@
             
             const message = `Hello, I would like to place an order:\n\n*Order Date/Time:* ${orderDateTime}\n*Product:* ${productName}\n*Price:* ${productPrice}\n*Quantity:* ${quantity}\n*Total Amount:* ${totalAmount}\n*Payment Method:* ${paymentMethod}\n\n*Customer Details:*\n*Name:* ${customerName}\n*Phone/WhatsApp:* ${customerPhone}\n*Delivery Address:* ${customerAddress}`;
             const encodedMsg = encodeURIComponent(message);
-            window.open(`https://wa.me/${whatsappNum}?text=${encodedMsg}`, '_blank');
+                        window.open(`https://wa.me/${whatsappNum}?text=${encodedMsg}`, '_blank');
         };
+
+        // Live Clock initialization
+        function startLiveClock() {
+            const updateClock = () => {
+                const dateEl = document.getElementById('clockDate');
+                const timeEl = document.getElementById('clockTime');
+                if (!dateEl || !timeEl) return;
+
+                const now = new Date();
+                
+                const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+                const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                
+                const dayName = days[now.getDay()];
+                const dayVal = String(now.getDate()).padStart(2, '0');
+                const monthName = months[now.getMonth()];
+                const year = now.getFullYear();
+                
+                dateEl.textContent = `${dayName}, ${dayVal} ${monthName} ${year}`;
+                
+                let hours = now.getHours();
+                const minutes = String(now.getMinutes()).padStart(2, '0');
+                const seconds = String(now.getSeconds()).padStart(2, '0');
+                const ampm = hours >= 12 ? 'pm' : 'am';
+                
+                hours = hours % 12;
+                hours = hours ? hours : 12;
+                const hoursStr = String(hours).padStart(2, '0');
+                
+                timeEl.textContent = `${hoursStr}:${minutes}:${seconds} ${ampm}`;
+            };
+            
+            updateClock();
+            setInterval(updateClock, 1000);
+        }
+        document.addEventListener('DOMContentLoaded', startLiveClock);
     </script>
 
     <!-- Product Detail Modal -->
