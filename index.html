@@ -462,8 +462,11 @@
                                 <div class="py-1">
                                     <!-- Food Deals Option -->
                                     <button onclick="openDealsModal('Food', null, '🔥 Food Deals'); closeDealsDropdown();"
-                                        class="w-full text-left px-4 py-3 text-sm font-semibold text-gray-700 hover:bg-rose-50 hover:text-rose-600 transition-colors flex items-center gap-2 cursor-pointer">
-                                        🔥 <span class="lang-en">Food Deals</span><span class="lang-ur">فوڈ ڈیلز</span>
+                                        class="w-full text-left px-4 py-3 text-sm font-semibold text-gray-700 hover:bg-rose-50 hover:text-rose-600 transition-colors flex items-center gap-2 cursor-pointer justify-between">
+                                        <div class="flex items-center gap-2">
+                                            🔥 <span class="lang-en">Food Deals</span><span class="lang-ur">فوڈ ڈیلز</span>
+                                        </div>
+                                        <span id="homeFoodDealsCount" class="text-xs bg-rose-500/10 text-rose-500 px-2 py-0.5 rounded-full font-bold">0+</span>
                                     </button>
                                     <!-- Computer Deals Option -->
                                     <button onclick="openDealsModal('Computer', null, '💻 Computer Deals'); closeDealsDropdown();"
@@ -3075,6 +3078,21 @@
         // ================================
         document.addEventListener('DOMContentLoaded', async () => {
             try {
+                // Load and count Food Deals
+                try {
+                    const deals = await DataService.getDeals();
+                    const publishedFoodDealsCount = (deals || []).filter(d => 
+                        (d.status === 'Publish' || d.status === 'publish' || !d.status) &&
+                        (d.category || '').toLowerCase().trim().includes('food')
+                    ).length;
+                    const countElem = document.getElementById('homeFoodDealsCount');
+                    if (countElem) {
+                        countElem.textContent = publishedFoodDealsCount + '+';
+                    }
+                } catch (e) {
+                    console.error("Error loading deals count on home page:", e);
+                }
+
                 const travelPackages = await DataService.getTravelPackages();
                 const grid = document.getElementById('travelPackagesGrid');
                 if (grid && travelPackages.length > 0) {
