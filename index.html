@@ -3513,6 +3513,8 @@
             }
 
             
+            // Only show published deals
+            deals = (deals || []).filter(d => d.status === 'Publish' || d.status === 'publish' || !d.status);
 
             if (categoryFilter) {
                 const catFilterLower = categoryFilter.toLowerCase().trim();
