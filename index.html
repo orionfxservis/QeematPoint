@@ -3512,8 +3512,18 @@
                 deals = JSON.parse(localStorage.getItem("admin_deals")) || [];
             }
 
+            // Only show published deals
+            deals = (deals || []).filter(d => d.status === 'Publish' || !d.status || d.status === 'publish');
+
             if (categoryFilter) {
-                deals = deals.filter(d => (d.category || '').toLowerCase() === categoryFilter.toLowerCase());
+                const catFilterLower = categoryFilter.toLowerCase().trim();
+                deals = deals.filter(d => {
+                    const catLower = (d.category || '').toLowerCase().trim();
+                    if (catFilterLower === 'food') {
+                        return catLower === 'food' || catLower === 'food stuffs' || catLower.includes('food');
+                    }
+                    return catLower === catFilterLower;
+                });
             }
             if (subCategoryFilter) {
                 deals = deals.filter(d => {
