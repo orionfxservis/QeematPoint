@@ -377,44 +377,32 @@
                 </div>
             </div>
         </div>
-        </div>
-    </nav>
 
         <!-- BROADCAST BAR -->
-    <div class="w-full bg-black text-white overflow-hidden border-y border-gray-800 
-            fixed top-[96px] left-0 right-0 z-[998] h-[36px] flex items-center justify-between pr-2">
+        <div class="w-full bg-black text-white overflow-hidden border-y border-gray-800 h-[36px] flex items-center justify-between pr-2">
+            <div class="flex items-center flex-1 overflow-hidden h-full">
+                <div class="px-4 py-1 mx-2 bg-[#0a7b54] text-white font-bold text-xs rounded-full border-2 border-[#40c988] flex items-center justify-center shrink-0 shadow-sm tracking-wide">
+                    News
+                </div>
 
-        <div class="flex items-center flex-1 overflow-hidden h-full">
-            <div
-                class="px-4 py-1 mx-2 bg-[#0a7b54] text-white font-bold text-xs rounded-full border-2 border-[#40c988] flex items-center justify-center shrink-0 shadow-sm tracking-wide">
-                News
-            </div>
-
-            <div class="flex-1 overflow-hidden relative h-full flex items-center">
-                <div class="ticker-wrapper w-full">
-                    <div id="broadcastText" class="ticker-content text-sm">
-                        Loading latest updates...
+                <div class="flex-1 overflow-hidden relative h-full flex items-center">
+                    <div class="ticker-wrapper w-full">
+                        <div id="broadcastText" class="ticker-content text-sm">
+                            Loading latest updates...
+                        </div>
                     </div>
                 </div>
             </div>
+
+            <!-- Live Clock Badge -->
+            <div id="liveClockBadge"
+                class="px-3 py-0.5 mx-2 bg-slate-900/80 text-slate-200 font-semibold text-[11px] rounded-full border border-[#40c988] flex items-center gap-1.5 shrink-0 shadow-sm tracking-wide h-[24px]">
+                <span id="clockDate">Thu, 16 Jul 2026</span>
+                <span class="text-[#40c988]/50">|</span>
+                <span id="clockTime" class="text-[#ffb300]">08:47:17 pm</span>
+            </div>
         </div>
-
-        <!-- Live Clock Badge -->
-        <div id="liveClockBadge"
-            class="px-3 py-0.5 mx-2 bg-slate-900/80 text-slate-200 font-semibold text-[11px] rounded-full border border-[#40c988] flex items-center gap-1.5 shrink-0 shadow-sm tracking-wide h-[24px]">
-            <span id="clockDate">Thu, 16 Jul 2026</span>
-            <span class="text-[#40c988]/50">|</span>
-            <span id="clockTime" class="text-[#ffb300]">08:47:17 pm</span>
-        </div>
-    </div>
-
-    <div id="installContainer" class="block md:hidden max-w-screen-2xl mx-auto px-4 mt-10 mb-1">
-
-        <button id="installBtn"
-            class="w-full bg-gradient-to-r from-emerald-600 to-green-500 text-white py-4 rounded-3xl text-lg font-bold shadow-lg">
-            📲 Install StopBuy App
-        </button>
-    </div>
+    </nav>
 
 
     <!-- HOME PAGE -->
@@ -422,7 +410,7 @@
 
         <!-- Fixed Background & Glass Effect Overlay -->
         <div
-            class="fixed inset-0 z-[-2] bg-[url('images/bg/bg-home.jpg')] bg-cover bg-center bg-no-repeat pointer-events-none">
+            class="fixed inset-0 z-[-2] bg-[url('images/bg/new-bg.png')] bg-cover bg-center bg-no-repeat pointer-events-none">
         </div>
         <div
             class="fixed inset-0 z-[-1] bg-gradient-to-b from-white/50 to-white/30 backdrop-blur-xl pointer-events-none">
@@ -2171,7 +2159,7 @@
                     <!-- LOGO -->
                     <div class="flex items-center gap-3 mb-5">
 
-                        <img src="https://orionfxservis.github.io/StopBuyPk/images/logo/stopbuy-logo.png"
+                        <img src="./images/logo/stopbuy-logo.png"
                             alt="StopBuyPk" class="w-12 h-12 bg-white rounded-xl object-contain p-1">
                         <div>
 
