@@ -3672,49 +3672,51 @@
             const installContainer = document.getElementById("installContainer");
             const installBtn = document.getElementById("installBtn");
 
-            // Detect mobile device
-            const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+            if (installContainer && installBtn) {
+                // Detect mobile device
+                const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
-            // Hide by default
-            installContainer.style.display = "none";
-
-            // If app is already installed/opened as app
-            if (
-                window.matchMedia('(display-mode: standalone)').matches ||
-                window.navigator.standalone === true
-            ) {
+                // Hide by default
                 installContainer.style.display = "none";
-            }
 
-            // Show only on mobile when installable
-            window.addEventListener("beforeinstallprompt", (e) => {
-                e.preventDefault();
-                deferredPrompt = e;
-
-                if (isMobile) {
-                    installContainer.style.display = "block";
-                }
-            });
-
-            // Install button click
-            installBtn.addEventListener("click", async () => {
-                if (!deferredPrompt) return;
-
-                deferredPrompt.prompt();
-
-                const choice = await deferredPrompt.userChoice;
-
-                if (choice.outcome === "accepted") {
+                // If app is already installed/opened as app
+                if (
+                    window.matchMedia('(display-mode: standalone)').matches ||
+                    window.navigator.standalone === true
+                ) {
                     installContainer.style.display = "none";
                 }
 
-                deferredPrompt = null;
-            });
+                // Show only on mobile when installable
+                window.addEventListener("beforeinstallprompt", (e) => {
+                    e.preventDefault();
+                    deferredPrompt = e;
 
-            // Hide permanently after installation
-            window.addEventListener("appinstalled", () => {
-                installContainer.style.display = "none";
-            });
+                    if (isMobile) {
+                        installContainer.style.display = "block";
+                    }
+                });
+
+                // Install button click
+                installBtn.addEventListener("click", async () => {
+                    if (!deferredPrompt) return;
+
+                    deferredPrompt.prompt();
+
+                    const choice = await deferredPrompt.userChoice;
+
+                    if (choice.outcome === "accepted") {
+                        installContainer.style.display = "none";
+                    }
+
+                    deferredPrompt = null;
+                });
+
+                // Hide permanently after installation
+                window.addEventListener("appinstalled", () => {
+                    installContainer.style.display = "none";
+                });
+            }
 
             // Super Admin Alerts implementation
             async function updateSuperAdminAlerts() {
