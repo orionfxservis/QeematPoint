@@ -3104,8 +3104,8 @@
                         return `
                         <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden group shadow-sm hover:shadow-md transition-all cursor-pointer flex flex-col justify-between" onclick="openBlogModal(${index})">
                             <div>
-                                <div class="h-48 overflow-hidden bg-slate-50 flex items-center justify-center">
-                                    <img src="${image}" alt="${titleEn}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" onerror="this.src='images/placeholder.jpg'">
+                                <div class="overflow-hidden">
+                                    <img src="${image}" alt="${titleEn}" class="w-full aspect-video object-cover rounded-t-2xl group-hover:scale-105 transition-transform duration-500" onerror="this.src='images/placeholder.jpg'">
                                 </div>
                                 <div class="p-6 space-y-2 text-left">
                                     <span class="text-[10px] text-[#005221] font-bold uppercase tracking-wider lang-en">${catEn}</span>
