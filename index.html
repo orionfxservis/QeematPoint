@@ -407,1745 +407,761 @@
 
     <!-- HOME PAGE -->
     <div id="home" class="page active relative">
-
-        <!-- Fixed Background & Glass Effect Overlay -->
-        <div
-            class="fixed inset-0 z-[-2] bg-[url('images/bg/new-bg.png')] bg-cover bg-center bg-no-repeat pointer-events-none">
-        </div>
-        <div
-            class="fixed inset-0 z-[-1] bg-gradient-to-b from-white/50 to-white/30 backdrop-blur-xl pointer-events-none">
-        </div>
-
-        <!-- Hero Banner -->
-        <div class="max-w-screen-2xl mx-auto px-6 pt-[68px] pb-2 flex items-center justify-between">
-            <div class="flex gap-4 items-start w-full">
-
-                <div class="hidden lg:block w-[120px] flex-shrink-0">
-                    <div class="sticky top-24 h-[800px] overflow-y-auto overflow-x-hidden deal-banner">
-
-                        <!-- Vertical Banner Left -->
-                        <div id="vertical-banner-left" class="flex flex-col gap-4">
+        <main class="max-w-7xl mx-auto px-4 lg:px-8">
+            <!-- 1. Hero Section -->
+            <section class="py-12 grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+                
+                <!-- Left Section: Title, Checklist, Search, Popular, Cart Graphic -->
+                <div class="bg-white border border-slate-200 rounded-3xl p-6 md:p-8 flex flex-col justify-between h-full shadow-sm text-left">
+                    <!-- Top Row: Heading on Left, Shopping Cart on Right -->
+                    <div class="grid grid-cols-12 gap-4 items-center">
+                        <div class="col-span-8 space-y-4">
+                            <h1 class="text-4xl sm:text-5xl font-extrabold text-slate-900 leading-[1.15] tracking-tight relative" style="font-family: 'Times New Roman', Times, serif;">
+                                Stop Buy <br/>
+                                Before Get <br/>
+                                <span class="text-[#005221] relative inline-block">
+                                    Best Price
+                                    <!-- Orange sunburst lines on top right of Best Price -->
+                                    <svg class="absolute -top-3 -right-6 w-6 h-6 text-orange-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                        <path d="M12 2v3m4.24-2.24l-2.12 2.12M22 12h-3m-2.24 4.24l2.12 2.12M12 22v-3m-8.24 2.24l2.12-2.12M2 12h3M4.76 4.76l2.12 2.12"/>
+                                    </svg>
+                                </span>
+                            </h1>
+                            <p class="text-slate-700 text-base md:text-lg font-medium">
+                                Compare prices from nearby shops and <span class="text-orange-500 font-extrabold">save your money</span>
+                            </p>
+                        </div>
+                        <!-- Shopping Cart next to Heading -->
+                        <div class="col-span-4 flex flex-col items-center justify-center relative">
+                            <img src="images/grafix/shopping_cart_mockup.png" alt="Smart Buyers" class="w-full max-w-[150px] h-auto object-contain drop-shadow-xl" />
+                            <!-- Green Badge below cart -->
+                            <div class="mt-2 bg-[#005221] border border-emerald-400/20 text-white rounded-lg py-1 px-2.5 flex items-center gap-1 shadow-md whitespace-nowrap">
+                                <span class="text-[8px] font-extrabold uppercase tracking-wide">Smart Buyers Save More!</span>
+                                <span class="bg-yellow-400 text-slate-900 rounded-full w-3 h-3 flex items-center justify-center text-[8px] font-black">✓</span>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="flex-1">
+                    <!-- Bottom Part: Checklist, Search, Popular searches -->
+                    <div class="mt-6 space-y-4">
+                        <!-- Checklist points -->
+                        <div class="flex flex-wrap gap-x-4 gap-y-2 text-xs sm:text-sm font-bold text-slate-800 border-t border-slate-100 pt-4">
+                            <span class="flex items-center gap-1.5"><span class="w-4 h-4 rounded-full border-2 border-slate-800 flex items-center justify-center text-[10px]">⊙</span> Nearby First</span>
+                            <span class="flex items-center gap-1.5 text-emerald-700">✓ Verified Shops</span>
+                            <span class="flex items-center gap-1.5 text-emerald-700">✓ Daily Updated Prices</span>
+                        </div>
 
-                    <!-- CTA Buttons Row -->
-                    <div class="w-full text-center pb-3 flex flex-wrap items-center justify-center gap-3">
-                        
-                        <!-- Compare Prices Now Button -->
-                        <button onclick="document.getElementById('searchInput')?.focus() || window.scrollTo({top: 0, behavior: 'smooth'})"
-                            class="h-[40px] px-5 rounded-full bg-gradient-to-r from-emerald-600 to-green-500 hover:from-emerald-500 hover:to-green-400 text-white font-bold text-xs sm:text-sm shadow-md hover:shadow-lg border border-emerald-400/20 transform hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center gap-1.5 cursor-pointer">
-                            🔥 <span class="lang-en">Compare Prices Now</span><span class="lang-ur">ابھی قیمتوں کا موازنہ کریں</span>
-                        </button>
-
-                        <!-- Track Price Drops Button -->
-                        <button onclick="document.getElementById('home')?.querySelector('section')?.scrollIntoView({behavior: 'smooth'})"
-                            class="h-[40px] px-5 rounded-full bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-bold text-xs sm:text-sm shadow-md hover:shadow-lg border border-blue-400/20 transform hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center gap-1.5 cursor-pointer">
-                            📈 <span class="lang-en">Track Price Drops</span><span class="lang-ur">قیمتوں کے اتار چڑھاو ٹریک کریں</span>
-                        </button>
-
-                        <!-- Today's Best Deals Dropdown Button -->
-                        <div class="relative inline-block text-left" id="dealsDropdownContainer">
-                            <!-- Button -->
-                            <button onclick="toggleDealsDropdown(event)"
-                                class="h-[40px] px-5 rounded-full bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-white font-bold text-xs sm:text-sm shadow-md hover:shadow-lg border border-amber-400/20 transform hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center gap-1.5 cursor-pointer">
-                                💰 <span class="lang-en">Today's Best Deals</span><span class="lang-ur">آج کی بہترین ڈیلز</span>
-                                <i class="fas fa-chevron-down text-xs ml-1"></i>
+                        <!-- Search Bar -->
+                        <div class="flex items-center bg-white rounded-2xl shadow-lg p-2 border border-slate-200 w-full">
+                            <div class="flex items-center w-full px-3 border-none">
+                                <span class="material-symbols-outlined text-slate-400 mr-1.5">search</span>
+                                <input id="searchInput" class="w-full border-none focus:ring-0 text-sm py-1.5 focus:outline-none text-slate-700 bg-transparent" placeholder="What are you looking for?" type="text"/>
+                            </div>
+                            <button onclick="performSearch()" class="bg-[#005221] hover:bg-emerald-800 text-white px-5 py-2 rounded-xl font-bold transition-all flex items-center justify-center gap-1.5 shrink-0 text-xs sm:text-sm">
+                                <span class="material-symbols-outlined text-white text-sm">search</span> Search
                             </button>
-                            
-                            <!-- Dropdown Menu -->
-                            <div id="dealsDropdownMenu" class="hidden absolute right-0 sm:right-auto sm:left-1/2 sm:transform sm:-translate-x-1/2 mt-2 w-48 rounded-2xl bg-white border border-gray-100 shadow-xl z-[999] overflow-hidden">
-                                <div class="py-1">
-                                    <!-- Food Deals Option -->
-                                    <button onclick="openDealsModal('Food', null, '🔥 Food Deals'); closeDealsDropdown();"
-                                        class="w-full text-left px-4 py-3 text-sm font-semibold text-gray-700 hover:bg-rose-50 hover:text-rose-600 transition-colors flex items-center gap-2 cursor-pointer justify-between">
-                                        <div class="flex items-center gap-2">
-                                            🔥 <span class="lang-en">Food Deals</span><span class="lang-ur">فوڈ ڈیلز</span>
-                                        </div>
-                                        <span id="homeFoodDealsCount" class="text-xs bg-rose-500/10 text-rose-500 px-2 py-0.5 rounded-full font-bold">0+</span>
-                                    </button>
-                                    <!-- Computer Deals Option -->
-                                    <button onclick="openDealsModal('Computer', null, '💻 Computer Deals'); closeDealsDropdown();"
-                                        class="w-full text-left px-4 py-3 text-sm font-semibold text-gray-700 hover:bg-cyan-50 hover:text-cyan-600 transition-colors flex items-center gap-2 cursor-pointer">
-                                        💻 <span class="lang-en">Computer Deals</span><span class="lang-ur">کمپیوٹر ڈیلز</span>
-                                    </button>
-                                </div>
-                            </div>
                         </div>
 
-                    </div>
-
-                    <!-- Modern Hero Banner Section -->
-                    <div class="relative w-full rounded-[28px] overflow-hidden bg-gradient-to-br from-[#064e3b] via-[#022c22] to-[#0a1b15] border border-emerald-500/20 shadow-2xl p-6 sm:p-8 md:p-10 mb-6 mt-4">
-                        <!-- Background patterns -->
-                        <div class="absolute inset-0 opacity-10 pointer-events-none bg-[radial-gradient(circle_at_top_right,rgba(16,185,129,0.3),transparent_70%)]"></div>
-                        <div class="absolute -right-20 -bottom-20 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
-
-                        <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                            
-                            <!-- Left Content Block: Headline & Subtitle -->
-                            <div class="lg:col-span-7 text-left space-y-5">
-                                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-300 text-xs font-semibold border border-emerald-500/20 uppercase tracking-wide">
-                                    <i class="fas fa-bolt text-amber-400"></i> Smart Price Comparison
-                                </span>
-                                
-                                <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white leading-tight font-serif" style="font-family: Georgia, 'Times New Roman', serif;">
-                                    Stop Paying More.<br class="hidden sm:inline">
-                                    <span class="bg-gradient-to-r from-emerald-400 to-lime-300 bg-clip-text text-transparent">Compare Prices Across Pakistan</span> in Seconds.
-                                </h1>
-                                
-                                <p class="text-slate-300 text-sm sm:text-base md:text-lg max-w-xl font-light leading-relaxed">
-                                    Compare prices from trusted stores, discover deals, track price drops, and save money on every purchase.
-                                </p>
-                                
-                                <!-- Action Buttons / Stats -->
-                                <div class="flex flex-wrap gap-3 pt-2">
-                                    <a href="#groceries" onclick="showPage('groceries')" class="px-5 py-3 rounded-2xl bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-400 hover:to-green-500 text-white font-bold text-sm shadow-lg shadow-emerald-950/50 hover:shadow-emerald-900/50 transform hover:-translate-y-0.5 transition-all duration-200 flex items-center gap-2">
-                                        <i class="fas fa-shopping-basket"></i> Compare Groceries
-                                    </a>
-                                    <a href="./pages/computers.html" class="px-5 py-3 rounded-2xl bg-white/10 hover:bg-white/20 text-white border border-white/10 hover:border-white/20 font-bold text-sm backdrop-blur-sm transform hover:-translate-y-0.5 transition-all duration-200 flex items-center gap-2">
-                                        <i class="fas fa-laptop"></i> Explore Computers
-                                    </a>
-                                </div>
-                            </div>
-                            
-                            <!-- Right Content Block: Price Comparison Cards Showcase -->
-                            <div class="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                
-                                <!-- Card 1: Zinger Burger (Food) -->
-                                <div class="bg-white/5 backdrop-blur-md border border-white/10 hover:border-emerald-500/30 rounded-2xl p-4 shadow-xl hover:scale-[1.03] transition-all duration-300 flex flex-col justify-between">
-                                    <div>
-                                        <div class="flex justify-between items-start mb-2">
-                                            <span class="text-xs font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">🍔 Food Item</span>
-                                            <span class="text-[10px] text-slate-400"><i class="fas fa-clock"></i> Updated hourly</span>
-                                        </div>
-                                        <h3 class="text-white font-bold text-sm sm:text-base truncate">Zinger Burger</h3>
-                                        <p class="text-[10px] text-slate-400 mb-3">Karachi / Lahore / Islamabad</p>
-                                        
-                                        <!-- Comparison List -->
-                                        <div class="space-y-1.5 text-xs">
-                                            <div class="flex justify-between items-center text-slate-300 py-0.5 border-b border-white/5">
-                                                <span>Imtiaz Market</span>
-                                                <span class="font-bold text-white">Rs. 380</span>
-                                            </div>
-                                            <div class="flex justify-between items-center text-slate-300 py-0.5 border-b border-white/5">
-                                                <span>Chase Up</span>
-                                                <span class="font-bold text-white">Rs. 420</span>
-                                            </div>
-                                            <div class="flex justify-between items-center text-emerald-400 font-bold py-0.5">
-                                                <span>KFC Restaurant</span>
-                                                <span class="text-white line-through font-normal text-[10px] mr-1">Rs. 650</span>
-                                                <span>Rs. 550</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="mt-4 pt-2 border-t border-white/5 flex justify-between items-center">
-                                        <div class="leading-none">
-                                            <span class="text-[9px] text-emerald-400 block font-semibold uppercase">Save Up To</span>
-                                            <span class="text-xs font-black text-white">Rs. 270</span>
-                                        </div>
-                                        <a href="./pages/food.html?search=zinger" class="text-xs text-emerald-400 font-bold hover:text-emerald-300 flex items-center gap-1">
-                                            Compare <i class="fas fa-arrow-right text-[10px]"></i>
-                                        </a>
-                                    </div>
-                                </div>
-
-                                <!-- Card 2: Core i5 Laptop (Computer) -->
-                                <div class="bg-white/5 backdrop-blur-md border border-white/10 hover:border-cyan-500/30 rounded-2xl p-4 shadow-xl hover:scale-[1.03] transition-all duration-300 flex flex-col justify-between">
-                                    <div>
-                                        <div class="flex justify-between items-start mb-2">
-                                            <span class="text-xs font-bold text-cyan-400 bg-cyan-500/10 px-2 py-0.5 rounded border border-cyan-500/20">💻 Computer</span>
-                                            <span class="text-[10px] text-slate-400"><i class="fas fa-shield-alt"></i> Verified</span>
-                                        </div>
-                                        <h3 class="text-white font-bold text-sm sm:text-base truncate">HP EliteBook i5</h3>
-                                        <p class="text-[10px] text-slate-400 mb-3">8GB RAM / 256GB SSD</p>
-                                        
-                                        <!-- Comparison List -->
-                                        <div class="space-y-1.5 text-xs">
-                                            <div class="flex justify-between items-center text-emerald-400 font-bold py-0.5 border-b border-white/5">
-                                                <span>Shophive</span>
-                                                <span>Rs. 75,500</span>
-                                            </div>
-                                            <div class="flex justify-between items-center text-slate-300 py-0.5 border-b border-white/5">
-                                                <span>Mega.pk</span>
-                                                <span class="font-bold text-white">Rs. 76,200</span>
-                                            </div>
-                                            <div class="flex justify-between items-center text-slate-300 py-0.5">
-                                                <span>Daraz.pk</span>
-                                                <span class="font-bold text-white">Rs. 78,000</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="mt-4 pt-2 border-t border-white/5 flex justify-between items-center">
-                                        <div class="leading-none">
-                                            <span class="text-[9px] text-cyan-400 block font-semibold uppercase">Save Up To</span>
-                                            <span class="text-xs font-black text-white">Rs. 2,500</span>
-                                        </div>
-                                        <a href="./pages/computers.html?search=elitebook" class="text-xs text-cyan-400 font-bold hover:text-cyan-300 flex items-center gap-1">
-                                            Compare <i class="fas fa-arrow-right text-[10px]"></i>
-                                        </a>
-                                    </div>
-                                </div>
-
-                                <!-- Card 3: Chicken Biryani (Food) -->
-                                <div class="bg-white/5 backdrop-blur-md border border-white/10 hover:border-emerald-500/30 rounded-2xl p-4 shadow-xl hover:scale-[1.03] transition-all duration-300 flex flex-col justify-between">
-                                    <div>
-                                        <div class="flex justify-between items-start mb-2">
-                                            <span class="text-xs font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">🍛 Food Item</span>
-                                            <span class="text-[10px] text-slate-400"><i class="fas fa-fire"></i> Hot Deal</span>
-                                        </div>
-                                        <h3 class="text-white font-bold text-sm sm:text-base truncate">Chicken Biryani</h3>
-                                        <p class="text-[10px] text-slate-400 mb-3">Single Plate Premium</p>
-                                        
-                                        <!-- Comparison List -->
-                                        <div class="space-y-1.5 text-xs">
-                                            <div class="flex justify-between items-center text-emerald-400 font-bold py-0.5 border-b border-white/5">
-                                                <span>Jedda Biryani</span>
-                                                <span>Rs. 290</span>
-                                            </div>
-                                            <div class="flex justify-between items-center text-slate-300 py-0.5 border-b border-white/5">
-                                                <span>Student Biryani</span>
-                                                <span class="font-bold text-white">Rs. 320</span>
-                                            </div>
-                                            <div class="flex justify-between items-center text-slate-300 py-0.5">
-                                                <span>Biryani Center</span>
-                                                <span class="font-bold text-white">Rs. 340</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="mt-4 pt-2 border-t border-white/5 flex justify-between items-center">
-                                        <div class="leading-none">
-                                            <span class="text-[9px] text-emerald-400 block font-semibold uppercase">Save Up To</span>
-                                            <span class="text-xs font-black text-white">Rs. 50</span>
-                                        </div>
-                                        <a href="./pages/food.html?search=biryani" class="text-xs text-emerald-400 font-bold hover:text-emerald-300 flex items-center gap-1">
-                                            Compare <i class="fas fa-arrow-right text-[10px]"></i>
-                                        </a>
-                                    </div>
-                                </div>
-
-                                <!-- Card 4: 8GB DDR4 RAM (Computer) -->
-                                <div class="bg-white/5 backdrop-blur-md border border-white/10 hover:border-cyan-500/30 rounded-2xl p-4 shadow-xl hover:scale-[1.03] transition-all duration-300 flex flex-col justify-between">
-                                    <div>
-                                        <div class="flex justify-between items-start mb-2">
-                                            <span class="text-xs font-bold text-cyan-400 bg-cyan-500/10 px-2 py-0.5 rounded border border-cyan-500/20">🔌 Computer PC</span>
-                                            <span class="text-[10px] text-slate-400"><i class="fas fa-check-circle"></i> In Stock</span>
-                                        </div>
-                                        <h3 class="text-white font-bold text-sm sm:text-base truncate">8GB DDR4 Desktop RAM</h3>
-                                        <p class="text-[10px] text-slate-400 mb-3">Kingston / Corsair 3200MHz</p>
-                                        
-                                        <!-- Comparison List -->
-                                        <div class="space-y-1.5 text-xs">
-                                            <div class="flex justify-between items-center text-emerald-400 font-bold py-0.5 border-b border-white/5">
-                                                <span>Galaxy Computers</span>
-                                                <span>Rs. 6,400</span>
-                                            </div>
-                                            <div class="flex justify-between items-center text-slate-300 py-0.5 border-b border-white/5">
-                                                <span>Eezepc</span>
-                                                <span class="font-bold text-white">Rs. 6,600</span>
-                                            </div>
-                                            <div class="flex justify-between items-center text-slate-300 py-0.5">
-                                                <span>Czone</span>
-                                                <span class="font-bold text-white">Rs. 6,800</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="mt-4 pt-2 border-t border-white/5 flex justify-between items-center">
-                                        <div class="leading-none">
-                                            <span class="text-[9px] text-cyan-400 block font-semibold uppercase">Save Up To</span>
-                                            <span class="text-xs font-black text-white">Rs. 400</span>
-                                        </div>
-                                        <a href="./pages/computers.html?search=ram" class="text-xs text-cyan-400 font-bold hover:text-cyan-300 flex items-center gap-1">
-                                            Compare <i class="fas fa-arrow-right text-[10px]"></i>
-                                        </a>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <!-- 🔥 Compare Before You Buy Interactive Section -->
-                    <section class="bg-white rounded-3xl py-6 px-6 border border-emerald-100 shadow-md mt-[24px] mb-6 relative overflow-hidden">
-                        <!-- SOFT GLOW BACKGROUND -->
-                        <div class="absolute inset-0 pointer-events-none opacity-30">
-                            <div class="absolute -top-10 -left-10 w-40 h-40 bg-emerald-100 rounded-full blur-2xl"></div>
-                            <div class="absolute bottom-0 right-0 w-40 h-40 bg-lime-100 rounded-full blur-2xl"></div>
-                        </div>
-
-                        <div class="relative z-10 text-center flex flex-col items-center justify-center gap-2">
-                            <div>
-                                <h2 class="text-xl md:text-2xl font-bold font-serif text-[#0A3D2A] flex items-center justify-center gap-2" style="font-family: Georgia, 'Times New Roman', serif;">
-                                    <span>🔥</span>
-                                    <span class="lang-en">Compare Before You Buy</span>
-                                    <span class="lang-ur">خریدنے سے پہلے موازنہ کریں</span>
-                                    <span>🔥</span>
-                                </h2>
-                                <p class="text-xs text-gray-500 mt-1">
-                                    <span class="lang-en">Click on any tag below to compare real-time prices instantly and find the best bargains</span>
-                                    <span class="lang-ur">بہترین سودے تلاش کرنے کے لیے نیچے دیے گئے کسی بھی ٹیگ پر کلک کریں اور فوری قیمتوں کا موازنہ کریں</span>
-                                </p>
-                            </div>
-                        </div>
-
-                        <!-- Interactive Tags (Pills) -->
-                        <div class="flex flex-wrap gap-2.5 justify-center mt-5">
-                            
-                            <!-- Tag 1: Laptops @ Affordable Price -->
-                            <div onclick="window.location.href='./pages/computers.html?search=laptop'" 
-                                 class="cursor-pointer bg-cyan-950/20 text-cyan-400 border border-cyan-500/30 hover:border-cyan-400 rounded-full px-4 py-2 text-xs md:text-sm font-semibold flex items-center gap-1.5 shadow-[0_2px_10px_rgba(6,182,212,0.05)] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_4px_15px_rgba(6,182,212,0.2)] hover:bg-cyan-500/10">
-                                <span class="text-base">💻</span>
-                                <span class="lang-en">Laptops @ Affordable Price</span>
-                                <span class="lang-ur">لیپ ٹاپس مناسب قیمت پر</span>
-                            </div>
-
-                            <!-- Tag 2: Mobiles Amazing Deal -->
-                            <div onclick="window.location.href='./pages/mobiles.html'" 
-                                 class="cursor-pointer bg-violet-950/20 text-violet-400 border border-violet-500/30 hover:border-violet-400 rounded-full px-4 py-2 text-xs md:text-sm font-semibold flex items-center gap-1.5 shadow-[0_2px_10px_rgba(139,92,246,0.05)] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_4px_15px_rgba(139,92,246,0.2)] hover:bg-violet-500/10">
-                                <span class="text-base">📱</span>
-                                <span class="lang-en">Mobiles Amazing Deal</span>
-                                <span class="lang-ur">موبائل کی شاندار ڈیلز</span>
-                            </div>
-
-                            <!-- Tag 3: Fast Food Items -->
-                            <div onclick="window.location.href='./pages/food.html'" 
-                                 class="cursor-pointer bg-amber-950/20 text-amber-400 border border-amber-500/30 hover:border-amber-400 rounded-full px-4 py-2 text-xs md:text-sm font-semibold flex items-center gap-1.5 shadow-[0_2px_10px_rgba(245,158,11,0.05)] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_4px_15px_rgba(245,158,11,0.2)] hover:bg-amber-500/10">
-                                <span class="text-base">🍔</span>
-                                <span class="lang-en">Fast Food Items</span>
-                                <span class="lang-ur">فاسٹ فوڈ آئٹمز</span>
-                            </div>
-
-                            <!-- Tag 4: Best Deal -->
-                            <div onclick="window.location.href='./pages/categories.html'" 
-                                 class="cursor-pointer bg-rose-950/20 text-rose-400 border border-rose-500/30 hover:border-rose-400 rounded-full px-4 py-2 text-xs md:text-sm font-semibold flex items-center gap-1.5 shadow-[0_2px_10px_rgba(244,63,94,0.05)] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_4px_15px_rgba(244,63,94,0.2)] hover:bg-rose-500/10">
-                                <span class="text-base">🏷️</span>
-                                <span class="lang-en">Best Deal</span>
-                                <span class="lang-ur">بہترین ڈیل</span>
-                            </div>
-
-                            <!-- Tag 5: Best Chromebook Price -->
-                            <div onclick="window.location.href='./pages/computers.html?search=chromebook'" 
-                                 class="cursor-pointer bg-indigo-950/20 text-indigo-400 border border-indigo-500/30 hover:border-indigo-400 rounded-full px-4 py-2 text-xs md:text-sm font-semibold flex items-center gap-1.5 shadow-[0_2px_10px_rgba(99,102,241,0.05)] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_4px_15px_rgba(99,102,241,0.2)] hover:bg-indigo-500/10">
-                                <span class="text-base">💻</span>
-                                <span class="lang-en">Best Chromebook Price</span>
-                                <span class="lang-ur">بہترین کروم بک کی قیمت</span>
-                            </div>
-
-                            <!-- Tag 6: Laptop Charger @ Good Price -->
-                            <div onclick="window.location.href='./pages/computers.html?search=charger'" 
-                                 class="cursor-pointer bg-emerald-950/20 text-emerald-400 border border-emerald-500/30 hover:border-emerald-400 rounded-full px-4 py-2 text-xs md:text-sm font-semibold flex items-center gap-1.5 shadow-[0_2px_10px_rgba(16,185,129,0.05)] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_4px_15px_rgba(16,185,129,0.2)] hover:bg-emerald-500/10">
-                                <span class="text-base">🔌</span>
-                                <span class="lang-en">Laptop Charger @ Good Price</span>
-                                <span class="lang-ur">لیپ ٹاپ چارجر اچھی قیمت پر</span>
-                            </div>
-
-                        </div>
-
-                        <!-- Heroic Comparison Showcase Grid -->
-                        <div dir="ltr" class="grid grid-cols-3 gap-4 mt-8 pt-6 border-t border-slate-100 relative z-10 text-left">
-                            
-                            <!-- Card 1: The Comparison Hero Card (Interactive Animation) -->
-                            <div class="bg-gradient-to-br from-[#021F17] via-[#053d2f] to-[#0A1A24] rounded-2xl p-5 border border-emerald-500/30 shadow-[0_10px_30px_rgba(4,120,87,0.15)] flex flex-col justify-between hover:shadow-[0_15px_40px_rgba(4,120,87,0.3)] hover:border-emerald-400/50 transition duration-300 text-white">
-                                <div class="text-left">
-                                    <!-- Tagline -->
-                                    <div class="mb-3 text-center">
-                                        <h4 class="text-xs font-bold font-serif text-emerald-300 flex items-center justify-center gap-1.5" style="font-family: Georgia, 'Times New Roman', serif;">
-                                            <span id="hero-tagline-emoji" class="text-base">🍔</span>
-                                            <span class="lang-en">Compare Before You Buy</span>
-                                            <span class="lang-ur">خریدنے سے پہلے موازنہ کریں</span>
-                                        </h4>
-                                    </div>
-                                    
-                                    <!-- Product Name & Subheading -->
-                                    <div class="text-center mb-3">
-                                        <h3 id="hero-product-name" class="font-extrabold text-base text-white tracking-tight transition-all duration-300">Zinger Burger</h3>
-                                        <p class="text-[9px] text-slate-300 font-medium leading-normal mt-0.5">
-                                            <span class="lang-en">Compare prices from nearby restaurants & save money instantly!</span>
-                                            <span class="lang-ur">قریبی ریستورانوں سے قیمتوں کا موازنہ کریں اور رقم بچائیں!</span>
-                                        </p>
-                                    </div>
-
-                                    <!-- Lowest Price Section -->
-                                    <div class="bg-emerald-950/50 border border-emerald-500/30 rounded-xl py-1.5 px-2 text-center mb-2">
-                                        <span class="text-[8px] font-bold text-emerald-400 uppercase tracking-wider block">Lowest Price</span>
-                                        <span id="hero-lowest-price" class="text-base font-black text-emerald-400 transition-all duration-300">Rs. 399</span>
-                                    </div>
-
-                                    <!-- Price Comparison List -->
-                                    <div id="hero-restaurants-list" class="border border-slate-800 rounded-xl p-2.5 bg-slate-950/40 shadow-inner space-y-1.5 text-[11px]">
-                                        <!-- Dynamic items populate here -->
-                                    </div>
-
-                                    <!-- Savings Highlight -->
-                                    <div id="hero-savings" class="flex items-center justify-between bg-emerald-950/60 text-slate-200 px-2.5 py-1.5 rounded-xl border border-emerald-500/30 text-[11px] font-bold my-3.5 transition-all duration-300">
-                                        <span>💰 You Save Up To:</span>
-                                        <span id="hero-saving-amount" class="text-emerald-400 font-extrabold">Rs. 121</span>
-                                    </div>
-                                    
-                                    <!-- Checklist -->
-                                    <div class="space-y-0.5 text-[10px] text-slate-300 font-medium pl-1 mb-2">
-                                        <div class="flex items-center gap-1.5">
-                                            <span class="text-emerald-400">✓</span>
-                                            <span id="hero-compared-restaurants">Compared from 12 Restaurants</span>
-                                        </div>
-                                        <div class="flex items-center gap-1.5">
-                                            <span class="text-emerald-400">✓</span>
-                                            <span>Verified Sellers</span>
-                                        </div>
-                                        <div class="flex items-center gap-1.5">
-                                            <span class="text-emerald-400">✓</span>
-                                            <span>Order Directly</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="mt-2 pt-2 border-t border-slate-700/50">
-                                    <a id="hero-compare-btn" href="./pages/food.html?search=zinger" class="w-full inline-flex items-center justify-center gap-1.5 bg-gradient-to-r from-orange-500 via-red-500 to-amber-500 hover:from-orange-400 hover:to-amber-400 text-white font-extrabold py-2.5 rounded-xl transition-all shadow-[0_4px_15px_rgba(249,115,22,0.3)] hover:shadow-[0_6px_20px_rgba(249,115,22,0.5)] hover:scale-[1.02] text-xs uppercase tracking-wider">
-                                        Compare All Prices →
-                                    </a>
-                                </div>
-                            </div>
-
-                            <!-- Card 2: Today's Biggest Savings -->
-                            <div class="bg-gradient-to-br from-[#0B1528] via-[#0E254A] to-[#121020] rounded-2xl p-5 border border-blue-500/30 shadow-[0_10px_30px_rgba(37,99,235,0.15)] flex flex-col justify-between hover:shadow-[0_15px_40px_rgba(37,99,235,0.3)] hover:border-blue-400/50 transition duration-300 text-white animate-fade-in">
-                                <div>
-                                    <div class="pb-2 border-b border-slate-800/80">
-                                        <h4 class="font-bold text-sm text-white flex items-center gap-2">
-                                            <i class="fas fa-arrow-trend-down text-blue-400"></i>
-                                            <span>Today's Biggest Savings</span>
-                                        </h4>
-                                        <p class="text-[11px] text-slate-300 mt-0.5">Top price drops across Pakistan</p>
-                                    </div>
-
-                                    <div class="space-y-2.5 my-3">
-                                        <!-- Item 1 -->
-                                        <div class="p-2 bg-slate-950/45 rounded-xl border border-blue-900/35 shadow-sm flex items-center justify-between">
-                                            <div class="flex items-center gap-2">
-                                                <span class="text-lg">💻</span>
-                                                <div class="leading-tight">
-                                                    <div class="text-xs font-bold text-slate-100">HP EliteBook</div>
-                                                    <div class="text-[9px] text-slate-350">Computers</div>
-                                                </div>
-                                            </div>
-                                            <span class="text-[10px] font-bold text-emerald-400 bg-emerald-950/50 px-2 py-0.5 rounded border border-emerald-500/30">Save Rs. 8,500/-</span>
-                                        </div>
-
-                                        <!-- Item 2 -->
-                                        <div class="p-2 bg-slate-950/45 rounded-xl border border-blue-900/35 shadow-sm flex items-center justify-between">
-                                            <div class="flex items-center gap-2">
-                                                <span class="text-lg">🍛</span>
-                                                <div class="leading-tight">
-                                                    <div class="text-xs font-bold text-slate-100">Chicken Mandi</div>
-                                                    <div class="text-[9px] text-slate-350">Food</div>
-                                                </div>
-                                            </div>
-                                            <span class="text-[10px] font-bold text-emerald-400 bg-emerald-950/50 px-2 py-0.5 rounded border border-emerald-500/30">Save Rs. 450/-</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="text-[9px] text-slate-350 font-bold uppercase tracking-wider text-right">
-                                    Verified Price Drop
-                                </div>
-                            </div>
-
-                            <!-- Card 3: Comparison Badges Widget -->
-                            <div class="bg-gradient-to-br from-[#1C160C] via-[#35250E] to-[#1C1024] rounded-2xl p-5 border border-amber-500/30 shadow-[0_10px_30px_rgba(245,158,11,0.15)] flex flex-col justify-between hover:shadow-[0_15px_40px_rgba(245,158,11,0.3)] hover:border-amber-400/50 transition duration-300 text-white animate-fade-in">
-                                <div>
-                                    <div class="pb-2 border-b border-slate-800/80">
-                                        <h4 class="font-bold text-sm text-white flex items-center gap-2">
-                                            <i class="fas fa-tags text-amber-400"></i>
-                                            <span>Comparison Badges</span>
-                                        </h4>
-                                        <p class="text-[11px] text-slate-300 mt-0.5">Smart shopping indicators</p>
-                                    </div>
-
-                                    <!-- Badges List -->
-                                    <div class="space-y-1.5 my-3">
-                                        <div class="flex items-center gap-2.5 p-1.5 bg-slate-950/45 rounded-xl border border-amber-900/35 shadow-sm">
-                                            <span class="text-base">🏆</span>
-                                            <div>
-                                                <div class="text-xs font-bold text-slate-100">Lowest Price</div>
-                                                <div class="text-[9px] text-slate-350">Lowest rate across Pakistan</div>
-                                            </div>
-                                        </div>
-                                        <div class="flex items-center gap-2.5 p-1.5 bg-slate-950/45 rounded-xl border border-amber-900/35 shadow-sm">
-                                            <span class="text-base">🔥</span>
-                                            <div>
-                                                <div class="text-xs font-bold text-slate-100">Best Deal</div>
-                                                <div class="text-[9px] text-slate-355">Highest value for money</div>
-                                            </div>
-                                        </div>
-                                        <div class="flex items-center gap-2.5 p-1.5 bg-slate-950/45 rounded-xl border border-amber-900/35 shadow-sm">
-                                            <span class="text-base">📍</span>
-                                            <div>
-                                                <div class="text-xs font-bold text-slate-100">Near You</div>
-                                                <div class="text-[9px] text-slate-355">Available close to you</div>
-                                            </div>
-                                        </div>
-                                        <div class="flex items-center gap-2.5 p-1.5 bg-slate-950/45 rounded-xl border border-amber-900/35 shadow-sm">
-                                            <span class="text-base">⭐</span>
-                                            <div>
-                                                <div class="text-xs font-bold text-slate-100">Verified Seller</div>
-                                                <div class="text-[9px] text-slate-350">Trusted merchant</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </section>
-
-                    <!-- LIVE PRICE UPDATE SECTION WITH GROCERY BASKET -->
-                    <section class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
-
-                        <!-- Left Side: Grocery Basket & Nearby (Spans 2 columns) -->
-                        <div class="sm:col-span-2 overflow-hidden sm:overflow-visible">
-                            <div
-                                class="flex flex-col gap-3 sm:scale-[0.75] sm:origin-top-left sm:rtl:origin-top-right sm:w-[133.33%] sm:-mb-[160px] md:-mb-[180px] lg:-mb-[160px] w-full">
-
-                                <!-- ROW 1: Grocery Basket + Nearby -->
-                                <div class="hidden grid grid-cols-1 lg:grid-cols-12 gap-3">
-                                    <!-- Grocery Basket -->
-                                    <div
-                                        class="lg:col-span-7 bg-white rounded-2xl p-4 modern-shadow border border-emerald-100">
-
-                                        <div class="flex justify-between items-center mb-3">
-                                            <span class="font-serif tracking-wide text-lg font-bold text-[#0A3D2A]"
-                                                style="font-family: Georgia, 'Times New Roman', serif;">
-                                                My Grocery Basket Comparison
-                                            </span>
-
-                                            <button onclick="showPage('groceries')"
-                                                class="text-[11px] px-3 py-1 bg-emerald-700 text-white rounded-xl">
-                                                Manage Basket
-                                            </button>
-                                        </div>
-
-                                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                                            <div class="border border-emerald-100 rounded-xl p-2.5 bg-emerald-50">
-                                                <div class="font-semibold text-xs">Imtiaz</div>
-                                                <div class="font-bold text-lg text-emerald-700">Rs. 5,200</div>
-                                            </div>
-                                            <div class="border border-emerald-100 rounded-xl p-2.5">
-                                                <div class="font-semibold text-xs">Chase Up</div>
-                                                <div class="font-bold text-lg">Rs. 4,750</div>
-                                            </div>
-                                            <div class="border border-emerald-100 rounded-xl p-2.5">
-                                                <div class="font-semibold text-xs">Carrefour</div>
-                                                <div class="font-bold text-lg">Rs. 5,400</div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Nearby Deals -->
-                                    <div
-                                        class="lg:col-span-5 bg-white rounded-2xl p-4 modern-shadow border border-emerald-100">
-                                        <span class="font-serif tracking-wide text-lg font-bold text-[#0A3D2A]"
-                                            style="font-family: Georgia, 'Times New Roman', serif;">
-                                            Nearby-First Deals
-                                        </span>
-                                        <div class="mt-2 space-y-2">
-                                            <div
-                                                class="flex justify-between border border-emerald-100 px-3 py-2 rounded-xl">
-                                                <div class="text-sm">Chase Up - Clifton</div>
-                                                <div class="font-bold text-emerald-700 text-sm">Rs. 4,750</div>
-                                            </div>
-                                            <div
-                                                class="flex justify-between border border-emerald-100 px-3 py-2 rounded-xl">
-                                                <div class="text-sm">Imtiaz - Tariq Road</div>
-                                                <div class="font-bold text-sm">Rs. 5,200</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- ROW 2: Today's Cheapest Picks + Price Drop Alerts -->
-                                <div class="hidden grid grid-cols-1 lg:grid-cols-2 gap-3">
-                                    <!-- Today's Cheapest Picks -->
-                                    <div class="bg-white rounded-2xl p-4 modern-shadow border border-emerald-100">
-                                        <span class="font-serif tracking-wide text-lg font-bold text-[#0A3D2A]"
-                                            style="font-family: Georgia, 'Times New Roman', serif;">Today's Cheapest
-                                            Picks</span>
-                                        <div class="mt-4 space-y-3 text-sm">
-                                            <div class="flex justify-between items-center">
-                                                <div class="text-gray-700">Sunflower Oil 1L</div>
-                                                <div class="font-bold text-gray-900">Rs. 389 <span
-                                                        class="text-emerald-600 font-bold text-xs ml-1">↓6%</span></div>
-                                            </div>
-                                            <div class="flex justify-between items-center">
-                                                <div class="text-gray-700">Tide 2kg</div>
-                                                <div class="font-bold text-gray-900">Rs. 499 <span
-                                                        class="text-emerald-600 font-bold text-xs ml-1">↓4%</span></div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Price Drop Alerts -->
-                                    <div class="bg-white rounded-2xl p-4 modern-shadow border border-emerald-100">
-                                        <span class="font-serif tracking-wide text-lg font-bold text-[#0A3D2A]"
-                                            style="font-family: Georgia, 'Times New Roman', serif;">Price Drop
-                                            Alerts</span>
-                                        <div class="mt-4 space-y-3 text-sm">
-                                            <div class="flex justify-between items-center">
-                                                <div class="text-gray-700">Zong 4G Device</div>
-                                                <div class="text-emerald-600 font-bold text-xs ml-1">↓9%</div>
-                                            </div>
-                                            <div class="flex justify-between items-center">
-                                                <div class="text-gray-700">Canon Printer</div>
-                                                <div class="text-emerald-600 font-bold text-xs ml-1">↓11%</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Savings Tracker -->
-                                <div class="hidden bg-white rounded-[28px] p-4 modern-shadow">
-                                    <div class="flex justify-between items-center mb-4">
-                                        <h3 class="font-serif text-2xl font-bold text-[#0A3D2A]">
-                                            <span class="lang-en">Savings Tracker</span>
-                                            <span class="lang-ur">بچت ٹریکر</span>
-                                        </h3>
-                                    </div>
-
-                                    <div class="space-y-3">
-                                        <div class="flex justify-between">
-                                            <span>Imtiaz</span>
-                                            <span class="font-bold text-emerald-700">22%</span>
-                                        </div>
-
-                                        <div class="flex justify-between">
-                                            <span>Chase Up</span>
-                                            <span class="font-bold text-emerald-700">18%</span>
-                                        </div>
-
-                                        <div class="flex justify-between">
-                                            <span>Carrefour</span>
-                                            <span class="font-bold text-emerald-700">15%</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Right Side: Live Price Update Boxes -->
-                        <div class="hidden sm:col-start-3 flex flex-col gap-3">
-                            <!-- Petrol Box -->
-                            <div
-                                class="bg-white rounded-3xl p-4 flex gap-x-3 items-center modern-shadow border border-orange-50 cursor-pointer transform transition duration-300 hover:scale-105 hover:shadow-xl hover:border-orange-200">
-                                <div
-                                    class="w-10 h-10 bg-orange-100 text-orange-600 rounded-2xl flex items-center justify-center flex-shrink-0">
-                                    <i class="fas fa-gas-pump text-lg"></i>
-                                </div>
-                                <div>
-                                    <div class="font-semibold text-gray-800 text-sm">Petrol</div>
-                                    <div class="flex gap-2 items-baseline">
-                                        <div id="petrolPrice" class="text-lg font-bold text-orange-600 leading-tight">
-                                            Rs. 272.15
-                                            <span class="text-[10px] font-medium text-orange-500">/L</span>
-                                        </div>
-                                        <div id="petrolPriceOld" class="text-xs line-through text-gray-400 font-medium">
-                                            Rs. 280.00</div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Diesel Box -->
-                            <div
-                                class="bg-white rounded-3xl p-4 flex gap-x-3 items-center modern-shadow border border-blue-50 cursor-pointer transform transition duration-300 hover:scale-105 hover:shadow-xl hover:border-blue-200">
-                                <div
-                                    class="w-10 h-10 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center flex-shrink-0">
-                                    <i class="fas fa-truck-monster text-lg"></i>
-                                </div>
-                                <div>
-                                    <div class="font-semibold text-gray-800 text-sm">Diesel</div>
-                                    <div class="flex gap-2 items-baseline">
-                                        <div id="dieselPrice" class="text-lg font-bold text-blue-600 leading-tight">Rs.
-                                            284.35
-                                            <span class="text-[10px] font-medium text-blue-500">/L</span>
-                                        </div>
-                                        <div id="dieselPriceOld" class="text-xs line-through text-gray-400 font-medium">
-                                            Rs. 290.00</div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- LNG Box -->
-                            <div
-                                class="bg-white rounded-3xl p-4 flex gap-x-3 items-center modern-shadow border border-cyan-50 cursor-pointer transform transition duration-300 hover:scale-105 hover:shadow-xl hover:border-cyan-200">
-
-                                <div
-                                    class="w-10 h-10 bg-cyan-100 text-cyan-600 rounded-2xl flex items-center justify-center flex-shrink-0">
-                                    <i class="fas fa-fire text-lg"></i>
-                                </div>
-
-                                <div>
-                                    <div class="font-semibold text-gray-800 text-sm">LNG</div>
-                                    <div class="flex gap-2 items-baseline">
-                                        <div id="lngPrice" class="text-lg font-bold text-cyan-600 leading-tight">
-                                            Rs. 230.00
-                                            <span class="text-[10px] font-medium text-cyan-500">/Kg</span>
-                                        </div>
-                                        <div id="lngPriceOld" class="text-xs line-through text-gray-400 font-medium">
-                                            Rs. 240.00
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Gold Box -->
-                            <div
-                                class="bg-white rounded-3xl p-4 flex gap-x-3 items-center modern-shadow border border-yellow-50 cursor-pointer transform transition duration-300 hover:scale-105 hover:shadow-xl hover:border-yellow-200">
-                                <div
-                                    class="w-10 h-10 bg-yellow-100 text-yellow-600 rounded-2xl flex items-center justify-center flex-shrink-0">
-                                    <i class="fas fa-coins text-lg"></i>
-                                </div>
-                                <div>
-                                    <div class="font-semibold text-gray-800 text-sm">Gold</div>
-                                    <div class="flex gap-2 items-baseline">
-                                        <div id="goldPrice" class="text-lg font-bold text-yellow-600 leading-tight">Rs.
-                                            351,000
-                                            <span class="text-[10px] font-medium text-yellow-500">/Tola</span>
-                                        </div>
-                                        <div id="goldPriceOld" class="text-xs line-through text-gray-400 font-medium">
-                                            Rs. 360,000</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                </div>
-
-                <div class="hidden lg:block w-[120px] flex-shrink-0">
-                    <div class="sticky top-24 h-[800px] overflow-y-auto overflow-x-hidden deal-banner">
-
-                        <!-- Vertical Banner Right -->
-                        <div id="vertical-banner-right" class="flex flex-col gap-4">
+                        <!-- Popular Tags -->
+                        <div class="flex flex-wrap gap-2 items-center text-xs">
+                            <span class="font-bold text-slate-500">Popular Searches:</span>
+                            <a class="bg-slate-50 border border-slate-200 rounded-full px-3.5 py-1.5 hover:bg-slate-50 hover:border-emerald-500 text-slate-700 font-semibold transition-all shadow-sm" href="#" onclick="setSearchQuery('Chicken Biryani')">Chicken Biryani</a>
+                            <a class="bg-slate-50 border border-slate-200 rounded-full px-3.5 py-1.5 hover:bg-slate-50 hover:border-emerald-500 text-slate-700 font-semibold transition-all shadow-sm" href="#" onclick="setSearchQuery('HP 830 G7')">HP 830 G7</a>
+                            <a class="bg-slate-50 border border-slate-200 rounded-full px-3.5 py-1.5 hover:bg-slate-50 hover:border-emerald-500 text-slate-700 font-semibold transition-all shadow-sm" href="#" onclick="setSearchQuery('Zinger Burger')">Zinger Burger</a>
+                            <a class="bg-slate-50 border border-slate-200 rounded-full px-3.5 py-1.5 hover:bg-slate-50 hover:border-emerald-500 text-slate-700 font-semibold transition-all shadow-sm" href="#" onclick="setSearchQuery('Laptop Charger')">Laptop Charger</a>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-
-
-
-        <!-- Features Row -->
-        <div class="max-w-screen-2xl mx-auto px-4 pt-3">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-
-                <!-- Card 01 -->
-                <div class="feature-card bg-white rounded-3xl p-5 flex gap-x-4 items-start modern-shadow border border-emerald-50 
-					cursor-pointer transform transition duration-300 hover:scale-105 hover:shadow-xl hover:border-emerald-200"
-                    data-title="Compare Across 500+ Stores" data-title-ur="500+ اسٹورز میں قیمتوں کا موازنہ کریں"
-                    data-description="Compare prices across 500+ stores in seconds and always get the best deal. Our platform scans multiple retailers instantly, so you don’t have to jump between sites. You’ll see the lowest available price, discover better offers, and shop with confidence knowing you’re saving both time and money."
-                    data-desc-ur="صرف چند سیکنڈز میں 500 سے زائد اسٹورز کی قیمتوں کا موازنہ کریں اور ہمیشہ بہترین ڈیل حاصل کریں۔ ہمارا پلیٹ فارم مختلف ریٹیلرز کی قیمتیں فوری طور پر اسکین کرتا ہے، تاکہ آپ کو بار بار مختلف ویب سائٹس دیکھنے کی ضرورت نہ پڑے۔ آپ کو سب سے کم دستیاب قیمت نظر آئے گی، بہتر آفرز دریافت ہوں گی، اور آپ پورے اعتماد کے ساتھ خریداری کر سکیں گے کہ آپ اپنا وقت اور پیسہ دونوں بچا رہے ہیں۔">
-
-
-                    <div class="w-10 h-10 bg-emerald-100 text-emerald-700 rounded-2xl flex items-center justify-center">
-                        <i class="fas fa-store text-xl"></i>
-                    </div>
-
-                    <div>
-                        <div class="font-semibold" data-lang-en="Compare Across 500+ Stores"
-                            data-lang-ur="500+ اسٹورز میں قیمتوں کا موازنہ کریں">Compare Across 500+ Stores</div>
-                        <div class="text-xs text-emerald-600 mt-1" data-lang-en="Find the lowest price instantly"
-                            data-lang-ur="فوری طور پر سب سے کم قیمت تلاش کریں">Find the lowest price instantly</div>
-                    </div>
-                </div>
-
-
-                <!-- Card 02 -->
-                <div class="feature-card bg-white rounded-3xl p-5 flex gap-x-4 items-start modern-shadow border border-emerald-50 
-					cursor-pointer transform transition duration-300 hover:scale-105 hover:shadow-xl hover:border-emerald-200"
-                    data-title="Price History & Trends" data-title-ur="قیمتوں کی تاریخ اور رجحانات"
-                    data-description="Track price history and trends to make smarter buying decisions. See how prices change over time, identify the best moments to purchase, and avoid overpaying. With clear insights and data, you can confidently buy at the right time and get the best value."
-                    data-desc-ur="زیادہ سمجھداری سے خریداری کرنے کے لیے قیمتوں کی تاریخ اور رجحانات کو ٹریک کریں۔ دیکھیں کہ وقت کے ساتھ قیمتیں کیسے تبدیل ہوتی ہیں، خریداری کے بہترین مواقع کی نشاندہی کریں، اور اضافی رقم ادا کرنے سے بچیں۔ واضح معلومات اور ڈیٹا کی مدد سے آپ اعتماد کے ساتھ درست وقت پر خریداری کر سکتے ہیں اور بہترین ویلیو حاصل کر سکتے ہیں۔">
-
-                    <div class="w-10 h-10 bg-amber-100 text-amber-700 rounded-2xl flex items-center justify-center">
-                        <i class="fas fa-chart-line text-xl"></i>
-                    </div>
-
-                    <div>
-                        <div class="font-semibold" data-lang-en="Price History &amp; Trends"
-                            data-lang-ur="قیمتوں میں اتار چڑھاؤ کی تاریخ اور رجحانات">Price History &amp; Trends</div>
-                        <div class="text-xs text-emerald-600 mt-1" data-lang-en="Buy at the right time"
-                            data-lang-ur="صحیح وقت پر خریداری کریں">Buy at the right time</div>
-                    </div>
-                </div>
-
-
-                <!-- Card 03 -->
-                <div class="feature-card bg-white rounded-3xl p-5 flex gap-x-4 items-start modern-shadow border border-emerald-50 
-					cursor-pointer transform transition duration-300 hover:scale-105 hover:shadow-xl hover:border-emerald-200"
-                    data-title="Nearby-First Comparison" data-title-ur="قریب ترین اسٹورز کا موازنہ"
-                    data-description="Compare prices with a focus on stores near you to save more than just money. Discover nearby retailers offering the best deals, reduce delivery time, and even explore convenient in-store options. With location-based results, you get faster, smarter, and more practical shopping choices tailored to where you are."
-                    data-desc-ur="اپنے قریب موجود اسٹورز کو ترجیح دیتے ہوئے قیمتوں کا موازنہ کریں تاکہ صرف پیسے ہی نہیں بلکہ وقت کی بھی بچت ہو۔ اپنے آس پاس موجود ایسے ریٹیلرز دریافت کریں جو بہترین ڈیلز فراہم کر رہے ہوں، ڈیلیوری کا وقت کم کریں، اور آسان اِن اسٹور خریداری کے مواقع بھی حاصل کریں۔ مقام پر مبنی نتائج کے ساتھ آپ کو تیز، ذہین، اور زیادہ عملی خریداری کے انتخاب ملتے ہیں جو آپ کی موجودہ لوکیشن کے مطابق ہوتے ہیں۔">
-
-                    <div class="w-10 h-10 bg-emerald-100 text-emerald-700 rounded-2xl flex items-center justify-center">
-                        <i class="fas fa-shopping-basket text-xl"></i>
-                    </div>
-
-                    <div>
-                        <div class="font-semibold" data-lang-en="Nearby-First Comparison"
-                            data-lang-ur="قریب ترین اسٹورز کا موازنہ">Nearby-First Comparison</div>
-                        <div class="text-xs text-emerald-600 mt-1" data-lang-en="Prioritize stores near you"
-                            data-lang-ur="آپ کے قریب موجود اسٹورز کو ترجیح دی جاتی ہے۔">Prioritize stores near you</div>
-                    </div>
-                </div>
-
-
-                <div id="popupModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50">
-                    <div class="bg-white p-6 rounded-xl max-w-md w-full relative">
-                        <button id="closeModal" class="absolute top-2 right-3 text-xl">&times;</button>
-
-                        <h2 id="modalTitle" class="font-semibold mb-2"></h2>
-                        <p id="modalDesc" class="text-sm text-gray-600"></p>
-                    </div>
-                </div>
-
-                <!-- Card 04 -->
-                <div class="feature-card bg-white rounded-3xl p-5 flex gap-x-4 items-start modern-shadow border border-emerald-50 
-					cursor-pointer transform transition duration-300 hover:scale-105 hover:shadow-xl hover:border-emerald-200"
-                    data-title="Real-time Updates Everyday" data-title-ur="ریئل ٹائم اپڈیٹس"
-                    data-description="Stay ahead with real-time updates that keep prices fresh and accurate every day. Our system continuously monitors changes across stores, so you always see the latest deals, discounts, and availability without any delay. No more relying on outdated information or missing out on better offers—everything is updated as it happens. With reliable, up-to-date data at your fingertips, you can shop smarter, act faster, and always make well-informed decisions."
-                    data-desc-ur="ریئل ٹائم اپڈیٹس کے ساتھ ہمیشہ آگے رہیں جو ہر روز قیمتوں کو تازہ اور درست رکھتی ہیں۔ ہمارا سسٹم مختلف اسٹورز میں ہونے والی تبدیلیوں کو مسلسل مانیٹر کرتا ہے تاکہ آپ کو بغیر کسی تاخیر کے تازہ ترین ڈیلز، ڈسکاؤنٹس، اور دستیابی کی معلومات مل سکیں۔ اب پرانی معلومات پر انحصار کرنے یا بہتر آفرز سے محروم ہونے کی ضرورت نہیں — ہر چیز اسی وقت اپڈیٹ ہوتی ہے جب تبدیلی آتی ہے۔ قابلِ اعتماد اور جدید معلومات آپ کی انگلیوں پر موجود ہونے کی وجہ سے آپ زیادہ سمجھداری سے خریداری کر سکتے ہیں، تیزی سے فیصلے لے سکتے ہیں، اور ہمیشہ بہتر انتخاب کر سکتے ہیں۔">
-
-                    <div class="w-10 h-10 bg-emerald-100 text-emerald-700 rounded-2xl flex items-center justify-center">
-                        <i class="fas fa-sync text-xl"></i>
-                    </div>
-
-                    <div>
-                        <div class="font-semibold" data-lang-en="Real-time Updates Everyday"
-                            data-lang-ur="ریئل ٹائم اپڈیٹس">Real-time Updates Everyday</div>
-                        <div class="text-xs text-emerald-600 mt-1" data-lang-en="Always up to date"
-                            data-lang-ur="ہر روز تازہ معلومات">Always up to date</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- AI Insights Section -->
-        <section class="max-w-screen-2xl mx-auto px-4 pt-6">
-
-            <!-- Main Wrapper -->
-            <div
-                class="rounded-[2rem] bg-gradient-to-r from-[#203c5d] to-[#127b9a] text-white shadow-xl overflow-hidden">
-                <!-- Header -->
-                <div
-                    class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 px-6 py-5 border-b border-white/10">
-                    <div class="flex items-center gap-4">
-
-                        <!-- Icon -->
-                        <div
-                            class="w-14 h-14 rounded-2xl bg-white/10 text-white flex items-center justify-center shadow-lg backdrop-blur-md">
-                            <i class="fas fa-robot text-2xl"></i>
-                        </div>
-
-                        <!-- Title -->
-                        <div>
-                            <h3 class="text-2xl font-serif tracking-wide font-bold text-white"
-                                style="font-family: Georgia, 'Times New Roman', serif;">
-                                AI-Powered Market Insights
-                            </h3>
-
-                            <p class="text-sm text-gray-200 mt-1">
-                                Real-time analysis of pricing trends across Pakistan
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Status -->
-                    <div
-                        class="hidden lg:flex items-center gap-2 text-xs font-semibold text-white bg-white/10 border border-white/20 px-4 py-2 rounded-full w-fit backdrop-blur-md">
-                        <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
-                        Live Market Tracking
-                    </div>
-                </div>
-
-                <!-- Insights Grid -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 p-6">
-
-                    <!-- Card -->
-                    <div
-                        class="group rounded-2xl border border-white/10 bg-white/10 p-5 backdrop-blur-md hover:bg-white/20 transition duration-300">
-
-                        <div class="flex items-center gap-2 text-sm text-gray-200 mb-3">
-                            <i class="fas fa-arrow-trend-down text-white"></i>
-                            Average Price Drop Today
-                        </div>
-
-                        <div class="text-3xl font-bold text-white">
-                            12.5%
-                        </div>
-
-                        <div class="mt-3 text-xs font-medium text-green-400 flex items-center gap-1">
-                            <i class="fas fa-caret-down"></i>
-                            Better than yesterday (-8%)
-                        </div>
-
-                    </div>
-
-                    <!-- Card -->
-                    <div
-                        class="group rounded-2xl border border-white/10 bg-white/10 p-5 backdrop-blur-md hover:bg-white/20 transition duration-300">
-
-                        <div class="flex items-center gap-2 text-sm text-gray-200 mb-3">
-                            <i class="fas fa-store text-white"></i>
-                            Active Stores Tracking
-                        </div>
-
-                        <div class="text-3xl font-bold text-white">
-                            2,847
-                        </div>
-
-                        <div class="mt-3 text-xs font-medium text-green-400 flex items-center gap-1">
-                            <i class="fas fa-caret-up"></i>
-                            +156 new this week
-                        </div>
-
-                    </div>
-
-                    <!-- Card -->
-                    <div
-                        class="group rounded-2xl border border-white/10 bg-white/10 p-5 backdrop-blur-md hover:bg-white/20 transition duration-300">
-
-                        <div class="flex items-center gap-2 text-sm text-gray-200 mb-3">
-                            <i class="fas fa-tags text-white"></i>
-                            Total Deals Available
-                        </div>
-
-                        <div class="text-3xl font-bold text-white">
-                            45,892
-                        </div>
-
-                        <div class="mt-3 text-xs font-medium text-green-400 flex items-center gap-1">
-                            <i class="fas fa-caret-up"></i>
-                            +2,341 new deals today
-                        </div>
-
-                    </div>
-
-                    <!-- Card -->
-                    <div
-                        class="group rounded-2xl border border-white/10 bg-white/10 p-5 backdrop-blur-md hover:bg-white/20 transition duration-300">
-
-                        <div class="flex items-center gap-2 text-sm text-gray-200 mb-3">
-                            <i class="fas fa-piggy-bank text-white"></i>
-                            User Savings This Month
-                        </div>
-
-                        <div class="text-3xl font-bold text-white">
-                            PKR 12.4M
-                        </div>
-
-                        <div class="mt-3 text-xs font-medium text-green-400 flex items-center gap-1">
-                            <i class="fas fa-caret-up"></i>
-                            23% more than last month
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-        <!-- Price Comparison - OUTER WRAPPER -->
-        <div id="price-comparison" class="max-w-screen-2xl mx-auto px-4 pt-6">
-
-            <!-- MAIN OUTER BOX -->
-            <div
-                class="relative overflow-hidden rounded-[38px] border border-emerald-100 bg-white/70 backdrop-blur-xl shadow-[0_20px_60px_rgba(16,24,40,0.08)] p-5 md:p-7">
-
-                <!-- SOFT BACKGROUND GLOW -->
-                <div class="absolute inset-0 pointer-events-none">
-                    <div class="absolute -top-24 -left-24 w-72 h-72 bg-emerald-100/40 rounded-full blur-3xl"></div>
-                    <div class="absolute bottom-0 right-0 w-80 h-80 bg-cyan-100/30 rounded-full blur-3xl"></div>
-                </div>
-
-                <!-- CONTENT -->
-                <div class="relative z-10">
-
-                    <!-- Header -->
-                    <div class="mb-6">
-
-                        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-5">
-
-                            <!-- LEFT -->
-                            <div>
-                                <h2 class="font-serif tracking-wide text-2xl font-bold text-[#0A3D2A]"
-                                    style="font-family: Georgia, 'Times New Roman', serif;">
-                                    <span class="lang-en">Price Comparison</span><span class="lang-ur">قیمتوں کا
-                                        موازنہ</span>
-                                </h2>
-
-                                <div class="text-gray-500 text-sm mt-1">
-                                    <span class="lang-en">Find the lowest prices near you</span><span
-                                        class="lang-ur">اپنے قریب سب سے کم قیمتیں تلاش کریں</span>
-                                </div>
-                            </div>
-
-                            <!-- SEARCH PANEL -->
-                            <div
-                                class="w-full lg:w-[900px] bg-white/95 backdrop-blur-md border border-gray-200 rounded-3xl p-5 shadow-sm mb-6">
-
-                                <!-- CATEGORY BUTTONS -->
-                                <div class="flex w-full items-center gap-2 mb-4 overflow-x-auto pb-2 no-scrollbar"
-                                    id="categoryFilterContainer">
-                                    <button
-                                        class="cat-filter-btn flex-1 text-center px-2 py-2 rounded-lg text-[12px] font-medium shadow-sm transition-all duration-300">Food</button>
-                                    <button
-                                        class="cat-filter-btn flex-1 text-center px-2 py-2 rounded-lg text-[12px] font-medium shadow-sm transition-all duration-300">Groceries</button>
-                                    <button
-                                        class="cat-filter-btn flex-1 text-center px-2 py-2 rounded-lg text-[12px] font-medium shadow-sm transition-all duration-300">Electronics</button>
-                                    <button
-                                        class="cat-filter-btn flex-1 text-center px-2 py-2 rounded-lg text-[12px] font-medium shadow-sm transition-all duration-300">Mobiles</button>
-                                    <button
-                                        class="cat-filter-btn flex-1 text-center px-2 py-2 rounded-lg text-[12px] font-medium shadow-sm transition-all duration-300">Computers</button>
-                                    <button
-                                        class="cat-filter-btn flex-1 text-center px-2 py-2 rounded-lg text-[12px] font-medium shadow-sm transition-all duration-300">Property</button>
-                                    <button
-                                        class="cat-filter-btn flex-1 text-center px-2 py-2 rounded-lg text-[12px] font-medium shadow-sm transition-all duration-300">Fashion</button>
-                                    <button
-                                        class="cat-filter-btn flex-1 text-center px-2 py-2 rounded-lg text-[12px] font-medium shadow-sm transition-all duration-300">Personal Care</button>
-                                    <button
-                                        class="cat-filter-btn flex-1 text-center px-2 py-2 rounded-lg text-[12px] font-medium shadow-sm transition-all duration-300">Kids</button>
-                                </div>
-                                <script>
-                                    document.addEventListener("DOMContentLoaded", () => {
-                                        const catBtns = document.querySelectorAll('.cat-filter-btn');
-                                        catBtns.forEach(btn => {
-                                            btn.addEventListener('click', () => {
-                                                catBtns.forEach(b => b.classList.remove('active'));
-                                                btn.classList.add('active');
-                                            });
-                                        });
-                                    });
-                                </script>
-
-                                <!-- SEARCH ROW -->
-                                <div class="grid grid-cols-1 sm:grid-cols-5 gap-2 mt-2 w-full">
-
-                                    <!-- SEARCH -->
-                                    <div>
-                                        <input type="text" id="mainSearchInput" placeholder="What are you looking for?"
-                                            autocomplete="off"
-                                            class="w-full h-9 px-3 rounded-lg border border-gray-200 bg-white text-[12px] shadow-sm focus:outline-none focus:border-emerald-500">
-                                    </div>
-
-                                    <!-- LOCATION -->
-                                    <div>
-                                        <select id="mainLocationSelect"
-                                            class="w-full h-9 px-2 rounded-lg border border-gray-200 bg-white text-[12px] shadow-sm focus:outline-none focus:border-emerald-500">
-                                            <option>Select City</option>
-                                            <option>Karachi</option>
-                                            <option>Lahore</option>
-                                            <option>Islamabad</option>
-                                        </select>
-                                    </div>
-
-                                    <!-- AREA -->
-                                    <div>
-                                        <select id="mainAreaSelect"
-                                            class="w-full h-9 px-2 rounded-lg border border-gray-200 bg-white text-[12px] shadow-sm focus:outline-none focus:border-emerald-500">
-                                            <option>Select Area</option>
-                                            <option>F. B. Area</option>
-                                            <option>F. B. Area Block 17</option>
-                                            <option>Gulshan-e-Iqbal</option>
-                                            <option>Metroville</option>
-                                            <option>North Nazimabad</option>
-                                            <option>Johar</option>
-                                            <option>Clifton</option>
-                                            <option>DHA</option>
-                                        </select>
-                                    </div>
-
-                                    <!-- FILTER -->
-                                    <div>
-                                        <select
-                                            class="w-full h-9 px-2 rounded-lg border border-gray-200 bg-white text-[12px] shadow-sm focus:outline-none focus:border-emerald-500">
-                                            <option>Sort By Price</option>
-                                        </select>
-                                    </div>
-
-                                    <!-- BUTTON -->
-                                    <div>
-                                        <button id="mainSearchBtn"
-                                            class="w-full h-9 rounded-lg bg-gradient-to-r from-emerald-600 to-cyan-600 text-white text-[12px] font-medium">
-                                            Search Prices
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- PRODUCT GRID -->
-                        <div id="product-grid"
-                            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Compare by Category -->
-        <div class="max-w-screen-2xl mx-auto px-4 pt-4 hidden">
-
-            <!-- Outer Box -->
-            <div
-                class="rounded-[38px] border border-emerald-100 bg-white/70 backdrop-blur-xl shadow-[0_20px_60px_rgba(16,24,40,0.08)] p-5 md:p-7">
-                <div class="flex justify-between items-center mb-4">
-                    <span class="section-header font-serif tracking-wide text-2xl font-bold text-[#0A3D2A]"
-                        style="font-family: Georgia, 'Times New Roman', serif;"><span class="lang-en">Compare Prices by
-                            Category</span><span class="lang-ur">کیٹیگری کے مطابق قیمتوں کا موازنہ کریں</span></span>
-                    <button onclick="showPage('groceries')"
-                        class="flex items-center gap-1.5 text-[13px] md:text-sm font-bold px-4 md:px-5 py-2 bg-white text-emerald-800 rounded-full shadow-sm hover:shadow-md border border-emerald-100/50 transition-all hover:-translate-y-0.5 hover:bg-emerald-50">
-                        View All <i class="fas fa-arrow-right text-[10px] md:text-xs"></i>
-                    </button>
-                </div>
-
-                <div class="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-6 gap-3">
-                    <div onclick="showPage('foodstuffs')"
-                        class="category-card bg-white rounded-3xl p-4 cursor-pointer border border-emerald-100 modern-shadow">
-                        <div class="flex justify-between">
-                            <div
-                                class="w-9 h-9 bg-orange-100 rounded-2xl flex items-center justify-center text-orange-700">
-                                <i class="fas fa-utensils text-xl"></i>
-                            </div>
-                        </div>
-                        <div class="font-bold text-[#0A3D2A] text-[15px] md:text-base">
-                            <span class="lang-en">Food Stuffs</span>
-                            <span class="lang-ur">کھانے پینے کی اشیاء</span>
-                        </div>
-
-                        <div class="text-xs text-[#0A3D2A]">
-                            3,210 products • Avg. savings 22%
-                        </div>
-                    </div>
-
-                    <div onclick="showPage('groceries')"
-                        class="category-card bg-white rounded-3xl p-4 cursor-pointer border border-emerald-100 modern-shadow">
-                        <div class="flex justify-between">
-                            <div
-                                class="w-9 h-9 bg-emerald-100 rounded-2xl flex items-center justify-center text-emerald-700">
-                                <i class="fas fa-shopping-basket text-xl"></i>
-                            </div>
-                        </div>
-                        <div class="mt-4">
-                            <div class="font-semibold text-[#0A3D2A]""><span class=" lang-en">Daily
-                                Groceries</span><span class="lang-ur">روزمرہ کا سودا</span></div>
-                            <div class="text-xs text-[#0A3D2A]">1,280 products • Avg. savings 18%</div>
-                        </div>
-                    </div>
-
-                    <div onclick="showPage('electronics')"
-                        class="category-card bg-white rounded-3xl p-4 cursor-pointer border border-emerald-100 modern-shadow">
-                        <div class="flex justify-between">
-                            <div class="w-9 h-9 bg-blue-100 rounded-2xl flex items-center justify-center text-blue-700">
-                                <i class="fas fa-tv text-xl"></i>
-                            </div>
-                        </div>
-                        <div class="mt-4">
-                            <div class="font-semibold text-[#0A3D2A]""><span class=" lang-en">Electronics</span><span
-                                    class="lang-ur">الیکٹرونکس</span></div>
-                            <div class="text-xs text-[#0A3D2A]">5,840 products • Avg. savings 15%</div>
-                        </div>
-                    </div>
-
-                    <div onclick="showPage('mobiles')"
-                        class="category-card bg-white rounded-3xl p-4 cursor-pointer border border-emerald-100 modern-shadow">
-                        <div class="flex justify-between">
-                            <div
-                                class="w-9 h-9 bg-purple-100 rounded-2xl flex items-center justify-center text-purple-700">
-                                <i class="fas fa-mobile-alt text-xl"></i>
-                            </div>
-                        </div>
-                        <div class="mt-4">
-                            <div class="font-semibold text-[#0A3D2A]""><span class=" lang-en">Mobiles</span><span
-                                    class="lang-ur">موبائلز</span></div>
-                            <div class="text-xs text-[#0A3D2A]">18,430 products • Avg. savings 11%</div>
-                        </div>
-                    </div>
-
-                    <div onclick="showPage('laptops')"
-                        class="category-card bg-white rounded-3xl p-4 cursor-pointer border border-emerald-100 modern-shadow">
-                        <div class="flex justify-between">
-                            <div
-                                class="w-9 h-9 bg-indigo-100 rounded-2xl flex items-center justify-center text-indigo-700">
-                                <i class="fas fa-laptop text-xl"></i>
-                            </div>
-                        </div>
-                        <div class="mt-4">
-                            <div class="font-semibold text-[#0A3D2A]""><span class=" lang-en">Laptops</span><span
-                                    class="lang-ur">لیپ ٹاپس</span></div>
-                            <div class="text-xs text-[#0A3D2A]">4,870 products • Avg. savings 17%</div>
-                        </div>
-                    </div>
-
-                    <div onclick="showPage('properties')"
-                        class="category-card bg-white rounded-3xl p-4 cursor-pointer border border-emerald-100 modern-shadow">
-                        <div class="flex justify-between">
-                            <div
-                                class="w-9 h-9 bg-orange-100 rounded-2xl flex items-center justify-center text-orange-700">
-                                <i class="fas fa-building text-xl"></i>
-                            </div>
-                        </div>
-                        <div class="mt-4">
-                            <div class="font-semibold text-[#0A3D2A]""><span class=" lang-en">Properties</span><span
-                                    class="lang-ur">پروپرٹیز</span></div>
-                            <div class="text-xs text-[#0A3D2A]">3,210 products • Avg. savings 22%</div>
-                        </div>
-                    </div>
-                </div> <!-- Grid End -->
-
-            </div> <!-- Outer Box End -->
-
-        </div> <!-- Section End -->
-
-
-        <!-- TRAVEL & TOURS SECTION -->
-        <section id="travel-section" class="pt-8 pb-5">
-
-            <div class="max-w-screen-2xl mx-auto px-4">
-
-                <!-- PREMIUM OUTER WRAPPER -->
-                <div
-                    class="relative overflow-hidden rounded-[38px] border border-white/10 bg-gradient-to-br from-[#021710] via-[#064e3b] to-[#059669] shadow-[0_20px_70px_rgba(16,185,129,0.28)] p-5 md:p-7">
-
-                    <!-- BACKGROUND EFFECTS -->
-                    <div class="absolute inset-0 overflow-hidden pointer-events-none">
-
-                        <!-- Glow -->
-                        <div
-                            class="absolute -top-32 -right-32 w-[420px] h-[420px] bg-emerald-300/10 rounded-full blur-3xl">
-                        </div>
-
-                        <div
-                            class="absolute -bottom-32 -left-32 w-[420px] h-[420px] bg-cyan-400/10 rounded-full blur-3xl">
-                        </div>
-
-                        <!-- Grid -->
-                        <div class="absolute inset-0 opacity-[0.05]" style="background-image:
-                    linear-gradient(to right, rgba(255,255,255,.18) 1px, transparent 1px),
-                    linear-gradient(to bottom, rgba(255,255,255,.18) 1px, transparent 1px);
-                    background-size: 55px 55px;">
-                        </div>
-
-                    </div>
-
-                    <!-- HEADER -->
-                    <div class="relative z-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5 mb-7">
-
-                        <!-- LEFT -->
-                        <div class="flex items-center gap-4">
-
-                            <!-- ICON -->
-                            <div
-                                class="w-16 h-16 rounded-3xl bg-white/10 backdrop-blur-xl border border-white/15 flex items-center justify-center shadow-[0_8px_30px_rgba(255,255,255,.12)] text-3xl">
-                                ✈️
-                            </div>
-
-                            <!-- TEXT -->
-                            <div>
-
-                                <h2 class="font-serif tracking-wide text-2xl font-bold text-white leading-tight"
-                                    style="font-family: Georgia, 'Times New Roman', serif;">
-
-                                    <span class="lang-en">
-                                        Travel & Tours
-                                    </span>
-
-                                    <span class="lang-ur">
-                                        سفر اور سیاحت
-                                    </span>
-
-                                </h2>
-
-                                <p class="text-sm md:text-[15px] text-emerald-100/80 mt-1 max-w-xl leading-relaxed">
-
-                                    <span class="lang-en">
-                                        Explore Pakistan & International Tour Deals with Smart Price Comparison
-                                    </span>
-
-                                    <span class="lang-ur">
-                                        پاکستان اور بین الاقوامی ٹور پیکجز بہترین قیمتوں کے موازنہ کے ساتھ دریافت کریں
-                                    </span>
-
-                                </p>
-
-                            </div>
-
-                        </div>
-
-                        <!-- RIGHT BUTTON -->
-                        <button onclick="window.location.href='pages/travel.html'"
-                            class="group h-[52px] px-7 rounded-2xl bg-white text-emerald-900 text-sm font-extrabold shadow-[0_8px_25px_rgba(255,255,255,.18)] hover:bg-emerald-50 transition-all duration-300 hover:-translate-y-1 flex items-center justify-center gap-2 whitespace-nowrap">
-
-                            <span>
-                                View All Packages
-                            </span>
-
-                            <i
-                                class="fas fa-arrow-right text-xs transition-transform duration-300 group-hover:translate-x-1"></i>
-
-                        </button>
-
-                    </div>
-
-                    <!-- FEATURE STRIP -->
-                    <div class="relative z-10 grid grid-cols-2 md:grid-cols-4 gap-3 mb-7">
-
-                        <!-- ITEM -->
-                        <div
-                            class="h-[56px] rounded-2xl bg-white/10 border border-white/10 backdrop-blur-xl px-4 flex items-center gap-3">
-
-                            <div class="text-xl">
-                                🌍
-                            </div>
-
-                            <div class="flex items-center gap-1.5">
-                                <span class="text-lg font-black text-white">
-                                    120+
-                                </span>
-
-                                <span class="text-[13px] font-semibold text-emerald-100/80">
-                                    Tours
-                                </span>
-                            </div>
-
-                        </div>
-
-                        <!-- ITEM -->
-                        <div
-                            class="h-[56px] rounded-2xl bg-white/10 border border-white/10 backdrop-blur-xl px-4 flex items-center gap-3">
-
-                            <div class="text-xl">
-                                🏨
-                            </div>
-
-                            <div class="flex items-center gap-1.5">
-                                <span class="text-lg font-black text-white">
-                                    85+
-                                </span>
-
-                                <span class="text-[13px] font-semibold text-emerald-100/80">
-                                    Hotels
-                                </span>
-                            </div>
-
-                        </div>
-
-                        <!-- ITEM -->
-                        <div
-                            class="h-[56px] rounded-2xl bg-white/10 border border-white/10 backdrop-blur-xl px-4 flex items-center gap-3">
-
-                            <div class="text-xl">
-                                ✈️
-                            </div>
-
-                            <div class="flex items-center gap-1.5">
-                                <span class="text-lg font-black text-white">
-                                    40+
-                                </span>
-
-                                <span class="text-[13px] font-semibold text-emerald-100/80">
-                                    Airlines
-                                </span>
-                            </div>
-
-                        </div>
-
-                        <!-- ITEM -->
-                        <div
-                            class="h-[56px] rounded-2xl bg-white/10 border border-white/10 backdrop-blur-xl px-4 flex items-center gap-3">
-
-                            <div class="text-xl">
-                                ⭐
-                            </div>
-
-                            <div class="flex items-center gap-1.5">
-                                <span class="text-lg font-black text-white">
-                                    4.9
-                                </span>
-
-                                <span class="text-[13px] font-semibold text-emerald-100/80">
-                                    Rating
-                                </span>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <!-- PACKAGES GRID -->
-                    <div class="relative z-10">
-
-                        <div id="travelPackagesGrid"
-                            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-
-                            <!-- DYNAMIC CARDS FROM JS -->
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-        <!-- Blogs Section -->
-        <section id="blogs-section" class="pt-6">
-            <div class="max-w-screen-2xl mx-auto px-4">
-                <div
-                    class="relative overflow-hidden rounded-[38px] border border-emerald-100 bg-white/70 backdrop-blur-xl shadow-[0_20px_60px_rgba(16,24,40,0.08)] p-5 md:p-7">
+                <!-- Right Section: Live Price Comparison Card -->
+                <div class="bg-white border border-slate-200 rounded-3xl p-6 md:p-8 shadow-xl flex flex-col justify-between h-full text-left">
                     <div class="flex justify-between items-center mb-6">
-                        <span class="section-header font-serif tracking-wide text-2xl font-bold text-[#0A3D2A]"
-                            style="font-family: Georgia, 'Times New Roman', serif;"><span class="lang-en">Latest
-                                Insights &amp; Blogs</span><span class="lang-ur">تازہ معلومات اور بلاگز</span></span>
-                        <button onclick="window.location.href='pages/blogs.html'"
-                            class="flex items-center gap-1.5 text-[13px] md:text-sm font-bold px-4 md:px-5 py-2 bg-white text-emerald-800 rounded-full shadow-sm hover:shadow-md border border-emerald-100/50 transition-all hover:-translate-y-0.5 hover:bg-emerald-50">
-                            View All <i class="fas fa-arrow-right text-[10px] md:text-xs"></i>
-                        </button>
+                        <div class="flex items-center gap-2">
+                            <span class="text-orange-500 font-bold text-lg">🪙</span>
+                            <span class="text-sm font-black uppercase tracking-wide text-slate-800">Live Price Comparison</span>
+                        </div>
+                        <span class="bg-red-500 text-white text-[9px] px-2.5 py-1 rounded-full font-bold flex items-center gap-1 animate-pulse">
+                            <span class="w-1.5 h-1.5 bg-white rounded-full"></span> LIVE
+                        </span>
                     </div>
-
-                    <div id="dynamicBlogGrid" class="grid grid-cols-1 md:grid-cols-3 gap-4 relative z-10">
-                        <div class="col-span-full text-center py-8 text-slate-500">
-                            <i class="fas fa-spinner fa-spin text-2xl mb-2 text-emerald-600"></i><br>Loading blogs...
+                    
+                    <div class="grid grid-cols-12 gap-4 mb-6 items-center flex-grow">
+                        <!-- Burger Image (Enlarged) -->
+                        <div class="col-span-6 flex justify-center">
+                            <img class="w-full h-auto object-cover rounded-2xl max-h-[160px] shadow-md border border-slate-100" src="images/categories/food/super-burger-fast-food/zinger-burger.png"/>
+                        </div>
+                        <!-- Shops List -->
+                        <div class="col-span-6 space-y-3">
+                            <div class="flex items-center justify-between py-1 border-b border-slate-100">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-5 h-5 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center text-[10px] font-bold">F</span>
+                                    <span class="text-sm font-bold text-slate-700">FRYCHI</span>
+                                </div>
+                                <div class="flex items-center gap-1.5">
+                                    <span class="text-[9px] bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded font-black uppercase">Best Price</span>
+                                    <span class="text-sm font-black text-emerald-700">Rs. 450</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between py-1 border-b border-slate-100">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-5 h-5 rounded-full bg-red-100 text-red-600 flex items-center justify-center text-[10px] font-bold">P</span>
+                                    <span class="text-sm font-bold text-slate-700">Pizza Max</span>
+                                </div>
+                                <span class="text-sm font-bold text-slate-600">Rs. 490</span>
+                            </div>
+                            <div class="flex items-center justify-between py-1 border-b border-slate-100">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-5 h-5 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center text-[10px] font-bold">K</span>
+                                    <span class="text-sm font-bold text-slate-700">Kababjees</span>
+                                </div>
+                                <span class="text-sm font-bold text-slate-600">Rs. 520</span>
+                            </div>
+                            <div class="flex items-center justify-between py-1">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-5 h-5 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center text-[10px] font-bold">K</span>
+                                    <span class="text-sm font-bold text-slate-700">KFC</span>
+                                </div>
+                                <span class="text-sm font-bold text-slate-600">Rs. 590</span>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-            </div>
-        </section>
-
-
-        <!-- CUSTOMER REVIEWS SECTION -->
-        <section id="reviews-section" class="hidden pt-6">
-
-            <div class="max-w-screen-2xl mx-auto px-4">
-
-                <!-- OUTER BOX -->
-                <div class="relative overflow-hidden rounded-[38px] border border-white/10 
-            bg-gradient-to-br from-[#020617] via-[#050816] to-[#0f172a]
-            shadow-[0_10px_40px_rgba(0,0,0,0.35)] backdrop-blur-xl p-5 md:p-7">
-
-                    <!-- Glow -->
-                    <div
-                        class="absolute -top-20 -right-20 w-72 h-72 bg-red-500/10 rounded-full blur-3xl pointer-events-none">
+                    <!-- Green Footer: You Save (Reduced height by 25%) -->
+                    <div class="bg-[#005221] py-3.5 px-5 rounded-2xl flex items-center justify-between text-white shadow-md relative overflow-hidden">
+                        <div class="absolute right-2 -bottom-2 opacity-25">
+                            <svg class="w-16 h-16 text-yellow-300" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M5 22h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2z"/>
+                            </svg>
+                        </div>
+                        <div class="relative z-10">
+                            <p class="text-xs opacity-80 uppercase tracking-widest font-bold">You Save</p>
+                        </div>
+                        <div class="flex items-center gap-1.5 relative z-10">
+                            <span class="text-sm text-yellow-300 font-bold">Rs.</span>
+                            <span class="text-3xl font-black text-yellow-300">140</span>
+                            <span class="text-xl ml-1">🪙</span>
+                        </div>
                     </div>
-
-                    <!-- HEADER -->
-                    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-5 relative z-10">
-
+                <!-- Compare All Prices Link -->
+                    <div class="mt-4 text-center">
+                        <a href="./pages/food.html" class="text-sm font-bold text-[#005221] hover:text-emerald-800 inline-flex items-center gap-1.5 hover:underline">
+                            Compare All Prices <span class="text-lg">→</span>
+                        </a>
+                    </div>
+                </div>
+            </section>
+            <!-- Stats/Trust Bar -->
+            <section class="mt-4 bg-[#005221] rounded-2xl py-4 px-6 md:px-8 shadow-lg">
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 items-center justify-between text-white text-left">
+                    
+                    <!-- Item 1: Verified Shops -->
+                    <div class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-3xl text-lime-400" style="font-variation-settings: 'FILL' 0, 'wght' 400;">storefront</span>
                         <div>
-                            <p class="text-red-400 tracking-[5px] uppercase text-[11px] mb-1">
-                                Loved By Pakistanis
-                            </p>
-
-                            <h2 class="font-serif tracking-wide text-2xl font-bold text-white leading-tight">
-                                Real People. Real Savings.
-                            </h2>
+                            <p class="font-extrabold text-base leading-tight">500+</p>
+                            <p class="text-[10px] text-slate-300 uppercase tracking-wide leading-none mt-0.5">Verified Shops</p>
                         </div>
-
-                        <!-- BUTTON -->
-                        <button onclick="openCommentModal()" class="bg-gradient-to-r from-emerald-500 to-green-600 
-                    hover:from-green-500 hover:to-emerald-600 
-                    text-white font-semibold px-5 py-2.5 rounded-2xl 
-                    shadow-lg hover:scale-105 transition-all duration-300 text-sm w-fit">
-
-                            <i class="fas fa-comment-dots mr-2"></i>
-                            Enter Your Comments
-                        </button>
                     </div>
 
-                    <!-- REVIEW CARDS -->
-                    <div id="reviewsContainer"
-                        class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 relative z-10">
-
-                        <!-- CARD -->
-                        <div
-                            class="bg-white/5 border border-white/10 rounded-3xl p-4 backdrop-blur-md hover:bg-white/10 transition-all duration-300">
-
-                            <div class="text-yellow-400 text-base mb-3">
-                                ★★★★★
-                            </div>
-
-                            <p class="text-gray-200 text-[15px] leading-relaxed italic">
-                                "I saved Rs 4,800 on monthly groceries using StopBuy.
-                                The comparison tool is a game changer!"
-                            </p>
-
-                            <div class="mt-5 text-red-400 font-semibold text-base">
-                                — Ayesha Khan, Lahore
-                            </div>
+                    <!-- Item 2: Products Listed -->
+                    <div class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-3xl text-lime-400" style="font-variation-settings: 'FILL' 0, 'wght' 400;">inventory_2</span>
+                        <div>
+                            <p class="font-extrabold text-base leading-tight">50,000+</p>
+                            <p class="text-[10px] text-slate-300 uppercase tracking-wide leading-none mt-0.5">Products Listed</p>
                         </div>
+                    </div>
 
-                        <!-- CARD -->
-                        <div
-                            class="bg-white/5 border border-white/10 rounded-3xl p-4 backdrop-blur-md hover:bg-white/10 transition-all duration-300">
-
-                            <div class="text-yellow-400 text-base mb-3">
-                                ★★★★★
-                            </div>
-
-                            <p class="text-gray-200 text-[15px] leading-relaxed italic">
-                                "Found the lowest petrol prices and got my iPhone 16
-                                for Rs 14k less than market."
-                            </p>
-
-                            <div class="mt-5 text-red-400 font-semibold text-base">
-                                — Bilal Ahmed, Karachi
-                            </div>
+                    <!-- Item 3: Comparisons -->
+                    <div class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-3xl text-lime-400" style="font-variation-settings: 'FILL' 0, 'wght' 400;">trending_up</span>
+                        <div>
+                            <p class="font-extrabold text-base leading-tight">1M+</p>
+                            <p class="text-[10px] text-slate-300 uppercase tracking-wide leading-none mt-0.5">Price Comparisons</p>
                         </div>
+                    </div>
 
-                        <!-- CARD -->
-                        <div
-                            class="bg-white/5 border border-white/10 rounded-3xl p-4 backdrop-blur-md hover:bg-white/10 transition-all duration-300">
-
-                            <div class="text-yellow-400 text-base mb-3">
-                                ★★★★★
-                            </div>
-
-                            <p class="text-gray-200 text-[15px] leading-relaxed italic">
-                                "Booked my Umrah through StopBuy. Everything was
-                                seamless and cheaper than travel agents."
-                            </p>
-
-                            <div class="mt-5 text-red-400 font-semibold text-base">
-                                — Sana Malik, Islamabad
-                            </div>
+                    <!-- Item 4: Updates -->
+                    <div class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-3xl text-lime-400" style="font-variation-settings: 'FILL' 0, 'wght' 400;">sync</span>
+                        <div>
+                            <p class="font-extrabold text-base leading-tight">Daily</p>
+                            <p class="text-[10px] text-slate-300 uppercase tracking-wide leading-none mt-0.5">Price Updates</p>
                         </div>
+                    </div>
 
+                    <!-- Item 5: Free Use -->
+                    <div class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-3xl text-lime-400" style="font-variation-settings: 'FILL' 0, 'wght' 400;">local_offer</span>
+                        <div>
+                            <p class="font-extrabold text-base leading-tight">100%</p>
+                            <p class="text-[10px] text-slate-300 uppercase tracking-wide leading-none mt-0.5">Free to Use</p>
+                        </div>
+                    </div>
+
+                    <!-- Item 6: Reviews -->
+                    <div class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-3xl text-lime-400" style="font-variation-settings: 'FILL' 0, 'wght' 400;">star</span>
+                        <div>
+                            <p class="font-extrabold text-base leading-tight">Real</p>
+                            <p class="text-[10px] text-slate-300 uppercase tracking-wide leading-none mt-0.5">Customer Reviews</p>
+                        </div>
                     </div>
 
                 </div>
-            </div>
-        </section>
+            </section>
+            
+            <!-- 3. Browse Categories -->
+            <section class="py-12 text-left">
+                <div class="flex items-center justify-between mb-8">
+                    <div>
+                        <h2 style="font-family: 'Times New Roman', Times, serif;" class="text-2xl font-bold text-gray-800">Browse Categories</h2>
+                        <p class="text-xs text-gray-500 mt-1">Find the best prices in your favorite food categories</p>
+                    </div>
+                    <a class="text-[#005221] font-bold flex items-center gap-1 group text-sm" href="./pages/categories.html">
+                        View All <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform text-sm">arrow_forward</span>
+                    </a>
+                </div>
+                <div class="flex overflow-x-auto gap-4 md:gap-8 pb-4 custom-scrollbar justify-between">
+                    <!-- Fast Food -->
+                    <a class="flex flex-col items-center gap-2 min-w-[80px] group text-center" href="./pages/food.html">
+                        <div class="w-20 h-20 rounded-full bg-white border border-slate-200 flex items-center justify-center overflow-hidden transition-all duration-300 group-hover:-translate-y-1.5 group-hover:shadow-lg group-hover:border-[#005221] p-1">
+                            <img alt="Fast Food" class="w-full h-full object-cover rounded-full" src="images/categories/food/chicken-burger.jpg">
+                        </div>
+                        <span class="font-bold text-xs text-slate-700 group-hover:text-[#005221] transition-colors">Fast Food</span>
+                    </a>
+                    <!-- Pizza -->
+                    <a class="flex flex-col items-center gap-2 min-w-[80px] group text-center" href="./pages/food.html?search=pizza">
+                        <div class="w-20 h-20 rounded-full bg-white border border-slate-200 flex items-center justify-center overflow-hidden transition-all duration-300 group-hover:-translate-y-1.5 group-hover:shadow-lg group-hover:border-[#005221] p-1">
+                            <img alt="Pizza" class="w-full h-full object-cover rounded-full" src="images/categories/food/pizza.jpg">
+                        </div>
+                        <span class="font-bold text-xs text-slate-700 group-hover:text-[#005221] transition-colors">Pizza</span>
+                    </a>
+                    <!-- Shawarma -->
+                    <a class="flex flex-col items-center gap-2 min-w-[80px] group text-center" href="./pages/food.html?search=shawarma">
+                        <div class="w-20 h-20 rounded-full bg-white border border-slate-200 flex items-center justify-center overflow-hidden transition-all duration-300 group-hover:-translate-y-1.5 group-hover:shadow-lg group-hover:border-[#005221] p-1">
+                            <img alt="Shawarma" class="w-full h-full object-cover rounded-full" src="images/categories/food/cheese-shararma.jpg">
+                        </div>
+                        <span class="font-bold text-xs text-slate-700 group-hover:text-[#005221] transition-colors">Shawarma</span>
+                    </a>
+                    <!-- Biryani -->
+                    <a class="flex flex-col items-center gap-2 min-w-[80px] group text-center" href="./pages/food.html?search=biryani">
+                        <div class="w-20 h-20 rounded-full bg-white border border-slate-200 flex items-center justify-center overflow-hidden transition-all duration-300 group-hover:-translate-y-1.5 group-hover:shadow-lg group-hover:border-[#005221] p-1">
+                            <img alt="Biryani" class="w-full h-full object-cover rounded-full" src="images/categories/food/chicken-biryani.jpg">
+                        </div>
+                        <span class="font-bold text-xs text-slate-700 group-hover:text-[#005221] transition-colors">Biryani</span>
+                    </a>
+                    <!-- Chinese -->
+                    <a class="flex flex-col items-center gap-2 min-w-[80px] group text-center" href="./pages/food.html?search=chinese">
+                        <div class="w-20 h-20 rounded-full bg-white border border-slate-200 flex items-center justify-center overflow-hidden transition-all duration-300 group-hover:-translate-y-1.5 group-hover:shadow-lg group-hover:border-[#005221] p-1">
+                            <img alt="Chinese" class="w-full h-full object-cover rounded-full" src="images/categories/food/chinese.jpg">
+                        </div>
+                        <span class="font-bold text-xs text-slate-700 group-hover:text-[#005221] transition-colors">Chinese</span>
+                    </a>
+                    <!-- Broast -->
+                    <a class="flex flex-col items-center gap-2 min-w-[80px] group text-center" href="./pages/food.html?search=broast">
+                        <div class="w-20 h-20 rounded-full bg-white border border-slate-200 flex items-center justify-center overflow-hidden transition-all duration-300 group-hover:-translate-y-1.5 group-hover:shadow-lg group-hover:border-[#005221] p-1">
+                            <img alt="Broast" class="w-full h-full object-cover rounded-full" src="images/categories/food/half-broast.jpg">
+                        </div>
+                        <span class="font-bold text-xs text-slate-700 group-hover:text-[#005221] transition-colors">Broast</span>
+                    </a>
+                    <!-- BBQ -->
+                    <a class="flex flex-col items-center gap-2 min-w-[80px] group text-center" href="./pages/food.html?search=bbq">
+                        <div class="w-20 h-20 rounded-full bg-white border border-slate-200 flex items-center justify-center overflow-hidden transition-all duration-300 group-hover:-translate-y-1.5 group-hover:shadow-lg group-hover:border-[#005221] p-1">
+                            <img alt="BBQ" class="w-full h-full object-cover rounded-full" src="images/categories/food/barbq.jpg">
+                        </div>
+                        <span class="font-bold text-xs text-slate-700 group-hover:text-[#005221] transition-colors">BBQ</span>
+                    </a>
+                    <!-- Sea Food -->
+                    <a class="flex flex-col items-center gap-2 min-w-[80px] group text-center" href="./pages/food.html?search=seafood">
+                        <div class="w-20 h-20 rounded-full bg-white border border-slate-200 flex items-center justify-center overflow-hidden transition-all duration-300 group-hover:-translate-y-1.5 group-hover:shadow-lg group-hover:border-[#005221] p-1">
+                            <img alt="Sea Food" class="w-full h-full object-cover rounded-full" src="images/categories/food/sea-food.jpg">
+                        </div>
+                        <span class="font-bold text-xs text-slate-700 group-hover:text-[#005221] transition-colors">Sea Food</span>
+                    </a>
+                    <!-- Dessert -->
+                    <a class="flex flex-col items-center gap-2 min-w-[80px] group text-center" href="./pages/food.html?search=dessert">
+                        <div class="w-20 h-20 rounded-full bg-white border border-slate-200 flex items-center justify-center overflow-hidden transition-all duration-300 group-hover:-translate-y-1.5 group-hover:shadow-lg group-hover:border-[#005221] p-1">
+                            <img alt="Dessert" class="w-full h-full object-cover rounded-full" src="images/categories/food/dessert.jpg">
+                        </div>
+                        <span class="font-bold text-xs text-slate-700 group-hover:text-[#005221] transition-colors">Dessert</span>
+                    </a>
+                    <!-- Drinks -->
+                    <a class="flex flex-col items-center gap-2 min-w-[80px] group text-center" href="./pages/food.html?search=drink">
+                        <div class="w-20 h-20 rounded-full bg-white border border-slate-200 flex items-center justify-center overflow-hidden transition-all duration-300 group-hover:-translate-y-1.5 group-hover:shadow-lg group-hover:border-[#005221] p-1">
+                            <img alt="Drinks" class="w-full h-full object-cover rounded-full" src="images/categories/food/drinks.png">
+                        </div>
+                        <span class="font-bold text-xs text-slate-700 group-hover:text-[#005221] transition-colors">Drinks</span>
+                    </a>
+                    <!-- Ice Cream / More -->
+                    <a class="flex flex-col items-center gap-2 min-w-[80px] group text-center" href="./pages/food.html?search=icecream">
+                        <div class="w-20 h-20 rounded-full bg-[#E8F5E9] border border-emerald-100 flex items-center justify-center overflow-hidden transition-all duration-300 group-hover:-translate-y-1.5 group-hover:shadow-lg group-hover:border-[#005221]">
+                            <span class="text-3xl text-[#005221] font-bold select-none leading-none pb-2">...</span>
+                        </div>
+                        <span class="font-bold text-xs text-slate-700 group-hover:text-[#005221] transition-colors">Ice Cream</span>
+                    </a>
+                </div>
+            </section>
+            <!-- 4. Price Comparison by Category Table -->
+            <section class="py-12 bg-emerald-50/30 border border-emerald-100/50 rounded-3xl px-6 lg:px-8 mb-12 text-left">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+                    
+                    <!-- Left Side: Title & Subtitle -->
+                    <div class="lg:col-span-2 space-y-2">
+                        <h2 style="font-family: 'Times New Roman', Times, serif;" class="text-3xl font-bold text-[#005221] leading-tight">Price Comparison</h2>
+                        <p class="text-xs text-gray-500">Find the lowest prices near you</p>
+                    </div>
+                    
+                    <!-- Right Side: Filter Widget Box (Aligned to match widths) -->
+                    <div class="lg:col-span-10 bg-white border border-slate-200 rounded-3xl p-6 shadow-sm space-y-4 w-full">
+                        <!-- Row 1: Categories (Aligned in same line, same size width using grid) -->
+                        <div class="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-9 gap-2 w-full">
+                            <button onclick="setActiveWidgetCat('food', this)" class="w-full py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 font-bold text-xs hover:border-[#005221] hover:bg-[#E8F5E9] hover:text-[#005221] transition-all text-center">Food</button>
+                            <button onclick="setActiveWidgetCat('grocery', this)" class="w-full py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 font-bold text-xs hover:border-[#005221] hover:bg-[#E8F5E9] hover:text-[#005221] transition-all text-center">Groceries</button>
+                            <button onclick="setActiveWidgetCat('electronics', this)" class="w-full py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 font-bold text-xs hover:border-[#005221] hover:bg-[#E8F5E9] hover:text-[#005221] transition-all text-center">Electronics</button>
+                            <button onclick="setActiveWidgetCat('mobiles', this)" class="w-full py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 font-bold text-xs hover:border-[#005221] hover:bg-[#E8F5E9] hover:text-[#005221] transition-all text-center">Mobiles</button>
+                            <button onclick="setActiveWidgetCat('laptops', this)" class="w-full py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 font-bold text-xs hover:border-[#005221] hover:bg-[#E8F5E9] hover:text-[#005221] transition-all text-center">Laptops</button>
+                            <button onclick="setActiveWidgetCat('property', this)" class="w-full py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 font-bold text-xs hover:border-[#005221] hover:bg-[#E8F5E9] hover:text-[#005221] transition-all text-center">Property</button>
+                            <button onclick="setActiveWidgetCat('fashion', this)" class="w-full py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 font-bold text-xs hover:border-[#005221] hover:bg-[#E8F5E9] hover:text-[#005221] transition-all text-center">Fashion</button>
+                            <button onclick="setActiveWidgetCat('personal-care', this)" class="w-full py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 font-bold text-[11px] hover:border-[#005221] hover:bg-[#E8F5E9] hover:text-[#005221] transition-all text-center flex items-center justify-center leading-tight">Personal Care</button>
+                            <button onclick="setActiveWidgetCat('kids', this)" class="w-full py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 font-bold text-xs hover:border-[#005221] hover:bg-[#E8F5E9] hover:text-[#005221] transition-all text-center">Kids</button>
+                        </div>
+                        
+                        <!-- Row 2: Inputs (Aligned with identical outer width) -->
+                        <div class="grid grid-cols-1 md:grid-cols-5 gap-3 w-full">
+                            <input id="searchWidgetQuery" type="text" placeholder="What are you looking for?" class="bg-white border border-slate-200 rounded-xl px-4 py-2.5 text-xs text-slate-700 focus:outline-none focus:border-[#005221] focus:ring-1 focus:ring-[#005221] w-full" />
+                            
+                            <select id="searchWidgetCity" class="bg-white border border-slate-200 rounded-xl px-4 py-2.5 text-xs text-slate-700 focus:outline-none focus:border-[#005221] w-full">
+                                <option value="">Select City</option>
+                                <option value="Karachi">Karachi</option>
+                                <option value="Lahore">Lahore</option>
+                                <option value="Islamabad">Islamabad</option>
+                            </select>
 
-        <!-- COMMENT MODAL -->
-        <div id="commentModal"
-            class="fixed inset-0 bg-black/70 backdrop-blur-sm hidden items-start justify-center z-[9999] p-3 overflow-y-auto">
+                            <select id="searchWidgetArea" class="bg-white border border-slate-200 rounded-xl px-4 py-2.5 text-xs text-slate-700 focus:outline-none focus:border-[#005221] w-full">
+                                <option value="">Select Area</option>
+                                <option value="Clifton">Clifton</option>
+                                <option value="Defence">Defence</option>
+                                <option value="Gulshan">Gulshan</option>
+                                <option value="Johar Town">Johar Town</option>
+                            </select>
 
-            <!-- SMALLER & SCROLLABLE POPUP -->
-            <div
-                class="bg-white w-full max-w-[300px] md:max-w-[340px] rounded-3xl shadow-2xl overflow-hidden relative mt-20 mb-6 animate-[fadeIn_.3s_ease]">
+                            <select id="searchWidgetSort" class="bg-white border border-slate-200 rounded-xl px-4 py-2.5 text-xs text-slate-700 focus:outline-none focus:border-[#005221] w-full">
+                                <option value="">Sort By Price</option>
+                                <option value="low-to-high">Low to High</option>
+                                <option value="high-to-low">High to Low</option>
+                            </select>
 
-                <!-- CLOSE BUTTON -->
-                <button onclick="closeCommentModal()"
-                    class="absolute top-3 right-3 w-7 h-7 rounded-full bg-red-100 hover:bg-red-200 text-red-600 flex items-center justify-center transition-all z-50">
-                    <i class="fas fa-times text-xs"></i>
-                </button>
+                            <button onclick="performPriceComparisonSearch()" class="bg-gradient-to-r from-emerald-700 to-[#005221] hover:opacity-90 text-white font-bold text-xs py-2.5 rounded-xl transition-all shadow-md w-full">
+                                Search Prices
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <script>
+                let selectedWidgetCat = '';
+                function setActiveWidgetCat(cat, btn) {
+                    selectedWidgetCat = cat;
+                    const buttons = btn.parentElement.querySelectorAll('button');
+                    buttons.forEach(b => {
+                        b.classList.remove('border-[#005221]', 'bg-[#E8F5E9]', 'text-[#005221]');
+                        b.classList.add('bg-slate-50', 'border-slate-200', 'text-slate-700');
+                    });
+                    btn.classList.add('border-[#005221]', 'bg-[#E8F5E9]', 'text-[#005221]');
+                    btn.classList.remove('bg-slate-50', 'border-slate-200', 'text-slate-700');
+                }
 
-                <!-- HEADER -->
-                <div class="bg-gradient-to-r from-emerald-600 to-green-500 p-3 text-white">
-                    <h3 class="text-lg font-bold">
-                        Share Your Experience
+                function performPriceComparisonSearch() {
+                    const query = document.getElementById('searchWidgetQuery').value;
+                    const city = document.getElementById('searchWidgetCity').value;
+                    const area = document.getElementById('searchWidgetArea').value;
+                    const sort = document.getElementById('searchWidgetSort').value;
+                    
+                    let url = './pages/categories.html';
+                    if (selectedWidgetCat) {
+                        url = './pages/' + selectedWidgetCat + '.html';
+                    }
+                    
+                    const params = [];
+                    if (query) params.push('search=' + encodeURIComponent(query));
+                    if (city) params.push('city=' + encodeURIComponent(city));
+                    if (area) params.push('area=' + encodeURIComponent(area));
+                    if (sort) params.push('sort=' + encodeURIComponent(sort));
+                    
+                    if (params.length > 0) {
+                        url += '?' + params.join('&');
+                    }
+                    window.location.href = url;
+                }
+            </script>
+<!-- 5. Today's Biggest Savings -->
+            <section class="py-12 text-left">
+                <!-- Title Row -->
+                <div class="flex items-center justify-between mb-8">
+                    <div class="flex items-center gap-2">
+                        <span class="text-orange-500 font-bold text-lg">📈</span>
+                        <h2 style="font-family: 'Times New Roman', Times, serif;" class="text-2xl font-bold text-gray-800">Today's Biggest Savings</h2>
+                    </div>
+                    <a class="text-[#005221] font-bold flex items-center gap-1 group text-sm" href="./pages/categories.html">
+                        View All Deals <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform text-sm">arrow_forward</span>
+                    </a>
+                </div>
+
+                <!-- Upper Grid: Banner & 4 Cards -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch mb-8">
+                    <!-- Left Banner -->
+                    <div class="lg:col-span-3 bg-[#005221] rounded-3xl p-6 flex flex-col justify-between text-white relative overflow-hidden shadow-md">
+                        <div class="absolute right-4 bottom-4 opacity-10">
+                            <span class="material-symbols-outlined text-[120px] text-white">campaign</span>
+                        </div>
+                        <div class="space-y-3 relative z-10">
+                            <p class="text-yellow-400 font-black text-sm uppercase tracking-wider">Don't Overpay!</p>
+                            <h3 class="text-2xl font-bold leading-tight">Compare First,<br>Save Every Time</h3>
+                        </div>
+                        <div class="mt-8 relative z-10">
+                            <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="bg-yellow-400 hover:bg-yellow-300 text-slate-900 font-extrabold px-5 py-2.5 rounded-xl transition-all shadow-md text-sm flex items-center gap-1">
+                                Start Comparing <span class="text-lg">→</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Right 4 Cards -->
+                    <div class="lg:col-span-9 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+                        <!-- Card 1: Chicken Biryani -->
+                        <div class="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md hover:border-[#005221] transition-all flex flex-col justify-between">
+                            <div class="p-4 flex items-center gap-3">
+                                <div class="w-20 h-20 flex-shrink-0 bg-slate-50 rounded-2xl overflow-hidden border border-slate-100 flex items-center justify-center">
+                                    <img class="w-full h-full object-cover" src="images/categories/food/chicken-biryani.jpg"/>
+                                </div>
+                                <div class="text-left">
+                                    <h4 class="font-extrabold text-sm text-slate-800 leading-tight mb-2">Chicken Biryani</h4>
+                                    <div class="space-y-0.5">
+                                        <p class="text-[10px] text-slate-400">Lowest Price <span class="text-[#005221] font-black ml-1">Rs. 180</span></p>
+                                        <p class="text-[10px] text-slate-400">Highest Price <span class="text-red-500 font-black ml-1">Rs. 320</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-[#005221] py-2 px-4 flex justify-between items-center text-white text-xs font-bold mt-2">
+                                <span class="text-[9px] opacity-75 uppercase">You Save</span>
+                                <span class="text-white font-extrabold">Rs. 140</span>
+                            </div>
+                        </div>
+
+                        <!-- Card 2: HP Laptop Charger -->
+                        <div class="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md hover:border-[#005221] transition-all flex flex-col justify-between">
+                            <div class="p-4 flex items-center gap-3">
+                                <div class="w-20 h-20 flex-shrink-0 bg-slate-50 rounded-2xl overflow-hidden border border-slate-100 flex items-center justify-center">
+                                    <img class="w-full h-full object-contain p-1" src="images/categories/computers/charger.png"/>
+                                </div>
+                                <div class="text-left">
+                                    <h4 class="font-extrabold text-sm text-slate-800 leading-tight mb-2">HP Laptop Charger</h4>
+                                    <div class="space-y-0.5">
+                                        <p class="text-[10px] text-slate-400">Lowest Price <span class="text-[#005221] font-black ml-1">Rs. 1,400</span></p>
+                                        <p class="text-[10px] text-slate-400">Highest Price <span class="text-red-500 font-black ml-1">Rs. 2,100</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-[#005221] py-2 px-4 flex justify-between items-center text-white text-xs font-bold mt-2">
+                                <span class="text-[9px] opacity-75 uppercase">You Save</span>
+                                <span class="text-white font-extrabold">Rs. 700</span>
+                            </div>
+                        </div>
+
+                        <!-- Card 3: Samsung Galaxy A36 -->
+                        <div class="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md hover:border-[#005221] transition-all flex flex-col justify-between">
+                            <div class="p-4 flex items-center gap-3">
+                                <div class="w-20 h-20 flex-shrink-0 bg-slate-50 rounded-2xl overflow-hidden border border-slate-100 flex items-center justify-center">
+                                    <img class="w-full h-full object-contain p-1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDg92tAvgo8PElqhdjEWlO8T8uDfx0HEe0SVT2rzfg_e0sX5b7CykO_A0pl70_zqVV_kwdfKMChPj-JSLeBaYO5Tdw2y5NwuUS-R_8zT8QErLKsBmPLRc25090D1Lao57cV48tqL3dSN10-OKCNNvug4vJuS3vP-y2RGoSdpDVi9wwmYX9moX2io50byuKyIr-mvm_YCxFLDNiCMD0czlWxP48xKWWW2phBta8g2n8qvTyKagxOcp8sRdVFXx3FgArq-u3a9ey0VJ_g"/>
+                                </div>
+                                <div class="text-left">
+                                    <h4 class="font-extrabold text-sm text-slate-800 leading-tight mb-2">Samsung Galaxy A36</h4>
+                                    <div class="space-y-0.5">
+                                        <p class="text-[10px] text-slate-400">Lowest Price <span class="text-[#005221] font-black ml-1">Rs. 74,999</span></p>
+                                        <p class="text-[10px] text-slate-400">Highest Price <span class="text-red-500 font-black ml-1">Rs. 82,999</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-[#005221] py-2 px-4 flex justify-between items-center text-white text-xs font-bold mt-2">
+                                <span class="text-[9px] opacity-75 uppercase">You Save</span>
+                                <span class="text-white font-extrabold">Rs. 8,000</span>
+                            </div>
+                        </div>
+
+                        <!-- Card 4: Cooking Oil -->
+                        <div class="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md hover:border-[#005221] transition-all flex flex-col justify-between">
+                            <div class="p-4 flex items-center gap-3">
+                                <div class="w-20 h-20 flex-shrink-0 bg-slate-50 rounded-2xl overflow-hidden border border-slate-100 flex items-center justify-center">
+                                    <img class="w-full h-full object-contain p-1" src="images/categories/grocery/oil.png"/>
+                                </div>
+                                <div class="text-left">
+                                    <h4 class="font-extrabold text-sm text-slate-800 leading-tight mb-2">Cooking Oil 5 Liter</h4>
+                                    <div class="space-y-0.5">
+                                        <p class="text-[10px] text-slate-400">Lowest Price <span class="text-[#005221] font-black ml-1">Rs. 2,450</span></p>
+                                        <p class="text-[10px] text-slate-400">Highest Price <span class="text-red-500 font-black ml-1">Rs. 2,950</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-[#005221] py-2 px-4 flex justify-between items-center text-white text-xs font-bold mt-2">
+                                <span class="text-[9px] opacity-75 uppercase">You Save</span>
+                                <span class="text-white font-extrabold">Rs. 500</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lower Grid: 3 Columns (Cheapest Near You, Live Price Drop, Trending Searches) -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
+                    
+                    <!-- Column 1: Cheapest Near You -->
+                    <div class="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-6">
+                                <div class="flex items-center gap-2">
+                                    <span class="text-[#005221] font-bold">🏠</span>
+                                    <h3 style="font-family: 'Times New Roman', Times, serif;" class="font-bold text-lg text-slate-800">Cheapest Near You</h3>
+                                </div>
+                                <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full">📍 Karachi</span>
+                            </div>
+                            
+                            <div class="space-y-4">
+                                <!-- Shop 1 -->
+                                <div class="flex items-center gap-3 border-b border-slate-100 pb-3 last:border-0 last:pb-0">
+                                    <span class="text-xs font-bold text-slate-400 w-4">1</span>
+                                    <div class="w-12 h-12 bg-slate-50 rounded-xl border border-slate-100 flex items-center justify-center p-1 overflow-hidden">
+                                        <img alt="FRYCHI" class="w-full h-full object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCylZFuTLc_FABEPhSEysYGdm1QSIJSwtEwC7WCRGQCCrVw7gE-WRnyfZ3rZHCNNtNSudKutfyzmqP5bCy5gbYsVOM0i6-gMgoEgzdrPHSGN4CEndq1Te0StmqpQHMl7XkwcVmX6VDauOgjZCwmiZDsuW7CjkvQS3b-kDcm2ZUMTJtuIRysH2xpVTmnowRhc09de5ZJWXYpti-j0dJ7wzuQ6HN-YDjWCBCU18FKR989vwmHOSrKGuOTq1cCu6GsrY8bgn2ca15kDRid"/>
+                                    </div>
+                                    <div class="flex-grow text-left">
+                                        <p class="font-extrabold text-sm text-slate-800">FRYCHI</p>
+                                        <div class="flex items-center gap-1 text-[10px] text-slate-500 font-semibold mt-0.5">
+                                            <span class="text-yellow-400">★</span> 4.8
+                                            <span class="text-slate-300">|</span> 235 Products
+                                        </div>
+                                    </div>
+                                    <span class="bg-emerald-50 text-[#005221] text-[9px] px-2 py-1 rounded-md font-extrabold uppercase shrink-0">Lowest Prices</span>
+                                </div>
+                                <!-- Shop 2 -->
+                                <div class="flex items-center gap-3 border-b border-slate-100 pb-3 last:border-0 last:pb-0">
+                                    <span class="text-xs font-bold text-slate-400 w-4">2</span>
+                                    <div class="w-12 h-12 bg-slate-50 rounded-xl border border-slate-100 flex items-center justify-center p-1 overflow-hidden">
+                                        <img alt="Pizza Max" class="w-full h-full object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuApi4RMZyrK6SebNJ51XAzCglm3TFRtg02mhsK1QkREQKZ4AZt0MY-IWckqz2-6QfMJMbZUOI1PoqDe0YaVQa9Y_DR4g7X31vLl4mjQ1n1EKsLEdwYl221HB2MxI_sY5h1halndsoAoc0Ta8Dl5MCJkdiiYp5UicLjIX-CfPqIkNJ4gLXgBLpYr9VaAnzI64LNc3EAIbi_fn_M2QoT3TFWtRaR6s7NZ3BlCC1_t3v3OzvDDAgXG1CHCa-vM9xh4TF9iDhDAyZcgtvky"/>
+                                    </div>
+                                    <div class="flex-grow text-left">
+                                        <p class="font-extrabold text-sm text-slate-800">Pizza Max</p>
+                                        <div class="flex items-center gap-1 text-[10px] text-slate-500 font-semibold mt-0.5">
+                                            <span class="text-yellow-400">★</span> 4.6
+                                            <span class="text-slate-300">|</span> 187 Products
+                                        </div>
+                                    </div>
+                                    <span class="bg-emerald-50 text-[#005221] text-[9px] px-2 py-1 rounded-md font-extrabold uppercase shrink-0">Lowest Prices</span>
+                                </div>
+                                <!-- Shop 3 -->
+                                <div class="flex items-center gap-3 border-b border-slate-100 pb-3 last:border-0 last:pb-0">
+                                    <span class="text-xs font-bold text-slate-400 w-4">3</span>
+                                    <div class="w-12 h-12 bg-slate-50 rounded-xl border border-slate-100 flex items-center justify-center p-1 overflow-hidden">
+                                        <span class="material-symbols-outlined text-2xl text-[#005221]">computer</span>
+                                    </div>
+                                    <div class="flex-grow text-left">
+                                        <p class="font-extrabold text-sm text-slate-800">Computer Market</p>
+                                        <div class="flex items-center gap-1 text-[10px] text-slate-500 font-semibold mt-0.5">
+                                            <span class="text-yellow-400">★</span> 4.7
+                                            <span class="text-slate-300">|</span> 302 Products
+                                        </div>
+                                    </div>
+                                    <span class="bg-emerald-50 text-[#005221] text-[9px] px-2 py-1 rounded-md font-extrabold uppercase shrink-0">Lowest Prices</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button onclick="window.location.href='./pages/categories.html'" class="w-full mt-6 text-[#005221] hover:bg-slate-50 font-extrabold text-xs py-2 rounded-xl border border-slate-200 transition-all flex items-center justify-center gap-1">
+                            View All Shops Nearby <span>→</span>
+                        </button>
+                    </div>
+
+                    <!-- Column 2: Live Price Drop -->
+                    <div class="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center gap-2 mb-6">
+                                <span class="text-orange-500 font-bold text-lg">⚡</span>
+                                <h3 style="font-family: 'Times New Roman', Times, serif;" class="font-bold text-lg text-slate-800">Live Price Drop</h3>
+                            </div>
+                            
+                            <div class="space-y-4">
+                                <!-- Product 1 -->
+                                <div class="flex items-center justify-between border-b border-slate-100 pb-3 last:border-0 last:pb-0">
+                                    <div class="flex items-center gap-3">
+                                        <img class="w-8 h-8 rounded-lg object-contain bg-slate-50 p-0.5 border border-slate-100" src="images/categories/computers/charger.png"/>
+                                        <span class="text-xs font-bold text-slate-700">HP Laptop Charger</span>
+                                    </div>
+                                    <div class="flex items-center gap-2 text-right shrink-0">
+                                        <span class="text-[10px] text-slate-400 line-through">Rs. 2,100</span>
+                                        <span class="text-xs font-black text-emerald-700">Rs. 1,800</span>
+                                        <span class="text-emerald-700 text-xs font-extrabold">↓</span>
+                                    </div>
+                                </div>
+                                <!-- Product 2 -->
+                                <div class="flex items-center justify-between border-b border-slate-100 pb-3 last:border-0 last:pb-0">
+                                    <div class="flex items-center gap-3">
+                                        <img class="w-8 h-8 rounded-lg object-cover bg-slate-50 border border-slate-100" src="images/categories/food/chicken-burger.jpg"/>
+                                        <span class="text-xs font-bold text-slate-700">Chicken Burger</span>
+                                    </div>
+                                    <div class="flex items-center gap-2 text-right shrink-0">
+                                        <span class="text-[10px] text-slate-400 line-through">Rs. 550</span>
+                                        <span class="text-xs font-black text-emerald-700">Rs. 450</span>
+                                        <span class="text-emerald-700 text-xs font-extrabold">↓</span>
+                                    </div>
+                                </div>
+                                <!-- Product 3 -->
+                                <div class="flex items-center justify-between border-b border-slate-100 pb-3 last:border-0 last:pb-0">
+                                    <div class="flex items-center gap-3">
+                                        <span class="w-8 h-8 rounded-lg bg-emerald-50 text-[#005221] flex items-center justify-center"><span class="material-symbols-outlined text-sm">local_gas_station</span></span>
+                                        <span class="text-xs font-bold text-slate-700">Petrol (1 Liter)</span>
+                                    </div>
+                                    <div class="flex items-center gap-2 text-right shrink-0">
+                                        <span class="text-[10px] text-slate-400 line-through">Rs. 304</span>
+                                        <span class="text-xs font-black text-emerald-700">Rs. 294</span>
+                                        <span class="text-emerald-700 text-xs font-extrabold">↓</span>
+                                    </div>
+                                </div>
+                                <!-- Product 4 -->
+                                <div class="flex items-center justify-between border-b border-slate-100 pb-3 last:border-0 last:pb-0">
+                                    <div class="flex items-center gap-3">
+                                        <img class="w-8 h-8 rounded-lg object-contain bg-slate-50 border border-slate-100" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDg92tAvgo8PElqhdjEWlO8T8uDfx0HEe0SVT2rzfg_e0sX5b7CykO_A0pl70_zqVV_kwdfKMChPj-JSLeBaYO5Tdw2y5NwuUS-R_8zT8QErLKsBmPLRc25090D1Lao57cV48tqL3dSN10-OKCNNvug4vJuS3vP-y2RGoSdpDVi9wwmYX9moX2io50byuKyIr-mvm_YCxFLDNiCMD0czlWxP48xKWWW2phBta8g2n8qvTyKagxOcp8sRdVFXx3FgArq-u3a9ey0VJ_g"/>
+                                        <span class="text-xs font-bold text-slate-700">Samsung A36</span>
+                                    </div>
+                                    <div class="flex items-center gap-2 text-right shrink-0">
+                                        <span class="text-[10px] text-slate-400 line-through">Rs. 82,999</span>
+                                        <span class="text-xs font-black text-emerald-700">Rs. 74,999</span>
+                                        <span class="text-emerald-700 text-xs font-extrabold">↓</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button onclick="window.scrollTo({top:0, behavior:'smooth'})" class="w-full mt-6 text-[#005221] hover:bg-slate-50 font-extrabold text-xs py-2 rounded-xl border border-slate-200 transition-all flex items-center justify-center gap-1">
+                            View All Price Drops <span>→</span>
+                        </button>
+                    </div>
+
+                    <!-- Column 3: Trending Searches -->
+                    <div class="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center gap-2 mb-6">
+                                <span class="text-orange-500 font-bold text-lg">🔥</span>
+                                <h3 style="font-family: 'Times New Roman', Times, serif;" class="font-bold text-lg text-slate-800">Trending Searches</h3>
+                            </div>
+                            
+                            <div class="grid grid-cols-2 gap-2 text-xs">
+                                <a class="bg-slate-50 border border-slate-200 rounded-2xl px-3 py-2.5 hover:border-emerald-500 text-slate-700 font-bold transition-all shadow-sm flex items-center gap-1" href="#" onclick="setSearchQuery('Chicken Biryani')">
+                                    <span class="material-symbols-outlined text-xs text-slate-400">search</span> Chicken Biryani
+                                </a>
+                                <a class="bg-slate-50 border border-slate-200 rounded-2xl px-3 py-2.5 hover:border-emerald-500 text-slate-700 font-bold transition-all shadow-sm flex items-center gap-1" href="#" onclick="setSearchQuery('HP 830 G7')">
+                                    <span class="material-symbols-outlined text-xs text-slate-400">search</span> HP 830 G7
+                                </a>
+                                <a class="bg-slate-50 border border-slate-200 rounded-2xl px-3 py-2.5 hover:border-emerald-500 text-slate-700 font-bold transition-all shadow-sm flex items-center gap-1" href="#" onclick="setSearchQuery('Laptop Charger')">
+                                    <span class="material-symbols-outlined text-xs text-slate-400">search</span> Laptop Charger
+                                </a>
+                                <a class="bg-slate-50 border border-slate-200 rounded-2xl px-3 py-2.5 hover:border-emerald-500 text-slate-700 font-bold transition-all shadow-sm flex items-center gap-1" href="#" onclick="setSearchQuery('Zinger Burger')">
+                                    <span class="material-symbols-outlined text-xs text-slate-400">search</span> Zinger Burger
+                                </a>
+                                <a class="bg-slate-50 border border-slate-200 rounded-2xl px-3 py-2.5 hover:border-emerald-500 text-slate-700 font-bold transition-all shadow-sm flex items-center gap-1" href="#" onclick="setSearchQuery('Samsung A36')">
+                                    <span class="material-symbols-outlined text-xs text-slate-400">search</span> Samsung A36
+                                </a>
+                                <a class="bg-slate-50 border border-slate-200 rounded-2xl px-3 py-2.5 hover:border-emerald-500 text-slate-700 font-bold transition-all shadow-sm flex items-center gap-1" href="#" onclick="setSearchQuery('PS5 Price')">
+                                    <span class="material-symbols-outlined text-xs text-slate-400">search</span> PS5 Price
+                                </a>
+                                <a class="bg-slate-50 border border-slate-200 rounded-2xl px-3 py-2.5 hover:border-emerald-500 text-slate-700 font-bold transition-all shadow-sm flex items-center gap-1" href="#" onclick="setSearchQuery('Cooking Oil 5 Liter')">
+                                    <span class="material-symbols-outlined text-xs text-slate-400">search</span> Cooking Oil
+                                </a>
+                                <a class="bg-slate-50 border border-slate-200 rounded-2xl px-3 py-2.5 hover:border-emerald-500 text-slate-700 font-bold transition-all shadow-sm flex items-center gap-1" href="#" onclick="setSearchQuery('iPhone 15 Price')">
+                                    <span class="material-symbols-outlined text-xs text-slate-400">search</span> iPhone 15
+                                </a>
+                            </div>
+                        </div>
+                        <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="w-full mt-6 text-[#005221] hover:bg-slate-50 font-extrabold text-xs py-2 rounded-xl border border-slate-200 transition-all flex items-center justify-center gap-1">
+                            View All Trending <span>→</span>
+                        </button>
+                    </div>
+
+                </div>
+            </section>
+            <!-- 7. Smart Savings Blog -->
+            <section class="py-12 text-left">
+                <div class="flex items-center justify-between mb-8">
+                    <h2 class="text-2xl font-bold text-gray-800">Smart Savings Blog</h2>
+                    <a class="text-[#005221] font-bold flex items-center gap-1 group text-sm" href="./pages/blogs.html">
+                        Read More <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform text-sm">arrow_forward</span>
+                    </a>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden group shadow-sm hover:shadow-md transition-all">
+                        <div class="h-48 overflow-hidden">
+                            <img alt="Savings App" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida/AP1WRLthpNrsEw41DXrwjCQmzgDUajZ-kozgWd6Y1gk845f06isY7ChLEkNbtTXcTkA3qCiHeGk0eq-Sr0enezhfASmEzRWxhaQLCqKlkSembbND4HaicPxL3DIkHDouT6h2TzOUO8WFXpIcLcR67WX6ylhru1p2HsR_K4LM9KNdCdoP8cbydsQ5GAUAdrt65M1fVwGAz7Acc1-gMyZecz6UIQN_KNgnJTYqmwQtJzsmplyHUiVRdQT58ptuGCjK"/>
+                        </div>
+                        <div class="p-6 space-y-2">
+                            <span class="text-[10px] text-[#005221] font-bold uppercase tracking-wider">Technology</span>
+                            <h3 class="font-bold text-lg text-gray-800 group-hover:text-[#005221] transition-colors leading-tight">How to Use StopBuyPk to Save up to 40% Daily</h3>
+                            <p class="text-sm text-gray-500 line-clamp-2">Master the art of price comparison with our latest mobile app features...</p>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden group shadow-sm hover:shadow-md transition-all">
+                        <div class="h-48 overflow-hidden">
+                            <img alt="Fresh Groceries" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida/AP1WRLtv18B7LjQPm39gVQWvrhPzHH9YrdUgH62C0pzz6ECWDupZASgoEP0FqX51oA8VEUHj5QK1Sqnd5KolFeQoDJBdEzRx_hhbxwtAQCS_DLi_DiOFJkneezWBpq5CVpqa4PThZ8uxB8h2PWqadwI1s4vtn4nEPYAudxatTFbPSwUfyY2lMl_5Zabex9pz003b5OTX_5HkmpeI9xhv7aYizc_1YZU0QHMMaERrlctHMfFLqqA2-zeUvdx93Mk"/>
+                        </div>
+                        <div class="p-6 space-y-2">
+                            <span class="text-[10px] text-[#005221] font-bold uppercase tracking-wider">Lifestyle</span>
+                            <h3 class="font-bold text-lg text-gray-800 group-hover:text-[#005221] transition-colors leading-tight">Finding the Best Grocery Prices in Your Local Market</h3>
+                            <p class="text-sm text-gray-500 line-clamp-2">The ultimate guide to navigating local grocery stores for the best value...</p>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden group shadow-sm hover:shadow-md transition-all">
+                        <div class="h-48 overflow-hidden">
+                            <img alt="Market Scene" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida/AP1WRLuSJoDvZHVXABqsS4U7mFqy2Cv_t-7uXzegv0T7yucfUATquwEMEWLbzQaPgalTzVfhPRTJ7myrx9OKpiPch8bZL1cCjk2B38ytRF1vc0WhwXljNR1Y6LOhSI-WvhmlBeP90FCecyrmteycaSfmuNlJG8l9OxBJ817UnZR9FsFJLndqHP-GZsrYvcUyCzJ62dNGTQ9SjafZpH29gGLYw08BrIRRs--KZ74ouit-FtEpTlHMk_Idb_uAA1tb"/>
+                        </div>
+                        <div class="p-6 space-y-2">
+                            <span class="text-[10px] text-[#005221] font-bold uppercase tracking-wider">Community</span>
+                            <h3 class="font-bold text-lg text-gray-800 group-hover:text-[#005221] transition-colors leading-tight">Supporting Local Shops While Getting Smart Deals</h3>
+                            <p class="text-sm text-gray-500 line-clamp-2">How StopBuyPk connects consumers with verified local entrepreneurs...</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 8. App Promotion (Comparison in your pocket) -->
+            <section class="py-2 bg-[#005221] rounded-3xl p-6 flex flex-col md:flex-row items-center justify-between gap-4 mb-12 text-left shadow-lg overflow-hidden relative">
+                <!-- Phone Image coming from bottom -->
+                <div class="w-full md:w-auto flex items-end justify-center md:justify-start shrink-0 relative h-20 pointer-events-none">
+                    <img alt="App Mockup" class="absolute bottom-[-10px] h-24 w-auto max-w-none object-contain pointer-events-none drop-shadow-2xl" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBt2R-mqTxabTIxG8qd22z8mLcwZQbtN7alpsp4K4AMS37hQ1WUT_W5oPez0qf9462bnVIoFJfbNuBZem1pR10el-tKJrjYxC4kMcu3yte4BKLySHDnEnA6n_bIA2u5UoOCAw_tC_WukxPq_QyGHCsF9dpRuhQCijs3Z998bmgLPg0UujJ74Z5LDVc0bPjmNv5y_90Bf2v2FET7nabJHO6bn93KWJy06liWbMEM1lL2vEWsgXgz6jDLkFFN7D4TaMuW16PTze_G4iZ3"/>
+                </div>
+
+                <!-- Text Block (In between Image and Buttons) -->
+                <div class="flex-grow md:pl-16 text-center md:text-left space-y-0.5 z-10">
+                    <h3 style="font-family: 'Times New Roman', Times, serif;" class="text-lg md:text-xl font-extrabold text-white leading-tight">
+                        Stop Buy Before Get
                     </h3>
-
-                    <p class="text-[11px] text-white/80 mt-1">
-                        Your feedback helps others save smarter.
+                    <p style="font-family: 'Times New Roman', Times, serif;" class="text-lg md:text-xl font-extrabold text-[#aaf4b1] leading-tight">
+                        Best Price
+                    </p>
+                    <p class="text-orange-400 text-xs font-semibold tracking-wide mt-0.5">
+                        Compare, Save &amp; Buy Smart
                     </p>
                 </div>
 
-                <!-- FORM -->
-                <div class="p-3 space-y-2 max-h-[75vh] overflow-y-auto">
-
-                    <!-- NAME -->
-                    <div>
-                        <label class="block text-[11px] font-semibold text-gray-700 mb-1">
-                            Your Name
-                        </label>
-
-                        <input type="text" id="reviewName"
-                            class="w-full border border-gray-200 rounded-xl px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-emerald-500"
-                            placeholder="Enter your name">
-                    </div>
-
-                    <!-- CITY -->
-                    <div>
-                        <label class="block text-[11px] font-semibold text-gray-700 mb-1">
-                            City
-                        </label>
-
-                        <input type="text" id="reviewCity"
-                            class="w-full border border-gray-200 rounded-xl px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-emerald-500"
-                            placeholder="Enter your city">
-                    </div>
-
-                    <!-- COMMENTS -->
-                    <div>
-                        <label class="block text-[11px] font-semibold text-gray-700 mb-1">
-                            Comments
-                        </label>
-
-                        <textarea id="reviewComment" rows="3"
-                            class="w-full border border-gray-200 rounded-xl px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-emerald-500 resize-none"
-                            placeholder="Write your feedback..."></textarea>
-                    </div>
-
-                    <!-- STARS -->
-                    <div>
-                        <label class="block text-[11px] font-semibold text-gray-700 mb-1">
-                            Satisfaction Stars
-                        </label>
-
-                        <select id="reviewStars"
-                            class="w-full border border-gray-200 rounded-xl px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-emerald-500">
-                            <option value="★★★★★">★★★★★ Excellent</option>
-                            <option value="★★★★☆">★★★★☆ Very Good</option>
-                            <option value="★★★☆☆">★★★☆☆ Good</option>
-                            <option value="★★☆☆☆">★★☆☆☆ Average</option>
-                        </select>
-                    </div>
-
-                    <!-- SUBMIT -->
-                    <button onclick="submitReview()" class="w-full bg-gradient-to-r from-emerald-600 to-green-500 
-                hover:from-green-500 hover:to-emerald-600 
-                text-white font-semibold py-2 rounded-xl 
-                transition-all duration-300 hover:scale-[1.02] shadow-lg text-xs">
-
-                        Submit Review
-                    </button>
-
+                <!-- Store Buttons -->
+                <div class="flex flex-wrap items-center justify-center gap-3 shrink-0 z-10">
+                    <a class="hover:opacity-90 transition-opacity" href="#">
+                        <img alt="Google Play" class="h-9" src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"/>
+                    </a>
+                    <a class="hover:opacity-90 transition-opacity" href="#">
+                        <img alt="App Store" class="h-9" src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg"/>
+                    </a>
                 </div>
-            </div>
-        </div>
 
-        <!-- ================= CUSTOMER SUPPORT SECTION ================= -->
-        <section class="pt-6 pb-6">
-            <div class="max-w-screen-2xl mx-auto px-4">
-
-
-
-                <!-- OUTER BOX -->
-                <div
-                    class="relative overflow-hidden rounded-[38px] border border-emerald-100 bg-white/70 backdrop-blur-xl shadow-[0_20px_60px_rgba(16,24,40,0.08)] p-5 md:p-7">
-
-                    <!-- Section Header Inside Box -->
-                    <div class="flex items-center justify-center mb-8 md:mb-10">
-                        <div class="flex items-center gap-4">
-                            <div class="w-14 h-14 rounded-2xl bg-cyan-100 flex items-center justify-center shadow-sm">
-                                <span class="text-3xl">🎧</span>
-                            </div>
-
-                            <h2 class="font-serif tracking-wide text-2xl font-bold text-[#0A3D2A] leading-tight">
-                                <span class="lang-en">
-                                    How Can We Help You?
-                                </span>
-                                <span class="lang-ur">
-                                    ہم آپ کی کیا مدد کر سکتے ہیں؟
-                                </span>
-                            </h2>
-                        </div>
-                    </div>
-
-                    <!-- Support Grid -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 relative z-10">
-
-                        <!-- CARD 1 -->
-                        <div
-                            class="group bg-white rounded-[32px] p-5 text-center border border-emerald-200/80 hover:border-emerald-400 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition duration-500">
-
-                            <div
-                                class="w-20 h-20 mx-auto rounded-full bg-cyan-50 flex items-center justify-center text-cyan-600 text-3xl shadow-inner group-hover:scale-110 transition duration-500">
-                                💬
-                            </div>
-
-                            <h3 class="mt-8 text-2xl font-bold text-slate-800">
-                                <span class="lang-en">Live Chat Support</span><span class="lang-ur">لائیو چیٹ
-                                    سپورٹ</span>
-                            </h3>
-
-                            <p class="mt-3 text-slate-500 leading-6 text-sm">
-                                <span class="lang-en">Chat with our support team in real-time</span><span
-                                    class="lang-ur">ہماری سپورٹ ٹیم کے ساتھ ریئل ٹائم میں چیٹ کریں</span> for instant
-                                assistance with any queries.
-                            </p>
-
-                        </div>
-
-                        <!-- CARD 2 -->
-                        <div
-                            class="group bg-white rounded-[32px] p-5 text-center border border-emerald-200/80 hover:border-emerald-400 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition duration-500">
-
-                            <div
-                                class="w-20 h-20 mx-auto rounded-full bg-cyan-50 flex items-center justify-center text-cyan-600 text-3xl shadow-inner group-hover:scale-110 transition duration-500">
-                                📞
-                            </div>
-
-                            <h3 class="mt-8 text-2xl font-bold text-slate-800">
-                                <span class="lang-en">Call Us Anytime</span><span class="lang-ur">کسی بھی وقت کال
-                                    کریں</span>
-                            </h3>
-
-                            <p class="mt-3 text-slate-500 leading-6 text-sm">
-                                Reach us at +92 300 1234567 from 9 AM to 9 PM, 7 days a week.
-                            </p>
-
-                        </div>
-
-                        <!-- CARD 3 -->
-                        <div
-                            class="group bg-white rounded-[32px] p-5 text-center border border-emerald-200/80 hover:border-emerald-400 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition duration-500">
-
-                            <div
-                                class="w-20 h-20 mx-auto rounded-full bg-cyan-50 flex items-center justify-center text-cyan-600 text-3xl shadow-inner group-hover:scale-110 transition duration-500">
-                                ✉️
-                            </div>
-
-                            <h3 class="mt-8 text-2xl font-bold text-slate-800">
-                                <span class="lang-en">Email Support</span><span class="lang-ur">ای میل سپورٹ</span>
-                            </h3>
-
-                            <p class="mt-3 text-slate-500 leading-6 text-sm">
-                                Send us an email at support@stopbuy.pk & we'll respond within 24 hours.
-                            </p>
-
-                        </div>
-
-                        <!-- CARD 4 -->
-                        <div
-                            class="group bg-white rounded-[32px] p-5 text-center border border-emerald-200/80 hover:border-emerald-400 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition duration-500">
-
-                            <div
-                                class="w-20 h-20 mx-auto rounded-full bg-cyan-50 flex items-center justify-center text-cyan-600 text-3xl shadow-inner group-hover:scale-110 transition duration-500">
-                                ❓
-                            </div>
-
-                            <h3 class="mt-8 text-2xl font-bold text-slate-800">
-                                <span class="lang-en">Help Center</span><span class="lang-ur">مدد کا مرکز</span>
-                            </h3>
-
-                            <p class="mt-3 text-slate-500 leading-6 text-sm">
-                                Browse our comprehensive FAQ and guides for quick answers to common questions.
-                            </p>
-
-                        </div>
-
-                    </div>
+                <!-- QR Code Block -->
+                <div class="bg-white p-1 rounded-2xl shadow-md shrink-0 flex items-center justify-center w-12 h-12 mr-1 z-10">
+                    <img alt="QR Code" class="w-full h-full object-contain" src="images/grafix/qr_code.png"/>
                 </div>
-            </div>
-        </section>
-        <!-- ================= END SUPPORT SECTION ================= -->
-
-        <!-- Trust Bar -->
-        <div class="max-w-screen-2xl mx-auto px-4 pb-8 pt-3">
-            <div
-                class="flex flex-wrap justify-center gap-x-8 text-sm py-4 border-t border-emerald-100 text-emerald-700">
-                <div><i class="fas fa-check-circle mr-1"></i> Verified Stores</div>
-                <div><i class="fas fa-check-circle mr-1"></i> 100% Free</div>
-                <div><i class="fas fa-check-circle mr-1"></i> Real-time Updates</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- FOOTER -->
+            </section>
+            </main>
+<!-- FOOTER -->
     <footer class="bg-[#1b2230] text-gray-300 pt-16 pb-6 mt-2 border-t border-[#2b3544]">
 
         <div class="max-w-screen-2xl mx-auto px-4">
