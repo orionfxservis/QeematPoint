@@ -1503,47 +1503,140 @@
             </section>
 
             <!-- 8. App Promotion (Comparison in your pocket) -->
-            <section
-                class="py-2 bg-[#005221] rounded-3xl p-6 flex flex-col md:flex-row items-center justify-between gap-4 mb-12 text-left shadow-lg overflow-hidden relative">
-                <!-- Phone Image coming from bottom -->
-                <div
-                    class="w-full md:w-auto flex items-end justify-center md:justify-start shrink-0 relative h-20 pointer-events-none">
-                    <img alt="App Mockup"
-                        class="absolute bottom-[-10px] h-24 w-auto max-w-none object-contain pointer-events-none drop-shadow-2xl"
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBt2R-mqTxabTIxG8qd22z8mLcwZQbtN7alpsp4K4AMS37hQ1WUT_W5oPez0qf9462bnVIoFJfbNuBZem1pR10el-tKJrjYxC4kMcu3yte4BKLySHDnEnA6n_bIA2u5UoOCAw_tC_WukxPq_QyGHCsF9dpRuhQCijs3Z998bmgLPg0UujJ74Z5LDVc0bPjmNv5y_90Bf2v2FET7nabJHO6bn93KWJy06liWbMEM1lL2vEWsgXgz6jDLkFFN7D4TaMuW16PTze_G4iZ3" />
-                </div>
+            <section class="py-12 mb-12">
+                <div class="bg-gradient-to-br from-emerald-950 via-[#005221] to-emerald-900 rounded-[32px] border border-emerald-800 shadow-xl overflow-hidden relative p-8 md:p-12 lg:p-16 text-left flex flex-col lg:flex-row items-center gap-12">
+                    
+                    <!-- Left: Text & Features & Badges -->
+                    <div class="flex-1 space-y-6 z-10 w-full">
+                        <div class="space-y-2">
+                            <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-800/60 border border-emerald-700/50 rounded-full text-xs font-bold text-emerald-300">
+                                📱 STOPBUYPK MOBILE APP
+                            </span>
+                            <h2 style="font-family: 'Times New Roman', Times, serif;" class="text-3xl sm:text-4xl font-extrabold text-white leading-tight">
+                                Compare Prices Instantly<br>While Shopping
+                            </h2>
+                            <p class="text-emerald-100/70 text-sm max-w-lg">
+                                Take Pakistan's smartest price comparison assistant everywhere you go. Scan, find best deals, and order directly on WhatsApp.
+                            </p>
+                        </div>
 
-                <!-- Text Block (In between Image and Buttons) -->
-                <div class="flex-grow md:pl-16 text-center md:text-left space-y-0.5 z-10">
-                    <h3 style="font-family: 'Times New Roman', Times, serif;"
-                        class="text-lg md:text-xl font-extrabold text-white leading-tight">
-                        Stop Buy Before Get
-                    </h3>
-                    <p style="font-family: 'Times New Roman', Times, serif;"
-                        class="text-lg md:text-xl font-extrabold text-[#aaf4b1] leading-tight">
-                        Best Price
-                    </p>
-                    <p class="text-orange-400 text-xs font-semibold tracking-wide mt-0.5">
-                        Compare, Save &amp; Buy Smart
-                    </p>
-                </div>
+                        <!-- Feature Checklist -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-emerald-100/90 font-medium">
+                            <div class="flex items-center gap-2">
+                                <span class="text-emerald-400 font-bold">✓</span> Scan Products
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-emerald-400 font-bold">✓</span> Nearby Price Comparison
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-emerald-400 font-bold">✓</span> Save Favourite Products
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-emerald-400 font-bold">✓</span> Price Drop Alerts
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-emerald-400 font-bold">✓</span> Order on WhatsApp
+                            </div>
+                        </div>
 
-                <!-- Store Buttons -->
-                <div class="flex flex-wrap items-center justify-center gap-3 shrink-0 z-10">
-                    <a class="hover:opacity-90 transition-opacity" href="#">
-                        <img alt="Google Play" class="h-9"
-                            src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" />
-                    </a>
-                    <a class="hover:opacity-90 transition-opacity" href="#">
-                        <img alt="App Store" class="h-9"
-                            src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" />
-                    </a>
-                </div>
+                        <!-- Badges & QR Code -->
+                        <div class="pt-4 flex flex-wrap items-center gap-6">
+                            <!-- Download Badges -->
+                            <div class="flex flex-col sm:flex-row gap-3">
+                                <a class="hover:opacity-90 transition-opacity" href="#">
+                                    <img alt="Google Play" class="h-10" src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" />
+                                </a>
+                                <a class="hover:opacity-90 transition-opacity" href="#">
+                                    <img alt="App Store" class="h-10" src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" />
+                                </a>
+                            </div>
 
-                <!-- QR Code Block -->
-                <div
-                    class="bg-white p-1 rounded-2xl shadow-md shrink-0 flex items-center justify-center w-12 h-12 mr-1 z-10">
-                    <img alt="QR Code" class="w-full h-full object-contain" src="images/grafix/qr_code.png" />
+                            <!-- Divider line -->
+                            <div class="hidden sm:block h-10 w-px bg-emerald-800"></div>
+
+                            <!-- QR Code & scan tag -->
+                            <div class="flex items-center gap-3">
+                                <div class="bg-white p-1.5 rounded-2xl shadow-lg shrink-0 flex items-center justify-center w-16 h-16 border border-emerald-800">
+                                    <img alt="QR Code" class="w-full h-full object-contain" src="images/grafix/qr_code.png" />
+                                </div>
+                                <div class="text-xs text-emerald-200 font-semibold max-w-[80px] leading-tight">
+                                    Scan QR to download app
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Real phone mockup showing app interface -->
+                    <div class="w-full lg:w-[400px] flex justify-center items-center shrink-0 z-10 relative">
+                        <!-- Decorative glow -->
+                        <div class="absolute w-72 h-72 bg-emerald-400/20 rounded-full blur-[80px] -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
+                        <img alt="App Mockup" class="w-[280px] md:w-[320px] h-auto object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)] hover:-translate-y-2 transition-transform duration-500" src="images/grafix/shopping_cart_mockup.png" />
+                    </div>
+
+            </section>
+
+            <!-- Contact & Support Section -->
+            <section class="py-12 mb-12">
+                <div class="bg-white rounded-[32px] border border-slate-200 shadow-lg p-8 md:p-12 text-center relative overflow-hidden">
+                    <!-- Title Area -->
+                    <div class="max-w-2xl mx-auto mb-10 space-y-3">
+                        <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-emerald-50 text-emerald-600 text-2xl mb-2">
+                            📞
+                        </div>
+                        <h2 style="font-family: 'Times New Roman', Times, serif;" class="text-3xl font-extrabold text-[#005221]">
+                            Get in Touch With Us
+                        </h2>
+                        <p class="text-slate-500 text-sm">
+                            Have a question? Need help? Want to list your shop? We are here to support you.
+                        </p>
+                    </div>
+
+                    <!-- Info Grid -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto mb-10">
+                        <!-- Card 1: WhatsApp -->
+                        <div class="bg-slate-50 border border-slate-100 rounded-2xl p-5 hover:border-emerald-500 transition-colors duration-300">
+                            <div class="text-xl mb-2">📱</div>
+                            <h4 class="font-extrabold text-sm text-slate-800 uppercase tracking-wider mb-2">WhatsApp</h4>
+                            <div class="text-xs text-slate-600 space-y-1 font-semibold">
+                                <p>+92 333 0257246</p>
+                                <p>+92 333 0360487</p>
+                            </div>
+                        </div>
+
+                        <!-- Card 2: Email -->
+                        <div class="bg-slate-50 border border-slate-100 rounded-2xl p-5 hover:border-emerald-500 transition-colors duration-300">
+                            <div class="text-xl mb-2">📧</div>
+                            <h4 class="font-extrabold text-sm text-slate-800 uppercase tracking-wider mb-2">Email</h4>
+                            <p class="text-xs text-slate-600 font-semibold leading-relaxed break-all">support@stopbuy.pk</p>
+                        </div>
+
+                        <!-- Card 3: Office -->
+                        <div class="bg-slate-50 border border-slate-100 rounded-2xl p-5 hover:border-emerald-500 transition-colors duration-300">
+                            <div class="text-xl mb-2">📍</div>
+                            <h4 class="font-extrabold text-sm text-slate-800 uppercase tracking-wider mb-2">Office</h4>
+                            <p class="text-xs text-slate-600 font-semibold leading-relaxed">Karachi, Pakistan</p>
+                        </div>
+
+                        <!-- Card 4: Live Chat -->
+                        <div class="bg-slate-50 border border-slate-100 rounded-2xl p-5 hover:border-emerald-500 transition-colors duration-300 relative overflow-hidden">
+                            <div class="text-xl mb-2">💬</div>
+                            <h4 class="font-extrabold text-sm text-slate-800 uppercase tracking-wider mb-2">Live Chat</h4>
+                            <span class="inline-block text-[10px] bg-amber-100 text-amber-800 font-bold px-2 py-0.5 rounded-full mt-1">Coming Soon</span>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <a href="https://wa.me/923330257246" target="_blank" class="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl shadow-md transition-all flex items-center gap-2">
+                            <i class="fab fa-whatsapp text-sm"></i> WhatsApp Us
+                        </a>
+                        <a href="tel:+923330257246" class="px-6 py-3 bg-[#005221] hover:opacity-95 text-white font-bold text-xs rounded-xl shadow-md transition-all flex items-center gap-2">
+                            <i class="fas fa-phone-alt text-sm"></i> Call Now
+                        </a>
+                        <a href="mailto:support@stopbuy.pk" class="px-6 py-3 bg-slate-800 hover:bg-slate-900 text-white font-bold text-xs rounded-xl shadow-md transition-all flex items-center gap-2">
+                            <i class="far fa-envelope text-sm"></i> Email Us
+                        </a>
+                    </div>
                 </div>
             </section>
         </main>
