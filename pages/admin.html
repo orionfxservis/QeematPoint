@@ -485,72 +485,33 @@
 
                 <!-- Quick Actions -->
                 <div class="quick-actions-grid section-spacing">
-                    <div class="quick-action" data-target="purchase.html">New Purchase <i
-                            class="fa-solid fa-cart-shopping"></i></div>
-                    <div class="quick-action" data-target="sales.html">New Sale <i
-                            class="fa-solid fa-cash-register"></i></div>
-                    <div class="quick-action" data-target="expenses.html">Add Expense <i
-                            class="fa-solid fa-money-bill-wave"></i></div>
-                    <div class="quick-action" data-target="inventory.html">Inventory <i
-                            class="fa-solid fa-boxes-stacked"></i></div>
-                    <div class="quick-action" data-target="reports.html">Report <i class="fa-solid fa-file-invoice"></i>
-                    </div>
+                    <div class="quick-action" onclick="showSection('products')">Manage Products <i class="fa-solid fa-box-open"></i></div>
+                    <div class="quick-action" onclick="showSection('deals')">Manage Deals <i class="fa-solid fa-fire"></i></div>
+                    <div class="quick-action" onclick="showSection('sellers')">Manage Sellers <i class="fa-solid fa-store"></i></div>
+                    <div class="quick-action" onclick="showSection('banners')">Manage Banners <i class="fa-solid fa-image"></i></div>
+                    <div class="quick-action" onclick="showSection('categories')">Manage Categories <i class="fa-solid fa-layer-group"></i></div>
                 </div>
 
-
-                <!-- Charts & Low Stock -->
+                <!-- Charts -->
                 <div class="chart-row section-spacing">
                     <div class="chart-col">
                         <div class="form-container chart-container-fixed">
-                            <h3 style="margin-bottom: 5px;">Total Sale</h3>
-                            <div style="position: relative; height:200px; width:100%;"><canvas
-                                    id="pharaSalesChart"></canvas></div>
-                        </div>
-                        <div class="form-container">
-                            <h3 style="color:#f59e0b;"><i class="fa-solid fa-triangle-exclamation"></i> Low Stock Alerts
-                            </h3>
-                            <table class="admin-table">
-                                <tbody id="lowStockTableBody">
-                                    <tr>
-                                        <td style="color:#aaa; text-align:center;">Working On It</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <h3 style="margin-bottom: 5px;">Products Activity</h3>
+                            <div style="position: relative; height:200px; width:100%;"><canvas id="pharaSalesChart"></canvas></div>
                         </div>
                     </div>
 
                     <div class="chart-col">
                         <div class="form-container chart-container-fixed">
-                            <h3 style="margin-bottom: 5px;">Credit Tracking</h3>
-                            <div style="position: relative; height:200px; width:100%;"><canvas
-                                    id="pharaCreditChart"></canvas></div>
-                        </div>
-                        <div class="form-container">
-                            <h3 style="color:#38bdf8;"><i class="fa-solid fa-clock"></i> Recent Activity</h3>
-                            <div id="recentActivity">
-                                <ul style="list-style:none; padding:0; margin:0; font-size:0.9rem;">
-                                    <li style="padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.1);">ðŸ§¾ Sale
-                                        recorded - Rs 5,000</li>
-                                    <li style="padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.1);">ðŸ“¦
-                                        Purchase added - 20 items</li>
-                                    <li style="padding:6px 0;">ðŸ’¸ Expense added - Rs 1,200</li>
-                                </ul>
-                            </div>
+                            <h3 style="margin-bottom: 5px;">Deals Trends</h3>
+                            <div style="position: relative; height:200px; width:100%;"><canvas id="pharaCreditChart"></canvas></div>
                         </div>
                     </div>
 
                     <div class="chart-col">
                         <div class="form-container chart-container-fixed">
-                            <h3 style="margin-bottom: 5px;">Inventory</h3>
-                            <div style="position: relative; height:200px; width:100%;"><canvas
-                                    id="pharaInventoryChart"></canvas></div>
-                        </div>
-                        <div class="form-container">
-                            <h3 style="color:#22c55e;"><i class="fa-solid fa-arrow-trend-up"></i> Top Selling Products
-                            </h3>
-                            <div id="topSellingList">
-                                <p style="color:#aaa;">No sales data available</p>
-                            </div>
+                            <h3 style="margin-bottom: 5px;">Categories Overview</h3>
+                            <div style="position: relative; height:200px; width:100%;"><canvas id="pharaInventoryChart"></canvas></div>
                         </div>
                     </div>
                 </div>
