@@ -4521,8 +4521,8 @@ window.enforceUserPermissions = function () {
                 const sectionId = sectionMatch[1];
                 // Always show dashboard
                 if (sectionId !== 'dashboard') {
-                    // Force hide 'Manage Users' and 'Manage Sellers' for anyone except Super Admin
-                    if ((sectionId === 'users' || sectionId === 'sellers') && String(currentUser.userId || '').toLowerCase() !== 'admin') {
+                    // Force hide 'Manage Users' for anyone except Super Admin
+                    if (sectionId === 'users' && String(currentUser.userId || '').toLowerCase() !== 'admin') {
                         li.style.display = 'none';
                     } else {
                         const sectionRights = perms[sectionId] || [];
