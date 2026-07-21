@@ -1325,25 +1325,26 @@
 
                 <div class="list-container">
                     <h3 style="color:#0f172a !important; display:inline-block; padding: 6px 15px; border: 1px solid rgba(56,189,248,0.5); border-radius: 8px; background: rgba(56,189,248,0.1); border-left: 4px solid #38bdf8; margin-bottom: 20px;">Seller Listings</h3>
-                    <table class="admin-table compact-table modern-user-table">
+                    <table class="admin-table compact-table modern-user-table" style="width:100%; border-collapse:collapse; background:rgba(255,255,255,0.7); border-radius:8px; overflow:hidden;">
                         <thead>
-                            <tr>
-                                <th>Seller ID</th>
-                                <th>Business Name</th>
-                                <th>Type</th>
-                                <th>City</th>
-                                <th>Products</th>
-                                <th>Deals</th>
-                                <th>Orders</th>
-                                <th>Verified</th>
-                                <th>Status</th>
-                                <th>Actions</th>
+                            <tr style="background:#e2e8f0; border-bottom:2px solid #cbd5e1;">
+                                <th style="color:#0f172a !important; font-weight:700; padding:12px 10px;">Seller ID</th>
+                                <th style="color:#0f172a !important; font-weight:700; padding:12px 10px;">Business Name</th>
+                                <th style="color:#0f172a !important; font-weight:700; padding:12px 10px;">Type</th>
+                                <th style="color:#0f172a !important; font-weight:700; padding:12px 10px;">City</th>
+                                <th style="color:#0f172a !important; font-weight:700; padding:12px 10px;">Products</th>
+                                <th style="color:#0f172a !important; font-weight:700; padding:12px 10px;">Deals</th>
+                                <th style="color:#0f172a !important; font-weight:700; padding:12px 10px;">Orders</th>
+                                <th style="color:#0f172a !important; font-weight:700; padding:12px 10px;">Verified</th>
+                                <th style="color:#0f172a !important; font-weight:700; padding:12px 10px;">Status</th>
+                                <th style="color:#0f172a !important; font-weight:700; padding:12px 10px;">Actions</th>
                             </tr>
                         </thead>
                         <tbody id="sellerList">
                             <!-- Sellers injected here via JS -->
                         </tbody>
                     </table>
+                    <div id="sellerPaginationContainer" style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px; background: rgba(255, 255, 255, 0.8); padding: 10px 15px; border-radius: 8px; border: 1px solid var(--border-color);"></div>
                 </div>
             </section>
 
