@@ -4184,12 +4184,14 @@ window.populatePermissionDropdown = function () {
 
     users.forEach(u => {
         const option = document.createElement('option');
-        option.value = u.userId;
-        option.textContent = `${u.fullName || u.userId} (${u.role})`;
+        const uId = String(u.userId || u.id || u.username || '');
+        if (!uId) return;
+        option.value = uId;
+        option.textContent = `${u.fullName || u.userName || uId} (${u.role || 'user'})`;
         select.appendChild(option);
     });
 
-    if (currentSelection && users.some(u => u.userId === currentSelection)) {
+    if (currentSelection && users.some(u => String(u.userId || u.id || u.username || '') === String(currentSelection))) {
         select.value = currentSelection;
     }
 };
@@ -4208,7 +4210,7 @@ window.onUserSelectChange = function () {
         return;
     }
 
-    const user = users.find(u => u.userId === userSelect.value);
+    const user = users.find(u => String(u.userId || u.id || u.username || '') === String(userSelect.value || ''));
     if (!user) {
         if (chargesInput) chargesInput.value = '';
         loadUserPermissions();
@@ -4233,7 +4235,7 @@ window.onUserSelectChange = function () {
         chargesInput.value = user.charges !== undefined ? user.charges : '';
     }
 
-    if (user.role === 'admin' && String(user.userId).toLowerCase() === 'admin') {
+    if (user.role === 'admin' && String(user.userId || user.id || '').toLowerCase() === 'admin') {
         sectionCheckboxes.forEach(cb => cb.checked = true);
     } else {
         // user.permissions is like { "dashboard": ["Draft", "Publish"], "deals": ["Draft"] }
@@ -4260,7 +4262,7 @@ window.loadUserPermissions = function () {
     // Check which sections are selected
     const selectedSections = Array.from(sectionCheckboxes).filter(cb => cb.checked).map(cb => cb.value);
 
-    const user = users.find(u => u.userId === userSelect.value);
+    const user = users.find(u => String(u.userId || u.id || u.username || '') === String(userSelect.value || ''));
     if (!user) return;
 
     // Normalize permissions string/object safely
@@ -4273,7 +4275,7 @@ window.loadUserPermissions = function () {
     }
     user.permissions = perms;
 
-    if (user.role === 'admin' && user.userId === 'admin') {
+    if (user.role === 'admin' && String(user.userId || user.id || '').toLowerCase() === 'admin') {
         permCheckboxes.forEach(cb => cb.checked = true);
     } else {
         if (selectedSections.length > 0) {
@@ -4295,19 +4297,16 @@ if (rightsForm) {
         const userSelect = document.getElementById('rightsUserSelect');
         const sectionCheckboxes = document.querySelectorAll('.section-checkbox');
 
-        const selectedSections = Array.from(sectionCheckboxes).filter(cb => cb.checked).map(cb => cb.value);
-
         if (!userSelect || !userSelect.value) {
             alert('Please select a user first.');
             return;
         }
-        if (selectedSections.length === 0) {
-            alert('Please select at least one section.');
+
+        const userIndex = users.findIndex(u => String(u.userId || u.id || u.username || '') === String(userSelect.value || ''));
+        if (userIndex === -1) {
+            alert('Selected user not found.');
             return;
         }
-
-        const userIndex = users.findIndex(u => u.userId === userSelect.value);
-        if (userIndex === -1) return;
 
         const permCheckboxes = document.querySelectorAll('.perm-checkbox');
         const selectedActions = [];
@@ -4316,14 +4315,21 @@ if (rightsForm) {
         });
 
         let currentPerms = users[userIndex].permissions;
-        // Normalize if it was previously an array or undefined
+        if (typeof currentPerms === 'string') {
+            try { currentPerms = JSON.parse(currentPerms); } catch (e) { currentPerms = {}; }
+        }
         if (!currentPerms || Array.isArray(currentPerms) || typeof currentPerms !== 'object') {
             currentPerms = {};
         }
 
-        // Apply rights to all selected sections
-        selectedSections.forEach(sec => {
-            currentPerms[sec] = selectedActions;
+        // Apply/Update rights for all section checkboxes
+        sectionCheckboxes.forEach(cb => {
+            const sec = cb.value;
+            if (cb.checked) {
+                currentPerms[sec] = [...selectedActions];
+            } else {
+                delete currentPerms[sec];
+            }
         });
 
         users[userIndex].permissions = currentPerms;
@@ -4332,6 +4338,7 @@ if (rightsForm) {
         const chargesInput = document.getElementById('rightsUserCharges');
         if (chargesInput) {
             users[userIndex].charges = parseFloat(chargesInput.value) || 0;
+            currentPerms.charges = users[userIndex].charges;
         }
 
         await saveUsers();
@@ -4350,16 +4357,17 @@ window.populateCategoryAssignDropdown = function () {
     select.innerHTML = '<option value="">Select a user...</option>';
 
     users.forEach(u => {
-        const isSuperAdmin = String(u.userId).toLowerCase() === 'admin';
-        if (!isSuperAdmin) {
+        const uId = String(u.userId || u.id || u.username || '');
+        const isSuperAdmin = uId.toLowerCase() === 'admin';
+        if (!isSuperAdmin && uId) {
             const option = document.createElement('option');
-            option.value = u.userId;
-            option.textContent = `${u.fullName || u.userId} (${u.role})`;
+            option.value = uId;
+            option.textContent = `${u.fullName || u.userName || uId} (${u.role || 'user'})`;
             select.appendChild(option);
         }
     });
 
-    if (currentSelection && users.some(u => u.userId === currentSelection)) {
+    if (currentSelection && users.some(u => String(u.userId || u.id || u.username || '') === String(currentSelection))) {
         select.value = currentSelection;
     }
 };
@@ -4387,7 +4395,7 @@ window.onCategoryAssignUserChange = function () {
 
     if (!userSelect || !userSelect.value) return;
 
-    const user = users.find(u => u.userId === userSelect.value);
+    const user = users.find(u => String(u.userId || u.id || u.username || '') === String(userSelect.value || ''));
     if (!user) return;
 
     let assigned = (user.permissions && user.permissions.assignedCategories)
@@ -4431,7 +4439,7 @@ if (categoryAssignForm) {
             return;
         }
 
-        const userIndex = users.findIndex(u => u.userId === userSelect.value);
+        const userIndex = users.findIndex(u => String(u.userId || u.id || u.username || '') === String(userSelect.value || ''));
         if (userIndex === -1) return;
 
         const checkboxes = document.querySelectorAll('.cat-assign-checkbox');

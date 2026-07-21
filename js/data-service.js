@@ -601,7 +601,7 @@ const DataService = {
 
             const rows = data.map(u => ({
                 id: u.id,
-                user_id: u.userId,
+                user_id: u.userId || u.username || u.id || '',
                 email: u.email || '',
                 full_name: u.fullName || '',
                 username: u.username || '',
