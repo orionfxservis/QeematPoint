@@ -1644,6 +1644,25 @@ window.updateBlockOptionsGlobal = function(areaVal, blockNoSelect) {
         bahadurabadBlocks.forEach(b => {
             optionsHtml += `<option value="${b}">${b}</option>`;
         });
+    } else if (areaVal === 'Burns Road') {
+        const burnsRoadBlocks = [
+            'Burns Road Main',
+            'Food Street',
+            'Jama Cloth Market',
+            'Aram Bagh',
+            'Kakri Ground',
+            'Soldier Bazaar No. 1',
+            'Soldier Bazaar No. 2',
+            'Soldier Bazaar No. 3',
+            'Garden East',
+            'M.A. Jinnah Road Side',
+            'Nishtar Road Side',
+            'Preedy Street',
+            'Pakistan Chowk Side'
+        ];
+        burnsRoadBlocks.forEach(b => {
+            optionsHtml += `<option value="${b}">${b}</option>`;
+        });
     } else if (areaVal === 'Malir') {
         const malirBlocks = [
             'Malir 15', 'Malir City', 'Malir Colony', 'Kala Board', 'Model Colony',
@@ -1810,6 +1829,7 @@ function renderDynamicAdminFields() {
                         <option value="">Select Area</option>
                         <option value="Metroville">Metroville</option>
                         <option value="Bahadurabad">Bahadurabad</option>
+                        <option value="Burns Road">Burns Road</option>
                         <option value="Clifton">Clifton</option>
                         <option value="Defence">Defence</option>
                         <option value="Federal B Area">Federal B Area</option>
