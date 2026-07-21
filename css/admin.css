@@ -189,7 +189,7 @@ h3 {
 
 .stat-card {
     background: var(--card-bg);
-    padding: 10px 14px !important;
+    padding: 12px 14px !important;
     border-radius: 14px !important;
     border: 1px solid var(--border-color);
     box-shadow: 0 6px 20px rgba(0,0,0,0.3);
@@ -760,7 +760,7 @@ body {
     background: rgba(241, 245, 249, 0.8) !important;
     color: #475569 !important;
 }
-.badge { background: rgba(241, 245, 249, 0.8) !important; color: #0ea5e9 !important; }
+.badge:not([style*="background"]) { background: rgba(241, 245, 249, 0.8) !important; color: #0ea5e9 !important; }
 
 .banner-item { background: rgba(255, 255, 255, 0.8) !important; }
 .banner-preview { background: rgba(255, 255, 255, 0.9) !important; color: #64748b !important; }
