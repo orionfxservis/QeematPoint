@@ -9,7 +9,9 @@ let prodSearchQuery = "";
 let prodFilterCategory = "";
 let prodFilterPostBy = "";
 let prodCurrentPage = 1;
-const prodPageSize = 15;
+const prodPageSize = 25;
+let sellerCurrentPage = 1;
+const sellerPageSize = 25;
 let banners = [];
 let deals = [];
 let blogs = [];
@@ -5577,71 +5579,100 @@ window.renderSellers = function() {
     const list = document.getElementById('sellerList');
     if (!list) return;
 
+    const cleanStr = (str) => String(str || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+
+    const matchSellerPost = (item, seller) => {
+        if (!item || !seller) return false;
+
+        const sBusName = cleanStr(seller.businessName);
+        const sOwnerName = cleanStr(seller.ownerName);
+        const sSellerId = cleanStr(seller.sellerId);
+
+        const fieldsToTest = [
+            item.brand,
+            item.companyName,
+            item.seller,
+            item.businessName,
+            item.addedBy,
+            item.postBy,
+            item["Post By"],
+            item.shopName,
+            item.sellerName
+        ];
+
+        for (let f of fieldsToTest) {
+            if (!f) continue;
+            const cVal = cleanStr(f);
+            if (!cVal) continue;
+            if (sSellerId && cVal === sSellerId) return true;
+            if (sBusName && (cVal === sBusName || (cVal.length >= 4 && sBusName.length >= 4 && (cVal.includes(sBusName) || sBusName.includes(cVal))))) return true;
+            if (sOwnerName && sOwnerName.length >= 3 && (cVal === sOwnerName || (cVal.length >= 4 && cVal.includes(sOwnerName)))) return true;
+        }
+        return false;
+    };
+
+    const totalItems = sellers.length;
+    const totalPages = Math.ceil(totalItems / sellerPageSize) || 1;
+
+    if (sellerCurrentPage > totalPages) sellerCurrentPage = totalPages;
+    if (sellerCurrentPage < 1) sellerCurrentPage = 1;
+
+    const startIndex = (sellerCurrentPage - 1) * sellerPageSize;
+    const endIndex = Math.min(startIndex + sellerPageSize, totalItems);
+    const paginatedSellers = sellers.slice(startIndex, endIndex);
+
     let html = '';
-    sellers.forEach((s, index) => {
-        const prodCount = (products || []).filter(p => {
-            const addedBy = String(p.addedBy || '').toLowerCase().trim();
-            const busName = String(s.businessName || '').toLowerCase().trim();
-            const ownName = String(s.ownerName || '').toLowerCase().trim();
-            const selId = String(s.sellerId || '').toLowerCase().trim();
-            return addedBy === busName || addedBy === ownName || addedBy === selId || String(p.companyName || '').toLowerCase().trim() === busName;
-        }).length;
-
-        const dealCount = (deals || []).filter(d => {
-            const addedBy = String(d.addedBy || '').toLowerCase().trim();
-            const busName = String(s.businessName || '').toLowerCase().trim();
-            const ownName = String(s.ownerName || '').toLowerCase().trim();
-            const selId = String(s.sellerId || '').toLowerCase().trim();
-            return addedBy === busName || addedBy === ownName || addedBy === selId || String(d.companyName || '').toLowerCase().trim() === busName;
-        }).length;
-
+    paginatedSellers.forEach((s, i) => {
+        const index = startIndex + i;
+        const prodCount = (products || []).filter(p => matchSellerPost(p, s)).length;
+        const dealCount = (deals || []).filter(d => matchSellerPost(d, s)).length;
         const orderCount = 0;
 
         const verifiedBadge = s.verifiedSeller 
-            ? `<span class="status-pill active" style="background:rgba(16,185,129,0.1); border:none; padding:4px 8px; border-radius:12px; display:inline-flex; align-items:center; gap:4px; font-weight:bold; color:#10b981;"><i class="fa-solid fa-circle-check"></i> Yes</span>` 
-            : `<span class="status-pill pending" style="background:rgba(148,163,184,0.1); border:none; padding:4px 8px; border-radius:12px; display:inline-flex; align-items:center; gap:4px; font-weight:bold; color:#94a3b8;"><i class="fa-solid fa-circle-xmark"></i> No</span>`;
+            ? `<span class="status-pill active" style="background:#d1fae5 !important; border:1px solid #a7f3d0 !important; padding:4px 10px; border-radius:12px; display:inline-flex; align-items:center; gap:4px; font-weight:bold; color:#047857 !important;"><i class="fa-solid fa-circle-check"></i> Yes</span>` 
+            : `<span class="status-pill pending" style="background:#f1f5f9 !important; border:1px solid #cbd5e1 !important; padding:4px 10px; border-radius:12px; display:inline-flex; align-items:center; gap:4px; font-weight:bold; color:#64748b !important;"><i class="fa-solid fa-circle-xmark"></i> No</span>`;
 
         let statusClass = 'active';
         if (s.status === 'Inactive') statusClass = 'pending';
         if (s.status === 'Suspended') statusClass = 'suspended';
         
         let statusStyle = '';
-        if (s.status === 'Suspended') statusStyle = 'background:rgba(239,68,68,0.1); color:#ef4444; border:none; padding:4px 8px; border-radius:12px; font-weight:bold;';
-        else if (s.status === 'Inactive') statusStyle = 'background:rgba(245,158,11,0.1); color:#f59e0b; border:none; padding:4px 8px; border-radius:12px; font-weight:bold;';
-        else statusStyle = 'background:rgba(16,185,129,0.1); color:#10b981; border:none; padding:4px 8px; border-radius:12px; font-weight:bold;';
+        if (s.status === 'Suspended') statusStyle = 'background:#fee2e2 !important; color:#b91c1c !important; border:1px solid #fca5a5 !important; padding:4px 10px; border-radius:12px; font-weight:bold;';
+        else if (s.status === 'Inactive') statusStyle = 'background:#fef3c7 !important; color:#b45309 !important; border:1px solid #fde68a !important; padding:4px 10px; border-radius:12px; font-weight:bold;';
+        else statusStyle = 'background:#d1fae5 !important; color:#047857 !important; border:1px solid #a7f3d0 !important; padding:4px 10px; border-radius:12px; font-weight:bold;';
 
         const statusLabel = s.status || 'Active';
 
         html += `
-            <tr>
-                <td>
-                    <span style="font-weight:700; color:#38bdf8;">${s.sellerId || 'SEL-000000'}</span>
+            <tr style="border-bottom: 1px solid rgba(0,0,0,0.08);">
+                <td style="padding: 12px 10px;">
+                    <span style="font-weight:700; color:#0284c7; font-size:13px;">${s.sellerId || 'SEL-000000'}</span>
                 </td>
-                <td>
-                    <span style="font-weight:600; color:#fff;">${s.businessName || 'N/A'}</span>
+                <td style="padding: 12px 10px;">
+                    <span style="font-weight:700; color:#0f172a; font-size:14px;">${s.businessName || 'N/A'}</span>
                 </td>
-                <td>
-                    <span style="color: #cbd5e1; font-size: 13px;">${s.businessType || 'Retailer'}</span>
+                <td style="padding: 12px 10px;">
+                    <span style="color:#334155; font-size:13px; font-weight:600;">${s.businessType || 'Retailer'}</span>
                 </td>
-                <td>
-                    <span style="color: #cbd5e1;">${s.city || 'N/A'}</span>
+                <td style="padding: 12px 10px;">
+                    <span style="color:#334155; font-size:13px; font-weight:600;">${s.city || 'N/A'}</span>
                 </td>
-                <td>
-                    <span class="badge" style="background:#0ea5e9; color:white; font-weight:bold; font-size:11px; padding:2px 8px; border-radius:6px;">${prodCount}</span>
+                <td style="padding: 12px 10px;">
+                    <span style="background:#0284c7; color:#ffffff; font-weight:bold; font-size:12px; padding:3px 10px; border-radius:6px; display:inline-block;">${prodCount}</span>
                 </td>
-                <td>
-                    <span class="badge" style="background:#f59e0b; color:white; font-weight:bold; font-size:11px; padding:2px 8px; border-radius:6px;">${dealCount}</span>
+                <td style="padding: 12px 10px;">
+                    <span style="background:#d97706; color:#ffffff; font-weight:bold; font-size:12px; padding:3px 10px; border-radius:6px; display:inline-block;">${dealCount}</span>
                 </td>
-                <td>
-                    <span class="badge" style="background:#10b981; color:white; font-weight:bold; font-size:11px; padding:2px 8px; border-radius:6px;">${orderCount}</span>
+                <td style="padding: 12px 10px;">
+                    <span style="background:#059669; color:#ffffff; font-weight:bold; font-size:12px; padding:3px 10px; border-radius:6px; display:inline-block;">${orderCount}</span>
                 </td>
-                <td>
+                <td style="padding: 12px 10px;">
                     ${verifiedBadge}
                 </td>
-                <td>
+                <td style="padding: 12px 10px;">
                     <span class="status-pill ${statusClass}" style="${statusStyle}">${statusLabel.toUpperCase()}</span>
                 </td>
-                <td>
+                <td style="padding: 12px 10px;">
                     <div class="action-buttons-group">
                         <button class="action-btn purple" onclick="window.editSeller(${index})" title="Edit Seller"><i class="fa-solid fa-pen"></i></button>
                         <button class="action-btn blue" onclick="window.viewSellerProfile(${index})" title="View Profile"><i class="fa-solid fa-eye"></i></button>
@@ -5652,9 +5683,40 @@ window.renderSellers = function() {
         `;
     });
     list.innerHTML = html;
+
+    const paginationContainer = document.getElementById('sellerPaginationContainer');
+    if (paginationContainer) {
+        if (totalItems <= sellerPageSize) {
+            paginationContainer.style.display = 'none';
+        } else {
+            paginationContainer.style.display = 'flex';
+            const showFrom = totalItems === 0 ? 0 : startIndex + 1;
+            const showTo = endIndex;
+
+            let pagesHtml = '';
+            pagesHtml += `<button onclick="window.changeSellerPage(${sellerCurrentPage - 1})" class="btn btn-secondary" style="padding: 4px 10px; font-size: 0.75rem; border-radius: 6px;" ${sellerCurrentPage === 1 ? 'disabled style="opacity: 0.5; pointer-events: none;"' : ''}><i class="fa-solid fa-chevron-left"></i> Prev</button>`;
+            pagesHtml += `<span style="font-weight: 600; color: #334155; font-size: 0.8rem; margin: 0 10px;">Page ${sellerCurrentPage} of ${totalPages}</span>`;
+            pagesHtml += `<button onclick="window.changeSellerPage(${sellerCurrentPage + 1})" class="btn btn-secondary" style="padding: 4px 10px; font-size: 0.75rem; border-radius: 6px;" ${sellerCurrentPage === totalPages ? 'disabled style="opacity: 0.5; pointer-events: none;"' : ''}>Next <i class="fa-solid fa-chevron-right"></i></button>`;
+
+            paginationContainer.innerHTML = `
+                <div style="color: #475569; font-weight: 500; font-size: 0.8rem;">
+                    Showing ${showFrom} - ${showTo} of ${totalItems} sellers
+                </div>
+                <div style="display: flex; align-items: center; gap: 5px;">
+                    ${pagesHtml}
+                </div>
+            `;
+        }
+    }
+
     if (typeof window.updateSellerDatalist === 'function') {
         window.updateSellerDatalist();
     }
+};
+
+window.changeSellerPage = function (page) {
+    sellerCurrentPage = page;
+    renderSellers();
 };
 
 window.editSeller = function(index) {
