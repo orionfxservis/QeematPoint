@@ -537,12 +537,13 @@
 
                     <div class="grid grid-cols-12 gap-4 mb-6 items-center flex-grow">
                         <!-- Burger Image (Enlarged) -->
-                        <div class="col-span-6 flex justify-center">
-                            <img class="w-full h-auto object-cover rounded-2xl max-h-[120px] shadow-md border border-slate-100"
-                                src="images/categories/food/zinger-burger.png" />
+                        <div class="col-span-6 flex flex-col items-center justify-center">
+                            <img id="live-comp-img" class="w-full h-[170px] object-cover rounded-2xl shadow-md border border-slate-100 transition-all duration-500"
+                                src="images/categories/food/super-burger-fast-food/zinger-burger.png" />
+                            <div id="live-comp-name" class="text-xs font-extrabold text-slate-800 mt-2 text-center truncate w-full">Zinger Burger</div>
                         </div>
                         <!-- Shops List -->
-                        <div class="col-span-6 space-y-3">
+                        <div id="live-comp-shops" class="col-span-6 space-y-3">
                             <div class="flex items-center justify-between py-1 border-b border-slate-100">
                                 <div class="flex items-center gap-2">
                                     <span
@@ -597,7 +598,7 @@
                         </div>
                         <div class="flex items-center gap-1.5 relative z-10">
                             <span class="text-sm text-yellow-300 font-bold">Rs.</span>
-                            <span class="text-3xl font-black text-yellow-300">140</span>
+                            <span id="live-comp-save" class="text-3xl font-black text-yellow-300">140</span>
                             <span class="text-xl ml-1">🪙</span>
                         </div>
                     </div>
@@ -4434,6 +4435,100 @@
                 alert(`Thank you for subscribing with ${email}! You will now receive the latest deals and price drop alerts.`);
                 inputEl.value = '';
             };
+
+            // Live Price Comparison Rotation
+            const liveComparisonItems = [
+                {
+                    name: "Zinger Burger",
+                    image: "images/categories/food/super-burger-fast-food/zinger-burger.png",
+                    shops: [
+                        { name: "FRYCHI", price: 450, isBest: true, logo: "F", logoBg: "bg-orange-100 text-orange-600" },
+                        { name: "Pizza Max", price: 490, isBest: false, logo: "P", logoBg: "bg-red-100 text-red-600" },
+                        { name: "Kababjees", price: 520, isBest: false, logo: "K", logoBg: "bg-amber-100 text-amber-700" },
+                        { name: "KFC", price: 590, isBest: false, logo: "K", logoBg: "bg-rose-100 text-rose-600" }
+                    ],
+                    save: 140
+                },
+                {
+                    name: "Chicken Cheese Pizza",
+                    image: "images/categories/food/pizza.jpg",
+                    shops: [
+                        { name: "Pizza Max", price: 1199, isBest: true, logo: "P", logoBg: "bg-red-100 text-red-600" },
+                        { name: "Pizza Hut", price: 1399, isBest: false, logo: "P", logoBg: "bg-orange-100 text-orange-600" },
+                        { name: "Kababjees", price: 1450, isBest: false, logo: "K", logoBg: "bg-amber-100 text-amber-700" },
+                        { name: "Domino's", price: 1599, isBest: false, logo: "D", logoBg: "bg-blue-100 text-blue-600" }
+                    ],
+                    save: 400
+                },
+                {
+                    name: "Chicken Biryani",
+                    image: "images/categories/food/chicken-biryani.jpg",
+                    shops: [
+                        { name: "Student Biryani", price: 320, isBest: true, logo: "S", logoBg: "bg-red-100 text-red-600" },
+                        { name: "Jeddah Biryani", price: 350, isBest: false, logo: "J", logoBg: "bg-amber-100 text-amber-700" },
+                        { name: "Biryani Center", price: 380, isBest: false, logo: "B", logoBg: "bg-emerald-100 text-emerald-700" },
+                        { name: "Kababjees", price: 420, isBest: false, logo: "K", logoBg: "bg-rose-100 text-rose-600" }
+                    ],
+                    save: 100
+                }
+            ];
+
+            let currentCompIndex = 0;
+            function rotateLiveComparison() {
+                currentCompIndex = (currentCompIndex + 1) % liveComparisonItems.length;
+                const item = liveComparisonItems[currentCompIndex];
+                
+                const imgEl = document.getElementById('live-comp-img');
+                const nameEl = document.getElementById('live-comp-name');
+                const shopsEl = document.getElementById('live-comp-shops');
+                const saveEl = document.getElementById('live-comp-save');
+                
+                if (!imgEl || !nameEl || !shopsEl || !saveEl) return;
+                
+                // Add fade-out transition classes or opacity
+                imgEl.style.opacity = 0;
+                nameEl.style.opacity = 0;
+                shopsEl.style.opacity = 0;
+                
+                setTimeout(() => {
+                    // Update text and image
+                    imgEl.src = item.image;
+                    nameEl.textContent = item.name;
+                    saveEl.textContent = item.save.toLocaleString();
+                    
+                    // Update shops list HTML
+                    let shopsHtml = '';
+                    item.shops.forEach((shop, index) => {
+                        const borderClass = index < item.shops.length - 1 ? 'border-b border-slate-100' : '';
+                        const bestPriceBadge = shop.isBest ? `<span class="text-[9px] bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded font-black uppercase">Best Price</span>` : '';
+                        const priceColorClass = shop.isBest ? 'text-emerald-700 font-black' : 'text-slate-600 font-bold';
+                        
+                        shopsHtml += `
+                            <div class="flex items-center justify-between py-1 ${borderClass}">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-5 h-5 rounded-full ${shop.logoBg} flex items-center justify-center text-[10px] font-bold">${shop.logo}</span>
+                                    <span class="text-sm font-bold text-slate-700">${shop.name}</span>
+                                </div>
+                                <div class="flex items-center gap-1.5">
+                                    ${bestPriceBadge}
+                                    <span class="text-sm ${priceColorClass}">Rs. ${shop.price.toLocaleString()}</span>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    shopsEl.innerHTML = shopsHtml;
+                    
+                    // Fade back in
+                    imgEl.style.opacity = 1;
+                    nameEl.style.opacity = 1;
+                    shopsEl.style.opacity = 1;
+                }, 300);
+            }
+
+            // Start rotation interval (every 5 seconds)
+            document.addEventListener('DOMContentLoaded', () => {
+                setInterval(rotateLiveComparison, 5000);
+            });
         </script>
 
         <!-- Product Detail Modal -->
