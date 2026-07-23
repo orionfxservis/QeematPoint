@@ -32,6 +32,15 @@
             animation: slideInFromRight 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
             opacity: 0;
         }
+
+        .welcome-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .welcome-card:hover {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 0 25px rgba(214, 28, 34, 0.4);
+            border-color: #d61c22;
+        }
     </style>
     <link
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
@@ -40,8 +49,84 @@
 
 <body class="bg-[#F8FAF9] text-[#1F2937]">
 
+    <!-- WELCOME & CATEGORY SELECTOR OVERLAY -->
+    <div id="welcomeOverlay" class="fixed inset-0 z-[10000000] bg-slate-950/85 backdrop-blur-2xl flex items-center justify-center p-4 transition-opacity duration-500 opacity-0">
+        <!-- Screen 1: Welcome -->
+        <div id="welcomeScreen1" class="max-w-md w-full bg-slate-900/95 border border-slate-800 rounded-3xl p-8 text-center shadow-2xl space-y-8 flex flex-col justify-center items-center transition-all duration-500 transform scale-90 opacity-0">
+            <div class="space-y-4">
+                <span class="text-5xl sm:text-6xl block animate-bounce">🛍️</span>
+                <h1 class="text-3xl sm:text-4xl font-black tracking-tight text-white">STOPBUYPK</h1>
+                <p class="text-[#ef4444] font-extrabold text-lg sm:text-xl">Compare Prices Before You Buy</p>
+            </div>
+            
+            <div class="text-slate-400 text-sm font-semibold space-y-1">
+                <p>Save Money • Compare Nearby Prices</p>
+                <p>Find the Best Deals</p>
+            </div>
+            
+            <div class="w-full space-y-4">
+                <button onclick="goToWelcomeScreen2()" class="w-full py-3.5 bg-[#d61c22] hover:bg-red-700 text-white font-extrabold rounded-2xl transition-all duration-300 transform hover:scale-102 shadow-lg shadow-red-500/20 text-base flex items-center justify-center gap-2">
+                    🚀 Start Comparing
+                </button>
+                
+                <div class="text-xs text-slate-500 font-bold">
+                    ──────── OR ────────
+                </div>
+                
+                <button onclick="skipWelcomeOverlay()" class="text-sm font-bold text-slate-400 hover:text-red-400 transition-colors">
+                    Skip & Explore Website
+                </button>
+            </div>
+        </div>
+
+        <!-- Screen 2: Category Selection -->
+        <div id="welcomeScreen2" class="max-w-2xl w-full bg-slate-900/95 border border-slate-800 rounded-3xl p-6 sm:p-8 text-center shadow-2xl space-y-6 transition-all duration-500 transform translate-y-8 opacity-0 hidden">
+            <div class="space-y-2">
+                <h2 class="text-2xl sm:text-3xl font-black text-white">What are you looking for today?</h2>
+                <p class="text-slate-400 text-xs sm:text-sm font-semibold">Select a category below to jump straight in</p>
+            </div>
+            
+            <!-- Grid of 4 categories -->
+            <div class="grid grid-cols-2 gap-4">
+                <!-- Food -->
+                <div onclick="selectWelcomeCategory('food')" class="welcome-card cursor-pointer border border-slate-800 bg-slate-950/40 rounded-2xl p-4 flex flex-col items-center justify-center text-center space-y-2">
+                    <span class="text-4xl">🍔</span>
+                    <h3 class="font-extrabold text-white text-sm sm:text-base tracking-wider uppercase">Food</h3>
+                    <p class="text-[10px] sm:text-xs text-slate-400 font-bold">Compare 20,000+ Dishes</p>
+                </div>
+                
+                <!-- Computers -->
+                <div onclick="selectWelcomeCategory('computers')" class="welcome-card cursor-pointer border border-slate-800 bg-slate-950/40 rounded-2xl p-4 flex flex-col items-center justify-center text-center space-y-2">
+                    <span class="text-4xl">💻</span>
+                    <h3 class="font-extrabold text-white text-sm sm:text-base tracking-wider uppercase">Computers</h3>
+                    <p class="text-[10px] sm:text-xs text-slate-400 font-bold">Compare 8,000+ Products</p>
+                </div>
+                
+                <!-- Mobiles -->
+                <div onclick="selectWelcomeCategory('mobiles')" class="welcome-card cursor-pointer border border-slate-800 bg-slate-950/40 rounded-2xl p-4 flex flex-col items-center justify-center text-center space-y-2">
+                    <span class="text-4xl">📱</span>
+                    <h3 class="font-extrabold text-white text-sm sm:text-base tracking-wider uppercase">Mobiles</h3>
+                    <p class="text-[10px] sm:text-xs text-slate-400 font-bold">Compare 12,000+ Phones</p>
+                </div>
+                
+                <!-- Daily Needs / Groceries -->
+                <div onclick="selectWelcomeCategory('daily-needs')" class="welcome-card cursor-pointer border border-slate-800 bg-slate-950/40 rounded-2xl p-4 flex flex-col items-center justify-center text-center space-y-2">
+                    <span class="text-4xl">🛒</span>
+                    <h3 class="font-extrabold text-white text-sm sm:text-base tracking-wider uppercase">Groceries</h3>
+                    <p class="text-[10px] sm:text-xs text-slate-400 font-bold">Compare Daily Prices</p>
+                </div>
+            </div>
+            
+            <div class="pt-4 border-t border-slate-800 flex justify-center">
+                <button onclick="skipWelcomeOverlay()" class="text-sm font-bold text-slate-400 hover:text-red-400 transition-colors">
+                    Skip & Explore Website
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Top Navigation Bar -->
-    <nav class="bg-[#0A3D2A] text-white sticky top-0 z-[99999]">
+    <nav class="bg-[#0f2249] text-white sticky top-0 z-[99999]">
         <div
             class="max-w-screen-2xl mx-auto px-4 py-2 sm:py-0 sm:h-[60px] flex flex-wrap sm:flex-nowrap items-center justify-between gap-y-3 gap-x-2 sm:gap-4">
 
@@ -56,11 +141,11 @@
                 <div class="flex flex-col leading-tight">
                     <div class="flex items-center gap-2">
                         <span class="font-bold text-lg sm:text-xl tracking-tight">
-                            <span class="text-[#8CC63F]">Stop</span><span class="text-[#5B9BD5]">Buy</span>
+                            <span class="text-white">Stop</span><span class="text-[#d61c22]">Buy</span>
                         </span>
 
                         <div
-                            class="hidden md:block border border-[#24533e] bg-emerald-900/20 text-[#58b284] px-2 py-[2px] rounded text-[10px] font-semibold tracking-wide">
+                            class="hidden md:block border border-[#1e293b] bg-slate-800/40 text-[#f87171] px-2 py-[2px] rounded text-[10px] font-semibold tracking-wide">
                             <span class="lang-en">Price Smart, Save More</span><span class="lang-ur">سمارٹ قیمت، زیادہ
                                 بچت</span>
                         </div>
@@ -299,7 +384,7 @@
                         </li>
                         <li>
                             <a href="pages/contact.html"
-                                class="flex items-center gap-2 px-4 py-2 hover:bg-emerald-50 hover:text-emerald-700">
+                        class="flex items-center gap-2 px-4 py-2 hover:bg-emerald-50 hover:text-emerald-700">
                                 <i class="fas fa-envelope text-xs"></i> <span class="lang-en">Contact Us</span><span
                                     class="lang-ur">رابطہ کریں</span>
                             </a>
@@ -312,53 +397,53 @@
                 class="flex items-center gap-x-4 sm:gap-x-6 lg:gap-x-8 text-white flex-1 text-xs xl:text-[13px] whitespace-nowrap overflow-x-auto pb-1">
 
                 <a href="./pages/categories.html"
-                    class="px-5 py-1.5 bg-emerald-700 text-white rounded-full flex items-center shrink-0 hover:bg-emerald-600 transition">
+                    class="px-5 py-1.5 bg-[#d61c22] text-white rounded-full flex items-center shrink-0 hover:bg-red-700 transition">
                     <span class="font-semibold tracking-wide">
                         <span class="lang-en">All Categories</span><span class="lang-ur">تمام کیٹیگریز</span>
                     </span>
                 </a>
 
-                <a href="./pages/food.html" class="hover:text-emerald-300 transition font-medium">
+                <a href="./pages/food.html" class="hover:text-red-400 transition font-medium">
                     <span class="lang-en">Food Stuffs</span>
                     <span class="lang-ur">کھانے پینے کی اشیاء</span>
                 </a>
 
-                <a href="./pages/grocery.html" class="hidden hover:text-emerald-300 transition font-medium">
+                <a href="./pages/grocery.html" class="hidden hover:text-red-400 transition font-medium">
                     <span class="lang-en">Daily Groceries</span>
                     <span class="lang-ur">روزمرہ کی اشیائے خوردونوش</span>
                 </a>
 
-                <a href="./pages/electronics.html" class="hidden hover:text-emerald-300 transition font-medium">
+                <a href="./pages/electronics.html" class="hidden hover:text-red-400 transition font-medium">
                     <span class="lang-en">Electronics</span>
                     <span class="lang-ur">الیکٹرونکس</span>
                 </a>
 
-                <a href="./pages/mobiles.html" class="hidden hover:text-emerald-300 transition font-medium">
+                <a href="./pages/mobiles.html" class="hidden hover:text-red-400 transition font-medium">
                     <span class="lang-en">Mobiles</span>
                     <span class="lang-ur">موبائیلز</span>
                 </a>
 
-                <a href="./pages/computers.html" class="hover:text-emerald-300 transition font-medium">
+                <a href="./pages/computers.html" class="hover:text-red-400 transition font-medium">
                     <span class="lang-en">Computers</span>
                     <span class="lang-ur">کمپیوٹرز</span>
                 </a>
 
-                <a href="./pages/property.html" class="hidden hover:text-emerald-300 transition font-medium">
+                <a href="./pages/property.html" class="hidden hover:text-red-400 transition font-medium">
                     <span class="lang-en">Property</span>
                     <span class="lang-ur">پروپرٹی</span>
                 </a>
 
-                <a href="./pages/fashion.html" class="hidden hover:text-emerald-300 transition font-medium">
+                <a href="./pages/fashion.html" class="hidden hover:text-red-400 transition font-medium">
                     <span class="lang-en">Fashion</span>
                     <span class="lang-ur">فیشن</span>
                 </a>
 
-                <a href="./pages/personal-care.html" class="hidden hover:text-emerald-300 transition font-medium">
+                <a href="./pages/personal-care.html" class="hidden hover:text-red-400 transition font-medium">
                     <span class="lang-en">Personal Care</span>
                     <span class="lang-ur">ذاتی نگہداشت</span>
                 </a>
 
-                <a href="./pages/kids.html" class="hidden hover:text-emerald-300 transition font-medium">
+                <a href="./pages/kids.html" class="hidden hover:text-red-400 transition font-medium">
                     <span class="lang-en">Kids</span>
                     <span class="lang-ur">کڈز</span>
                 </a>
@@ -368,16 +453,16 @@
             <div class="hidden md:flex items-center ml-2 xl:ml-4">
                 <div class="animated-border-box">
                     <div class="animated-border-content px-2.5 py-1 flex items-center gap-x-1.5 text-white shrink-0">
-                        <span class="text-[11px] xl:text-xs text-emerald-100 whitespace-nowrap">
+                        <span class="text-[11px] xl:text-xs text-red-100 whitespace-nowrap">
                             <span class="lang-en">Total Visitors</span><span class="lang-ur">کل زائرین</span>
                         </span>
 
                         <span id="visitor-count"
-                            class="font-bold text-emerald-400 tracking-wide text-xs xl:text-[13px]">
+                            class="font-bold text-red-400 tracking-wide text-xs xl:text-[13px]">
                             5,090
                         </span>
 
-                        <i class="fas fa-eye text-emerald-400 text-[11px] xl:text-xs"></i>
+                        <i class="fas fa-eye text-red-400 text-[11px] xl:text-xs"></i>
                     </div>
                 </div>
             </div>
@@ -388,7 +473,7 @@
             class="w-full bg-black text-white overflow-hidden border-y border-gray-800 h-[36px] flex items-center justify-between pr-2">
             <div class="flex items-center flex-1 overflow-hidden h-full">
                 <div
-                    class="px-4 py-1 mx-2 bg-[#0a7b54] text-white font-bold text-xs rounded-full border-2 border-[#40c988] flex items-center justify-center shrink-0 shadow-sm tracking-wide">
+                    class="px-4 py-1 mx-2 bg-[#d61c22] text-white font-bold text-xs rounded-full border-2 border-[#ef4444] flex items-center justify-center shrink-0 shadow-sm tracking-wide">
                     News
                 </div>
 
@@ -403,9 +488,9 @@
 
             <!-- Live Clock Badge -->
             <div id="liveClockBadge"
-                class="px-3 py-0.5 mx-2 bg-slate-900/80 text-slate-200 font-semibold text-[11px] rounded-full border border-[#40c988] flex items-center gap-1.5 shrink-0 shadow-sm tracking-wide h-[24px]">
+                class="px-3 py-0.5 mx-2 bg-slate-900/80 text-slate-200 font-semibold text-[11px] rounded-full border border-[#ef4444] flex items-center gap-1.5 shrink-0 shadow-sm tracking-wide h-[24px]">
                 <span id="clockDate">Thu, 16 Jul 2026</span>
-                <span class="text-[#40c988]/50">|</span>
+                <span class="text-[#ef4444]/50">|</span>
                 <span id="clockTime" class="text-[#ffb300]">08:47:17 pm</span>
             </div>
         </div>
@@ -419,7 +504,7 @@
             <div class="flex flex-wrap justify-center items-center gap-3 pt-6 pb-2">
                 <!-- Trends Button -->
                 <button onclick="openTrendsModal()"
-                    class="px-6 py-2 rounded-full bg-[#004d20] hover:bg-[#003c18] text-white font-bold text-sm sm:text-base border-2 border-[#10b981] shadow-sm transition-all duration-300 hover:scale-105 flex items-center justify-center min-h-[38px]">
+                    class="px-6 py-2 rounded-full bg-[#0f2249] hover:bg-slate-800 text-white font-bold text-sm sm:text-base border-2 border-[#d61c22] shadow-sm transition-all duration-300 hover:scale-105 flex items-center justify-center min-h-[38px]">
                     Trends
                 </button>
 
@@ -449,7 +534,7 @@
                                 style="font-family: 'Times New Roman', Times, serif;">
                                 Stop Buy <br />
                                 Before Get <br />
-                                <span class="text-[#005221] relative inline-block">
+                                <span class="text-[#d61c22] relative inline-block">
                                     Best Price
                                     <!-- Orange sunburst lines on top right of Best Price -->
                                     <svg class="absolute -top-3 -right-6 w-6 h-6 text-orange-500" viewBox="0 0 24 24"
@@ -460,7 +545,7 @@
                                 </span>
                             </h1>
                             <p class="text-slate-700 text-base md:text-lg font-medium">
-                                Compare prices from nearby shops and <span class="text-orange-500 font-extrabold">save
+                                Compare prices from nearby shops and <span class="text-[#d61c22] font-extrabold">save
                                     your money</span>
                             </p>
                         </div>
@@ -470,7 +555,7 @@
                                 class="w-full max-w-[110px] h-auto object-contain drop-shadow-xl" />
                             <!-- Green Badge below cart -->
                             <div
-                                class="mt-2 bg-[#005221] border border-emerald-400/20 text-white rounded-lg py-1 px-2.5 flex items-center gap-1 shadow-md whitespace-nowrap">
+                                class="mt-2 bg-[#0f2249] border border-slate-700 text-white rounded-lg py-1 px-2.5 flex items-center gap-1 shadow-md whitespace-nowrap">
                                 <span class="text-[8px] font-extrabold uppercase tracking-wide">Smart Buyers Save
                                     More!</span>
                                 <span
@@ -485,10 +570,10 @@
                         <div
                             class="flex flex-wrap gap-x-4 gap-y-2 text-xs sm:text-sm font-bold text-slate-800 border-t border-slate-100 pt-4">
                             <span class="flex items-center gap-1.5"><span
-                                    class="w-4 h-4 rounded-full border-2 border-slate-800 flex items-center justify-center text-[10px]">⊙</span>
+                                     class="w-4 h-4 rounded-full border-2 border-slate-800 flex items-center justify-center text-[10px]">⊙</span>
                                 Nearby First</span>
-                            <span class="flex items-center gap-1.5 text-emerald-700">✓ Verified Shops</span>
-                            <span class="flex items-center gap-1.5 text-emerald-700">✓ Daily Updated Prices</span>
+                            <span class="flex items-center gap-1.5 text-[#d61c22]">✓ Verified Shops</span>
+                            <span class="flex items-center gap-1.5 text-[#d61c22]">✓ Daily Updated Prices</span>
                         </div>
 
                         <!-- Search Bar -->
@@ -501,7 +586,7 @@
                                     placeholder="What are you looking for?" type="text" />
                             </div>
                             <button onclick="performSearch()"
-                                class="bg-[#005221] hover:bg-emerald-800 text-white px-5 py-2 rounded-xl font-bold transition-all flex items-center justify-center gap-1.5 shrink-0 text-xs sm:text-sm">
+                                class="bg-[#d61c22] hover:bg-red-700 text-white px-5 py-2 rounded-xl font-bold transition-all flex items-center justify-center gap-1.5 shrink-0 text-xs sm:text-sm">
                                 <span class="material-symbols-outlined text-white text-sm">search</span> Search
                             </button>
                         </div>
@@ -555,9 +640,9 @@
                                 </div>
                                 <div class="flex items-center gap-1.5">
                                     <span
-                                        class="text-[9px] bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded font-black uppercase">Best
+                                        class="text-[9px] bg-red-100 text-[#d61c22] px-1.5 py-0.5 rounded font-black uppercase">Best
                                         Price</span>
-                                    <span class="text-sm font-black text-emerald-700">Rs. 450</span>
+                                    <span class="text-sm font-black text-[#d61c22]">Rs. 450</span>
                                 </div>
                             </div>
                             <div class="flex items-center justify-between py-1 border-b border-slate-100">
@@ -708,7 +793,7 @@
             </section>
 
             <!-- 3. Browse Categories -->
-            <section class="py-12 text-left">
+            <section id="browseCategoriesSection" class="py-12 text-left">
                 <div class="flex items-center justify-between mb-8">
                     <div>
                         <h2 style="font-family: 'Times New Roman', Times, serif;"
@@ -844,14 +929,14 @@
                 </div>
             </section>
             <!-- 4. Price Comparison by Category Table -->
-            <section
-                class="pt-10 pb-6 bg-emerald-50/30 border border-emerald-100/50 rounded-3xl px-6 lg:px-8 mb-2 text-left">
+            <section id="price-comparison-widget"
+                class="pt-10 pb-6 bg-[#0f2249]/5 border border-slate-200 rounded-3xl px-6 lg:px-8 mb-2 text-left">
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
 
                     <!-- Left Side: Title & Subtitle (lg:col-span-3, whitespace-nowrap) -->
                     <div class="lg:col-span-3 space-y-2">
                         <h2 style="font-family: 'Times New Roman', Times, serif;"
-                            class="text-3xl font-bold text-[#005221] leading-tight whitespace-nowrap">Price Comparison
+                            class="text-3xl font-bold text-[#0f2249] leading-tight whitespace-nowrap">Price Comparison
                         </h2>
                         <p class="text-xs text-gray-500">Find the lowest prices near you</p>
                     </div>
@@ -862,33 +947,33 @@
                         <!-- Row 1: Categories (Aligned in same line, same size width using grid) -->
                         <div class="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-9 gap-2 w-full">
                             <button onclick="setActiveWidgetCat('food', this)"
-                                class="w-full py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 font-bold text-xs hover:border-[#005221] hover:bg-[#E8F5E9] hover:text-[#005221] transition-all text-center">Food</button>
+                                class="w-full py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 font-bold text-xs hover:border-[#d61c22] hover:bg-red-50 hover:text-[#d61c22] transition-all text-center">Food</button>
                             <button onclick="setActiveWidgetCat('grocery', this)"
-                                class="w-full py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 font-bold text-xs hover:border-[#005221] hover:bg-[#E8F5E9] hover:text-[#005221] transition-all text-center">Groceries</button>
+                                class="w-full py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 font-bold text-xs hover:border-[#d61c22] hover:bg-red-50 hover:text-[#d61c22] transition-all text-center">Groceries</button>
                             <button onclick="setActiveWidgetCat('electronics', this)"
-                                class="w-full py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 font-bold text-xs hover:border-[#005221] hover:bg-[#E8F5E9] hover:text-[#005221] transition-all text-center">Electronics</button>
+                                class="w-full py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 font-bold text-xs hover:border-[#d61c22] hover:bg-red-50 hover:text-[#d61c22] transition-all text-center">Electronics</button>
                             <button onclick="setActiveWidgetCat('mobiles', this)"
-                                class="w-full py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 font-bold text-xs hover:border-[#005221] hover:bg-[#E8F5E9] hover:text-[#005221] transition-all text-center">Mobiles</button>
+                                class="w-full py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 font-bold text-xs hover:border-[#d61c22] hover:bg-red-50 hover:text-[#d61c22] transition-all text-center">Mobiles</button>
                             <button onclick="setActiveWidgetCat('laptops', this)"
-                                class="w-full py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 font-bold text-xs hover:border-[#005221] hover:bg-[#E8F5E9] hover:text-[#005221] transition-all text-center">Laptops</button>
+                                class="w-full py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 font-bold text-xs hover:border-[#d61c22] hover:bg-red-50 hover:text-[#d61c22] transition-all text-center">Laptops</button>
                             <button onclick="setActiveWidgetCat('property', this)"
-                                class="w-full py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 font-bold text-xs hover:border-[#005221] hover:bg-[#E8F5E9] hover:text-[#005221] transition-all text-center">Property</button>
+                                class="w-full py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 font-bold text-xs hover:border-[#d61c22] hover:bg-red-50 hover:text-[#d61c22] transition-all text-center">Property</button>
                             <button onclick="setActiveWidgetCat('fashion', this)"
-                                class="w-full py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 font-bold text-xs hover:border-[#005221] hover:bg-[#E8F5E9] hover:text-[#005221] transition-all text-center">Fashion</button>
+                                class="w-full py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 font-bold text-xs hover:border-[#d61c22] hover:bg-red-50 hover:text-[#d61c22] transition-all text-center">Fashion</button>
                             <button onclick="setActiveWidgetCat('personal-care', this)"
-                                class="w-full py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 font-bold text-[11px] hover:border-[#005221] hover:bg-[#E8F5E9] hover:text-[#005221] transition-all text-center flex items-center justify-center leading-tight">Personal
+                                class="w-full py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 font-bold text-[11px] hover:border-[#d61c22] hover:bg-red-50 hover:text-[#d61c22] transition-all text-center flex items-center justify-center leading-tight">Personal
                                 Care</button>
                             <button onclick="setActiveWidgetCat('kids', this)"
-                                class="w-full py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 font-bold text-xs hover:border-[#005221] hover:bg-[#E8F5E9] hover:text-[#005221] transition-all text-center">Kids</button>
+                                class="w-full py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 font-bold text-xs hover:border-[#d61c22] hover:bg-red-50 hover:text-[#d61c22] transition-all text-center">Kids</button>
                         </div>
 
                         <!-- Row 2: Inputs -->
                         <div class="grid grid-cols-1 md:grid-cols-5 gap-3 w-full">
                             <input id="searchWidgetQuery" type="text" placeholder="What are you looking for?"
-                                class="bg-white border border-slate-200 rounded-xl px-4 py-2.5 text-xs text-slate-700 focus:outline-none focus:border-[#005221] focus:ring-1 focus:ring-[#005221] w-full" />
+                                class="bg-white border border-slate-200 rounded-xl px-4 py-2.5 text-xs text-slate-700 focus:outline-none focus:border-[#d61c22] focus:ring-1 focus:ring-[#d61c22] w-full" />
 
                             <select id="searchWidgetCity"
-                                class="bg-white border border-slate-200 rounded-xl px-4 py-2.5 text-xs text-slate-700 focus:outline-none focus:border-[#005221] w-full">
+                                class="bg-white border border-slate-200 rounded-xl px-4 py-2.5 text-xs text-slate-700 focus:outline-none focus:border-[#d61c22] w-full">
                                 <option value="">Select City</option>
                                 <option value="Karachi">Karachi</option>
                                 <option value="Lahore">Lahore</option>
@@ -896,7 +981,7 @@
                             </select>
 
                             <select id="searchWidgetArea"
-                                class="bg-white border border-slate-200 rounded-xl px-4 py-2.5 text-xs text-slate-700 focus:outline-none focus:border-[#005221] w-full">
+                                class="bg-white border border-slate-200 rounded-xl px-4 py-2.5 text-xs text-slate-700 focus:outline-none focus:border-[#d61c22] w-full">
                                 <option value="">Select Area</option>
                                 <option value="Clifton">Clifton</option>
                                 <option value="Defence">Defence</option>
@@ -905,14 +990,14 @@
                             </select>
 
                             <select id="searchWidgetSort"
-                                class="bg-white border border-slate-200 rounded-xl px-4 py-2.5 text-xs text-slate-700 focus:outline-none focus:border-[#005221] w-full">
+                                class="bg-white border border-slate-200 rounded-xl px-4 py-2.5 text-xs text-slate-700 focus:outline-none focus:border-[#d61c22] w-full">
                                 <option value="">Sort By Price</option>
                                 <option value="low-to-high">Low to High</option>
                                 <option value="high-to-low">High to Low</option>
                             </select>
 
                             <button onclick="performPriceComparisonSearch()"
-                                class="bg-gradient-to-r from-emerald-700 to-[#005221] hover:opacity-90 text-white font-bold text-xs py-2.5 rounded-xl transition-all shadow-md w-full">
+                                class="bg-[#d61c22] hover:bg-red-700 text-white font-bold text-xs py-2.5 rounded-xl transition-all shadow-md w-full">
                                 Search Prices
                             </button>
                         </div>
@@ -969,10 +1054,10 @@
                     selectedWidgetCat = cat;
                     const buttons = btn.parentElement.querySelectorAll('button');
                     buttons.forEach(b => {
-                        b.classList.remove('border-[#005221]', 'bg-[#E8F5E9]', 'text-[#005221]');
+                        b.classList.remove('border-[#d61c22]', 'bg-red-50', 'text-[#d61c22]');
                         b.classList.add('bg-slate-50', 'border-slate-200', 'text-slate-700');
                     });
-                    btn.classList.add('border-[#005221]', 'bg-[#E8F5E9]', 'text-[#005221]');
+                    btn.classList.add('border-[#d61c22]', 'bg-red-50', 'text-[#d61c22]');
                     btn.classList.remove('bg-slate-50', 'border-slate-200', 'text-slate-700');
                 }
 
@@ -4194,7 +4279,7 @@
                     const el = document.getElementById(options[key].id);
                     if (!el) return;
                     if (key === method) {
-                        el.className = "cursor-pointer border border-emerald-500 bg-emerald-50/40 rounded-xl py-1 px-1.5 flex flex-col items-center justify-center gap-0.5 text-emerald-700 transition-all font-bold";
+                        el.className = "cursor-pointer border border-red-500 bg-red-50/40 rounded-xl py-1 px-1.5 flex flex-col items-center justify-center gap-0.5 text-[#d61c22] transition-all font-bold";
                     } else {
                         el.className = "cursor-pointer border border-slate-200 rounded-xl py-1 px-1.5 flex flex-col items-center justify-center gap-0.5 bg-white text-slate-600 hover:border-slate-300 transition-all";
                     }
@@ -4573,8 +4658,8 @@
                     let shopsHtml = '';
                     item.shops.forEach((shop, index) => {
                         const borderClass = index < item.shops.length - 1 ? 'border-b border-slate-100' : '';
-                        const bestPriceBadge = shop.isBest ? `<span class="text-[9px] bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded font-black uppercase">Best Price</span>` : '';
-                        const priceColorClass = shop.isBest ? 'text-emerald-700 font-black' : 'text-slate-600 font-bold';
+                        const bestPriceBadge = shop.isBest ? `<span class="text-[9px] bg-red-100 text-[#d61c22] px-1.5 py-0.5 rounded font-black uppercase">Best Price</span>` : '';
+                        const priceColorClass = shop.isBest ? 'text-[#d61c22] font-black' : 'text-slate-600 font-bold';
 
                         shopsHtml += `
                             <div class="flex items-center justify-between py-1 ${borderClass}">
@@ -4602,6 +4687,83 @@
             document.addEventListener('DOMContentLoaded', () => {
                 setInterval(rotateLiveComparison, 5000);
             });
+
+            // Welcome Overlay Flow Controllers
+            window.goToWelcomeScreen2 = function () {
+                const screen1 = document.getElementById('welcomeScreen1');
+                const screen2 = document.getElementById('welcomeScreen2');
+                if (screen1 && screen2) {
+                    // Fade out screen 1
+                    screen1.classList.add('scale-90', 'opacity-0');
+                    setTimeout(() => {
+                        screen1.classList.add('hidden');
+                        
+                        // Show and slide up screen 2
+                        screen2.classList.remove('hidden');
+                        setTimeout(() => {
+                            screen2.classList.remove('translate-y-8', 'opacity-0');
+                            screen2.classList.add('translate-y-0', 'opacity-100');
+                        }, 50);
+                    }, 400);
+                }
+            };
+
+            window.skipWelcomeOverlay = function () {
+                const overlay = document.getElementById('welcomeOverlay');
+                if (overlay) {
+                    overlay.classList.add('opacity-0');
+                    setTimeout(() => {
+                        overlay.classList.add('hidden');
+                    }, 500);
+                }
+            };
+
+            window.selectWelcomeCategory = function (category) {
+                const overlay = document.getElementById('welcomeOverlay');
+                if (overlay) {
+                    overlay.classList.add('opacity-0');
+                    setTimeout(() => {
+                        overlay.classList.add('hidden');
+                        
+                        let targetTab = 'food';
+                        if (category === 'computers') targetTab = 'laptops';
+                        else if (category === 'mobiles') targetTab = 'mobiles';
+                        else if (category === 'daily-needs') targetTab = 'grocery';
+                        
+                        // Scroll to Price Comparison Widget
+                        const widgetSection = document.getElementById('price-comparison-widget');
+                        if (widgetSection) {
+                            widgetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            
+                            // Automatically find and click the corresponding category tab button
+                            const btn = document.querySelector(`#price-comparison-widget button[onclick*="'${targetTab}'"]`);
+                            if (btn) {
+                                btn.click();
+                            }
+                        }
+                    }, 500);
+                }
+            };
+
+            function initWelcomeOverlay() {
+                const overlay = document.getElementById('welcomeOverlay');
+                const screen1 = document.getElementById('welcomeScreen1');
+                if (overlay && screen1) {
+                    overlay.classList.remove('hidden');
+                    setTimeout(() => {
+                        overlay.classList.remove('opacity-0');
+                        overlay.classList.add('opacity-100');
+                        
+                        // Zoom in Screen 1
+                        setTimeout(() => {
+                            screen1.classList.remove('scale-90', 'opacity-0');
+                            screen1.classList.add('scale-100', 'opacity-100');
+                        }, 100);
+                    }, 50);
+                }
+            }
+
+            document.addEventListener('DOMContentLoaded', initWelcomeOverlay);
         </script>
 
         <!-- Product Detail Modal -->
@@ -4630,40 +4792,29 @@
                             <div>
                                 <div class="flex justify-between items-center">
                                     <span id="pm-category"
-                                        class="bg-emerald-50 text-emerald-700 border border-emerald-200/50 text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">Category</span>
+                                        class="bg-red-50 text-[#d61c22] border border-red-200/50 text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">Category</span>
                                     <span id="pm-post-date" class="text-[10px] text-slate-400 font-semibold"></span>
                                 </div>
-                                <h3 id="pm-title" class="font-bold text-lg text-slate-800 leading-snug mt-1.5">Product
-                                    Title</h3>
-                                <!-- Specs Summary Container under Laptops Name -->
+                                <h3 id="pm-title" class="font-bold text-lg text-slate-800 leading-snug mt-1.5">Product Title</h3>
                                 <div id="pm-specs-summary" class="text-[11px] text-slate-400 mt-1 font-semibold"></div>
                             </div>
                             <div class="border-t border-b border-slate-100 py-2 flex justify-between items-center">
                                 <div>
-                                    <div class="text-[9px] text-slate-400 font-semibold uppercase tracking-wider">
-                                        Highest Price</div>
+                                    <div class="text-[9px] text-slate-400 font-semibold uppercase tracking-wider">Highest Price</div>
                                     <div class="text-sm font-bold text-red-500 mt-0.5" id="pm-highest-price">Rs. -</div>
                                 </div>
                                 <div class="text-center px-1">
-                                    <div class="text-[9px] text-slate-400 font-semibold uppercase tracking-wider">Shop
-                                        Name</div>
-                                    <div class="text-[11px] font-bold text-slate-700 mt-0.5 truncate max-w-[100px]"
-                                        id="pm-shop-name">-</div>
+                                    <div class="text-[9px] text-slate-400 font-semibold uppercase tracking-wider">Shop Name</div>
+                                    <div class="text-[11px] font-bold text-slate-700 mt-0.5 truncate max-w-[100px]" id="pm-shop-name">-</div>
                                 </div>
                                 <div class="text-right">
-                                    <div class="text-[9px] text-slate-400 font-semibold uppercase tracking-wider">Best
-                                        Price</div>
-                                    <div class="text-lg font-extrabold text-emerald-600 mt-0.5" id="pm-price">Rs. -
-                                    </div>
+                                    <div class="text-[9px] text-slate-400 font-semibold uppercase tracking-wider">Best Price</div>
+                                    <div class="text-lg font-extrabold text-[#d61c22] mt-0.5" id="pm-price">Rs. -</div>
                                 </div>
                             </div>
                             <div>
-                                <div class="text-[9px] text-slate-400 font-semibold uppercase tracking-wider mb-0.5">
-                                    Details</div>
-                                <div id="pm-desc"
-                                    class="text-xs text-slate-600 leading-relaxed max-h-[64px] overflow-y-auto custom-scrollbar">
-                                    Product details description here.
-                                </div>
+                                <div class="text-[9px] text-slate-400 font-semibold uppercase tracking-wider mb-0.5">Details</div>
+                                <div id="pm-desc" class="text-xs text-slate-600 leading-relaxed max-h-[64px] overflow-y-auto custom-scrollbar">Product details description here.</div>
                             </div>
                             <!-- Action Buttons -->
                             <div class="flex gap-2 mt-1">
@@ -4672,9 +4823,7 @@
                                     <i class="fab fa-whatsapp text-sm"></i> Order Now
                                 </button>
                                 <button onclick="closeProductModal()"
-                                    class="flex-1 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-semibold text-xs transition-all text-center">
-                                    Close
-                                </button>
+                                    class="flex-1 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-semibold text-xs transition-all text-center">Close</button>
                             </div>
                         </div>
                     </div>
@@ -4692,7 +4841,7 @@
                                 <span class="text-base">📋</span> Order Details
                             </h3>
                             <button onclick="hideOrderForm()"
-                                class="px-3 py-1.5 bg-white hover:bg-slate-50 border border-slate-100 rounded-full text-[10px] font-bold text-emerald-600 hover:text-emerald-700 flex items-center gap-1 transition-all shadow-sm">
+                                class="px-3 py-1.5 bg-white hover:bg-slate-50 border border-slate-100 rounded-full text-[10px] font-bold text-[#d61c22] hover:text-red-700 flex items-center gap-1 transition-all shadow-sm">
                                 <i class="fas fa-arrow-left"></i> Back
                             </button>
                         </div>
@@ -4702,8 +4851,7 @@
                             <!-- Order Date & Time -->
                             <div>
                                 <label
-                                    class="block text-[9px] text-slate-400 font-semibold uppercase tracking-wider mb-0.5">Order
-                                    Date & Time</label>
+                                    class="block text-[9px] text-slate-400 font-semibold uppercase tracking-wider mb-0.5">Order Date & Time</label>
                                 <input type="text" id="of-datetime" readonly
                                     class="w-full border border-slate-200 rounded-xl py-1 px-3 text-xs text-slate-600 bg-slate-50/50 font-medium focus:outline-none">
                             </div>
@@ -4726,22 +4874,20 @@
                                     <label
                                         class="block text-[9px] text-slate-400 font-semibold uppercase tracking-wider mb-0.5">Quantity</label>
                                     <input type="number" id="of-quantity" min="1" value="1" required
-                                        class="w-full border border-slate-200 rounded-xl py-1 px-2 text-xs text-slate-700 font-medium text-center focus:border-emerald-500 focus:outline-none">
+                                        class="w-full border border-slate-200 rounded-xl py-1 px-2 text-xs text-slate-700 font-medium text-center focus:border-red-500 focus:outline-none">
                                 </div>
                                 <div>
                                     <label
                                         class="block text-[9px] text-slate-400 font-semibold uppercase tracking-wider mb-0.5">Total</label>
-                                    <div class="w-full border border-slate-200 bg-white rounded-xl py-1 px-2 text-xs text-emerald-700 font-bold text-center"
-                                        style="min-height: 26px; line-height: 1.5;" id="of-total-amount-display">Rs. -
-                                    </div>
+                                    <div class="w-full border border-slate-200 bg-white rounded-xl py-1 px-2 text-xs text-[#d61c22] font-bold text-center"
+                                        style="min-height: 26px; line-height: 1.5;" id="of-total-amount-display">Rs. -</div>
                                     <input type="hidden" id="of-total-amount">
                                 </div>
                             </div>
                             <!-- Payment Method -->
                             <div>
                                 <label
-                                    class="block text-[9px] text-slate-400 font-semibold uppercase tracking-wider mb-0.5">Payment
-                                    Method</label>
+                                    class="block text-[9px] text-slate-400 font-semibold uppercase tracking-wider mb-0.5">Payment Method</label>
                                 <div class="grid grid-cols-3 gap-2" id="payment-methods-container">
                                     <!-- JazzCash -->
                                     <div onclick="selectPaymentMethod('JazzCash')" id="pm-option-JazzCash"
@@ -4757,7 +4903,7 @@
                                     </div>
                                     <!-- Cash On Delivery -->
                                     <div onclick="selectPaymentMethod('Cash On Delivery')" id="pm-option-COD"
-                                        class="cursor-pointer border border-emerald-500 bg-emerald-50/40 rounded-xl py-1 px-1.5 flex flex-col items-center justify-center gap-0.5 text-emerald-700 transition-all font-bold">
+                                        class="cursor-pointer border border-red-500 bg-red-50/40 rounded-xl py-1 px-1.5 flex flex-col items-center justify-center gap-0.5 text-[#d61c22] transition-all font-bold">
                                         <span class="text-sm">💵</span>
                                         <span class="text-[8px] font-bold">Cash On Delivery</span>
                                     </div>
@@ -4766,29 +4912,25 @@
                             </div>
                             <div>
                                 <label
-                                    class="block text-[9px] text-slate-400 font-semibold uppercase tracking-wider mb-0.5">Full
-                                    Name</label>
+                                    class="block text-[9px] text-slate-400 font-semibold uppercase tracking-wider mb-0.5">Full Name</label>
                                 <input type="text" id="of-name" required placeholder="Enter your full name"
-                                    class="w-full border border-slate-200 rounded-lg py-1 px-3 text-xs text-slate-700 font-medium focus:border-emerald-500 focus:outline-none">
+                                    class="w-full border border-slate-200 rounded-lg py-1 px-3 text-xs text-slate-700 font-medium focus:border-red-500 focus:outline-none">
                             </div>
                             <div>
                                 <label
-                                    class="block text-[9px] text-slate-400 font-semibold uppercase tracking-wider mb-0.5">WhatsApp
-                                    / Phone</label>
+                                    class="block text-[9px] text-slate-400 font-semibold uppercase tracking-wider mb-0.5">WhatsApp / Phone</label>
                                 <input type="tel" id="of-phone" required placeholder="e.g., 03001234567"
-                                    class="w-full border border-slate-200 rounded-lg py-1 px-3 text-xs text-slate-700 font-medium focus:border-emerald-500 focus:outline-none">
+                                    class="w-full border border-slate-200 rounded-lg py-1 px-3 text-xs text-slate-700 font-medium focus:border-red-500 focus:outline-none">
                             </div>
                             <div>
                                 <label
-                                    class="block text-[9px] text-slate-400 font-semibold uppercase tracking-wider mb-0.5">Shipping
-                                    Address</label>
-                                <textarea id="of-address" required rows="1"
-                                    placeholder="Complete address for home delivery"
-                                    class="w-full border border-slate-200 rounded-lg py-1 px-3 text-xs text-slate-700 font-medium focus:border-emerald-500 focus:outline-none resize-none"></textarea>
+                                    class="block text-[9px] text-slate-400 font-semibold uppercase tracking-wider mb-0.5">Shipping Address</label>
+                                <textarea id="of-address" required rows="1" placeholder="Complete address for home delivery"
+                                    class="w-full border border-slate-200 rounded-lg py-1 px-3 text-xs text-slate-700 font-medium focus:border-red-500 focus:outline-none resize-none"></textarea>
                             </div>
                             <!-- Submit -->
                             <button type="submit"
-                                class="w-full mt-1.5 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl font-bold text-xs transition-all flex items-center justify-center gap-1.5 shadow-sm text-center">
+                                class="w-full mt-1.5 py-2.5 bg-[#d61c22] hover:bg-red-700 text-white rounded-xl font-bold text-xs transition-all flex items-center justify-center gap-1.5 shadow-sm text-center">
                                 <i class="fab fa-whatsapp text-sm"></i> Confirm Order on WhatsApp
                             </button>
                         </form>
