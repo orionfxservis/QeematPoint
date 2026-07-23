@@ -415,12 +415,33 @@
     <!-- HOME PAGE -->
     <div id="home" class="page active relative">
         <main class="max-w-7xl mx-auto px-4 lg:px-8">
+            <!-- Deals & Trends Pill Buttons Container -->
+            <div class="flex flex-wrap justify-center items-center gap-3 pt-6 pb-2">
+                <!-- Trends Button -->
+                <button onclick="openTrendsModal()"
+                    class="px-6 py-2 rounded-full bg-[#004d20] hover:bg-[#003c18] text-white font-bold text-sm sm:text-base border-2 border-[#10b981] shadow-sm transition-all duration-300 hover:scale-105 flex items-center justify-center min-h-[38px]">
+                    Trends
+                </button>
+                
+                <!-- Food Deals Button -->
+                <button onclick="openDealsModal('Food', null, '🔥 Food Deals')"
+                    class="px-6 py-2 rounded-full bg-gradient-to-r from-[#ec4899] to-[#f97316] hover:brightness-110 text-white font-bold text-sm sm:text-base shadow-sm transition-all duration-300 hover:scale-105 flex items-center justify-center gap-1.5 min-h-[38px]">
+                    🔥Food Deals
+                </button>
+                
+                <!-- Computer Deals Button -->
+                <button onclick="openDealsModal('Computer', null, '💻 Computer Deals')"
+                    class="px-6 py-2 rounded-full bg-gradient-to-r from-[#0ea5e9] to-[#6366f1] hover:brightness-110 text-white font-bold text-sm sm:text-base shadow-sm transition-all duration-300 hover:scale-105 flex items-center justify-center gap-1.5 min-h-[38px]">
+                    💻Computer Deals
+                </button>
+            </div>
+
             <!-- 1. Hero Section -->
-            <section class="py-12 grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+            <section class="py-6 grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
 
                 <!-- Left Section: Title, Checklist, Search, Popular, Cart Graphic -->
                 <div
-                    class="bg-white border border-slate-200 rounded-3xl p-6 md:p-8 flex flex-col justify-between h-full shadow-sm text-left">
+                    class="bg-white border border-slate-200 rounded-3xl p-5 md:p-6 flex flex-col justify-between h-full shadow-sm text-left">
                     <!-- Top Row: Heading on Left, Shopping Cart on Right -->
                     <div class="grid grid-cols-12 gap-4 items-center">
                         <div class="col-span-8 space-y-4">
@@ -446,7 +467,7 @@
                         <!-- Shopping Cart next to Heading -->
                         <div class="col-span-4 flex flex-col items-center justify-center relative">
                             <img src="images/grafix/shopping_cart_mockup.png" alt="Smart Buyers"
-                                class="w-full max-w-[150px] h-auto object-contain drop-shadow-xl" />
+                                class="w-full max-w-[110px] h-auto object-contain drop-shadow-xl" />
                             <!-- Green Badge below cart -->
                             <div
                                 class="mt-2 bg-[#005221] border border-emerald-400/20 text-white rounded-lg py-1 px-2.5 flex items-center gap-1 shadow-md whitespace-nowrap">
@@ -501,7 +522,7 @@
                 </div>
                 <!-- Right Section: Live Price Comparison Card -->
                 <div
-                    class="bg-white border border-slate-200 rounded-3xl p-6 md:p-8 shadow-xl flex flex-col justify-between h-full text-left">
+                    class="bg-white border border-slate-200 rounded-3xl p-5 md:p-6 shadow-xl flex flex-col justify-between h-full text-left">
                     <div class="flex justify-between items-center mb-6">
                         <div class="flex items-center gap-2">
                             <span class="text-orange-500 font-bold text-lg">🪙</span>
@@ -517,7 +538,7 @@
                     <div class="grid grid-cols-12 gap-4 mb-6 items-center flex-grow">
                         <!-- Burger Image (Enlarged) -->
                         <div class="col-span-6 flex justify-center">
-                            <img class="w-full h-auto object-cover rounded-2xl max-h-[160px] shadow-md border border-slate-100"
+                            <img class="w-full h-auto object-cover rounded-2xl max-h-[120px] shadow-md border border-slate-100"
                                 src="images/categories/food/zinger-burger.png" />
                         </div>
                         <!-- Shops List -->
@@ -3240,6 +3261,9 @@
                         const catLower = (d.category || '').toLowerCase().trim();
                         if (catFilterLower === 'food') {
                             return catLower === 'food' || catLower === 'food stuffs' || catLower.includes('food');
+                        }
+                        if (catFilterLower === 'computer' || catFilterLower === 'computers') {
+                            return catLower === 'computer' || catLower === 'computers' || catLower.includes('computer');
                         }
                         return catLower === catFilterLower;
                     });
