@@ -50,78 +50,130 @@
 <body class="bg-[#F8FAF9] text-[#1F2937]">
 
     <!-- WELCOME & CATEGORY SELECTOR OVERLAY -->
-    <div id="welcomeOverlay" class="fixed inset-0 z-[10000000] bg-slate-950/85 backdrop-blur-2xl flex items-center justify-center p-4 transition-opacity duration-500 opacity-0">
-        <!-- Screen 1: Welcome -->
-        <div id="welcomeScreen1" class="max-w-md w-full bg-slate-900/95 border border-slate-800 rounded-3xl p-8 text-center shadow-2xl space-y-8 flex flex-col justify-center items-center transition-all duration-500 transform scale-90 opacity-0">
-            <div class="space-y-4">
-                <img src="./images/logo/stopbuy-logo.png" alt="Stop Buy" class="h-16 w-auto object-contain mx-auto animate-bounce mb-2" />
-                <h1 class="text-3xl sm:text-4xl font-black tracking-tight text-white">STOP BUY</h1>
-                <p class="text-[#ef4444] font-extrabold text-lg sm:text-xl">Compare Prices Before You Buy</p>
-            </div>
+    <div id="welcomeOverlay" class="fixed inset-0 z-[10000000] bg-slate-950/90 backdrop-blur-2xl flex items-center justify-center p-4 transition-opacity duration-500 opacity-0">
+        
+        <div class="max-w-6xl w-full flex flex-col lg:flex-row items-center justify-center gap-8">
             
-            <div class="text-slate-400 text-sm font-semibold space-y-1">
-                <p>Save Money • Compare Nearby Prices</p>
-                <p>Find the Best Deals</p>
-            </div>
-            
-            <div class="w-full space-y-4">
-                <button onclick="goToWelcomeScreen2()" class="w-full py-3.5 bg-[#d61c22] hover:bg-red-700 text-white font-extrabold rounded-2xl transition-all duration-300 transform hover:scale-102 shadow-lg shadow-red-500/20 text-base flex items-center justify-center gap-2">
-                    🚀 Start Comparing
-                </button>
-                
-                <div class="text-xs text-slate-500 font-bold">
-                    ──────── OR ────────
+            <!-- Left Overlay Banner Stack (300 x 250 px each) -->
+            <div class="hidden lg:flex w-[300px] flex-col gap-4 shrink-0">
+                <div class="w-full h-[250px] bg-slate-900 border border-slate-800 rounded-3xl p-5 flex flex-col justify-between text-white relative overflow-hidden shadow-2xl text-left">
+                    <div class="absolute inset-0 bg-gradient-to-br from-red-500/25 to-slate-950 z-0"></div>
+                    <div class="relative z-10 space-y-2">
+                        <span class="text-[9px] font-black uppercase tracking-wider text-red-500 bg-red-500/10 px-2.5 py-0.5 rounded-full border border-red-500/20">Featured</span>
+                        <h4 class="text-base font-extrabold mt-1">🍔 Foodies Club</h4>
+                        <p class="text-xs text-slate-400">Save up to 40% on popular food spots nearby.</p>
+                    </div>
+                    <button onclick="skipWelcomeOverlay(); setTimeout(() => { const target = document.getElementById('price-comparison-widget'); if (target) { target.scrollIntoView({behavior: 'smooth', block: 'start'}); setTimeout(() => { document.querySelector('button[onclick*=\'food\']').click(); }, 600); } }, 500);" class="relative z-10 w-full py-2.5 bg-[#d61c22] hover:bg-red-700 text-white text-xs font-bold rounded-xl shadow-md transition duration-300">View Food Deals</button>
                 </div>
-                
-                <button onclick="skipWelcomeOverlay()" class="text-[11px] uppercase tracking-wider font-extrabold text-slate-500 hover:text-red-400 transition-colors">
-                    Skip & Explore Website
-                </button>
+                <div class="w-full h-[250px] bg-slate-900 border border-slate-800 rounded-3xl p-5 flex flex-col justify-between text-white relative overflow-hidden shadow-2xl text-left">
+                    <div class="absolute inset-0 bg-gradient-to-br from-blue-500/25 to-slate-950 z-0"></div>
+                    <div class="relative z-10 space-y-2">
+                        <span class="text-[9px] font-black uppercase tracking-wider text-blue-400 bg-blue-500/10 px-2.5 py-0.5 rounded-full border border-blue-500/20">Hot Tech</span>
+                        <h4 class="text-base font-extrabold mt-1">💻 Computer World</h4>
+                        <p class="text-xs text-slate-400">Get discounted price quotes on top-selling laptops.</p>
+                    </div>
+                    <button onclick="skipWelcomeOverlay(); setTimeout(() => { const target = document.getElementById('price-comparison-widget'); if (target) { target.scrollIntoView({behavior: 'smooth', block: 'start'}); setTimeout(() => { document.querySelector('button[onclick*=\'laptops\']').click(); }, 600); } }, 500);" class="relative z-10 w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-xl shadow-md transition duration-300">View Laptops</button>
+                </div>
             </div>
-        </div>
 
-        <!-- Screen 2: Category Selection -->
-        <div id="welcomeScreen2" class="max-w-2xl w-full bg-slate-900/95 border border-slate-800 rounded-3xl p-6 sm:p-8 text-center shadow-2xl space-y-6 transition-all duration-500 transform translate-y-8 opacity-0 hidden">
-            <div class="space-y-2">
-                <h2 class="text-2xl sm:text-3xl font-black text-white">What are you looking for today?</h2>
-                <p class="text-slate-400 text-xs sm:text-sm font-semibold">Select a category below to jump straight in</p>
+            <!-- Center Welcome Card container -->
+            <div class="w-full max-w-md flex flex-col items-center justify-center relative shrink-0">
+                <!-- Screen 1: Welcome -->
+                <div id="welcomeScreen1" class="w-full bg-slate-900/95 border border-slate-800 rounded-3xl p-8 text-center shadow-2xl space-y-8 flex flex-col justify-center items-center transition-all duration-500 transform scale-90 opacity-0">
+                    <div class="space-y-4">
+                        <img src="./images/logo/stopbuy-logo.png" alt="Stop Buy" class="h-16 w-auto object-contain mx-auto animate-bounce mb-2" />
+                        <h1 class="text-3xl sm:text-4xl font-black tracking-tight text-white">🛍️ STOPBUYPK</h1>
+                        <p class="text-[#ef4444] font-extrabold text-lg sm:text-xl">Compare Prices Before You Buy</p>
+                    </div>
+                    
+                    <div class="text-slate-400 text-sm font-semibold space-y-1">
+                        <p>Save Money • Compare Nearby Prices</p>
+                        <p>Find the Best Deals</p>
+                    </div>
+                    
+                    <div class="w-full space-y-4">
+                        <button onclick="goToWelcomeScreen2()" class="w-full py-3.5 bg-[#d61c22] hover:bg-red-700 text-white font-extrabold rounded-2xl transition-all duration-300 transform hover:scale-102 shadow-lg shadow-red-500/20 text-base flex items-center justify-center gap-2">
+                            🚀 Start Comparing
+                        </button>
+                        
+                        <div class="text-xs text-slate-500 font-bold">
+                            ──────── OR ────────
+                        </div>
+                        
+                        <button onclick="skipWelcomeOverlay()" class="text-[11px] uppercase tracking-wider font-extrabold text-slate-500 hover:text-red-400 transition-colors">
+                            Skip & Explore Website
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Screen 2: Category Selection -->
+                <div id="welcomeScreen2" class="w-full bg-slate-900/95 border border-slate-800 rounded-3xl p-6 sm:p-8 text-center shadow-2xl space-y-6 transition-all duration-500 transform translate-y-8 opacity-0 hidden">
+                    <div class="space-y-2">
+                        <h2 class="text-2xl sm:text-3xl font-black text-white">What are you looking for today?</h2>
+                        <p class="text-slate-400 text-xs sm:text-sm font-semibold">Select a category below to jump straight in</p>
+                    </div>
+                    
+                    <!-- Grid of 4 categories -->
+                    <div class="grid grid-cols-2 gap-4">
+                        <!-- Food -->
+                        <div onclick="selectWelcomeCategory('food')" class="welcome-card cursor-pointer border border-slate-800 bg-slate-950/40 rounded-2xl p-4 flex flex-col items-center justify-center text-center space-y-2">
+                            <span class="text-4xl">🍔</span>
+                            <h3 class="font-extrabold text-white text-sm sm:text-base tracking-wider uppercase">Food</h3>
+                            <p class="text-[10px] sm:text-xs text-slate-400 font-bold">Compare 20,000+ Dishes</p>
+                        </div>
+                        
+                        <!-- Computers -->
+                        <div onclick="selectWelcomeCategory('computers')" class="welcome-card cursor-pointer border border-slate-800 bg-slate-950/40 rounded-2xl p-4 flex flex-col items-center justify-center text-center space-y-2">
+                            <span class="text-4xl">💻</span>
+                            <h3 class="font-extrabold text-white text-sm sm:text-base tracking-wider uppercase">Computers</h3>
+                            <p class="text-[10px] sm:text-xs text-slate-400 font-bold">Compare 8,000+ Products</p>
+                        </div>
+                        
+                        <!-- Mobiles -->
+                        <div onclick="selectWelcomeCategory('mobiles')" class="welcome-card cursor-pointer border border-slate-800 bg-slate-950/40 rounded-2xl p-4 flex flex-col items-center justify-center text-center space-y-2">
+                            <span class="text-4xl">📱</span>
+                            <h3 class="font-extrabold text-white text-sm sm:text-base tracking-wider uppercase">Mobiles</h3>
+                            <p class="text-[10px] sm:text-xs text-slate-400 font-bold">Compare 12,000+ Phones</p>
+                        </div>
+                        
+                        <!-- Daily Needs -->
+                        <div onclick="selectWelcomeCategory('daily-needs')" class="welcome-card cursor-pointer border border-slate-800 bg-slate-950/40 rounded-2xl p-4 flex flex-col items-center justify-center text-center space-y-2">
+                            <span class="text-4xl">🏠</span>
+                            <h3 class="font-extrabold text-white text-sm sm:text-base tracking-wider uppercase">Daily Needs</h3>
+                            <p class="text-[10px] sm:text-xs text-slate-400 font-bold">Compare Daily Prices</p>
+                        </div>
+                    </div>
+                    
+                    <div class="pt-4 border-t border-slate-800 flex justify-center">
+                        <button onclick="skipWelcomeOverlay()" class="text-[11px] uppercase tracking-wider font-extrabold text-slate-500 hover:text-red-400 transition-colors">
+                            Skip & Explore Website
+                        </button>
+                    </div>
+                </div>
             </div>
-            
-            <!-- Grid of 4 categories -->
-            <div class="grid grid-cols-2 gap-4">
-                <!-- Food -->
-                <div onclick="selectWelcomeCategory('food')" class="welcome-card cursor-pointer border border-slate-800 bg-slate-950/40 rounded-2xl p-4 flex flex-col items-center justify-center text-center space-y-2">
-                    <span class="text-4xl">🍔</span>
-                    <h3 class="font-extrabold text-white text-sm sm:text-base tracking-wider uppercase">Food</h3>
-                    <p class="text-[10px] sm:text-xs text-slate-400 font-bold">Compare 20,000+ Dishes</p>
+
+            <!-- Right Overlay Banner Stack (300 x 250 px each) -->
+            <div class="hidden lg:flex w-[300px] flex-col gap-4 shrink-0">
+                <div class="w-full h-[250px] bg-slate-900 border border-slate-800 rounded-3xl p-5 flex flex-col justify-between text-white relative overflow-hidden shadow-2xl text-left">
+                    <div class="absolute inset-0 bg-gradient-to-br from-emerald-500/25 to-slate-950 z-0"></div>
+                    <div class="relative z-10 space-y-2">
+                        <span class="text-[9px] font-black uppercase tracking-wider text-emerald-400 bg-emerald-500/10 px-2.5 py-0.5 rounded-full border border-emerald-500/20">Daily Needs</span>
+                        <h4 class="text-base font-extrabold mt-1">🛒 Daily Groceries</h4>
+                        <p class="text-xs text-slate-400">Compare everyday item prices and shop cheapest vendors.</p>
+                    </div>
+                    <button onclick="skipWelcomeOverlay(); setTimeout(() => { const target = document.getElementById('price-comparison-widget'); if (target) { target.scrollIntoView({behavior: 'smooth', block: 'start'}); setTimeout(() => { document.querySelector('button[onclick*=\'grocery\']').click(); }, 600); } }, 500);" class="relative z-10 w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-xl shadow-md transition duration-300">Shop Groceries</button>
                 </div>
-                
-                <!-- Computers -->
-                <div onclick="selectWelcomeCategory('computers')" class="welcome-card cursor-pointer border border-slate-800 bg-slate-950/40 rounded-2xl p-4 flex flex-col items-center justify-center text-center space-y-2">
-                    <span class="text-4xl">💻</span>
-                    <h3 class="font-extrabold text-white text-sm sm:text-base tracking-wider uppercase">Computers</h3>
-                    <p class="text-[10px] sm:text-xs text-slate-400 font-bold">Compare 8,000+ Products</p>
-                </div>
-                
-                <!-- Mobiles -->
-                <div onclick="selectWelcomeCategory('mobiles')" class="welcome-card cursor-pointer border border-slate-800 bg-slate-950/40 rounded-2xl p-4 flex flex-col items-center justify-center text-center space-y-2">
-                    <span class="text-4xl">📱</span>
-                    <h3 class="font-extrabold text-white text-sm sm:text-base tracking-wider uppercase">Mobiles</h3>
-                    <p class="text-[10px] sm:text-xs text-slate-400 font-bold">Compare 12,000+ Phones</p>
-                </div>
-                
-                <!-- Daily Needs / Groceries -->
-                <div onclick="selectWelcomeCategory('daily-needs')" class="welcome-card cursor-pointer border border-slate-800 bg-slate-950/40 rounded-2xl p-4 flex flex-col items-center justify-center text-center space-y-2">
-                    <span class="text-4xl">🛒</span>
-                    <h3 class="font-extrabold text-white text-sm sm:text-base tracking-wider uppercase">Groceries</h3>
-                    <p class="text-[10px] sm:text-xs text-slate-400 font-bold">Compare Daily Prices</p>
+                <div class="w-full h-[250px] bg-slate-900 border border-slate-800 rounded-3xl p-5 flex flex-col justify-between text-white relative overflow-hidden shadow-2xl text-left">
+                    <div class="absolute inset-0 bg-gradient-to-br from-amber-500/25 to-slate-950 z-0"></div>
+                    <div class="relative z-10 space-y-2">
+                        <span class="text-[9px] font-black uppercase tracking-wider text-amber-400 bg-amber-500/10 px-2.5 py-0.5 rounded-full border border-amber-500/20">Smart Choice</span>
+                        <h4 class="text-base font-extrabold mt-1">📱 Mobile Hub</h4>
+                        <p class="text-xs text-slate-400">Instant price comparisons for latest Android & iPhones.</p>
+                    </div>
+                    <button onclick="skipWelcomeOverlay(); setTimeout(() => { const target = document.getElementById('price-comparison-widget'); if (target) { target.scrollIntoView({behavior: 'smooth', block: 'start'}); setTimeout(() => { document.querySelector('button[onclick*=\'mobiles\']').click(); }, 600); } }, 500);" class="relative z-10 w-full py-2.5 bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold rounded-xl shadow-md transition duration-300">Shop Mobiles</button>
                 </div>
             </div>
-            
-            <div class="pt-4 border-t border-slate-800 flex justify-center">
-                <button onclick="skipWelcomeOverlay()" class="text-[11px] uppercase tracking-wider font-extrabold text-slate-500 hover:text-red-400 transition-colors">
-                    Skip & Explore Website
-                </button>
-            </div>
+
         </div>
     </div>
 
@@ -499,7 +551,12 @@
 
     <!-- HOME PAGE -->
     <div id="home" class="page active relative">
-        <main class="max-w-7xl mx-auto px-4 lg:px-8">
+        <main class="max-w-[1920px] mx-auto px-4 lg:px-8 flex gap-6 items-start justify-center">
+            
+
+
+            <!-- Middle Main Content Column -->
+            <div class="flex-1 max-w-7xl w-full">
             <!-- Deals & Trends Pill Buttons Container -->
             <div class="flex flex-wrap justify-center items-center gap-3 pt-6 pb-2">
                 <!-- Trends Button -->
@@ -522,11 +579,10 @@
             </div>
 
             <!-- 1. Hero Section -->
-            <section class="py-6 grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+            <section class="py-6 space-y-6">
 
-                <!-- Left Section: Title, Checklist, Search, Popular, Cart Graphic -->
-                <div
-                    class="bg-white border border-slate-200 rounded-3xl p-5 md:p-6 flex flex-col justify-between h-full shadow-sm text-left">
+                <!-- Main Comparison Card (Full Width) -->
+                <div class="bg-white border border-slate-200 rounded-3xl p-5 md:p-6 shadow-sm text-left w-full">
                     <!-- Top Row: Heading on Left, Shopping Cart on Right -->
                     <div class="grid grid-cols-12 gap-4 items-center">
                         <div class="col-span-8 space-y-4">
@@ -598,105 +654,157 @@
                                 href="#" onclick="setSearchQuery('HP 830 G7')">HP 830 G7</a>
                             <a class="bg-slate-50 border border-slate-200 rounded-full px-3.5 py-1.5 hover:bg-slate-50 hover:border-emerald-500 text-slate-700 font-semibold transition-all shadow-sm"
                                 href="#" onclick="setSearchQuery('Zinger Burger')">Zinger Burger</a>
-                            <a class="bg-slate-50 border border-slate-200 rounded-full px-3.5 py-1.5 hover:bg-slate-50 hover:border-emerald-500 text-slate-700 font-semibold transition-all shadow-sm"
-                                href="#" onclick="setSearchQuery('Laptop Charger')">Laptop Charger</a>
+                                        <!-- 3-Column Bottom Layout -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+                    <!-- Left Banner Stack (300 x 250 px each) -->
+                    <div class="hidden lg:flex lg:col-span-3 flex-col gap-4">
+                        <div class="w-full h-[250px] bg-slate-900 border border-slate-800 rounded-3xl p-5 flex flex-col justify-between text-white relative overflow-hidden shadow-lg">
+                            <div class="absolute inset-0 bg-gradient-to-br from-red-500/20 to-slate-950 z-0"></div>
+                            <div class="relative z-10 space-y-2">
+                                <span class="text-[9px] font-black uppercase tracking-wider text-red-500 bg-red-500/10 px-2.5 py-0.5 rounded-full border border-red-500/20">Hot Deal</span>
+                                <h4 class="text-base font-extrabold mt-1">🍔 Burger Hub Specials</h4>
+                                <p class="text-xs text-slate-400">Buy 1 Get 1 Free on all premium Zingers today.</p>
+                            </div>
+                            <button class="relative z-10 w-full py-2.5 bg-[#d61c22] hover:bg-red-700 text-white text-xs font-bold rounded-xl shadow-md transition duration-300">Order Now</button>
                         </div>
-                    </div>
-                </div>
-                <!-- Right Section: Live Price Comparison Card -->
-                <div
-                    class="bg-white border border-slate-200 rounded-3xl p-5 md:p-6 shadow-xl flex flex-col justify-between h-full text-left">
-                    <div class="flex justify-between items-center mb-6">
-                        <div class="flex items-center gap-2">
-                            <span class="text-orange-500 font-bold text-lg">🪙</span>
-                            <span class="text-sm font-black uppercase tracking-wide text-slate-800">Live Price
-                                Comparison</span>
-                        </div>
-                        <span
-                            class="bg-red-500 text-white text-[9px] px-2.5 py-1 rounded-full font-bold flex items-center gap-1 animate-pulse">
-                            <span class="w-1.5 h-1.5 bg-white rounded-full"></span> LIVE
-                        </span>
-                    </div>
-
-                    <div class="grid grid-cols-12 gap-4 mb-6 items-center flex-grow">
-                        <!-- Burger Image (Enlarged) -->
-                        <div class="col-span-6 flex flex-col items-center justify-center">
-                            <img id="live-comp-img"
-                                class="w-full h-[170px] object-cover rounded-2xl shadow-md border border-slate-100 transition-all duration-500"
-                                src="images/categories/food/zinger-burger.png" />
-                            <div id="live-comp-name"
-                                class="text-xs font-extrabold text-slate-800 mt-2 text-center truncate w-full">Zinger
-                                Burger</div>
-                        </div>
-                        <!-- Shops List -->
-                        <div id="live-comp-shops" class="col-span-6 space-y-3">
-                            <div class="flex items-center justify-between py-1 border-b border-slate-100">
-                                <div class="flex items-center gap-2">
-                                    <span
-                                        class="w-5 h-5 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center text-[10px] font-bold">F</span>
-                                    <span class="text-sm font-bold text-slate-700">FRYCHI</span>
-                                </div>
-                                <div class="flex items-center gap-1.5">
-                                    <span
-                                        class="text-[9px] bg-red-100 text-[#d61c22] px-1.5 py-0.5 rounded font-black uppercase">Best
-                                        Price</span>
-                                    <span class="text-sm font-black text-[#d61c22]">Rs. 450</span>
-                                </div>
+                        <div class="w-full h-[250px] bg-slate-900 border border-slate-800 rounded-3xl p-5 flex flex-col justify-between text-white relative overflow-hidden shadow-lg">
+                            <div class="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-slate-950 z-0"></div>
+                            <div class="relative z-10 space-y-2">
+                                <span class="text-[9px] font-black uppercase tracking-wider text-blue-400 bg-blue-500/10 px-2.5 py-0.5 rounded-full border border-blue-500/20">Tech Deal</span>
+                                <h4 class="text-base font-extrabold mt-1">💻 LapStore Pak</h4>
+                                <p class="text-xs text-slate-400">Imported HP & Dell laptops starting from Rs. 45,000.</p>
                             </div>
-                            <div class="flex items-center justify-between py-1 border-b border-slate-100">
-                                <div class="flex items-center gap-2">
-                                    <span
-                                        class="w-5 h-5 rounded-full bg-red-100 text-red-600 flex items-center justify-center text-[10px] font-bold">P</span>
-                                    <span class="text-sm font-bold text-slate-700">Pizza Max</span>
-                                </div>
-                                <span class="text-sm font-bold text-slate-600">Rs. 490</span>
-                            </div>
-                            <div class="flex items-center justify-between py-1 border-b border-slate-100">
-                                <div class="flex items-center gap-2">
-                                    <span
-                                        class="w-5 h-5 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center text-[10px] font-bold">K</span>
-                                    <span class="text-sm font-bold text-slate-700">Kababjees</span>
-                                </div>
-                                <span class="text-sm font-bold text-slate-600">Rs. 520</span>
-                            </div>
-                            <div class="flex items-center justify-between py-1">
-                                <div class="flex items-center gap-2">
-                                    <span
-                                        class="w-5 h-5 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center text-[10px] font-bold">K</span>
-                                    <span class="text-sm font-bold text-slate-700">KFC</span>
-                                </div>
-                                <span class="text-sm font-bold text-slate-600">Rs. 590</span>
-                            </div>
+                            <button class="relative z-10 w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-xl shadow-md transition duration-300">Explore Sale</button>
                         </div>
                     </div>
 
-                    <!-- Green Footer: You Save (Reduced height by 25%) -->
-                    <div
-                        class="bg-[#005221] py-3.5 px-5 rounded-2xl flex items-center justify-between text-white shadow-md relative overflow-hidden">
-                        <div class="absolute right-2 -bottom-2 opacity-25">
-                            <svg class="w-16 h-16 text-yellow-300" fill="currentColor" viewBox="0 0 24 24">
-                                <path
-                                    d="M5 22h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2z" />
-                            </svg>
+                    <!-- Middle Section: Live Price Comparison Card -->
+                    <div class="col-span-12 lg:col-span-6 flex flex-col justify-between bg-white border border-slate-200 rounded-3xl p-5 shadow-sm text-left h-full min-h-[516px] lg:min-h-0">
+                        <div class="flex justify-between items-center mb-2 shrink-0">
+                            <div class="flex items-center gap-2">
+                                <span class="text-orange-500 font-bold text-base">🪙</span>
+                                <span class="text-xs font-black uppercase tracking-wide text-slate-800">Live Price Comparison</span>
+                            </div>
+                            <span class="bg-red-500 text-white text-[9px] px-2.5 py-0.5 rounded-full font-bold flex items-center gap-1 animate-pulse">
+                                <span class="w-1.5 h-1.5 bg-white rounded-full"></span> LIVE
+                            </span>
                         </div>
-                        <div class="relative z-10">
-                            <p class="text-xs opacity-80 uppercase tracking-widest font-bold">You Save</p>
+
+                        <div class="flex gap-4 items-center flex-1 overflow-hidden py-1">
+                            <!-- Product Image -->
+                            <div class="w-1/3 flex flex-col items-center justify-center shrink-0">
+                                <img id="live-comp-img"
+                                    class="w-full h-[120px] lg:h-[240px] object-cover rounded-2xl border border-slate-100 shadow-md transition-all duration-300"
+                                    src="images/categories/food/zinger-burger.png" />
+                                <div id="live-comp-name"
+                                    class="text-xs lg:text-sm font-extrabold text-slate-800 mt-1 lg:mt-2 text-center truncate w-full">Zinger Burger</div>
+                            </div>
+                            <!-- Shops List -->
+                            <div id="live-comp-shops" class="flex-1 space-y-1.5 overflow-y-auto max-h-[140px] lg:max-h-[380px] pr-1">
+                                <div class="flex items-center justify-between py-1 border-b border-slate-50">
+                                    <div class="flex items-center gap-2">
+                                        <span class="w-4 h-4 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center text-[9px] font-bold">F</span>
+                                        <span class="text-xs font-bold text-slate-700">FRYCHI</span>
+                                    </div>
+                                    <div class="flex items-center gap-1">
+                                        <span class="text-[8px] bg-red-100 text-[#d61c22] px-1 py-0.5 rounded font-black uppercase">Best</span>
+                                        <span class="text-xs font-black text-[#d61c22]">Rs. 450</span>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between py-1 border-b border-slate-50">
+                                    <div class="flex items-center gap-2">
+                                        <span class="w-4 h-4 rounded-full bg-red-100 text-red-600 flex items-center justify-center text-[9px] font-bold">P</span>
+                                        <span class="text-xs font-bold text-slate-700">Pizza Max</span>
+                                    </div>
+                                    <span class="text-xs font-bold text-slate-600">Rs. 490</span>
+                                </div>
+                                <div class="flex items-center justify-between py-1 border-b border-slate-50">
+                                    <div class="flex items-center gap-2">
+                                        <span class="w-4 h-4 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center text-[9px] font-bold">K</span>
+                                        <span class="text-xs font-bold text-slate-700">Kababjees</span>
+                                    </div>
+                                    <span class="text-xs font-bold text-slate-600">Rs. 520</span>
+                                </div>
+                                <div class="flex items-center justify-between py-1">
+                                    <div class="flex items-center gap-2">
+                                        <span class="w-4 h-4 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center text-[9px] font-bold">K</span>
+                                        <span class="text-xs font-bold text-slate-700">KFC</span>
+                                    </div>
+                                    <span class="text-xs font-bold text-slate-600">Rs. 590</span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="flex items-center gap-1.5 relative z-10">
-                            <span class="text-sm text-yellow-300 font-bold">Rs.</span>
-                            <span id="live-comp-save" class="text-3xl font-black text-yellow-300">140</span>
-                            <span class="text-xl ml-1">🪙</span>
+
+                        <!-- Mini Save Tag footer inside card -->
+                        <div class="bg-[#0f2249] py-1.5 px-4 rounded-xl flex items-center justify-between text-white shadow-sm overflow-hidden shrink-0 mt-2 relative">
+                            <div class="absolute right-4 bottom-[-10px] opacity-10">
+                                <span class="material-symbols-outlined text-[40px] text-white">savings</span>
+                            </div>
+                            <div class="flex items-center gap-1.5 relative z-10">
+                                <span>💰</span>
+                                <span class="text-[10px] font-black uppercase tracking-wider">Save up to</span>
+                            </div>
+                            <span class="text-xs font-extrabold text-white relative z-10">Rs. <span id="live-comp-save">140</span></span>
                         </div>
                     </div>
-                    <!-- Compare All Prices Link -->
-                    <div class="mt-4 text-center">
-                        <a href="./pages/food.html"
-                            class="text-sm font-bold text-[#005221] hover:text-emerald-800 inline-flex items-center gap-1.5 hover:underline">
-                            Compare All Prices <span class="text-lg">→</span>
+
+                    <!-- Right Banner Stack (300 x 250 px each) -->
+                    <div class="hidden lg:flex lg:col-span-3 flex-col gap-4">
+                        <div class="w-full h-[250px] bg-slate-900 border border-slate-800 rounded-3xl p-5 flex flex-col justify-between text-white relative overflow-hidden shadow-lg">
+                            <div class="absolute inset-0 bg-gradient-to-br from-emerald-500/20 to-slate-950 z-0"></div>
+                            <div class="relative z-10 space-y-2">
+                                <span class="text-[9px] font-black uppercase tracking-wider text-emerald-400 bg-emerald-500/10 px-2.5 py-0.5 rounded-full border border-emerald-500/20">Grocery Deals</span>
+                                <h4 class="text-base font-extrabold mt-1">🛒 MegaMart Specials</h4>
+                                <p class="text-xs text-slate-400">Save flat 15% on fresh vegetables & daily essentials.</p>
+                            </div>
+                            <button class="relative z-10 w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-xl shadow-md transition duration-300">Shop Groceries</button>
+                        </div>
+                        <div class="w-full h-[250px] bg-slate-900 border border-slate-800 rounded-3xl p-5 flex flex-col justify-between text-white relative overflow-hidden shadow-lg">
+                            <div class="absolute inset-0 bg-gradient-to-br from-amber-500/20 to-slate-950 z-0"></div>
+                            <div class="relative z-10 space-y-2">
+                                <span class="text-[9px] font-black uppercase tracking-wider text-amber-400 bg-amber-500/10 px-2.5 py-0.5 rounded-full border border-amber-500/20">Mobile Special</span>
+                                <h4 class="text-base font-extrabold mt-1">📱 Phone Shop</h4>
+                                <p class="text-xs text-slate-400">Compare verified local mobile prices. Low rate guaranteed.</p>
+                            </div>
+                            <button class="relative z-10 w-full py-2.5 bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold rounded-xl shadow-md transition duration-300">Compare Mobiles</button>
+                        </div>
+                    </div>
+
+                <!-- Mobile-Only Inline Banner 1 (Between Live Comparison & Categories) -->
+                <div class="block lg:hidden w-full my-4">
+                    <div class="relative w-full rounded-2xl overflow-hidden shadow border border-slate-200 bg-slate-900 py-3 px-4 flex items-center justify-between h-[100px] text-left">
+                        <div class="absolute inset-0 bg-gradient-to-br from-slate-950 to-slate-900 opacity-90 z-0"></div>
+                        <div class="relative z-10 flex items-center gap-3">
+                            <span class="text-3xl">🍔</span>
+                            <div class="flex flex-col">
+                                <span class="text-[10px] font-black uppercase text-[#d61c22]">Featured Restaurant</span>
+                                <span class="text-xs font-bold text-slate-100">Restaurant Deals - Save 40%</span>
+                                <span class="text-[10px] text-slate-400">Order from local outlets nearby</span>
+                            </div>
+                        </div>
+                        <a href="./pages/food.html" class="relative z-10 px-3.5 py-1.5 bg-[#d61c22] text-white text-[11px] font-extrabold rounded-xl shrink-0">
+                            Claim
                         </a>
                     </div>
                 </div>
+
+                <!-- Compare All Prices Link -->
+                <div class="mt-4 text-center">
+                    <a href="./pages/food.html"
+                        class="text-sm font-bold text-[#d61c22] hover:text-red-700 inline-flex items-center gap-1.5 hover:underline">
+                        Compare All Prices <span class="text-lg">→</span>
+                    </a>
+                </div>
             </section>
+
+            <!-- Large Promotional Banner (400 x 140 px aspect ratio) -->
+            <div class="w-full my-4">
+                <div class="relative w-full rounded-3xl overflow-hidden shadow-md border border-slate-200 bg-slate-950 flex items-center justify-center">
+                    <img src="./images/banner/OrionFx - Web Banner.gif" alt="Stop Buy Promotional Banner" 
+                        class="w-full h-auto max-h-[140px] md:max-h-[180px] object-cover md:object-fill">
+                </div>
+            </div>
+
             <!-- Stats/Trust Bar -->
             <section
                 class="mt-4 bg-[#073B2A] rounded-3xl py-4.5 px-6 md:px-10 shadow-lg border border-emerald-900/30 overflow-hidden text-left">
@@ -1003,6 +1111,24 @@
                 </div>
             </section>
 
+            <!-- Mobile-Only Inline Banner 3 (Between Categories Switcher & Savings/Products) -->
+            <div class="block lg:hidden w-full my-4">
+                <div class="relative w-full rounded-2xl overflow-hidden shadow border border-slate-200 bg-slate-900 py-3 px-4 flex items-center justify-between h-[100px] text-left">
+                    <div class="absolute inset-0 bg-gradient-to-br from-slate-950 to-slate-900 opacity-90 z-0"></div>
+                    <div class="relative z-10 flex items-center gap-3">
+                        <span class="text-3xl">📱</span>
+                        <div class="flex flex-col">
+                            <span class="text-[10px] font-black uppercase text-[#d61c22]">Mobile Promotions</span>
+                            <span class="text-xs font-bold text-slate-100">Flash Smartphone Price Drops</span>
+                            <span class="text-[10px] text-slate-400">Order verified items online</span>
+                        </div>
+                    </div>
+                    <a href="./pages/categories.html" class="relative z-10 px-3.5 py-1.5 bg-[#d61c22] text-white text-[11px] font-extrabold rounded-xl shrink-0">
+                        Explore
+                    </a>
+                </div>
+            </div>
+
             <!-- Results Grid Embedded on Main Page (Index.html) -->
             <div id="priceComparisonResultsSection" class="hidden mb-12 text-left">
                 <div class="flex justify-between items-center mb-4">
@@ -1236,362 +1362,214 @@
                     </a>
                 </div>
 
-                <!-- Upper Grid: Banner & 4 Cards -->
+                <!-- Upper Grid: Banners & 4 Cards (300 x 280 px Layout) -->
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch mb-8">
-                    <!-- Left Banner -->
-                    <div
-                        class="lg:col-span-3 bg-[#0f2249] rounded-3xl p-6 flex flex-col justify-between text-white relative overflow-hidden shadow-md">
-                        <div class="absolute right-4 bottom-4 opacity-10">
-                            <span class="material-symbols-outlined text-[120px] text-white">campaign</span>
+                    <!-- Left Banner Stack (300 x 250 px each) -->
+                    <div class="hidden lg:flex lg:col-span-3 flex-col gap-4">
+                        <div class="w-full h-[250px] bg-slate-900 border border-slate-800 rounded-3xl p-5 flex flex-col justify-between text-white relative overflow-hidden shadow-lg">
+                            <div class="absolute inset-0 bg-gradient-to-br from-indigo-500/20 to-slate-950 z-0"></div>
+                            <div class="relative z-10 space-y-2">
+                                <span class="text-[9px] font-black uppercase tracking-wider text-indigo-400 bg-indigo-500/10 px-2.5 py-0.5 rounded-full border border-indigo-500/20">Featured Store</span>
+                                <h4 class="text-base font-extrabold mt-1">👟 Sports Life</h4>
+                                <p class="text-xs text-slate-400">Up to 50% off on running shoes, gym gear, and sport accessories.</p>
+                            </div>
+                            <button class="relative z-10 w-full py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold rounded-xl shadow-md transition duration-300">Shop Collection</button>
                         </div>
-                        <div class="space-y-3 relative z-10">
-                            <p class="text-yellow-400 font-black text-sm uppercase tracking-wider">Don't Overpay!</p>
-                            <h3 class="text-2xl font-bold leading-tight">Compare First,<br>Save Every Time</h3>
-                        </div>
-                        <div class="mt-8 relative z-10">
-                            <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
-                                class="bg-yellow-400 hover:bg-yellow-300 text-slate-900 font-extrabold px-5 py-2.5 rounded-xl transition-all shadow-md text-sm flex items-center gap-1">
-                                Start Comparing <span class="text-lg">→</span>
-                            </button>
+                        <div class="w-full h-[250px] bg-slate-900 border border-slate-800 rounded-3xl p-5 flex flex-col justify-between text-white relative overflow-hidden shadow-lg">
+                            <div class="absolute inset-0 bg-gradient-to-br from-rose-500/20 to-slate-950 z-0"></div>
+                            <div class="relative z-10 space-y-2">
+                                <span class="text-[9px] font-black uppercase tracking-wider text-rose-400 bg-rose-500/10 px-2.5 py-0.5 rounded-full border border-rose-500/20">Fashion Special</span>
+                                <h4 class="text-base font-extrabold mt-1">👗 Outfit Pakistan</h4>
+                                <p class="text-xs text-slate-400">Save big on summer clothing, shirts & eastern wear.</p>
+                            </div>
+                            <button class="relative z-10 w-full py-2.5 bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold rounded-xl shadow-md transition duration-300">Check Styles</button>
                         </div>
                     </div>
-
-                    <!-- Right 4 Cards -->
-                    <div class="lg:col-span-9 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+                    
+                    <!-- Middle 8 Cards Grid (2x4 Layout on Desktop, 584px Height) -->
+                    <div class="col-span-12 lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 h-auto lg:h-[624px] overflow-hidden">
                         <!-- Card 1: Chicken Biryani -->
-                        <div
-                            class="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md hover:border-[#005221] transition-all flex flex-col justify-between">
-                            <div class="p-4 flex items-center gap-3">
-                                <div
-                                    class="w-20 h-20 flex-shrink-0 bg-slate-50 rounded-2xl overflow-hidden border border-slate-100 flex items-center justify-center">
-                                    <img class="w-full h-full object-cover"
-                                        src="images/categories/food/chicken-biryani.jpg" />
+                        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md hover:border-[#d61c22] transition-all flex flex-col justify-between h-[144px]">
+                            <div class="p-3 flex items-center gap-3">
+                                <div class="w-12 h-12 flex-shrink-0 bg-slate-50 rounded-xl overflow-hidden border border-slate-100 flex items-center justify-center">
+                                    <img class="w-full h-full object-cover" src="images/categories/food/chicken-biryani.jpg" />
                                 </div>
                                 <div class="text-left">
-                                    <h4 class="font-extrabold text-sm text-slate-800 leading-tight mb-2">Chicken Biryani
-                                    </h4>
+                                    <h4 class="font-extrabold text-xs text-slate-800 leading-tight mb-1">Chicken Biryani</h4>
                                     <div class="space-y-0.5">
-                                        <p class="text-[10px] text-slate-400">Lowest Price <span
-                                                class="text-[#005221] font-black ml-1">Rs. 180</span></p>
-                                        <p class="text-[10px] text-slate-400">Highest Price <span
-                                                class="text-red-500 font-black ml-1">Rs. 320</span></p>
+                                        <p class="text-[9px] text-slate-400">Lowest: <span class="text-[#d61c22] font-black">Rs. 180</span></p>
+                                        <p class="text-[9px] text-slate-400">Highest: <span class="text-red-500 font-bold">Rs. 320</span></p>
                                     </div>
                                 </div>
                             </div>
-                            <div
-                                class="bg-[#005221] py-2 px-4 flex justify-between items-center text-white text-xs font-bold mt-2">
-                                <span class="text-[9px] opacity-75 uppercase">You Save</span>
+                            <div class="bg-[#0f2249] py-1 px-3 flex justify-between items-center text-white text-[10px] font-bold">
+                                <span class="text-[8px] opacity-75 uppercase">You Save</span>
                                 <span class="text-white font-extrabold">Rs. 140</span>
                             </div>
                         </div>
 
                         <!-- Card 2: HP Laptop Charger -->
-                        <div
-                            class="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md hover:border-[#005221] transition-all flex flex-col justify-between">
-                            <div class="p-4 flex items-center gap-3">
-                                <div
-                                    class="w-20 h-20 flex-shrink-0 bg-slate-50 rounded-2xl overflow-hidden border border-slate-100 flex items-center justify-center">
-                                    <img class="w-full h-full object-contain p-1"
-                                        src="images/categories/computers/charger.png" />
+                        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md hover:border-[#d61c22] transition-all flex flex-col justify-between h-[144px]">
+                            <div class="p-3 flex items-center gap-3">
+                                <div class="w-12 h-12 flex-shrink-0 bg-slate-50 rounded-xl overflow-hidden border border-slate-100 flex items-center justify-center">
+                                    <img class="w-full h-full object-contain p-1" src="images/categories/computers/charger.png" />
                                 </div>
                                 <div class="text-left">
-                                    <h4 class="font-extrabold text-sm text-slate-800 leading-tight mb-2">HP Laptop
-                                        Charger</h4>
+                                    <h4 class="font-extrabold text-xs text-slate-800 bulls-eye mb-1">HP Charger</h4>
                                     <div class="space-y-0.5">
-                                        <p class="text-[10px] text-slate-400">Lowest Price <span
-                                                class="text-[#005221] font-black ml-1">Rs. 1,400</span></p>
-                                        <p class="text-[10px] text-slate-400">Highest Price <span
-                                                class="text-red-500 font-black ml-1">Rs. 2,100</span></p>
+                                        <p class="text-[9px] text-slate-400">Lowest: <span class="text-[#d61c22] font-black">Rs. 1,400</span></p>
+                                        <p class="text-[9px] text-slate-400">Highest: <span class="text-red-500 font-bold">Rs. 2,100</span></p>
                                     </div>
                                 </div>
                             </div>
-                            <div
-                                class="bg-[#005221] py-2 px-4 flex justify-between items-center text-white text-xs font-bold mt-2">
-                                <span class="text-[9px] opacity-75 uppercase">You Save</span>
+                            <div class="bg-[#0f2249] py-1 px-3 flex justify-between items-center text-white text-[10px] font-bold">
+                                <span class="text-[8px] opacity-75 uppercase">You Save</span>
                                 <span class="text-white font-extrabold">Rs. 700</span>
                             </div>
                         </div>
 
                         <!-- Card 3: Samsung Galaxy A36 -->
-                        <div
-                            class="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md hover:border-[#005221] transition-all flex flex-col justify-between">
-                            <div class="p-4 flex items-center gap-3">
-                                <div
-                                    class="w-20 h-20 flex-shrink-0 bg-slate-50 rounded-2xl overflow-hidden border border-slate-100 flex items-center justify-center">
-                                    <img class="w-full h-full object-contain p-1"
-                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDg92tAvgo8PElqhdjEWlO8T8uDfx0HEe0SVT2rzfg_e0sX5b7CykO_A0pl70_zqVV_kwdfKMChPj-JSLeBaYO5Tdw2y5NwuUS-R_8zT8QErLKsBmPLRc25090D1Lao57cV48tqL3dSN10-OKCNNvug4vJuS3vP-y2RGoSdpDVi9wwmYX9moX2io50byuKyIr-mvm_YCxFLDNiCMD0czlWxP48xKWWW2phBta8g2n8qvTyKagxOcp8sRdVFXx3FgArq-u3a9ey0VJ_g" />
+                        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md hover:border-[#d61c22] transition-all flex flex-col justify-between h-[144px]">
+                            <div class="p-3 flex items-center gap-3">
+                                <div class="w-12 h-12 flex-shrink-0 bg-slate-50 rounded-xl overflow-hidden border border-slate-100 flex items-center justify-center">
+                                    <img class="w-full h-full object-contain p-1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDg92tAvgo8PElqhdjEWlO8T8uDfx0HEe0SVT2rzfg_e0sX5b7CykO_A0pl70_zqVV_kwdfKMChPj-JSLeBaYO5Tdw2y5NwuUS-R_8zT8QErLKsBmPLRc25090D1Lao57cV48tqL3dSN10-OKCNNvug4vJuS3vP-y2RGoSdpDVi9wwmYX9moX2io50byuKyIr-mvm_YCxFLDNiCMD0czlWxP48xKWWW2phBta8g2n8qvTyKagxOcp8sRdVFXx3FgArq-u3a9ey0VJ_g" />
                                 </div>
                                 <div class="text-left">
-                                    <h4 class="font-extrabold text-sm text-slate-800 leading-tight mb-2">Samsung Galaxy
-                                        A36</h4>
+                                    <h4 class="font-extrabold text-xs text-slate-800 leading-tight mb-1 truncate w-[130px]">Galaxy A36</h4>
                                     <div class="space-y-0.5">
-                                        <p class="text-[10px] text-slate-400">Lowest Price <span
-                                                class="text-[#005221] font-black ml-1">Rs. 74,999</span></p>
-                                        <p class="text-[10px] text-slate-400">Highest Price <span
-                                                class="text-red-500 font-black ml-1">Rs. 82,999</span></p>
+                                        <p class="text-[9px] text-slate-400">Lowest: <span class="text-[#d61c22] font-black">Rs. 74,999</span></p>
+                                        <p class="text-[9px] text-slate-400">Highest: <span class="text-red-500 font-bold">Rs. 82,999</span></p>
                                     </div>
                                 </div>
                             </div>
-                            <div
-                                class="bg-[#005221] py-2 px-4 flex justify-between items-center text-white text-xs font-bold mt-2">
-                                <span class="text-[9px] opacity-75 uppercase">You Save</span>
+                            <div class="bg-[#0f2249] py-1 px-3 flex justify-between items-center text-white text-[10px] font-bold">
+                                <span class="text-[8px] opacity-75 uppercase">You Save</span>
                                 <span class="text-white font-extrabold">Rs. 8,000</span>
                             </div>
                         </div>
 
                         <!-- Card 4: Cooking Oil -->
-                        <div
-                            class="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md hover:border-[#005221] transition-all flex flex-col justify-between">
-                            <div class="p-4 flex items-center gap-3">
-                                <div
-                                    class="w-20 h-20 flex-shrink-0 bg-slate-50 rounded-2xl overflow-hidden border border-slate-100 flex items-center justify-center">
-                                    <img class="w-full h-full object-contain p-1"
-                                        src="images/categories/grocery/oil.png" />
+                        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md hover:border-[#d61c22] transition-all flex flex-col justify-between h-[144px]">
+                            <div class="p-3 flex items-center gap-3">
+                                <div class="w-12 h-12 flex-shrink-0 bg-slate-50 rounded-xl overflow-hidden border border-slate-100 flex items-center justify-center">
+                                    <img class="w-full h-full object-contain p-1" src="images/categories/grocery/oil.png" />
                                 </div>
                                 <div class="text-left">
-                                    <h4 class="font-extrabold text-sm text-slate-800 leading-tight mb-2">Cooking Oil 5
-                                        Liter</h4>
+                                    <h4 class="font-extrabold text-xs text-slate-800 leading-tight mb-1">Cooking Oil 5L</h4>
                                     <div class="space-y-0.5">
-                                        <p class="text-[10px] text-slate-400">Lowest Price <span
-                                                class="text-[#005221] font-black ml-1">Rs. 2,450</span></p>
-                                        <p class="text-[10px] text-slate-400">Highest Price <span
-                                                class="text-red-500 font-black ml-1">Rs. 2,950</span></p>
+                                        <p class="text-[9px] text-slate-400">Lowest: <span class="text-[#d61c22] font-black">Rs. 2,450</span></p>
+                                        <p class="text-[9px] text-slate-400">Highest: <span class="text-red-500 font-bold">Rs. 2,950</span></p>
                                     </div>
                                 </div>
                             </div>
-                            <div
-                                class="bg-[#005221] py-2 px-4 flex justify-between items-center text-white text-xs font-bold mt-2">
-                                <span class="text-[9px] opacity-75 uppercase">You Save</span>
+                            <div class="bg-[#0f2249] py-1 px-3 flex justify-between items-center text-white text-[10px] font-bold">
+                                <span class="text-[8px] opacity-75 uppercase">You Save</span>
                                 <span class="text-white font-extrabold">Rs. 500</span>
                             </div>
                         </div>
-                    </div>
-                </div>
 
-                <!-- Lower Grid: 3 Columns (Cheapest Near You, Live Price Drop, Trending Searches) -->
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
-
-                    <!-- Column 1: Cheapest Near You -->
-                    <div
-                        class="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm flex flex-col justify-between">
-                        <div>
-                            <div class="flex items-center justify-between mb-6">
-                                <div class="flex items-center gap-2">
-                                    <span class="text-[#005221] font-bold">🏠</span>
-                                    <h3 style="font-family: 'Times New Roman', Times, serif;"
-                                        class="font-bold text-lg text-slate-800">Cheapest Near You</h3>
+                        <!-- Card 5: Zinger Burger -->
+                        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md hover:border-[#d61c22] transition-all flex flex-col justify-between h-[144px]">
+                            <div class="p-3 flex items-center gap-3">
+                                <div class="w-12 h-12 flex-shrink-0 bg-slate-50 rounded-xl overflow-hidden border border-slate-100 flex items-center justify-center">
+                                    <img class="w-full h-full object-cover p-1" src="images/categories/food/zinger-burger.png" />
                                 </div>
-                                <span
-                                    class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full">📍
-                                    Karachi</span>
+                                <div class="text-left">
+                                    <h4 class="font-extrabold text-xs text-slate-800 leading-tight mb-1">Zinger Burger</h4>
+                                    <div class="space-y-0.5">
+                                        <p class="text-[9px] text-slate-400">Lowest: <span class="text-[#d61c22] font-black">Rs. 450</span></p>
+                                        <p class="text-[9px] text-slate-400">Highest: <span class="text-red-500 font-bold">Rs. 590</span></p>
+                                    </div>
+                                </div>
                             </div>
-
-                            <div class="space-y-4">
-                                <!-- Shop 1 -->
-                                <div
-                                    class="flex items-center gap-3 border-b border-slate-100 pb-3 last:border-0 last:pb-0">
-                                    <span class="text-xs font-bold text-slate-400 w-4">1</span>
-                                    <div
-                                        class="w-12 h-12 bg-slate-50 rounded-xl border border-slate-100 flex items-center justify-center p-1 overflow-hidden">
-                                        <img alt="FRYCHI" class="w-full h-full object-contain"
-                                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCylZFuTLc_FABEPhSEysYGdm1QSIJSwtEwC7WCRGQCCrVw7gE-WRnyfZ3rZHCNNtNSudKutfyzmqP5bCy5gbYsVOM0i6-gMgoEgzdrPHSGN4CEndq1Te0StmqpQHMl7XkwcVmX6VDauOgjZCwmiZDsuW7CjkvQS3b-kDcm2ZUMTJtuIRysH2xpVTmnowRhc09de5ZJWXYpti-j0dJ7wzuQ6HN-YDjWCBCU18FKR989vwmHOSrKGuOTq1cCu6GsrY8bgn2ca15kDRid" />
-                                    </div>
-                                    <div class="flex-grow text-left">
-                                        <p class="font-extrabold text-sm text-slate-800">FRYCHI</p>
-                                        <div
-                                            class="flex items-center gap-1 text-[10px] text-slate-500 font-semibold mt-0.5">
-                                            <span class="text-yellow-400">★</span> 4.8
-                                            <span class="text-slate-300">|</span> 235 Products
-                                        </div>
-                                    </div>
-                                    <span
-                                        class="bg-emerald-50 text-[#005221] text-[9px] px-2 py-1 rounded-md font-extrabold uppercase shrink-0">Lowest
-                                        Prices</span>
-                                </div>
-                                <!-- Shop 2 -->
-                                <div
-                                    class="flex items-center gap-3 border-b border-slate-100 pb-3 last:border-0 last:pb-0">
-                                    <span class="text-xs font-bold text-slate-400 w-4">2</span>
-                                    <div
-                                        class="w-12 h-12 bg-slate-50 rounded-xl border border-slate-100 flex items-center justify-center p-1 overflow-hidden">
-                                        <img alt="Pizza Max" class="w-full h-full object-contain"
-                                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuApi4RMZyrK6SebNJ51XAzCglm3TFRtg02mhsK1QkREQKZ4AZt0MY-IWckqz2-6QfMJMbZUOI1PoqDe0YaVQa9Y_DR4g7X31vLl4mjQ1n1EKsLEdwYl221HB2MxI_sY5h1halndsoAoc0Ta8Dl5MCJkdiiYp5UicLjIX-CfPqIkNJ4gLXgBLpYr9VaAnzI64LNc3EAIbi_fn_M2QoT3TFWtRaR6s7NZ3BlCC1_t3v3OzvDDAgXG1CHCa-vM9xh4TF9iDhDAyZcgtvky" />
-                                    </div>
-                                    <div class="flex-grow text-left">
-                                        <p class="font-extrabold text-sm text-slate-800">Pizza Max</p>
-                                        <div
-                                            class="flex items-center gap-1 text-[10px] text-slate-500 font-semibold mt-0.5">
-                                            <span class="text-yellow-400">★</span> 4.6
-                                            <span class="text-slate-300">|</span> 187 Products
-                                        </div>
-                                    </div>
-                                    <span
-                                        class="bg-emerald-50 text-[#005221] text-[9px] px-2 py-1 rounded-md font-extrabold uppercase shrink-0">Lowest
-                                        Prices</span>
-                                </div>
-                                <!-- Shop 3 -->
-                                <div
-                                    class="flex items-center gap-3 border-b border-slate-100 pb-3 last:border-0 last:pb-0">
-                                    <span class="text-xs font-bold text-slate-400 w-4">3</span>
-                                    <div
-                                        class="w-12 h-12 bg-slate-50 rounded-xl border border-slate-100 flex items-center justify-center p-1 overflow-hidden">
-                                        <span class="material-symbols-outlined text-2xl text-[#005221]">computer</span>
-                                    </div>
-                                    <div class="flex-grow text-left">
-                                        <p class="font-extrabold text-sm text-slate-800">Computer Market</p>
-                                        <div
-                                            class="flex items-center gap-1 text-[10px] text-slate-500 font-semibold mt-0.5">
-                                            <span class="text-yellow-400">★</span> 4.7
-                                            <span class="text-slate-300">|</span> 302 Products
-                                        </div>
-                                    </div>
-                                    <span
-                                        class="bg-emerald-50 text-[#005221] text-[9px] px-2 py-1 rounded-md font-extrabold uppercase shrink-0">Lowest
-                                        Prices</span>
-                                </div>
+                            <div class="bg-[#0f2249] py-1 px-3 flex justify-between items-center text-white text-[10px] font-bold">
+                                <span class="text-[8px] opacity-75 uppercase">You Save</span>
+                                <span class="text-white font-extrabold">Rs. 140</span>
                             </div>
                         </div>
-                        <button onclick="window.location.href='./pages/categories.html'"
-                            class="w-full mt-6 text-[#005221] hover:bg-slate-50 font-extrabold text-xs py-2 rounded-xl border border-slate-200 transition-all flex items-center justify-center gap-1">
-                            View All Shops Nearby <span>→</span>
-                        </button>
-                    </div>
 
-                    <!-- Column 2: Live Price Drop -->
-                    <div
-                        class="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm flex flex-col justify-between">
-                        <div>
-                            <div class="flex items-center gap-2 mb-6">
-                                <span class="text-orange-500 font-bold text-lg">⚡</span>
-                                <h3 style="font-family: 'Times New Roman', Times, serif;"
-                                    class="font-bold text-lg text-slate-800">Live Price Drop</h3>
+                        <!-- Card 6: HP ProBook Laptop -->
+                        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md hover:border-[#d61c22] transition-all flex flex-col justify-between h-[144px]">
+                            <div class="p-3 flex items-center gap-3">
+                                <div class="w-12 h-12 flex-shrink-0 bg-slate-50 rounded-xl overflow-hidden border border-slate-100 flex items-center justify-center">
+                                    <img class="w-full h-full object-contain p-1" src="images/categories/computers/hp-probook.png" onerror="this.src='images/categories/computers/charger.png'" />
+                                </div>
+                                <div class="text-left">
+                                    <h4 class="font-extrabold text-xs text-slate-800 leading-tight mb-1">HP ProBook 830</h4>
+                                    <div class="space-y-0.5">
+                                        <p class="text-[9px] text-slate-400">Lowest: <span class="text-[#d61c22] font-black">Rs. 85,000</span></p>
+                                        <p class="text-[9px] text-slate-400">Highest: <span class="text-red-500 font-bold">Rs. 98,000</span></p>
+                                    </div>
+                                </div>
                             </div>
-
-                            <div class="space-y-4">
-                                <!-- Product 1 -->
-                                <div
-                                    class="flex items-center justify-between border-b border-slate-100 pb-3 last:border-0 last:pb-0">
-                                    <div class="flex items-center gap-3">
-                                        <img class="w-8 h-8 rounded-lg object-contain bg-slate-50 p-0.5 border border-slate-100"
-                                            src="images/categories/computers/charger.png" />
-                                        <span class="text-xs font-bold text-slate-700">HP Laptop Charger</span>
-                                    </div>
-                                    <div class="flex items-center gap-2 text-right shrink-0">
-                                        <span class="text-[10px] text-slate-400 line-through">Rs. 2,100</span>
-                                        <span class="text-xs font-black text-emerald-700">Rs. 1,800</span>
-                                        <span class="text-emerald-700 text-xs font-extrabold">↓</span>
-                                    </div>
-                                </div>
-                                <!-- Product 2 -->
-                                <div
-                                    class="flex items-center justify-between border-b border-slate-100 pb-3 last:border-0 last:pb-0">
-                                    <div class="flex items-center gap-3">
-                                        <img class="w-8 h-8 rounded-lg object-cover bg-slate-50 border border-slate-100"
-                                            src="images/categories/food/chicken-burger.jpg" />
-                                        <span class="text-xs font-bold text-slate-700">Chicken Burger</span>
-                                    </div>
-                                    <div class="flex items-center gap-2 text-right shrink-0">
-                                        <span class="text-[10px] text-slate-400 line-through">Rs. 550</span>
-                                        <span class="text-xs font-black text-emerald-700">Rs. 450</span>
-                                        <span class="text-emerald-700 text-xs font-extrabold">↓</span>
-                                    </div>
-                                </div>
-                                <!-- Product 3 -->
-                                <div
-                                    class="flex items-center justify-between border-b border-slate-100 pb-3 last:border-0 last:pb-0">
-                                    <div class="flex items-center gap-3">
-                                        <span
-                                            class="w-8 h-8 rounded-lg bg-emerald-50 text-[#005221] flex items-center justify-center"><span
-                                                class="material-symbols-outlined text-sm">local_gas_station</span></span>
-                                        <span class="text-xs font-bold text-slate-700">Petrol (1 Liter)</span>
-                                    </div>
-                                    <div class="flex items-center gap-2 text-right shrink-0">
-                                        <span class="text-[10px] text-slate-400 line-through">Rs. 304</span>
-                                        <span class="text-xs font-black text-emerald-700">Rs. 294</span>
-                                        <span class="text-emerald-700 text-xs font-extrabold">↓</span>
-                                    </div>
-                                </div>
-                                <!-- Product 4 -->
-                                <div
-                                    class="flex items-center justify-between border-b border-slate-100 pb-3 last:border-0 last:pb-0">
-                                    <div class="flex items-center gap-3">
-                                        <img class="w-8 h-8 rounded-lg object-contain bg-slate-50 border border-slate-100"
-                                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDg92tAvgo8PElqhdjEWlO8T8uDfx0HEe0SVT2rzfg_e0sX5b7CykO_A0pl70_zqVV_kwdfKMChPj-JSLeBaYO5Tdw2y5NwuUS-R_8zT8QErLKsBmPLRc25090D1Lao57cV48tqL3dSN10-OKCNNvug4vJuS3vP-y2RGoSdpDVi9wwmYX9moX2io50byuKyIr-mvm_YCxFLDNiCMD0czlWxP48xKWWW2phBta8g2n8qvTyKagxOcp8sRdVFXx3FgArq-u3a9ey0VJ_g" />
-                                        <span class="text-xs font-bold text-slate-700">Samsung A36</span>
-                                    </div>
-                                    <div class="flex items-center gap-2 text-right shrink-0">
-                                        <span class="text-[10px] text-slate-400 line-through">Rs. 82,999</span>
-                                        <span class="text-xs font-black text-emerald-700">Rs. 74,999</span>
-                                        <span class="text-emerald-700 text-xs font-extrabold">↓</span>
-                                    </div>
-                                </div>
+                            <div class="bg-[#0f2249] py-1 px-3 flex justify-between items-center text-white text-[10px] font-bold">
+                                <span class="text-[8px] opacity-75 uppercase">You Save</span>
+                                <span class="text-white font-extrabold">Rs. 13,000</span>
                             </div>
                         </div>
-                        <button onclick="window.scrollTo({top:0, behavior:'smooth'})"
-                            class="w-full mt-6 text-[#005221] hover:bg-slate-50 font-extrabold text-xs py-2 rounded-xl border border-slate-200 transition-all flex items-center justify-center gap-1">
-                            View All Price Drops <span>→</span>
-                        </button>
-                    </div>
 
-                    <!-- Column 3: Trending Searches -->
-                    <div
-                        class="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm flex flex-col justify-between">
-                        <div>
-                            <div class="flex items-center gap-2 mb-6">
-                                <span class="text-orange-500 font-bold text-lg">🔥</span>
-                                <h3 style="font-family: 'Times New Roman', Times, serif;"
-                                    class="font-bold text-lg text-slate-800">Trending Searches</h3>
+                        <!-- Card 7: Adidas Sneakers -->
+                        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md hover:border-[#d61c22] transition-all flex flex-col justify-between h-[144px]">
+                            <div class="p-3 flex items-center gap-3">
+                                <div class="w-12 h-12 flex-shrink-0 bg-slate-50 rounded-xl overflow-hidden border border-slate-100 flex items-center justify-center">
+                                    <img class="w-full h-full object-cover p-1" src="images/categories/fashion/shoes.jpg" onerror="this.src='https://placehold.co/100?text=Shoes'" />
+                                </div>
+                                <div class="text-left">
+                                    <h4 class="font-extrabold text-xs text-slate-800 leading-tight mb-1">Adidas Sneakers</h4>
+                                    <div class="space-y-0.5">
+                                        <p class="text-[9px] text-slate-400">Lowest: <span class="text-[#d61c22] font-black">Rs. 4,500</span></p>
+                                        <p class="text-[9px] text-slate-400">Highest: <span class="text-red-500 font-bold">Rs. 6,800</span></p>
+                                    </div>
+                                </div>
                             </div>
-
-                            <div class="grid grid-cols-2 gap-2 text-xs">
-                                <a class="bg-slate-50 border border-slate-200 rounded-2xl px-3 py-2.5 hover:border-emerald-500 text-slate-700 font-bold transition-all shadow-sm flex items-center gap-1"
-                                    href="#" onclick="setSearchQuery('Chicken Biryani')">
-                                    <span class="material-symbols-outlined text-xs text-slate-400">search</span> Chicken
-                                    Biryani
-                                </a>
-                                <a class="bg-slate-50 border border-slate-200 rounded-2xl px-3 py-2.5 hover:border-emerald-500 text-slate-700 font-bold transition-all shadow-sm flex items-center gap-1"
-                                    href="#" onclick="setSearchQuery('HP 830 G7')">
-                                    <span class="material-symbols-outlined text-xs text-slate-400">search</span> HP 830
-                                    G7
-                                </a>
-                                <a class="bg-slate-50 border border-slate-200 rounded-2xl px-3 py-2.5 hover:border-emerald-500 text-slate-700 font-bold transition-all shadow-sm flex items-center gap-1"
-                                    href="#" onclick="setSearchQuery('Laptop Charger')">
-                                    <span class="material-symbols-outlined text-xs text-slate-400">search</span> Laptop
-                                    Charger
-                                </a>
-                                <a class="bg-slate-50 border border-slate-200 rounded-2xl px-3 py-2.5 hover:border-emerald-500 text-slate-700 font-bold transition-all shadow-sm flex items-center gap-1"
-                                    href="#" onclick="setSearchQuery('Zinger Burger')">
-                                    <span class="material-symbols-outlined text-xs text-slate-400">search</span> Zinger
-                                    Burger
-                                </a>
-                                <a class="bg-slate-50 border border-slate-200 rounded-2xl px-3 py-2.5 hover:border-emerald-500 text-slate-700 font-bold transition-all shadow-sm flex items-center gap-1"
-                                    href="#" onclick="setSearchQuery('Samsung A36')">
-                                    <span class="material-symbols-outlined text-xs text-slate-400">search</span> Samsung
-                                    A36
-                                </a>
-                                <a class="bg-slate-50 border border-slate-200 rounded-2xl px-3 py-2.5 hover:border-emerald-500 text-slate-700 font-bold transition-all shadow-sm flex items-center gap-1"
-                                    href="#" onclick="setSearchQuery('PS5 Price')">
-                                    <span class="material-symbols-outlined text-xs text-slate-400">search</span> PS5
-                                    Price
-                                </a>
-                                <a class="bg-slate-50 border border-slate-200 rounded-2xl px-3 py-2.5 hover:border-emerald-500 text-slate-700 font-bold transition-all shadow-sm flex items-center gap-1"
-                                    href="#" onclick="setSearchQuery('Cooking Oil 5 Liter')">
-                                    <span class="material-symbols-outlined text-xs text-slate-400">search</span> Cooking
-                                    Oil
-                                </a>
-                                <a class="bg-slate-50 border border-slate-200 rounded-2xl px-3 py-2.5 hover:border-emerald-500 text-slate-700 font-bold transition-all shadow-sm flex items-center gap-1"
-                                    href="#" onclick="setSearchQuery('iPhone 15 Price')">
-                                    <span class="material-symbols-outlined text-xs text-slate-400">search</span> iPhone
-                                    15
-                                </a>
+                            <div class="bg-[#0f2249] py-1 px-3 flex justify-between items-center text-white text-[10px] font-bold">
+                                <span class="text-[8px] opacity-75 uppercase">You Save</span>
+                                <span class="text-white font-extrabold">Rs. 2,300</span>
                             </div>
                         </div>
-                        <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
-                            class="w-full mt-6 text-[#005221] hover:bg-slate-50 font-extrabold text-xs py-2 rounded-xl border border-slate-200 transition-all flex items-center justify-center gap-1">
-                            View All Trending <span>→</span>
-                        </button>
+
+                        <!-- Card 8: Tapal Tea 950g -->
+                        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md hover:border-[#d61c22] transition-all flex flex-col justify-between h-[144px]">
+                            <div class="p-3 flex items-center gap-3">
+                                <div class="w-12 h-12 flex-shrink-0 bg-slate-50 rounded-xl overflow-hidden border border-slate-100 flex items-center justify-center">
+                                    <img class="w-full h-full object-contain p-1" src="images/categories/grocery/tea.png" onerror="this.src='images/categories/grocery/oil.png'" />
+                                </div>
+                                <div class="text-left">
+                                    <h4 class="font-extrabold text-xs text-slate-800 leading-tight mb-1">Tapal Danedar 950g</h4>
+                                    <div class="space-y-0.5">
+                                        <p class="text-[9px] text-slate-400">Lowest: <span class="text-[#d61c22] font-black">Rs. 1,250</span></p>
+                                        <p class="text-[9px] text-slate-400">Highest: <span class="text-red-500 font-bold">Rs. 1,450</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-[#0f2249] py-1 px-3 flex justify-between items-center text-white text-[10px] font-bold">
+                                <span class="text-[8px] opacity-75 uppercase">You Save</span>
+                                <span class="text-white font-extrabold">Rs. 200</span>
+                            </div>
+                        </div>
                     </div>
 
+                    <!-- Right Banner Stack (300 x 250 px each) -->
+                    <div class="hidden lg:flex lg:col-span-3 flex-col gap-4">
+                        <div class="w-full h-[250px] bg-slate-900 border border-slate-800 rounded-3xl p-5 flex flex-col justify-between text-white relative overflow-hidden shadow-lg">
+                            <div class="absolute inset-0 bg-gradient-to-br from-teal-500/20 to-slate-950 z-0"></div>
+                            <div class="relative z-10 space-y-2">
+                                <span class="text-[9px] font-black uppercase tracking-wider text-teal-400 bg-teal-500/10 px-2.5 py-0.5 rounded-full border border-teal-500/20">Daily Offer</span>
+                                <h4 class="text-base font-extrabold mt-1">🍵 Tapal Tea House</h4>
+                                <p class="text-xs text-slate-400">Extra savings on bulk family tea packs & tea bags.</p>
+                            </div>
+                            <button class="relative z-10 w-full py-2.5 bg-teal-600 hover:bg-teal-700 text-white text-xs font-bold rounded-xl shadow-md transition duration-300">Claim Deal</button>
+                        </div>
+                        <div class="w-full h-[250px] bg-slate-900 border border-slate-800 rounded-3xl p-5 flex flex-col justify-between text-white relative overflow-hidden shadow-lg">
+                            <div class="absolute inset-0 bg-gradient-to-br from-violet-500/20 to-slate-950 z-0"></div>
+                            <div class="relative z-10 space-y-2">
+                                <span class="text-[9px] font-black uppercase tracking-wider text-violet-400 bg-violet-500/10 px-2.5 py-0.5 rounded-full border border-violet-500/20">Kitchen Deal</span>
+                                <h4 class="text-base font-extrabold mt-1">🍳 Kitchen Pro</h4>
+                                <p class="text-xs text-slate-400">Non-stick pans, cookers & smart blenders at lowest prices.</p>
+                            </div>
+                            <button class="relative z-10 w-full py-2.5 bg-violet-600 hover:bg-violet-700 text-white text-xs font-bold rounded-xl shadow-md transition duration-300">Browse Shop</button>
+                        </div>
+                    </div>
                 </div>
             </section>
             <!-- 7. Smart Savings Blog -->
@@ -2010,6 +1988,9 @@
                     </div>
                 </div>
             </section>
+            </div>
+
+
         </main>
         <!-- FOOTER -->
         <footer class="bg-[#1b2230] text-gray-300 pt-16 pb-6 mt-2 border-t border-[#2b3544]">
@@ -2646,7 +2627,7 @@
                             const cursor = clickTarget !== 'javascript:void(0)' ? 'pointer' : 'default';
                             return `
                             <a href="${clickTarget}" target="_blank" style="display:block; width:100%; cursor:${cursor}; text-decoration:none;">
-                                <img src="${b.image}" class="w-full h-auto rounded-3xl shadow-md border border-emerald-200" onerror="this.src='https://placehold.co/120x600?text=Vertical+Ad'"/>
+                                <img src="${b.image}" class="w-full h-auto rounded-3xl shadow-md border border-emerald-200" onerror="this.src='https://placehold.co/300x600?text=Vertical+Ad'"/>
                             </a>
                         `;
                         }).join('');
@@ -4655,19 +4636,19 @@
                     // Update shops list HTML
                     let shopsHtml = '';
                     item.shops.forEach((shop, index) => {
-                        const borderClass = index < item.shops.length - 1 ? 'border-b border-slate-100' : '';
-                        const bestPriceBadge = shop.isBest ? `<span class="text-[9px] bg-red-100 text-[#d61c22] px-1.5 py-0.5 rounded font-black uppercase">Best Price</span>` : '';
+                        const borderClass = index < item.shops.length - 1 ? 'border-b border-slate-50' : '';
+                        const bestPriceBadge = shop.isBest ? `<span class="text-[8px] bg-red-100 text-[#d61c22] px-1 py-0.5 rounded font-black uppercase">Best</span>` : '';
                         const priceColorClass = shop.isBest ? 'text-[#d61c22] font-black' : 'text-slate-600 font-bold';
 
                         shopsHtml += `
                             <div class="flex items-center justify-between py-1 ${borderClass}">
                                 <div class="flex items-center gap-2">
-                                    <span class="w-5 h-5 rounded-full ${shop.logoBg} flex items-center justify-center text-[10px] font-bold">${shop.logo}</span>
-                                    <span class="text-sm font-bold text-slate-700">${shop.name}</span>
+                                    <span class="w-4 h-4 rounded-full ${shop.logoBg} flex items-center justify-center text-[9px] font-bold">${shop.logo}</span>
+                                    <span class="text-xs font-bold text-slate-700">${shop.name}</span>
                                 </div>
-                                <div class="flex items-center gap-1.5">
+                                <div class="flex items-center gap-1">
                                     ${bestPriceBadge}
-                                    <span class="text-sm ${priceColorClass}">Rs. ${shop.price.toLocaleString()}</span>
+                                    <span class="text-xs ${priceColorClass}">Rs. ${shop.price.toLocaleString()}</span>
                                 </div>
                             </div>
                         `;
@@ -4681,10 +4662,77 @@
                 }, 300);
             }
 
-            // Start rotation interval (every 5 seconds)
-            document.addEventListener('DOMContentLoaded', () => {
-                setInterval(rotateLiveComparison, 5000);
-            });
+            // Promotional Banners Rotation Arrays
+            const leftPromos = [
+                {
+                    title: "🛒 Grocery Specials",
+                    desc: "Shop daily household essentials and fresh products at the lowest prices.",
+                    emoji: "🍎"
+                },
+                {
+                    title: "🏪 Verified Sellers",
+                    desc: "Buy from trusted partner merchants with certified reviews and return protection.",
+                    emoji: "🏬"
+                },
+                {
+                    title: "🎁 Weekend Deals",
+                    desc: "Extra rewards, coupons, and double cashback active until Sunday night!",
+                    emoji: "🎁"
+                }
+            ];
+
+            const rightPromos = [
+                {
+                    title: "🍔 Food Deals",
+                    desc: "Save flat discounts on popular local eateries and fast food portals today.",
+                    emoji: "🍕"
+                },
+                {
+                    title: "💻 Computer Offers",
+                    desc: "Compare premium laptops & accessories. Save up to Rs. 15,000!",
+                    emoji: "💻"
+                },
+                {
+                    title: "📱 Mobile Discounts",
+                    desc: "Get flash price comparisons for top-rated smartphones and accessories.",
+                    emoji: "📱"
+                }
+            ];
+
+            let leftPromoIdx = 0;
+            let rightPromoIdx = 0;
+
+            window.rotateLeftPromo = function () {
+                const el = document.getElementById('welcomeLeftPromo');
+                if (!el) return;
+                leftPromoIdx = (leftPromoIdx + 1) % leftPromos.length;
+                const item = leftPromos[leftPromoIdx];
+                el.style.opacity = 0;
+                setTimeout(() => {
+                    el.innerHTML = `
+                        <h3 class="text-xl font-bold leading-tight font-serif text-white">${item.title}</h3>
+                        <p class="text-xs text-slate-400 font-medium leading-relaxed">${item.desc}</p>
+                        <div class="text-4xl pt-4">${item.emoji}</div>
+                    `;
+                    el.style.opacity = 1;
+                }, 300);
+            };
+
+            window.rotateRightPromo = function () {
+                const el = document.getElementById('welcomeRightPromo');
+                if (!el) return;
+                rightPromoIdx = (rightPromoIdx + 1) % rightPromos.length;
+                const item = rightPromos[rightPromoIdx];
+                el.style.opacity = 0;
+                setTimeout(() => {
+                    el.innerHTML = `
+                        <h3 class="text-xl font-bold leading-tight font-serif text-white">${item.title}</h3>
+                        <p class="text-xs text-slate-400 font-medium leading-relaxed">${item.desc}</p>
+                        <div class="text-4xl pt-4">${item.emoji}</div>
+                    `;
+                    el.style.opacity = 1;
+                }, 300);
+            };
 
             // Welcome Overlay Flow Controllers
             window.goToWelcomeScreen2 = function () {
@@ -4747,6 +4795,10 @@
                 const overlay = document.getElementById('welcomeOverlay');
                 const screen1 = document.getElementById('welcomeScreen1');
                 if (overlay && screen1) {
+                    // Populate initial banner items immediately
+                    rotateLeftPromo();
+                    rotateRightPromo();
+
                     overlay.classList.remove('hidden');
                     setTimeout(() => {
                         overlay.classList.remove('opacity-0');
@@ -4758,6 +4810,12 @@
                             screen1.classList.add('scale-100', 'opacity-100');
                         }, 100);
                     }, 50);
+
+                    // Setup intervals for continuous banner rotation
+                    setInterval(rotateLeftPromo, 6000);
+                    setTimeout(() => {
+                        setInterval(rotateRightPromo, 6000);
+                    }, 3000);
                 }
             }
 
