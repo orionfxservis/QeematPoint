@@ -894,15 +894,14 @@
                     </a>
                 </div>
                 <div class="flex overflow-x-auto gap-4 md:gap-8 pb-4 custom-scrollbar justify-between">
-                    <!-- Fast Food -->
-                    <a class="flex flex-col items-center gap-2 min-w-[80px] group text-center" href="./pages/food.html">
+                    <!-- Burger -->
+                    <a class="flex flex-col items-center gap-2 min-w-[80px] group text-center" href="./pages/food.html?search=burger">
                         <div
                             class="w-20 h-20 rounded-full bg-white border border-slate-200 flex items-center justify-center overflow-hidden transition-all duration-300 group-hover:-translate-y-1.5 group-hover:shadow-lg group-hover:border-[#005221] p-1">
-                            <img alt="Fast Food" class="w-full h-full object-cover rounded-full"
+                            <img alt="Burger" class="w-full h-full object-cover rounded-full"
                                 src="images/categories/food/chicken-burger.jpg">
                         </div>
-                        <span class="font-bold text-xs text-slate-700 group-hover:text-[#005221] transition-colors">Fast
-                            Food</span>
+                        <span class="font-bold text-xs text-slate-700 group-hover:text-[#005221] transition-colors">Burger</span>
                     </a>
                     <!-- Pizza -->
                     <a class="flex flex-col items-center gap-2 min-w-[80px] group text-center"
@@ -4853,10 +4852,10 @@
                         else if (category === 'mobiles') targetTab = 'mobiles';
                         else if (category === 'daily-needs') targetTab = 'grocery';
                         
-                        // Scroll to Price Comparison Widget
-                        const widgetSection = document.getElementById('price-comparison-widget');
-                        if (widgetSection) {
-                            widgetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        // Scroll to Browse Categories Section (which sits right above Price Comparison)
+                        const targetSection = document.getElementById('browseCategoriesSection') || document.getElementById('price-comparison-widget');
+                        if (targetSection) {
+                            targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
                             
                             // Automatically find and click the corresponding category tab button
                             const btn = document.querySelector(`#price-comparison-widget button[onclick*="'${targetTab}'"]`);
@@ -4867,6 +4866,13 @@
                     }, 500);
                 }
             };
+            
+
+                        
+
+                        
+
+
 
             function initWelcomeOverlay() {
                 const overlay = document.getElementById('welcomeOverlay');
