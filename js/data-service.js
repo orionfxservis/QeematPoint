@@ -437,7 +437,7 @@ const DataService = {
                 fields: c.fields || [],
                 show_on_main_page: c.showOnMainPage !== false
             }));
-            const { error } = await client.from('categories').upsert(rows, { onConflict: 'name' });
+            const { error } = await client.from('categories').upsert(rows);
             if (error) throw error;
         } catch (err) {
             console.error("Failed to sync categories to Supabase", err);
