@@ -204,8 +204,15 @@ function updateUI() {
     const userName = cUser.fullName || cUser.username || cUser.userId || 'Admin';
 
     // Update Stats
-    if (totalCategoriesEl) totalCategoriesEl.textContent = categories.length;
-    if (totalProductsEl) totalProductsEl.textContent = products.length;
+    if (typeof totalCategoriesEl !== 'undefined' && totalCategoriesEl) totalCategoriesEl.textContent = categories.length;
+    const totalProdEl = document.getElementById('totalProducts');
+    if (totalProdEl) totalProdEl.textContent = (products || []).length;
+    const totalSellerEl = document.getElementById('totalSellers');
+    if (totalSellerEl) totalSellerEl.textContent = (sellers || []).length;
+    const totalCompEl = document.getElementById('totalCompanies');
+    if (totalCompEl) totalCompEl.textContent = (sellers || []).length;
+    const totalUserEl = document.getElementById('totalUsers');
+    if (totalUserEl) totalUserEl.textContent = (users || []).length;
 
     populateCategoryDropdown(); // Keep product dropdowns in sync
     populateCategoryAssignGrid(); // Keep assignment grid in sync
@@ -1217,6 +1224,7 @@ if (userForm) {
             fullName: document.getElementById('userName').value, // Also save as userName for backward compatibility
             userName: document.getElementById('userName').value,
             username: document.getElementById('userName').value,
+            phone: document.getElementById('userPhone').value,
             userId: document.getElementById('userId').value,
             password: document.getElementById('userPassword').value,
             role: document.getElementById('userRole').value,
@@ -1248,6 +1256,7 @@ window.editUser = function (index) {
 
     document.getElementById('userPic').value = u.pic || '';
     document.getElementById('userName').value = u.fullName || u.userName || u.name || u.username || '';
+    document.getElementById('userPhone').value = u.phone || '';
     document.getElementById('userId').value = u.userId || u.id || u.username || '';
     document.getElementById('userPassword').value = u.password || '';
     document.getElementById('userRole').value = u.role || 'user';
@@ -3427,6 +3436,9 @@ function renderAdminProducts() {
 
             return true;
         });
+
+        const totalProdEl = document.getElementById('totalProducts');
+        if (totalProdEl) totalProdEl.textContent = (products || []).length;
 
         // Pagination calculation
         const totalItems = filteredProducts.length;
@@ -5708,6 +5720,11 @@ window.renderSellers = function() {
             `;
         }
     }
+
+    const totalSellerEl = document.getElementById('totalSellers');
+    if (totalSellerEl) totalSellerEl.textContent = totalItems;
+    const totalCompEl = document.getElementById('totalCompanies');
+    if (totalCompEl) totalCompEl.textContent = totalItems;
 
     if (typeof window.updateSellerDatalist === 'function') {
         window.updateSellerDatalist();
