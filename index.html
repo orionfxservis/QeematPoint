@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>StopBuyPk - Pakistan's Smartest Price Comparison Platform</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="manifest" href="/StopBuyPk/json/manifest.json">
@@ -4494,8 +4495,14 @@
                 let whatsappNum = currentWhatsappNumber ? currentWhatsappNumber.replace(/[^0-9]/g, '') : '923001234567';
                 if (!whatsappNum) whatsappNum = '923001234567';
 
-                const message = `Hello, I would like to place an order:\n\n*Order Date/Time:* ${orderDateTime}\n*Product:* ${productName}\n*Price:* ${productPrice}\n*Quantity:* ${quantity}\n*Total Amount:* ${totalAmount}\n*Payment Method:* ${paymentMethod}\n\n*Customer Details:*\n*Name:* ${customerName}\n*Phone/WhatsApp:* ${customerPhone}\n*Delivery Address:* ${customerAddress}`;
+                const message = `================================\n         *STOP BUY*\n================================\n*Date & Time:* ${orderDateTime}\n--------------------------------\n*PRODUCT DETAIL:*\n- *Product:* ${productName}\n- *Price:* ${productPrice}\n- *Quantity:* ${quantity}\n- *Total Amount:* ${totalAmount}\n- *Payment Method:* ${paymentMethod}\n--------------------------------\n*CUSTOMER DETAIL:*\n- *Name:* ${customerName}\n- *Phone/WhatsApp:* ${customerPhone}\n- *Shipping Address:* ${customerAddress}\n================================\n    *Order through "Stop Buy"*\n================================`;
                 const encodedMsg = encodeURIComponent(message);
+                
+                // Close Modal
+                if (typeof closeProductModal === 'function') {
+                    closeProductModal();
+                }
+
                 window.open(`https://wa.me/${whatsappNum}?text=${encodedMsg}`, '_blank');
             };
 
