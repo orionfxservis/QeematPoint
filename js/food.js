@@ -149,7 +149,12 @@ function renderFoodList() {
     f.distanceKm = calculateDistance(viewerLat, viewerLon, pCoords.lat, pCoords.lon);
   });
 
-  const q = foodSearchInput ? foodSearchInput.value.trim().toLowerCase() : '';
+  const urlParams = new URLSearchParams(window.location.search);
+  const qParam = urlParams.get('search') || '';
+  const q = (foodSearchInput ? (foodSearchInput.value.trim() || qParam) : qParam).toLowerCase();
+  if (foodSearchInput && qParam && !foodSearchInput.value) {
+    foodSearchInput.value = qParam;
+  }
   const filterCat = document.getElementById('filterCategory')?.value || '';
   const filterSubCat = document.getElementById('filterSubCategory')?.value || '';
   const filterProd = document.getElementById('filterProduct')?.value || '';
@@ -166,6 +171,16 @@ function renderFoodList() {
 
   let filtered = foodDeals.filter(f => {
     if (q && !(f.name.toLowerCase().includes(q) || f.variety.toLowerCase().includes(q) || f.address.toLowerCase().includes(q))) return false;
+    const cityParam = urlParams.get('city') || '';
+    if (cityParam) {
+      const city = cityParam.toLowerCase().trim();
+      if (city && !(f.city.toLowerCase().includes(city) || f.address.toLowerCase().includes(city))) return false;
+    }
+    const areaParam = urlParams.get('area') || '';
+    if (areaParam) {
+      const area = areaParam.toLowerCase().trim();
+      if (area && !(f.area.toLowerCase().includes(area) || f.address.toLowerCase().includes(area))) return false;
+    }
     if (filterCat && f.category !== filterCat) return false;
     if (filterSubCat && f.subCategory !== filterSubCat) return false;
     if (filterProd && f.name !== filterProd) return false;
@@ -186,7 +201,7 @@ function renderFoodList() {
   });
 
   // Sort by Sort By Dropdown selection (min price to max price by default)
-  const sortBy = document.getElementById('sortProducts')?.value || 'priceLow';
+  const sortBy = document.getElementById('sortProducts')?.value || urlParams.get('sort') || 'priceLow';
   if (sortBy === 'priceLow') {
     filtered.sort((a, b) => a.price - b.price);
   } else if (sortBy === 'priceHigh') {
@@ -751,7 +766,7 @@ if (confirmOrderBtn) {
     });
 
     // 3. Construct WhatsApp Message
-    const message = `Hello, I would like to place an order:\n\n*Order Date/Time:* ${dateTime}\n*Restaurant:* ${restaurant}\n*Product:* ${productName}\n*Price:* ${rate}\n*Quantity:* ${quantity}\n*Total Amount:* ${totalAmount}\n*Payment Method:* ${paymentMethod}\n*Rating given:* ${stars} Stars\n*Remarks:* ${remarks}\n\n*Customer Details:*\n*Name:* ${customerName}\n*Phone/WhatsApp:* ${customerPhone}\n*Delivery Address:* ${customerAddress}`;
+    const message = `================================\n         *STOP BUY*\n================================\n*Date & Time:* ${dateTime}\n--------------------------------\n*PRODUCT DETAIL:*\n- *Restaurant:* ${restaurant}\n- *Product:* ${productName}\n- *Price:* ${rate}\n- *Quantity:* ${quantity}\n- *Total Amount:* ${totalAmount}\n- *Payment Method:* ${paymentMethod}\n- *Rating:* ${stars} Stars\n- *Remarks:* ${remarks}\n--------------------------------\n*CUSTOMER DETAIL:*\n- *Name:* ${customerName}\n- *Phone/WhatsApp:* ${customerPhone}\n- *Delivery Address:* ${customerAddress}\n================================\n    *Order through "Stop Buy"*\n================================`;
     const encodedMsg = encodeURIComponent(message);
 
     // 4. Send message to restaurant
@@ -760,6 +775,13 @@ if (confirmOrderBtn) {
     if (!whatsappNum) whatsappNum = '923001234567';
 
     window.open(`https://wa.me/${whatsappNum}?text=${encodedMsg}`, '_blank');
+
+    // Send copy to Admin
+    setTimeout(() => {
+        if (confirm("Order receipt sent to Seller! Press OK to send a copy to the Admin.")) {
+            window.open(`https://wa.me/923330257246?text=${encodedMsg}`, '_blank');
+        }
+    }, 800);
 
     // 5. Hide Modal & reset
     if (orderModal) orderModal.classList.add('hidden');
