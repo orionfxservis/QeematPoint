@@ -685,15 +685,15 @@
 
                         <div class="flex gap-4 items-center flex-1 overflow-hidden py-1">
                             <!-- Product Image -->
-                            <div class="w-[42%] lg:w-[42%] flex flex-col items-center justify-center shrink-0">
+                            <div class="w-[52%] lg:w-[52%] flex flex-col items-center justify-center shrink-0">
                                 <img id="live-comp-img"
-                                    class="w-full h-[180px] lg:h-[240px] object-cover rounded-2xl border border-slate-100 shadow-md transition-all duration-300"
+                                    class="w-full h-[210px] lg:h-[290px] object-cover rounded-2xl border border-slate-100 shadow-md transition-all duration-300"
                                     src="images/categories/food/zinger-burger.png" />
                                 <div id="live-comp-name"
                                     class="text-xs lg:text-sm font-extrabold text-slate-800 mt-1 lg:mt-2 text-center truncate w-full">Zinger Burger</div>
                             </div>
                             <!-- Shops List -->
-                            <div id="live-comp-shops" class="w-[55%] space-y-1.5 overflow-y-auto max-h-[140px] lg:max-h-[380px] pr-1">
+                            <div id="live-comp-shops" class="w-[45%] space-y-1.5 overflow-y-auto max-h-[160px] lg:max-h-[380px] pr-1">
                                 <div class="flex items-center justify-between py-1 border-b border-slate-50">
                                     <div class="flex items-center gap-2">
                                         <span class="w-4 h-4 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center text-[9px] font-bold">F</span>
@@ -2261,16 +2261,12 @@
                         <span class="lang-ur">© 2026 اسٹاپ بائے پی کے۔ جملہ حقوق محفوظ ہیں۔ پاکستان کا قابلِ اعتماد
                             سمارٹ پرائس کمپیریزن پلیٹ فارم۔ ڈیزائن اور ڈیولپمنٹ: <strong>اورین ایف ایکس</strong>۔</span>
                     </div>
-                    <div class="flex gap-5">
-                        <a href="./pages/terms.html" class="hover:text-white transition-colors">
-                            Terms
-                        </a>
-                        <a href="./pages/privacy.html" class="hover:text-white transition-colors">
-                            Privacy
-                        </a>
-                        <a href="./pages/cookies.html" class="hover:text-white transition-colors">
-                            Cookies
-                        </a>
+                    <div class="flex flex-wrap gap-2 md:gap-3 items-center">
+                        <a href="./pages/terms.html" class="hover:text-white transition-colors">Terms & Conditions</a>
+                        <span class="text-gray-600">|</span>
+                        <a href="./pages/privacy.html" class="hover:text-white transition-colors">Privacy Policy</a>
+                        <span class="text-gray-600">|</span>
+                        <a href="./pages/cookies.html" class="hover:text-white transition-colors">Cookies Policy</a>
                     </div>
                 </div>
             </div>
@@ -4503,7 +4499,15 @@
                     closeProductModal();
                 }
 
+                // Send to Seller
                 window.open(`https://wa.me/${whatsappNum}?text=${encodedMsg}`, '_blank');
+
+                // Send copy to Admin
+                setTimeout(() => {
+                    if (confirm("Order receipt sent to Seller! Press OK to send a copy to the Admin.")) {
+                        window.open(`https://wa.me/923330257246?text=${encodedMsg}`, '_blank');
+                    }
+                }, 800);
             };
 
             // Live Clock initialization
