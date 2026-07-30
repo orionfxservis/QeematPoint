@@ -11,6 +11,7 @@
 
   <!-- ✅ Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
   <style>
     /* PAGE BAR */
@@ -135,18 +136,21 @@
                         </span>
                         <div
                             class="hidden md:block border border-[#24533e] bg-emerald-900/20 text-[#58b284] px-2 py-[2px] rounded text-[10px] font-semibold tracking-wide">
-                            <span class="lang-en">Price Smart, Save More</span><span class="lang-ur">سمارٹ قیمت، زیادہ بچت</span>
+                            <span class="lang-en">Price Smart, Save More</span><span class="lang-ur">سمارٹ قیمت، زیادہ
+                                بچت</span>
                         </div>
                     </div>
                     <span class="hidden md:block text-[11px] text-gray-300 mt-0.5">
-                        <span class="lang-en">Smart Price Comparison for Pakistan</span><span class="lang-ur">پاکستان کے لیے سمارٹ پرائس کیئر</span>
+                        <span class="lang-en">Smart Price Comparison for Pakistan</span><span class="lang-ur">پاکستان کے
+                            لیے سمارٹ پرائس کیئر</span>
                     </span>
                 </div>
             </a>
 
 
             <!-- CENTER: Location -->
-            <div class="order-3 sm:order-none w-full sm:w-auto flex justify-center sm:flex-1 lg:absolute lg:left-1/2 lg:-translate-x-1/2 lg:transform">
+            <div
+                class="order-3 sm:order-none w-full sm:w-auto flex justify-center sm:flex-1 lg:absolute lg:left-1/2 lg:-translate-x-1/2 lg:transform">
                 <div class="hidden lg:flex items-center gap-1 text-slate-700 text-sm bg-slate-100 px-3 py-1.5 rounded-full border border-slate-200 cursor-pointer hover:bg-slate-200 transition whitespace-nowrap"
                     onclick="showLocationModal()" id="locationBox">
                     <span>📍</span>
@@ -813,6 +817,21 @@
           compSearchInput.value = searchQuery;
         }
       }
+      const cityQuery = urlParams.get('city');
+      if (cityQuery) {
+        const cityCb = document.querySelector(`.loc-filter[value="${cityQuery}"]`) || 
+                       document.querySelector(`.loc-filter[value="${cityQuery.toLowerCase()}"]`);
+        if (cityCb) {
+          cityCb.checked = true;
+        }
+      }
+      const areaQuery = urlParams.get('area');
+      if (areaQuery) {
+        const locAreaInput = document.getElementById('locArea');
+        if (locAreaInput) {
+          locAreaInput.value = areaQuery;
+        }
+      }
       
       applyFilters();
     } catch (err) {
@@ -1215,6 +1234,256 @@
   window.addEventListener('load', () => {
     setTimeout(togglePlaceholders, 150);
   });
+
+  // Modal and Order Form Helper Functions
+  let currentWhatsappNumber = '';
+  let currentProductPriceVal = 0;
+
+  window.updateOrderFormTotal = function () {
+      const qtyInput = document.getElementById('of-quantity');
+      const totalInput = document.getElementById('of-total-amount');
+      if (!qtyInput || !totalInput) return;
+
+      const qty = parseInt(qtyInput.value) || 1;
+      const total = currentProductPriceVal * qty;
+      const totalText = total > 0 ? `Rs. ${total.toLocaleString()}` : 'Rs. -';
+      totalInput.value = totalText;
+      const displayEl = document.getElementById('of-total-amount-display');
+      if (displayEl) displayEl.textContent = totalText;
+  };
+
+  window.selectPaymentMethod = function (method) {
+      document.getElementById('of-payment-method').value = method;
+
+      const options = {
+          'JazzCash': { id: 'pm-option-JazzCash' },
+          'Easypaisa': { id: 'pm-option-Easypaisa' },
+          'Cash On Delivery': { id: 'pm-option-COD' }
+      };
+
+      Object.keys(options).forEach(key => {
+          const el = document.getElementById(options[key].id);
+          if (!el) return;
+          if (key === method) {
+              el.className = "cursor-pointer border border-emerald-500 bg-emerald-50/40 rounded-xl py-1 px-1.5 flex flex-col items-center justify-center gap-0.5 text-emerald-700 transition-all font-bold";
+          } else {
+              el.className = "cursor-pointer border border-slate-200 rounded-xl py-1 px-1.5 flex flex-col items-center justify-center gap-0.5 bg-white text-slate-600 hover:border-slate-300 transition-all";
+          }
+      });
+  };
+
+  window.openProductDetailModal = function (name, image, desc, price, originalPrice, category, subCategory, whatsapp, model, ram, storage, brand, series, processor, addedBy, createdDate, companyName) {
+      try {
+          const content = document.getElementById('productModalContent');
+          document.getElementById('pm-image').src = image || '../images/placeholder.jpg';
+          document.getElementById('pm-title').textContent = name;
+          document.getElementById('pm-category').textContent = subCategory || category || 'Product';
+
+          // Add Post Date
+          let dateText = '';
+          if (createdDate && createdDate !== 'undefined' && createdDate !== 'null' && createdDate.trim() !== '') {
+              try {
+                  const dateObj = new Date(createdDate);
+                  if (!isNaN(dateObj.getTime())) {
+                      dateText = dateObj.toLocaleDateString('en-US', { day: '2-digit', month: 'short', year: 'numeric' });
+                  } else {
+                      dateText = createdDate;
+                  }
+              } catch (e) {
+                  dateText = createdDate;
+              }
+          }
+          const postDateEl = document.getElementById('pm-post-date');
+          if (postDateEl) {
+              postDateEl.textContent = dateText ? dateText : '';
+          }
+
+          // Add Shop Name
+          const shopNameEl = document.getElementById('pm-shop-name');
+          if (shopNameEl) {
+              let displayShop = 'Admin';
+              displayShop = (companyName && companyName !== 'undefined' && companyName !== 'null' && companyName.trim() !== '') ? companyName.trim() : ((addedBy && addedBy !== 'undefined' && addedBy !== 'null') ? addedBy.trim() : 'Admin');
+              shopNameEl.textContent = displayShop;
+          }
+
+          // Add Brand + Series + Model + Processor + RAM + Storage specs summary
+          const specsSummaryEl = document.getElementById('pm-specs-summary');
+          if (specsSummaryEl) {
+              let specParts = [];
+              if (brand && brand !== 'undefined' && brand !== 'null' && brand.trim() !== '') specParts.push(brand.trim());
+              if (series && series !== 'undefined' && series !== 'null' && series.trim() !== '') specParts.push(series.trim());
+              if (model && model !== 'undefined' && model !== 'null' && model.trim() !== '') specParts.push(model.trim());
+              if (processor && processor !== 'undefined' && processor !== 'null' && processor.trim() !== '') specParts.push(processor.trim());
+              if (ram && ram !== 'undefined' && ram !== 'null' && ram.trim() !== '') specParts.push(ram.trim());
+              if (storage && storage !== 'undefined' && storage !== 'null' && storage.trim() !== '') specParts.push(storage.trim());
+
+              if (specParts.length > 0) {
+                  specsSummaryEl.textContent = specParts.join(' + ');
+                  specsSummaryEl.classList.remove('hidden');
+              } else {
+                  specsSummaryEl.textContent = '';
+                  specsSummaryEl.classList.add('hidden');
+              }
+          }
+
+          let bestPrice = parseFloat(price.toString().replace(/[^0-9.]/g, '')) || 0;
+          let highestPrice = parseFloat((originalPrice || '').toString().replace(/[^0-9.]/g, '')) || 0;
+          if (highestPrice === 0 || highestPrice < bestPrice) {
+              highestPrice = bestPrice;
+          }
+
+          const priceText = bestPrice ? `Rs. ${bestPrice.toLocaleString()}` : 'Rs. -';
+          const highestPriceText = highestPrice ? `Rs. ${highestPrice.toLocaleString()}` : 'Rs. -';
+
+          document.getElementById('pm-price').textContent = priceText;
+          if (document.getElementById('pm-highest-price')) {
+              document.getElementById('pm-highest-price').textContent = highestPriceText;
+          }
+
+          document.getElementById('pm-desc').innerHTML = desc ? desc.replace(/\n/g, '<br>') : 'Compare prices from multiple stores and find the best deals.';
+
+          currentWhatsappNumber = whatsapp || '';
+          const whatsappBtn = document.getElementById('pm-whatsapp');
+          if (whatsappBtn) {
+              if (whatsapp && whatsapp !== 'undefined' && whatsapp !== '') {
+                  whatsappBtn.classList.remove('hidden');
+              } else {
+                  whatsappBtn.classList.add('hidden');
+              }
+          }
+
+          // Parse numeric price for total calculation
+          currentProductPriceVal = bestPrice;
+
+          // Reset form fields first
+          if (document.getElementById('orderSubmitForm')) {
+              document.getElementById('orderSubmitForm').reset();
+              document.getElementById('of-quantity').value = 1;
+          }
+
+          // Fill Order Form fields
+          document.getElementById('of-product-name').value = name;
+          document.getElementById('of-product-price').value = priceText;
+
+          // Auto-load Date & Time
+          const now = new Date();
+          const dateStr = now.toLocaleDateString('en-US', { day: '2-digit', month: 'short', year: 'numeric' }) + ' ' + now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+          document.getElementById('of-datetime').value = dateStr;
+
+          // Reset payment method selector to Cash On Delivery
+          selectPaymentMethod('Cash On Delivery');
+
+          // Reset panels state
+          const detailsPane = document.getElementById('detailsPane');
+          const orderFormPane = document.getElementById('orderFormPane');
+          const slider = document.getElementById('modalSlider');
+
+          if (orderFormPane) {
+              orderFormPane.classList.add('hidden', 'opacity-0', 'pointer-events-none');
+          }
+          content.classList.remove('max-w-[696px]', 'w-full');
+          content.classList.add('max-w-[340px]', 'w-[90vw]');
+          if (slider) slider.style.transform = 'translateX(0px)';
+
+          updateOrderFormTotal();
+
+          const modal = document.getElementById('productDetailModal');
+          if (modal) {
+              modal.classList.remove('hidden');
+              modal.classList.add('flex');
+          }
+          setTimeout(() => {
+              try {
+                  if (modal) modal.classList.remove('opacity-0');
+                  if (content) {
+                      content.classList.remove('scale-95', 'opacity-0');
+                      content.classList.add('scale-100', 'opacity-100');
+                  }
+              } catch (e) {
+                  console.error(e);
+              }
+          }, 10);
+      } catch (err) {
+          console.error(err);
+      }
+  };
+
+  window.closeProductModal = function () {
+      const modal = document.getElementById('productDetailModal');
+      const content = document.getElementById('productModalContent');
+      modal.classList.add('opacity-0');
+      content.classList.remove('scale-100', 'opacity-100');
+      content.classList.add('scale-95', 'opacity-0');
+      setTimeout(() => {
+          modal.classList.add('hidden');
+          modal.classList.remove('flex');
+      }, 300);
+  };
+
+  window.showOrderForm = function () {
+      const orderFormPane = document.getElementById('orderFormPane');
+      const content = document.getElementById('productModalContent');
+      const slider = document.getElementById('modalSlider');
+
+      orderFormPane.classList.remove('hidden');
+      setTimeout(() => {
+          orderFormPane.classList.remove('opacity-0', 'pointer-events-none');
+
+          if (window.innerWidth >= 768) {
+              content.classList.remove('max-w-[340px]', 'w-[90vw]');
+              content.classList.add('max-w-[696px]', 'w-full');
+          } else {
+              if (slider) slider.style.transform = 'translateX(-50%)';
+          }
+      }, 10);
+  };
+
+  window.hideOrderForm = function () {
+      const orderFormPane = document.getElementById('orderFormPane');
+      const content = document.getElementById('productModalContent');
+      const slider = document.getElementById('modalSlider');
+
+      orderFormPane.classList.add('opacity-0', 'pointer-events-none');
+
+      if (window.innerWidth >= 768) {
+          content.classList.remove('max-w-[696px]', 'w-full');
+          content.classList.add('max-w-[340px]', 'w-[90vw]');
+      } else {
+          if (slider) slider.style.transform = 'translateX(0px)';
+      }
+
+      setTimeout(() => {
+          orderFormPane.classList.add('hidden');
+      }, 500);
+  };
+
+  window.submitWhatsAppOrder = function (e) {
+      e.preventDefault();
+      const orderDateTime = document.getElementById('of-datetime').value;
+      const productName = document.getElementById('of-product-name').value;
+      const productPrice = document.getElementById('of-product-price').value;
+      const quantity = document.getElementById('of-quantity').value;
+      const totalAmount = document.getElementById('of-total-amount').value;
+      const paymentMethod = document.getElementById('of-payment-method').value;
+      const customerName = document.getElementById('of-name').value;
+      const customerPhone = document.getElementById('of-phone').value;
+      const customerAddress = document.getElementById('of-address').value;
+
+      let whatsappNum = currentWhatsappNumber ? currentWhatsappNumber.replace(/[^0-9]/g, '') : '923001234567';
+      if (!whatsappNum) whatsappNum = '923001234567';
+
+      const message = `================================\n         *STOP BUY*\n================================\n*Date & Time:* ${orderDateTime}\n--------------------------------\n*PRODUCT DETAIL:*\n- *Product:* ${productName}\n- *Price:* ${productPrice}\n- *Quantity:* ${quantity}\n- *Total Amount:* ${totalAmount}\n- *Payment Method:* ${paymentMethod}\n--------------------------------\n*CUSTOMER DETAIL:*\n- *Name:* ${customerName}\n- *Phone/WhatsApp:* ${customerPhone}\n- *Shipping Address:* ${customerAddress}\n================================\n    *Order through "Stop Buy"*\n================================`;
+      const encodedMsg = encodeURIComponent(message);
+      
+      // Close Modal
+      if (typeof closeProductModal === 'function') {
+          closeProductModal();
+      }
+
+      window.open(`https://wa.me/${whatsappNum}?text=${encodedMsg}`, '_blank');
+  };
+
+  document.getElementById('of-quantity')?.addEventListener('input', updateOrderFormTotal);
 </script>
 
 
@@ -1227,306 +1496,9 @@
 
 
 
-<!-- FOOTER -->
-    <div class="w-full bg-[#0A3D2A] text-emerald-50 text-center py-4 text-sm mt-auto border-t border-[#052C22]">
-        &copy; 2026 StopBuyPk - Smart Price Comparison
-    </div>
 
-<!-- LANG_TOGGLE_SCRIPT -->
-<script>
-    const currentLang = localStorage.getItem('qeematLang') || 'en';
-    document.documentElement.lang = currentLang;
-    document.documentElement.dir = currentLang === 'ur' ? 'rtl' : 'ltr';
 
-    function updateLanguageUI(lang) {
-        const toggleText = document.getElementById('lang-toggle-text');
-        if (toggleText) toggleText.textContent = lang === 'ur' ? 'English' : 'اردو';
-        
-        if (typeof togglePlaceholders === 'function') {
-            togglePlaceholders();
-        }
-    }
 
-    function toggleLanguage() {
-        const newLang = document.documentElement.lang === 'ur' ? 'en' : 'ur';
-        document.documentElement.lang = newLang;
-        document.documentElement.dir = newLang === 'ur' ? 'rtl' : 'ltr';
-        localStorage.setItem('qeematLang', newLang);
-        updateLanguageUI(newLang);
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-        updateLanguageUI(currentLang);
-        const qtyInput = document.getElementById('of-quantity');
-        if (qtyInput) {
-            qtyInput.addEventListener('input', updateOrderFormTotal);
-            qtyInput.addEventListener('change', updateOrderFormTotal);
-        }
-    });
-
-    let currentWhatsappNumber = '';
-    let currentProductPriceVal = 0;
-
-    window.updateOrderFormTotal = function() {
-        const qtyInput = document.getElementById('of-quantity');
-        const totalInput = document.getElementById('of-total-amount');
-        if (!qtyInput || !totalInput) return;
-        const qty = parseInt(qtyInput.value) || 1;
-        const total = currentProductPriceVal * qty;
-        const totalText = total > 0 ? `Rs. ${total.toLocaleString()}` : 'Rs. -';
-        totalInput.value = totalText;
-        const displayEl = document.getElementById('of-total-amount-display');
-        if (displayEl) displayEl.textContent = totalText;
-    };
-
-    window.selectPaymentMethod = function(method) {
-        document.getElementById('of-payment-method').value = method;
-        
-        const options = {
-            'JazzCash': { id: 'pm-option-JazzCash' },
-            'Easypaisa': { id: 'pm-option-Easypaisa' },
-            'Cash On Delivery': { id: 'pm-option-COD' }
-        };
-        
-        Object.keys(options).forEach(key => {
-            const el = document.getElementById(options[key].id);
-            if (!el) return;
-            if (key === method) {
-                el.className = "cursor-pointer border border-emerald-500 bg-emerald-50/40 rounded-xl py-1 px-1.5 flex flex-col items-center justify-center gap-0.5 text-emerald-700 transition-all font-bold";
-            } else {
-                el.className = "cursor-pointer border border-slate-200 rounded-xl py-1 px-1.5 flex flex-col items-center justify-center gap-0.5 bg-white text-slate-600 hover:border-slate-300 transition-all";
-            }
-        });
-    };
-
-    window.openProductDetailModal = function(name, image, desc, price, originalPrice, category, subCategory, whatsapp, model, ram, storage, brand, series, processor, addedBy, createdDate, companyName) {
-        document.getElementById('pm-image').src = image || 'https://via.placeholder.com/150';
-        document.getElementById('pm-title').textContent = name;
-        document.getElementById('pm-category').textContent = subCategory || category || 'Product';
-        
-        // Add Post Date
-        let dateText = '';
-        if (createdDate && createdDate !== 'undefined' && createdDate !== 'null' && createdDate.trim() !== '') {
-            try {
-                const dateObj = new Date(createdDate);
-                if (!isNaN(dateObj.getTime())) {
-                    dateText = dateObj.toLocaleDateString('en-US', { day: '2-digit', month: 'short', year: 'numeric' });
-                } else {
-                    dateText = createdDate;
-                }
-            } catch (e) {
-                dateText = createdDate;
-            }
-        }
-        const postDateEl = document.getElementById('pm-post-date');
-        if (postDateEl) {
-            postDateEl.textContent = dateText ? dateText : '';
-        }
-
-        // Add Shop Name
-        const shopNameEl = document.getElementById('pm-shop-name');
-        if (shopNameEl) {
-            const displayShop = (companyName && companyName !== 'undefined' && companyName !== 'null' && companyName.trim() !== '') ? companyName.trim() : ((addedBy && addedBy !== 'undefined' && addedBy !== 'null') ? addedBy.trim() : 'Admin');
-            shopNameEl.textContent = displayShop;
-        }
-
-        // Add Brand + Series + Model + Processor + RAM + Storage specs summary
-        const specsSummaryEl = document.getElementById('pm-specs-summary');
-        if (specsSummaryEl) {
-            let specParts = [];
-            if (brand && brand !== 'undefined' && brand !== 'null' && brand.trim() !== '') specParts.push(brand.trim());
-            if (series && series !== 'undefined' && series !== 'null' && series.trim() !== '') specParts.push(series.trim());
-            if (model && model !== 'undefined' && model !== 'null' && model.trim() !== '') specParts.push(model.trim());
-            if (processor && processor !== 'undefined' && processor !== 'null' && processor.trim() !== '') specParts.push(processor.trim());
-            if (ram && ram !== 'undefined' && ram !== 'null' && ram.trim() !== '') specParts.push(ram.trim());
-            if (storage && storage !== 'undefined' && storage !== 'null' && storage.trim() !== '') specParts.push(storage.trim());
-            
-            if (specParts.length > 0) {
-                specsSummaryEl.textContent = specParts.join(' + ');
-                specsSummaryEl.classList.remove('hidden');
-            } else {
-                specsSummaryEl.textContent = '';
-                specsSummaryEl.classList.add('hidden');
-            }
-        }
-        
-        // Find matching computers for price comparison
-        const normModel = (model || '').toLowerCase().trim();
-        const normRam = (ram || '').toLowerCase().trim();
-        const normStorage = (storage || '').toLowerCase().trim();
-
-        let highestPrice = 0;
-        let bestPrice = parseFloat(price.toString().replace(/[^0-9.]/g, '')) || 0;
-
-        if (normModel || normRam || normStorage) {
-            const matches = allComputers.filter(p => {
-                const mModel = (p.model || '').toLowerCase().trim();
-                const mRam = (p.ram || '').toLowerCase().trim();
-                const mStorage = (p.storage || p.hdd || '').toLowerCase().trim();
-                
-                // Compare model, ram, and storage
-                const matchModel = !normModel || mModel === normModel;
-                const matchRam = !normRam || mRam === normRam;
-                const matchStorage = !normStorage || mStorage === normStorage;
-
-                return matchModel && matchRam && matchStorage;
-            });
-
-            if (matches.length > 0) {
-                const prices = matches.map(p => parseFloat(p.price) || 0).filter(p => p > 0);
-                if (prices.length > 0) {
-                    highestPrice = Math.max(...prices);
-                    bestPrice = Math.min(...prices);
-                }
-            }
-        }
-
-        if (highestPrice === 0 || highestPrice < bestPrice) {
-            highestPrice = parseFloat(price.toString().replace(/[^0-9.]/g, '')) || 0;
-        }
-
-        const priceText = bestPrice ? `Rs. ${bestPrice.toLocaleString()}` : 'Rs. -';
-        const highestPriceText = highestPrice ? `Rs. ${highestPrice.toLocaleString()}` : 'Rs. -';
-
-        document.getElementById('pm-price').textContent = priceText;
-        if (document.getElementById('pm-highest-price')) {
-            document.getElementById('pm-highest-price').textContent = highestPriceText;
-        }
-        
-        document.getElementById('pm-desc').innerHTML = desc ? desc.replace(/\n/g, '<br>') : 'Compare prices from multiple stores and find the best deals.';
-        
-        currentWhatsappNumber = whatsapp || '';
-        const whatsappBtn = document.getElementById('pm-whatsapp');
-        if (whatsapp && whatsapp !== 'undefined' && whatsapp !== '') {
-            whatsappBtn.classList.remove('hidden');
-        } else {
-            whatsappBtn.classList.add('hidden');
-        }
-
-        // Parse numeric price for total calculation
-        currentProductPriceVal = bestPrice;
-
-        // Reset form fields first
-        if (document.getElementById('orderSubmitForm')) {
-            document.getElementById('orderSubmitForm').reset();
-            document.getElementById('of-quantity').value = 1;
-        }
-
-        // Fill Order Form fields
-        document.getElementById('of-product-name').value = name;
-        if (document.getElementById('of-product-name-display')) {
-            document.getElementById('of-product-name-display').textContent = name;
-        }
-        
-        document.getElementById('of-product-price').value = priceText;
-        if (document.getElementById('of-product-price-display')) {
-            document.getElementById('of-product-price-display').textContent = priceText;
-        }
-        
-        // Auto-load Date & Time
-        const now = new Date();
-        const dateStr = now.toLocaleDateString('en-US', { day: '2-digit', month: 'short', year: 'numeric' }) + ' ' + now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-        document.getElementById('of-datetime').value = dateStr;
-        if (document.getElementById('of-datetime-display')) {
-            document.getElementById('of-datetime-display').textContent = dateStr;
-        }
-
-        // Reset payment method selector to Cash On Delivery
-        selectPaymentMethod('Cash On Delivery');
-
-        // Reset panels state
-        const detailsPane = document.getElementById('detailsPane');
-        const orderFormPane = document.getElementById('orderFormPane');
-        const content = document.getElementById('productModalContent');
-        const slider = document.getElementById('modalSlider');
-        
-        orderFormPane.classList.add('hidden', 'opacity-0', 'pointer-events-none');
-        content.classList.remove('max-w-[696px]', 'w-full');
-        content.classList.add('max-w-[340px]', 'w-[90vw]');
-        if (slider) slider.style.transform = 'translateX(0px)';
-        
-        updateOrderFormTotal();
-
-        const modal = document.getElementById('productDetailModal');
-        
-        modal.classList.remove('hidden');
-        modal.classList.add('flex');
-        setTimeout(() => {
-            modal.classList.remove('opacity-0');
-            content.classList.remove('scale-95', 'opacity-0');
-            content.classList.add('scale-100', 'opacity-100');
-        }, 10);
-    };
-
-    window.closeProductModal = function() {
-        const modal = document.getElementById('productDetailModal');
-        const content = document.getElementById('productModalContent');
-        modal.classList.add('opacity-0');
-        content.classList.remove('scale-100', 'opacity-100');
-        content.classList.add('scale-95', 'opacity-0');
-        setTimeout(() => {
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-        }, 300);
-    };
-
-    window.showOrderForm = function() {
-        const orderFormPane = document.getElementById('orderFormPane');
-        const content = document.getElementById('productModalContent');
-        const slider = document.getElementById('modalSlider');
-        
-        orderFormPane.classList.remove('hidden');
-        setTimeout(() => {
-            orderFormPane.classList.remove('opacity-0', 'pointer-events-none');
-            
-            if (window.innerWidth >= 768) {
-                content.classList.remove('max-w-[340px]', 'w-[90vw]');
-                content.classList.add('max-w-[696px]', 'w-full');
-            } else {
-                if (slider) slider.style.transform = 'translateX(-50%)';
-            }
-        }, 10);
-    };
-
-    window.hideOrderForm = function() {
-        const orderFormPane = document.getElementById('orderFormPane');
-        const content = document.getElementById('productModalContent');
-        const slider = document.getElementById('modalSlider');
-        
-        orderFormPane.classList.add('opacity-0', 'pointer-events-none');
-        
-        if (window.innerWidth >= 768) {
-            content.classList.remove('max-w-[696px]', 'w-full');
-            content.classList.add('max-w-[340px]', 'w-[90vw]');
-        } else {
-            if (slider) slider.style.transform = 'translateX(0px)';
-        }
-        
-        setTimeout(() => {
-            orderFormPane.classList.add('hidden');
-        }, 500);
-    };
-
-    window.submitWhatsAppOrder = function(e) {
-        e.preventDefault();
-        const orderDateTime = document.getElementById('of-datetime').value;
-        const productName = document.getElementById('of-product-name').value;
-        const productPrice = document.getElementById('of-product-price').value;
-        const quantity = document.getElementById('of-quantity').value;
-        const totalAmount = document.getElementById('of-total-amount').value;
-        const paymentMethod = document.getElementById('of-payment-method').value;
-        const customerName = document.getElementById('of-name').value;
-        const customerPhone = document.getElementById('of-phone').value;
-        const customerAddress = document.getElementById('of-address').value;
-        
-        let whatsappNum = currentWhatsappNumber ? currentWhatsappNumber.replace(/[^0-9]/g, '') : '923001234567';
-        if (!whatsappNum) whatsappNum = '923001234567';
-        
-        const message = `Hello, I would like to place an order:\n\n*Order Date/Time:* ${orderDateTime}\n*Product:* ${productName}\n*Price:* ${productPrice}\n*Quantity:* ${quantity}\n*Total Amount:* ${totalAmount}\n*Payment Method:* ${paymentMethod}\n\n*Customer Details:*\n*Name:* ${customerName}\n*Phone/WhatsApp:* ${customerPhone}\n*Delivery Address:* ${customerAddress}`;
-        const encodedMsg = encodeURIComponent(message);
-        window.open(`https://wa.me/${whatsappNum}?text=${encodedMsg}`, '_blank');
-    };
-</script>
 
 <!-- Product Detail Modal -->
 <div id="productDetailModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-md hidden items-center justify-center z-[999999] opacity-0 transition-opacity duration-300" onclick="closeProductModal()">
@@ -1672,6 +1644,39 @@
 
     </div>
 </div>
+<!-- FOOTER -->
+    <div class="w-full bg-[#0A3D2A] text-emerald-50 text-center py-4 text-sm mt-auto border-t border-[#052C22]">
+        &copy; 2026 StopBuyPk - Smart Price Comparison
+    </div>
+
+<!-- LANG_TOGGLE_SCRIPT -->
+<script>
+    const currentLang = localStorage.getItem('qeematLang') || 'en';
+    document.documentElement.lang = currentLang;
+    document.documentElement.dir = currentLang === 'ur' ? 'rtl' : 'ltr';
+
+    function updateLanguageUI(lang) {
+        const toggleText = document.getElementById('lang-toggle-text');
+        if (toggleText) toggleText.textContent = lang === 'ur' ? 'English' : 'اردو';
+        
+        // Custom placeholder toggling if function exists
+        if (typeof togglePlaceholders === 'function') {
+            togglePlaceholders();
+        }
+    }
+
+    function toggleLanguage() {
+        const newLang = document.documentElement.lang === 'ur' ? 'en' : 'ur';
+        document.documentElement.lang = newLang;
+        document.documentElement.dir = newLang === 'ur' ? 'rtl' : 'ltr';
+        localStorage.setItem('qeematLang', newLang);
+        updateLanguageUI(newLang);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        updateLanguageUI(currentLang);
+    });
+</script>
 </body>
 
 </html>
