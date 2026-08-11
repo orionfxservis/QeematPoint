@@ -271,76 +271,158 @@
 
                     <!-- DROPDOWN -->
                     <div
-                        class="absolute right-0 rtl:left-0 rtl:right-auto top-full mt-3 w-[320px] bg-[#0B1120]/95 backdrop-blur-2xl rounded-3xl shadow-[0_15px_50px_rgba(0,0,0,0.45)] border border-white/10 opacity-0 invisible group-hover:opacity-100 group-hover:visible focus-within:opacity-100 focus-within:visible transition-all duration-300 overflow-hidden text-left rtl:text-right z-50 translate-y-2 group-hover:translate-y-0">
+                        class="absolute right-0 rtl:left-0 rtl:right-auto top-full mt-3 w-[320px] max-h-[85vh] overflow-y-auto bg-[#0B1120]/95 backdrop-blur-2xl rounded-3xl shadow-[0_15px_50px_rgba(0,0,0,0.45)] border border-white/10 opacity-0 invisible group-hover:opacity-100 group-hover:visible focus-within:opacity-100 focus-within:visible transition-all duration-300 text-left rtl:text-right z-50 translate-y-2 group-hover:translate-y-0 custom-scrollbar">
 
                         <!-- TOP HEADER -->
                         <div
-                            class="px-5 py-4 border-b border-white/10 bg-gradient-to-r from-emerald-500/10 to-cyan-500/10">
+                            class="px-5 py-3 border-b border-white/10 bg-gradient-to-r from-emerald-500/10 to-cyan-500/10">
 
-                            <div class="flex items-center gap-3">
+                        <div class="flex items-center gap-3">
 
-                                <div
-                                    class="w-11 h-11 rounded-2xl bg-gradient-to-br from-emerald-400 to-cyan-500 flex items-center justify-center shadow-lg">
+                            <div
+                                class="w-10 h-10 rounded-2xl bg-gradient-to-br from-emerald-400 to-cyan-500 flex items-center justify-center shadow-lg shrink-0">
 
-                                    <i class="fas fa-shield-halved text-gray-900 text-lg"></i>
+                                <i class="fas fa-shield-halved text-gray-900 text-base"></i>
 
-                                </div>
+                            </div>
 
-                                <div>
-                                    <h3 class="text-white text-sm font-semibold">
-                                        Secure Login
-                                    </h3>
+                            <div>
+                                <h3 class="text-white text-xs sm:text-sm font-semibold">
+                                    Secure Login
+                                </h3>
 
-                                    <p class="text-gray-400 text-xs">
-                                        Access your dashboard securely
-                                    </p>
-                                </div>
+                                <p class="text-gray-400 text-[10px] sm:text-xs">
+                                    Access your dashboard securely
+                                </p>
                             </div>
                         </div>
+                    </div>
 
-                        <!-- TABS -->
-                        <div class="grid grid-cols-3 border-b border-white/10">
-                            <!-- USER -->
-                            <button onclick="switchLoginTab('user')" id="tab-user"
-                                class="login-tab active-tab py-3 text-sm font-semibold text-emerald-400 border-b-2 border-emerald-400 transition-all duration-300 hover:bg-white/5">
-                                User
+                    <!-- TABS -->
+                    <div class="grid grid-cols-3 border-b border-white/10">
+                        <!-- USER -->
+                        <button onclick="switchLoginTab('user')" id="tab-user"
+                            class="login-tab active-tab py-2 text-sm font-semibold text-emerald-400 border-b-2 border-emerald-400 transition-all duration-300 hover:bg-white/5">
+                            User
+                        </button>
+
+                        <!-- COMPANY -->
+                        <button onclick="switchLoginTab('company')" id="tab-company"
+                            class="login-tab py-2 text-sm font-semibold text-gray-400 hover:text-white hover:bg-white/5 transition-all duration-300">
+                            Company
+                        </button>
+
+                        <!-- ADMIN -->
+                        <button onclick="switchLoginTab('admin')" id="tab-admin"
+                            class="login-tab py-2 text-sm font-semibold text-gray-400 hover:text-white hover:bg-white/5 transition-all duration-300">
+                            Admin
+                        </button>
+                    </div>
+
+                    <!-- FORM AREA -->
+                    <div class="p-3.5">
+
+                        <!-- USER FORM -->
+                        <div id="form-user" class="space-y-2">
+
+                            <input type="text"
+                                id="user-login-id"
+                                placeholder="User ID"
+                                class="login-input">
+
+                            <input type="password"
+                                id="user-login-password"
+                                placeholder="Password"
+                                class="login-input">
+
+                            <button type="button"
+                                onclick="loginUser()"
+                                class="login-btn">
+                                Login as User
                             </button>
 
-                            <!-- COMPANY -->
-                            <button onclick="switchLoginTab('company')" id="tab-company"
-                                class="login-tab py-3 text-sm font-semibold text-gray-400 hover:text-white hover:bg-white/5 transition-all duration-300">
-                                Company
+                            <!-- SOCIAL LOGIN -->
+                            <div class="flex items-center gap-2 my-2">
+                                <div class="flex-1 h-px bg-white/10"></div>
+                                <span class="text-gray-500 text-[11px] uppercase">or continue with</span>
+                                <div class="flex-1 h-px bg-white/10"></div>
+                            </div>
+
+                            <button type="button"
+                                onclick="loginWithGoogle('user')"
+                                class="w-full flex items-center justify-center gap-2 py-2 rounded-xl
+                                       bg-white text-gray-800 text-sm font-semibold
+                                       hover:bg-gray-100 transition-all">
+                                <i class="fab fa-google text-red-500"></i>
+                                Continue with Google
                             </button>
 
-                            <!-- ADMIN -->
-                            <button onclick="switchLoginTab('admin')" id="tab-admin"
-                                class="login-tab py-3 text-sm font-semibold text-gray-400 hover:text-white hover:bg-white/5 transition-all duration-300">
-                                Admin
+                            <button type="button"
+                                onclick="loginWithFacebook('user')"
+                                class="w-full flex items-center justify-center gap-2 py-2 rounded-xl
+                                       bg-[#1877F2] text-white text-sm font-semibold
+                                       hover:bg-[#166FE5] transition-all">
+                                <i class="fab fa-facebook-f"></i>
+                                Continue with Facebook
                             </button>
+
                         </div>
 
-                        <!-- FORM AREA -->
-                        <div class="p-4">
+                        <!-- COMPANY FORM -->
+                        <div id="form-company" class="space-y-2 hidden">
 
-                            <!-- USER FORM -->
-                            <div id="form-user" class="space-y-2.5">
-                                <input type="text" placeholder="User ID" class="login-input">
-                                <input type="password" placeholder="Password" class="login-input">
-                                <button type="button" onclick="loginUser()" class="login-btn">
-                                    Login as User
-                                </button>
+                            <input type="text"
+                                id="company-user-name"
+                                placeholder="User Name"
+                                class="login-input">
+
+                            <input type="text"
+                                id="company-name"
+                                placeholder="Company Name"
+                                class="login-input">
+
+                            <input type="text"
+                                id="company-login-id"
+                                placeholder="User ID"
+                                class="login-input">
+
+                            <input type="password"
+                                id="company-login-password"
+                                placeholder="Password"
+                                class="login-input">
+
+                            <button type="button"
+                                onclick="loginCompany()"
+                                class="login-btn">
+                                Login as Company
+                            </button>
+
+                            <!-- SOCIAL LOGIN -->
+                            <div class="flex items-center gap-2 my-2">
+                                <div class="flex-1 h-px bg-white/10"></div>
+                                <span class="text-gray-500 text-[11px] uppercase">or continue with</span>
+                                <div class="flex-1 h-px bg-white/10"></div>
                             </div>
 
-                            <!-- COMPANY FORM -->
-                            <div id="form-company" class="space-y-2.5 hidden">
-                                <input type="text" placeholder="User Name" class="login-input">
-                                <input type="text" placeholder="Company Name" class="login-input">
-                                <input type="text" placeholder="User ID" class="login-input">
-                                <input type="password" placeholder="Password" class="login-input">
-                                <button type="button" onclick="loginCompany()" class="login-btn">
-                                    Login as Company
-                                </button>
-                            </div>
+                            <button type="button"
+                                onclick="loginWithGoogle('company')"
+                                class="w-full flex items-center justify-center gap-2 py-2 rounded-xl
+                                       bg-white text-gray-800 text-sm font-semibold
+                                       hover:bg-gray-100 transition-all">
+                                <i class="fab fa-google text-red-500"></i>
+                                Continue with Google
+                            </button>
+
+                            <button type="button"
+                                onclick="loginWithFacebook('company')"
+                                class="w-full flex items-center justify-center gap-2 py-2 rounded-xl
+                                       bg-[#1877F2] text-white text-sm font-semibold
+                                       hover:bg-[#166FE5] transition-all">
+                                <i class="fab fa-facebook-f"></i>
+                                Continue with Facebook
+                            </button>
+
+                        </div>
 
                             <!-- ADMIN FORM -->
                             <div id="form-admin" class="space-y-2.5 hidden">
@@ -5090,6 +5172,66 @@
 
             </div>
         </div>
+<script>
+/* =========================================================
+   STOPBUY.PK SOCIAL LOGIN
+   Google + Facebook
+   User + Company only
+   ========================================================= */
+
+async function loginWithGoogle(accountType) {
+
+    try {
+        const client = await DataService.ensureSupabase();
+        const { data, error } =
+            await client.auth.signInWithOAuth({
+                provider: 'google',
+
+                options: {
+                    redirectTo: 'https://stopbuy.pk/'
+                }
+            });
+
+        if (error) {
+            console.error('Google Login Error:', error);
+            alert('Google login failed. Please try again.');
+        }
+
+    } catch (error) {
+
+        console.error('Google Login Error:', error);
+        alert('Unable to connect with Google.');
+
+    }
+}
+
+
+async function loginWithFacebook(accountType) {
+
+    try {
+        const client = await DataService.ensureSupabase();
+        const { data, error } =
+            await client.auth.signInWithOAuth({
+                provider: 'facebook',
+
+                options: {
+                    redirectTo: 'https://stopbuy.pk/'
+                }
+            });
+
+        if (error) {
+            console.error('Facebook Login Error:', error);
+            alert('Facebook login failed. Please try again.');
+        }
+
+    } catch (error) {
+
+        console.error('Facebook Login Error:', error);
+        alert('Unable to connect with Facebook.');
+
+    }
+}
+</script>
 </body>
 
 </html>
