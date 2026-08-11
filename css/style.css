@@ -606,13 +606,13 @@ html[lang='ur'] body *:not(i):not(.fas):not(.far):not(.fab):not(.fa):not([class*
     width:100%;
     background:#131A2B;
     border:1px solid rgba(255,255,255,0.08);
-    border-radius:14px;
-    padding:10px 14px;
+    border-radius:10px;
+    padding:6px 12px;
     color:black;
     font-size:12px;
     transition:all .3s ease;
     outline:none;
-    height:42px;
+    height:34px;
 }
 
 .login-input::placeholder{
@@ -631,12 +631,12 @@ html[lang='ur'] body *:not(i):not(.fas):not(.far):not(.fab):not(.fa):not([class*
     background:linear-gradient(to right,#34D399,#06B6D4);
     color:#0B1120;
     font-weight:700;
-    padding:10px;
-    border-radius:14px;
+    padding:6px 10px;
+    border-radius:10px;
     transition:all .3s ease;
     box-shadow:0 6px 18px rgba(52,211,153,.22);
     font-size:13px;
-    height:42px;
+    height:34px;
 }
 
 .login-btn:hover{
@@ -1441,23 +1441,6 @@ textarea:focus {
 .food-category i{
     font-size: 1rem;
     opacity: 0.95;
-}
-
-.food-category{
-    display:flex;
-    align-items:center;
-    gap:10px;
-}
-
-.food-category img{
-    width:34px;
-    height:34px;
-    object-fit:contain;
-    transition:.3s;
-}
-
-.food-category:hover img{
-    transform:scale(1.1);
 }
 
 /* Different glow accents */
