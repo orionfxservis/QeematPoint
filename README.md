@@ -2,216 +2,194 @@
 
 ## 🇵🇰 Smart Price Comparison Platform for Pakistan
 
-StopBuyPk is an AI-powered price comparison platform designed to help Pakistani consumers compare prices, discover deals, track market trends, and make smarter purchasing decisions.
+StopBuyPk is an AI-powered price comparison platform designed for Pakistani consumers to compare prices, discover deals, track market prices, and make smarter purchasing decisions.
 
-The platform aggregates products from multiple sellers and categories, allowing users to find the best available prices in one place.
-
----
-
-## 🌟 Features
-
-### Product Price Comparison
-
-* Compare prices from different sellers.
-* View product details, images, and descriptions.
-* Track price differences and savings.
-
-### Multiple Categories
-
-* Food Stuffs
-* Daily Groceries
-* Electronics
-* Mobiles
-* Laptops
-* Computers
-* Property
-* Fashion
-* Personal Care
-* Kids
-
-### Smart Search & Filters
-
-* Category-based filtering
-* Sub-category filtering
-* Brand selection
-* Price range filtering
-* Location-based search
-* Condition filters (New, Used, Refurbished)
-
-### AI-Powered Insights
-
-* Market trends
-* Price tracking
-* Savings estimation
-* Smart shopping recommendations
-
-### Blog & News Section
-
-* Latest market updates
-* Product reviews
-* Shopping guides
-* Consumer awareness articles
-
-### Admin Dashboard
-
-* Product management
-* User management
-* Blog management
-* Banner management
-* Activity tracking
-* Performance monitoring
-
-### Multilingual Support
-
-* English
-* Urdu
-
-### Mobile Friendly
-
-* Responsive design
-* Progressive Web App (PWA) support
-* Installable on mobile devices
+The platform brings products, prices, offers, and market information from multiple categories and sellers into one convenient platform.
 
 ---
 
-## 🛠 Technologies Used
+## 🌟 Key Features
 
-* HTML5
-* CSS3
-* Tailwind CSS
-* JavaScript (ES6)
-* Font Awesome
-* Local Storage / Data Services
-* Progressive Web App (PWA)
+### 🛒 Product Price Comparison
 
----
+- Compare prices from multiple sellers.
+- Find the best available price.
+- View product details, images, and descriptions.
+- Compare price differences.
+- Identify potential savings.
+- Track product price changes.
 
-## 🎯 Mission
+### 📦 Product Categories
 
-Our mission is to provide Pakistani consumers with transparent pricing information, helping them save money and make informed purchasing decisions.
+StopBuyPk supports multiple shopping and market categories:
 
----
+- Food Stuffs
+- Daily Groceries
+- Fruits & Vegetables
+- Electronics
+- Mobiles
+- Laptops
+- Computers
+- Property
+- Fashion
+- Personal Care
+- Kids
+- Other consumer categories
 
-## 🚀 Future Roadmap
-
-* Real-time seller integrations
-* Automated price updates
-* AI-powered shopping assistant
-* User reviews and ratings
-* Deal alerts and notifications
-* Price history charts
-* Mobile application
-* Seller verification system
-
----
-
-## 🌐 Live Demo
-
-https://orionfxservis.github.io/StopBuyPk/
+Categories can be expanded as the platform grows.
 
 ---
 
-## 👨‍💻 Developed By
+## 🥦 Daily Grocery Management
 
-### Orion FX
+The Grocery section provides dedicated price information for everyday household products.
 
-Website Development | Business Solutions | Digital Transformation
+### Grocery Sections
+
+- Grocery Categories
+- Grocery Products
+- Daily Price Updates
+- Fruits
+- Vegetables
+- Food Staples
+- Dairy Products
+- Bakery Products
+- Beverages
+- Household Essentials
+- Monthly Bachat Packages
+- Supermarkets
+- Weekly Offers
+- Price History
+- Seasonal Products
+- Featured Products
+- Price Alerts
+- Grocery Reports
+
+Prices and product information are managed through the administrative system and stored using Supabase.
 
 ---
 
-## 📄 License
+## 🔎 Smart Search & Filters
 
-This project is intended for educational, commercial, and business use. All rights reserved by Orion FX.
+Users can search and filter products using:
+
+- Product name
+- Category
+- Sub-category
+- Brand
+- Seller
+- Price range
+- Location
+- Product condition
+- Availability
+- Offers
+- Featured products
+
+Supported conditions include:
+
+- New
+- Used
+- Refurbished
 
 ---
 
-### StopBuyPk
+## 📍 Location-Based Price Comparison
 
-**Compare Prices. Save More.**
+StopBuyPk is designed to help users discover relevant prices based on their location.
 
+The platform can prioritize nearby sellers and stores to help consumers find:
 
-## 📁 Project Structure
+- Nearby sellers
+- Local prices
+- Nearby supermarkets
+- Local offers
+- Better purchasing options
+
+---
+
+## 🤖 AI-Powered Insights
+
+Future AI capabilities include:
+
+- Market price trends
+- Price movement analysis
+- Savings estimation
+- Smart product recommendations
+- Best-price suggestions
+- Shopping assistance
+- Price anomaly detection
+- Consumer buying insights
+
+---
+
+## 📈 Price Tracking & History
+
+StopBuyPk is designed to maintain product price history so users can understand how prices change over time.
+
+Planned capabilities include:
+
+- Daily price records
+- Historical price comparison
+- Price trend charts
+- Highest price
+- Lowest price
+- Average price
+- Price change percentage
+- Savings calculation
+
+---
+
+## 🔔 Price Alerts
+
+Users will be able to receive alerts when:
+
+- A product reaches a target price.
+- A product price decreases.
+- A special offer becomes available.
+- A tracked product changes significantly in price.
+
+---
+
+## 📰 Blog & News
+
+The platform includes a content and awareness section for:
+
+- Market updates
+- Shopping guides
+- Product reviews
+- Consumer awareness
+- Price-related articles
+- Buying advice
+- Market trends
+- Pakistani retail information
+
+---
+
+## 👤 User Authentication
+
+StopBuyPk uses **Supabase Authentication**.
+
+Supported login methods include:
+
+- Google Login
+- Facebook Login
+- Email/password authentication where enabled
+
+Authentication is handled through Supabase rather than storing passwords or authentication credentials in the GitHub repository.
+
+### Authentication Flow
 
 ```text
-StopBuyPk/
-│
-├── index.html
-│
-├── assets/
-│   ├── css/
-│   │   ├── style.css
-│   │   ├── admin.css
-│   │   └── responsive.css
-│   │
-│   ├── js/
-│   │   ├── app.js
-│   │   ├── admin.js
-│   │   ├── data-service.js
-│   │   ├── auth.js
-│   │   ├── food.js
-│   │   ├── grocery.js
-│   │   ├── electronics.js
-│   │   ├── mobiles.js
-│   │   ├── laptops.js
-│   │   ├── computers.js
-│   │   ├── property.js
-│   │   └── blog.js
-│   │
-│   └── images/
-│       ├── logo/
-│       ├── banners/
-│       ├── products/
-│       ├── blogs/
-│       └── icons/
-│
-├── pages/
-│   ├── admin.html
-│   ├── about.html
-│   ├── contact.html
-│   ├── blogs.html
-│   ├── categories.html
-│   │
-│   ├── food.html
-│   ├── grocery.html
-│   ├── electronics.html
-│   ├── mobiles.html
-│   ├── laptops.html
-│   ├── computers.html
-│   ├── property.html
-│   ├── fashion.html
-│   ├── personal-care.html
-│   └── kids.html
-│
-├── data/
-│   ├── products.json
-│   ├── blogs.json
-│   ├── banners.json
-│   ├── users.json
-│   └── settings.json
-│
-├── uploads/
-│   ├── products/
-│   ├── blogs/
-│   └── banners/
-│
-├── manifest.json
-├── service-worker.js
-├── favicon.ico
-├── robots.txt
-├── sitemap.xml
-│
-├── README.md
-└── LICENSE
-```
-
-### Main Components
-
-* **Frontend:** Product comparison interface and customer-facing pages.
-* **Admin Panel:** Product, blog, banner, and user management.
-* **Data Service:** Handles storage and retrieval of products and content.
-* **PWA Support:** Installable application with offline capabilities.
-* **Multilingual:** English and Urdu language support.
-* **Analytics & Performance:** User activity and posting performance tracking.
-
-```
-```
+StopBuy.pk
+     │
+     ├── Google Login
+     │       ↓
+     │   Google OAuth
+     │       ↓
+     │   Supabase Auth
+     │
+     └── Facebook Login
+             ↓
+        Meta OAuth
+             ↓
+        Supabase Auth
