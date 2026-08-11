@@ -9,7 +9,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="manifest" href="/StopBuyPk/json/manifest.json">
+    <link rel="manifest" href="json/manifest.json">
     <link rel="icon" type="image/png" href="./favicon.png">
 
     <meta name="theme-color" content="#16a34a">
@@ -2376,7 +2376,7 @@
 
         <script>
             // Language Setup
-            const currentLang = localStorage.getItem('qeematLang') || 'ur';
+            const currentLang = localStorage.getItem('qeematLang') || 'en';
             document.documentElement.lang = currentLang;
             document.documentElement.dir = currentLang === 'ur' ? 'rtl' : 'ltr';
 
@@ -4064,7 +4064,7 @@
             });
 
             if ('serviceWorker' in navigator) {
-                navigator.serviceWorker.register('/StopBuyPk/js/sw.js');
+                navigator.serviceWorker.register('js/sw.js');
             }
 
             let deferredPrompt;
