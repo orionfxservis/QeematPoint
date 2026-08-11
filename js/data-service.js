@@ -16,7 +16,6 @@ const DataService = {
                 const supabaseUrl = "https://qmfcveywsavujcuoygng.supabase.co";
                 const supabaseKey = "sb_publishable_q9tutF2DgPmgKvim8QvxPA_3nQhYRcG";
                 window.supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
-                window.supabase = window.supabaseClient; // Keep globally compatible
                 return window.supabaseClient;
             })();
         }
