@@ -626,91 +626,26 @@
                 <h1>Manage Products</h1>
 
                 <div class="form-container">
-                    <h3>Add New Product</h3>
-                    <form id="adminProductForm">
-                        <h4 class="form-section-title" style="margin-bottom:15px; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:5px; font-weight:bold; color:var(--primary-color);">Product's Area</h4>
-                        <div class="form-row">
-                            <div class="input-group">
-                                <label>Choose Category</label>
-                                <select id="prodCategory" required>
-                                    <option value="">Select Category</option>
-                                    <!-- Populated via JS -->
-                                </select>
-                            </div>
-                            <div class="input-group">
-                                <label>Select Sub Category</label>
-                                <select id="prodSubCategory" required>
-                                    <option value="">Select Sub Category</option>
-                                    <!-- Populated via JS -->
-                                </select>
-                            </div>
-                            <div class="input-group">
-                                <label>Image</label>
-                                <div style="display: flex; gap: 10px;">
-                                    <input type="url" id="prodImage" placeholder="https://..." style="flex: 1;">
-                                    <input type="file" id="prodImageUpload" accept="image/*" style="display: none;">
-                                    <button type="button" class="btn btn-secondary"
-                                        onclick="document.getElementById('prodImageUpload').click()"
-                                        style="padding: 10px 15px;"><i class="fa-solid fa-upload"></i></button>
-                                </div>
-                                <span id="prodUploadStatus"
-                                    style="font-size: 0.8rem; color: var(--accent-color); margin-top: 5px; display: none;">Uploading...</span>
-                            </div>
-                        </div>
-
-                        <!-- Dynamic Fields Injected Here -->
-                        <div id="dynamicProductFields"></div>
-
-                        <div id="staticStatusContainer" class="input-group" style="margin-top:10px;">
-                            <label>Status <span style="color:var(--accent-color);">*</span></label>
-                            <select id="prodStatus" class="admin-input" required>
-                                <option value="Publish">Publish</option>
-                                <option value="Draft">Draft</option>
+                    <h3>Select Category & Sub Category</h3>
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label>Category</label>
+                            <select id="prodCategory" required>
+                                <option value="">Select Category</option>
+                                <!-- Populated dynamically -->
                             </select>
                         </div>
-
-                        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px;">Add
-                            Product</button>
-                    </form>
-                </div>
-
-                <!-- Search & Filters Toolbar -->
-                <div class="form-container" style="padding: 15px; margin-bottom: 15px; border-top: 4px solid var(--primary-color);">
-                    <div style="display: flex; flex-wrap: wrap; gap: 15px; align-items: center; justify-content: space-between;">
-                        <div style="display: flex; align-items: center; gap: 10px;">
-                            <span style="font-weight: 700; color: #1e293b;"><i class="fa-solid fa-filter"></i> Filters & Search</span>
-                        </div>
-                        <div style="display: flex; flex-wrap: wrap; gap: 10px; flex: 1; justify-content: flex-end; align-items: center;">
-                            <input type="text" id="prodSearchInput" placeholder="Search by name/brand..." class="admin-input" style="max-width: 250px; margin-bottom: 0;">
-                            <select id="prodFilterCategory" class="admin-input" style="max-width: 180px; margin-bottom: 0;">
-                                <option value="">All Categories</option>
+                        <div class="input-group">
+                            <label>Sub Category</label>
+                            <select id="prodSubCategory" required disabled>
+                                <option value="">Select Sub Category</option>
                             </select>
-                            <select id="prodFilterSubCategory" class="admin-input" style="max-width: 180px; margin-bottom: 0;">
-                                <option value="">All Sub Categories</option>
-                            </select>
-                            <select id="prodFilterPostBy" class="admin-input" style="max-width: 180px; margin-bottom: 0;">
-                                <option value="">All Authors</option>
-                            </select>
-                            <button type="button" class="btn btn-secondary" onclick="resetProductFilters()" style="padding: 0 15px; height: 30px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.8rem; border-radius: 10px; margin-bottom: 8px;">Reset</button>
                         </div>
                     </div>
                 </div>
 
-                <div class="grid-table-header">
-					<div>Image</div>
-					<div>Name</div>
-					<div>Category</div>
-					<div>Price</div>
-					<div>Actions</div>
-					<div>Post By</div>
-				</div>
-                <div id="adminProductList">
-                    <!-- Products injected here via JS -->
-                </div>
-                <!-- Pagination Controls -->
-                <div id="adminProductPagination" style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px; padding: 10px 15px; background: rgba(30, 41, 59, 0.05); border-radius: 10px; border: 1px solid var(--border-color); color: #334155; font-size: 0.9rem;">
-                    <!-- Injected dynamically -->
-                </div>
+                <div id="groceryProductFields"></div>
+                <div id="groceryProductTable"></div>
             </section>
 
             <!-- Place Ads Section -->
