@@ -5974,3 +5974,695 @@ window.closeSellerProfile = function() {
         });
     }
 
+/* =========================================================================
+   DYNAMIC PRODUCTS SCHEMA LOGIC (FULLY DYNAMIC & GLOBAL)
+   ========================================================================= */
+
+const groceryCatSelect = document.getElementById("prodCategory");
+const grocerySubCatSelect = document.getElementById("prodSubCategory");
+const groceryFields = document.getElementById("groceryProductFields");
+const groceryTable = document.getElementById("groceryProductTable");
+
+let currentGroceryFields = [];
+let currentGroceryProducts = [];
+
+const GROCERY_DEFAULT_FIELDS = {
+    "Retail": [
+        { field_name: "item", field_label: "Item", field_type: "text", is_required: true },
+        { field_name: "quality", field_label: "Quality", field_type: "text", is_required: false },
+        { field_name: "brand", field_label: "Brand", field_type: "text", is_required: false },
+        { field_name: "price", field_label: "Price", field_type: "number", is_required: true }
+    ],
+    "Vegetables": [
+        { field_name: "item", field_label: "Item", field_type: "text", is_required: true },
+        { field_name: "quality", field_label: "Quality", field_type: "text", is_required: false },
+        { field_name: "price", field_label: "Price", field_type: "number", is_required: true },
+        { field_name: "unit", field_label: "Unit", field_type: "text", is_required: false }
+    ],
+    "Fruits": [
+        { field_name: "item", field_label: "Item", field_type: "text", is_required: true },
+        { field_name: "quality", field_label: "Quality", field_type: "text", is_required: false },
+        { field_name: "price", field_label: "Price", field_type: "number", is_required: true },
+        { field_name: "unit", field_label: "Unit", field_type: "text", is_required: false }
+    ],
+    "Laptops": [
+        { field_name: "brand", field_label: "Brand", field_type: "text", is_required: true },
+        { field_name: "model", field_label: "Model", field_type: "text", is_required: true },
+        { field_name: "generation", field_label: "Generation", field_type: "text", is_required: false },
+        { field_name: "ram", field_label: "RAM", field_type: "text", is_required: true },
+        { field_name: "hdd", field_label: "Storage", field_type: "text", is_required: true },
+        { field_name: "price", field_label: "Price", field_type: "number", is_required: true }
+    ],
+    "Chinese": [
+        { field_name: "name", field_label: "Dish Name", field_type: "text", is_required: true },
+        { field_name: "brand", field_label: "Restaurant / Brand", field_type: "text", is_required: true },
+        { field_name: "variety", field_label: "Variety / Type", field_type: "text", is_required: false },
+        { field_name: "qty", field_label: "Serving Size", field_type: "text", is_required: false },
+        { field_name: "price", field_label: "Price", field_type: "number", is_required: true }
+    ]
+};
+
+function getFallbackFieldsForSubcategory(subCategoryName) {
+    const nameLower = subCategoryName.toLowerCase();
+    
+    if (GROCERY_DEFAULT_FIELDS[subCategoryName]) {
+        return GROCERY_DEFAULT_FIELDS[subCategoryName];
+    }
+    
+    if (nameLower.includes("laptop") || nameLower.includes("chromebook")) {
+        return GROCERY_DEFAULT_FIELDS["Laptops"];
+    }
+    if (nameLower.includes("vegetable")) {
+        return GROCERY_DEFAULT_FIELDS["Vegetables"];
+    }
+    if (nameLower.includes("fruit")) {
+        return GROCERY_DEFAULT_FIELDS["Fruits"];
+    }
+    if (nameLower.includes("food") || nameLower.includes("cuisine") || nameLower.includes("bbq") || nameLower.includes("desi") || nameLower.includes("chinese") || nameLower.includes("dessert") || nameLower.includes("beverage")) {
+        return GROCERY_DEFAULT_FIELDS["Chinese"];
+    }
+    
+    return [
+        { field_name: "name", field_label: "Item Name", field_type: "text", is_required: true },
+        { field_name: "brand", field_label: "Brand", field_type: "text", is_required: false },
+        { field_name: "price", field_label: "Price", field_type: "number", is_required: true }
+    ];
+}
+
+// Hook category selection change
+if (groceryCatSelect) {
+    groceryCatSelect.addEventListener('change', () => {
+        if (groceryFields) groceryFields.innerHTML = "";
+        if (groceryTable) groceryTable.innerHTML = "";
+    });
+}
+
+// Hook subcategory selection change
+if (grocerySubCatSelect) {
+    grocerySubCatSelect.addEventListener('change', () => {
+        const subCategoryName = grocerySubCatSelect.value;
+        if (subCategoryName) {
+            loadGrocerySubcategoryFields(subCategoryName);
+            loadGroceryProducts(subCategoryName);
+        } else {
+            if (groceryFields) groceryFields.innerHTML = "";
+            if (groceryTable) groceryTable.innerHTML = "";
+        }
+    });
+}
+
+
+/* =========================================
+   LOAD GROCERY SUBCATEGORY FIELDS
+========================================= */
+
+async function loadGrocerySubcategoryFields(subCategoryName) {
+    let fields = [];
+    try {
+        const client = await DataService.ensureSupabase();
+        const { data, error } = await client
+            .from("subcategory_fields")
+            .select(`
+                id,
+                field_name,
+                field_label,
+                field_type,
+                is_required,
+                display_order
+            `)
+            .eq("subcategory_id", subCategoryName)
+            .eq("is_active", true)
+            .order("display_order");
+
+        if (!error && data && data.length > 0) {
+            fields = data;
+        }
+    } catch (e) {
+        console.warn("subcategory_fields query failed, using defaults:", e);
+    }
+
+    if (!fields || fields.length === 0) {
+        fields = getFallbackFieldsForSubcategory(subCategoryName);
+        fields = fields.map((f, index) => ({
+            id: f.id || `field_${index}`,
+            field_name: f.field_name,
+            field_label: f.field_label,
+            field_type: f.field_type,
+            is_required: f.is_required
+        }));
+    }
+
+    currentGroceryFields = fields;
+    renderGroceryProductForm();
+}
+
+
+/* =========================================
+   GENERATE GROCERY PRODUCT FORM
+========================================= */
+
+function renderGroceryProductForm() {
+    if (!currentGroceryFields.length) {
+        groceryFields.innerHTML = `
+            <div class="p-4 rounded-xl bg-yellow-500/10
+                        border border-yellow-500/20 text-yellow-300">
+                No fields have been configured for this
+                Sub Category yet.
+            </div>
+        `;
+        return;
+    }
+
+    let html = `
+        <div class="form-container text-left" style="margin-top: 20px;">
+            <h3>Add Product</h3>
+            <div class="form-row">
+    `;
+
+    currentGroceryFields.forEach(field => {
+        let input = "";
+        const required = field.is_required ? "required" : "";
+
+        if (field.field_type === "number") {
+            input = `
+                <input
+                    type="number"
+                    id="field_${field.id}"
+                    data-field-id="${field.id}"
+                    ${required}
+                >
+            `;
+        } else if (field.field_type === "date") {
+            input = `
+                <input
+                    type="date"
+                    id="field_${field.id}"
+                    data-field-id="${field.id}"
+                    ${required}
+                >
+            `;
+        } else {
+            input = `
+                <input
+                    type="text"
+                    id="field_${field.id}"
+                    data-field-id="${field.id}"
+                    ${required}
+                >
+            `;
+        }
+
+        html += `
+            <div class="input-group">
+                <label>
+                    ${escapeHtml(field.field_label)}
+                    ${field.is_required
+                        ? '<span style="color: var(--accent-color);">*</span>'
+                        : ''}
+                </label>
+                ${input}
+            </div>
+        `;
+    });
+
+    html += `
+            </div>
+
+            <!-- Standard Seller's / Shop's Area (Same for all categories) -->
+            <h4 class="form-section-title" style="margin-top:25px; margin-bottom:15px; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:5px; font-weight:bold; color:var(--primary-color);">Seller's / Shop's Area</h4>
+            <div class="form-row">
+                <div class="input-group">
+                    <label>Seller <span style="color: var(--accent-color);">*</span></label>
+                    <select id="prodSeller" required>
+                        <option value="">Select Seller Type</option>
+                        <option value="Owner">Owner</option>
+                        <option value="Retailer">Retailer</option>
+                        <option value="Wholesaler">Wholesaler</option>
+                    </select>
+                </div>
+                <div class="input-group" id="laptopCompanyGroup" style="opacity: 0.4; pointer-events: none;">
+                    <label>Shop / Office / Company Name <span style="color: var(--accent-color);">*</span></label>
+                    <input type="text" id="prodCompanyName" placeholder="Shop / Office / Company Name" disabled>
+                </div>
+            </div>
+            
+            <div class="input-group">
+                <label>Address <span style="color: var(--accent-color);">*</span></label>
+                <input type="text" id="prodAddress" placeholder="Full Address" required>
+            </div>
+
+            <div class="form-row">
+                <div class="input-group">
+                    <label>Area <span style="color: var(--accent-color);">*</span></label>
+                    <select id="prodArea" required>
+                        <option value="">Select Area</option>
+                        <option value="Metroville">Metroville</option>
+                        <option value="Bahadurabad">Bahadurabad</option>
+                        <option value="Burns Road">Burns Road</option>
+                        <option value="Clifton">Clifton</option>
+                        <option value="Defence">Defence</option>
+                        <option value="Federal B Area">Federal B Area</option>
+                        <option value="Gulshan-e-Iqbal">Gulshan-e-Iqbal</option>
+                        <option value="Gulistan-e-Johar">Gulistan-e-Johar</option>
+                        <option value="Korangi">Korangi</option>
+                        <option value="Korangi Industrial Area">Korangi Industrial Area</option>
+                        <option value="Landhi">Landhi</option>
+                        <option value="Mehran Town">Mehran Town</option>
+                        <option value="Liaquatabad">Liaquatabad</option>
+                        <option value="Malir">Malir</option>
+                        <option value="North Nazimabad">North Nazimabad</option>
+                        <option value="Nazimabad">Nazimabad</option>
+                        <option value="Orangi">Orangi</option>
+                        <option value="PECHS">PECHS</option>
+                        <option value="Saddar">Saddar</option>
+                        <option value="Shah Faisal">Shah Faisal</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>Sub Area / Block / Sector <span style="color: var(--accent-color);">*</span></label>
+                    <select id="prodBlockNo" required>
+                        <option value="">Select Sub Area / Block / Sector</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>City <span style="color: var(--accent-color);">*</span></label>
+                    <select id="prodCity" required>
+                        <option value="Karachi">Karachi</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="input-group">
+                    <label>Phone No. <span style="color: var(--accent-color);">*</span></label>
+                    <input type="text" id="prodPhone" placeholder="Phone No." required>
+                </div>
+                <div class="input-group">
+                    <label>Whatsapp No. <span style="color: var(--accent-color);">*</span></label>
+                    <input type="text" id="prodWhatsapp" placeholder="Whatsapp No." required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="input-group" style="flex: 2;">
+                    <label>Website address (if available)</label>
+                    <input type="url" id="prodWebsite" placeholder="https://...">
+                </div>
+                <div class="input-group" style="flex: 1;">
+                    <label>Status <span style="color: var(--accent-color);">*</span></label>
+                    <select id="prodStatus" required>
+                        <option value="Publish">Publish</option>
+                        <option value="Draft">Draft</option>
+                    </select>
+                </div>
+            </div>
+
+            <button
+                type="button"
+                id="btnSaveDynamicProduct"
+                onclick="saveDynamicGroceryProduct()"
+                class="btn btn-primary"
+                style="width: 100%; margin-top: 15px;">
+                Add Product
+            </button>
+
+        </div>
+    `;
+
+    groceryFields.innerHTML = html;
+
+    // Attach listeners for Seller Type toggle & Block updates
+    const sellerSelect = document.getElementById('prodSeller');
+    const shopField = document.getElementById('prodCompanyName');
+    const shopGroup = document.getElementById('laptopCompanyGroup');
+    if (sellerSelect && shopField && shopGroup) {
+        sellerSelect.addEventListener('change', () => {
+            const val = sellerSelect.value;
+            if (val === 'Retailer' || val === 'Wholesaler') {
+                shopField.disabled = false;
+                shopField.required = true;
+                shopGroup.style.opacity = '1';
+                shopGroup.style.pointerEvents = 'auto';
+            } else {
+                shopField.disabled = true;
+                shopField.required = false;
+                shopField.value = '';
+                shopGroup.style.opacity = '0.4';
+                shopGroup.style.pointerEvents = 'none';
+            }
+        });
+    }
+
+    const prodAreaSelect = document.getElementById('prodArea');
+    const prodBlockNoSelect = document.getElementById('prodBlockNo');
+    if (prodAreaSelect && prodBlockNoSelect) {
+        prodAreaSelect.addEventListener('change', () => {
+            window.updateBlockOptionsGlobal(prodAreaSelect.value, prodBlockNoSelect);
+        });
+    }
+}
+
+
+/* =========================================
+   SAVE GROCERY PRODUCT
+========================================= */
+
+window.saveDynamicGroceryProduct = async function() {
+    const categoryName = groceryCatSelect.options[groceryCatSelect.selectedIndex]?.text || groceryCatSelect.value;
+    const subCategoryName = grocerySubCatSelect.value;
+
+    if (!categoryName || !subCategoryName) {
+        alert("Please select Category and Sub Category.");
+        return;
+    }
+
+    const dynamicData = {};
+
+    for (const field of currentGroceryFields) {
+        const input = document.getElementById(`field_${field.id}`);
+        if (!input) continue;
+
+        if (field.is_required && !input.value.trim()) {
+            alert(`${field.field_label} is required.`);
+            input.focus();
+            return;
+        }
+
+        dynamicData[field.field_name] =
+            field.field_type === "number"
+                ? Number(input.value)
+                : input.value.trim();
+    }
+
+    // Get Seller/Shop fields
+    const sellerType = document.getElementById('prodSeller')?.value || "";
+    const companyName = document.getElementById('prodCompanyName')?.value || "";
+    const address = document.getElementById('prodAddress')?.value || "";
+    const area = document.getElementById('prodArea')?.value || "";
+    const blockNo = document.getElementById('prodBlockNo')?.value || "";
+    const city = document.getElementById('prodCity')?.value || "Karachi";
+    const phone = document.getElementById('prodPhone')?.value || "";
+    const whatsapp = document.getElementById('prodWhatsapp')?.value || "";
+    const website = document.getElementById('prodWebsite')?.value || "";
+    const status = document.getElementById('prodStatus')?.value || "Publish";
+
+    if (!sellerType || !address || !area || !blockNo || !phone || !whatsapp) {
+        alert("Please fill in all required Seller / Shop fields.");
+        return;
+    }
+
+    // Merge seller fields into dynamicData (extra_fields)
+    Object.assign(dynamicData, {
+        seller: sellerType,
+        companyName,
+        address,
+        area,
+        blockNo,
+        city,
+        phone,
+        whatsapp,
+        website,
+        status
+    });
+
+    const client = await DataService.ensureSupabase();
+    
+    let userName = "Admin";
+    try {
+        const currentUserStr = localStorage.getItem('currentUser');
+        if (currentUserStr) {
+            const currentUser = JSON.parse(currentUserStr);
+            userName = currentUser.fullName || currentUser.username || currentUser.userId || 'Admin';
+        }
+    } catch(e) {}
+
+    const payload = {
+        category: categoryName,
+        sub_category: subCategoryName,
+        image: dynamicData.image || "https://via.placeholder.com/150",
+        status: status,
+        added_by: userName,
+        updated_date: new Date().toISOString(),
+        extra_fields: dynamicData
+    };
+
+    let resultError;
+
+    if (window.currentEditingProductId) {
+        const { error } = await client
+            .from("products")
+            .update(payload)
+            .eq("id", window.currentEditingProductId);
+        resultError = error;
+    } else {
+        payload.id = DataService.generateUUID ? DataService.generateUUID() : uuidv4();
+        payload.created_date = new Date().toISOString();
+        const { error } = await client
+            .from("products")
+            .insert(payload);
+        resultError = error;
+    }
+
+    if (resultError) {
+        console.error(resultError);
+        alert("Failed to save product: " + resultError.message);
+        return;
+    }
+
+    alert(window.currentEditingProductId ? "Product updated successfully." : "Product added successfully.");
+    window.currentEditingProductId = null;
+
+    await loadGroceryProducts(subCategoryName);
+    renderGroceryProductForm();
+}
+
+
+/* =========================================
+   LOAD GROCERY PRODUCTS
+========================================= */
+
+async function loadGroceryProducts(subCategoryName) {
+    const client = await DataService.ensureSupabase();
+    const categoryName = groceryCatSelect.options[groceryCatSelect.selectedIndex]?.text || groceryCatSelect.value;
+
+    const { data, error } = await client
+        .from("products")
+        .select(`
+            id,
+            category,
+            sub_category,
+            image,
+            status,
+            added_by,
+            created_date,
+            updated_date,
+            extra_fields
+        `)
+        .eq("category", categoryName)
+        .eq("sub_category", subCategoryName)
+        .order("created_date", {
+            ascending: false
+        });
+
+    if (error) {
+        console.error(error);
+        groceryTable.innerHTML = `
+            <div class="text-red-400">
+                Failed to load products.
+            </div>
+        `;
+        return;
+    }
+
+    currentGroceryProducts = (data || []).map(p => ({
+        id: p.id,
+        category: p.category,
+        subCategory: p.sub_category,
+        image: p.image,
+        status: p.status,
+        addedBy: p.added_by,
+        createdDate: p.created_date,
+        updatedDate: p.updated_date,
+        data: p.extra_fields || {}
+    }));
+
+    renderGroceryProductTable();
+}
+
+
+/* =========================================
+   GENERATE GROCERY PRODUCT TABLE
+========================================= */
+
+function renderGroceryProductTable() {
+    if (!currentGroceryProducts.length) {
+        groceryTable.innerHTML = `
+            <div class="p-6 text-center text-gray-400 rounded-2xl bg-white/5 border border-white/10" style="margin-top: 20px;">
+                No products found in this Sub Category.
+            </div>
+        `;
+        return;
+    }
+
+    let html = `
+        <div class="list-container" style="margin-top: 20px;">
+            <h3>Existing Products</h3>
+            <table class="admin-table">
+                <thead>
+                    <tr>
+    `;
+
+    currentGroceryFields.forEach(field => {
+        html += `
+            <th>
+                ${escapeHtml(field.field_label)}
+            </th>
+        `;
+    });
+
+    html += `
+                        <th style="text-align: center;">
+                            Actions
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+    `;
+
+    currentGroceryProducts.forEach(product => {
+        html += `<tr>`;
+
+        currentGroceryFields.forEach(field => {
+            const value = product.data?.[field.field_name] ?? "";
+            html += `
+                <td>
+                    ${escapeHtml(String(value))}
+                </td>
+            `;
+        });
+
+        html += `
+            <td style="text-align: center;">
+                <button
+                    onclick="editGroceryProduct('${product.id}')"
+                    class="text-blue-400 hover:text-blue-300 mr-3 transition-colors" style="background: none; border: none; cursor: pointer; color: #38bdf8;">
+                    Edit
+                </button>
+                <button
+                    onclick="deleteGroceryProduct('${product.id}')"
+                    class="text-red-400 hover:text-red-300 transition-colors" style="background: none; border: none; cursor: pointer; color: #f87171;">
+                    Delete
+                </button>
+            </td>
+        `;
+
+        html += `</tr>`;
+    });
+
+    html += `
+                </tbody>
+            </table>
+
+        </div>
+    `;
+
+    groceryTable.innerHTML = html;
+}
+
+
+/* =========================================
+   DELETE GROCERY PRODUCT
+========================================= */
+
+window.deleteGroceryProduct = async function(productId) {
+    if (!confirm("Delete this product?")) return;
+
+    const client = await DataService.ensureSupabase();
+    const { error } = await client
+        .from("products")
+        .delete()
+        .eq("id", productId);
+
+    if (error) {
+        console.error(error);
+        alert("Failed to delete product: " + error.message);
+        return;
+    }
+
+    await loadGroceryProducts(grocerySubCatSelect.value);
+}
+
+
+/* =========================================
+   EDIT GROCERY PRODUCT
+========================================= */
+
+window.editGroceryProduct = async function(productId) {
+    const product = currentGroceryProducts.find(p => p.id === productId);
+    if (!product) return;
+
+    // Fill dynamic fields
+    currentGroceryFields.forEach(field => {
+        const input = document.getElementById(`field_${field.id}`);
+        if (!input) return;
+        input.value = product.data?.[field.field_name] ?? "";
+    });
+
+    // Fill Seller/Shop fields
+    const sellerSelect = document.getElementById('prodSeller');
+    if (sellerSelect) {
+        sellerSelect.value = product.data?.seller || "";
+        sellerSelect.dispatchEvent(new Event('change'));
+    }
+    
+    const fieldsToMap = {
+        'prodCompanyName': product.data?.companyName || "",
+        'prodAddress': product.data?.address || "",
+        'prodArea': product.data?.area || "",
+        'prodPhone': product.data?.phone || "",
+        'prodWhatsapp': product.data?.whatsapp || "",
+        'prodWebsite': product.data?.website || "",
+        'prodStatus': product.data?.status || "Publish"
+    };
+
+    for (const [id, val] of Object.entries(fieldsToMap)) {
+        const el = document.getElementById(id);
+        if (el) el.value = val;
+    }
+
+    // Trigger Area change to populate Blocks, then set Block value
+    const areaEl = document.getElementById('prodArea');
+    if (areaEl) {
+        areaEl.dispatchEvent(new Event('change'));
+        const blockEl = document.getElementById('prodBlockNo');
+        if (blockEl) {
+            blockEl.value = product.data?.blockNo || "";
+        }
+    }
+
+    window.currentEditingProductId = productId;
+    
+    const btn = document.getElementById('btnSaveDynamicProduct');
+    if (btn) btn.textContent = 'Save Changes';
+    
+    // Scroll to form
+    const formEl = document.getElementById('products').querySelector('.form-container');
+    if (formEl) formEl.scrollIntoView({ behavior: 'smooth' });
+}
+
+
+/* =========================================
+   ESCAPE HTML
+========================================= */
+
+function escapeHtml(value) {
+    return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+
