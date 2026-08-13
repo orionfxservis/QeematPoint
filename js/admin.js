@@ -5975,7 +5975,7 @@ window.closeSellerProfile = function() {
     }
 
 /* =========================================================================
-   DYNAMIC PRODUCTS SCHEMA LOGIC (FULLY DYNAMIC & GLOBAL)
+   DYNAMIC GROCERY SCHEMA LOGIC (SCHEMA-ADAPTED)
    ========================================================================= */
 
 const groceryCatSelect = document.getElementById("prodCategory");
@@ -5986,90 +5986,351 @@ const groceryTable = document.getElementById("groceryProductTable");
 let currentGroceryFields = [];
 let currentGroceryProducts = [];
 
-const GROCERY_DEFAULT_FIELDS = {
+const COMMON_FIELDS = [
+    { field_name: "item_name", field_label: "Item / Product Name", field_type: "text", is_required: true },
+    { field_name: "brand", field_label: "Brand", field_type: "text", is_required: true },
+    { field_name: "model", field_label: "Model", field_type: "text", is_required: true },
+    { field_name: "condition", field_label: "Condition", field_type: "text", is_required: true },
+    { field_name: "price", field_label: "Price", field_type: "number", is_required: true },
+    { field_name: "stock_status", field_label: "Stock Status", field_type: "text", is_required: true },
+    { field_name: "warranty", field_label: "Warranty", field_type: "text", is_required: true }
+];
+
+const SPECIALIZED_FIELDS_MAP = {
+    // Groceries
     "Retail": [
-        { field_name: "item", field_label: "Item", field_type: "text", is_required: true },
-        { field_name: "quality", field_label: "Quality", field_type: "text", is_required: false },
-        { field_name: "brand", field_label: "Brand", field_type: "text", is_required: false },
-        { field_name: "price", field_label: "Price", field_type: "number", is_required: true }
+        { field_name: "quality", field_label: "Quality", field_type: "text", is_required: false }
     ],
     "Vegetables": [
-        { field_name: "item", field_label: "Item", field_type: "text", is_required: true },
         { field_name: "quality", field_label: "Quality", field_type: "text", is_required: false },
-        { field_name: "price", field_label: "Price", field_type: "number", is_required: true },
         { field_name: "unit", field_label: "Unit", field_type: "text", is_required: false }
     ],
     "Fruits": [
-        { field_name: "item", field_label: "Item", field_type: "text", is_required: true },
         { field_name: "quality", field_label: "Quality", field_type: "text", is_required: false },
-        { field_name: "price", field_label: "Price", field_type: "number", is_required: true },
         { field_name: "unit", field_label: "Unit", field_type: "text", is_required: false }
     ],
+    // Computers - Laptops
     "Laptops": [
-        { field_name: "brand", field_label: "Brand", field_type: "text", is_required: true },
+        { field_name: "item_name", field_label: "Item / Product Name", field_type: "text", is_required: true },
+        { field_name: "image", field_label: "Image", field_type: "image", is_required: false },
+        { field_name: "brand", field_label: "Brand", field_type: "select", field_options: ["Acer", "Asus", "CTL", "Dell", "Ergo", "Haier", "Hp", "Lenovo", "Samsung", "Toshiba"], is_required: true },
         { field_name: "model", field_label: "Model", field_type: "text", is_required: true },
-        { field_name: "generation", field_label: "Generation", field_type: "text", is_required: false },
-        { field_name: "ram", field_label: "RAM", field_type: "text", is_required: true },
-        { field_name: "hdd", field_label: "Storage", field_type: "text", is_required: true },
-        { field_name: "price", field_label: "Price", field_type: "number", is_required: true }
+        { field_name: "processor", field_label: "Processor", field_type: "text", is_required: true },
+        { field_name: "ram", field_label: "RAM (GB)", field_type: "select", field_options: ["2", "4", "6", "8", "12", "16", "20", "24", "32", "64", "128"], is_required: true },
+        { field_name: "ram_type", field_label: "RAM Type", field_type: "select", field_options: ["DDR2", "DDR3", "DDR4", "DDR5"], is_required: true },
+        { field_name: "storage_capacity", field_label: "Storage Capacity", field_type: "select", field_options: ["16", "32", "64", "80", "120", "128", "160", "180", "250", "256", "320", "500", "512", "650", "750", "1 TB", "2 TB", "3 TB", "4 TB", "5 TB", "6 TB", "8 TB"], is_required: true },
+        { field_name: "storage_type", field_label: "Storage Type", field_type: "select", field_options: ["SATA HDD", "SATA SSD", "SSD M1", "SSD M2", "SSD M2 NVME"], is_required: true },
+        { field_name: "graphics", field_label: "Graphics", field_type: "select", field_options: ["512 MB", "1 GB", "2 GB", "4 GB", "6 GB", "8 GB"], is_required: true },
+        { field_name: "graphics_company", field_label: "Graphics Company", field_type: "text", is_required: true },
+        { field_name: "screen_size", field_label: "Screen Size", field_type: "select", field_options: ["8\"", "10\"", "11.6\"", "12.6\"", "13.3\"", "14\"", "15\"", "15.6\"", "16\"", "17\"", "17.3\"", "19\""], is_required: true },
+        { field_name: "screen_resolution", field_label: "Screen Resolution", field_type: "text", is_required: true },
+        { field_name: "display_type", field_label: "Display Type", field_type: "select", field_options: ["HD", "FHD", "UHD"], is_required: true },
+        { field_name: "condition", field_label: "Condition", field_type: "select", field_options: ["New", "Like a New", "Normal", "Lower"], is_required: true },
+        { field_name: "price", field_label: "Price", field_type: "number", is_required: true },
+        { field_name: "stock_status", field_label: "Stock Status", field_type: "select", field_options: ["Available", "Finish"], is_required: true },
+        { field_name: "warranty", field_label: "Warranty", field_type: "select", field_options: ["Yes", "No", "Limited Time"], is_required: true },
+        { field_name: "description", field_label: "Description", field_type: "text", is_required: false }
     ],
-    "Chinese": [
-        { field_name: "name", field_label: "Dish Name", field_type: "text", is_required: true },
-        { field_name: "brand", field_label: "Restaurant / Brand", field_type: "text", is_required: true },
-        { field_name: "variety", field_label: "Variety / Type", field_type: "text", is_required: false },
-        { field_name: "qty", field_label: "Serving Size", field_type: "text", is_required: false },
-        { field_name: "price", field_label: "Price", field_type: "number", is_required: true }
+    // Computers - Chromebooks
+    "Chromebooks": [
+        { field_name: "item_name", field_label: "Item / Product Name", field_type: "text", is_required: true },
+        { field_name: "brand", field_label: "Brand", field_type: "select", field_options: ["Acer", "Asus", "CTL", "Dell", "Hp", "Lenovo", "Samsung"], is_required: true },
+        { field_name: "image", field_label: "Image", field_type: "image", is_required: false },
+        { field_name: "model", field_label: "Model", field_type: "text", is_required: true },
+        { field_name: "processor", field_label: "Processor", field_type: "text", is_required: true },
+        { field_name: "ram", field_label: "RAM", field_type: "select", field_options: ["2 GB", "4 GB", "6 GB", "8 GB"], is_required: true },
+        { field_name: "storage", field_label: "Storage", field_type: "select", field_options: ["16 GB", "32 GB", "64 GB", "128 GB", "256 GB", "512 GB", "1 TB"], is_required: true },
+        { field_name: "screen_size", field_label: "Screen Size", field_type: "select", field_options: ["8\"", "10\"", "11.6\"", "12.6\"", "13.3\"", "14\""], is_required: true },
+        { field_name: "screen_resolution", field_label: "Screen Resolution", field_type: "text", is_required: true },
+        { field_name: "touchscreen", field_label: "Touchscreen", field_type: "select", field_options: ["Yes", "No"], is_required: true },
+        { field_name: "rotate_360", field_label: "Rotate 360", field_type: "select", field_options: ["Yes", "No"], is_required: true },
+        { field_name: "condition", field_label: "Condition", field_type: "select", field_options: ["New", "Like New", "Used"], is_required: true },
+        { field_name: "price", field_label: "Price", field_type: "number", is_required: true },
+        { field_name: "stock_status", field_label: "Stock Status", field_type: "select", field_options: ["Available", "Finish"], is_required: true },
+        { field_name: "warranty", field_label: "Warranty", field_type: "select", field_options: ["Yes", "Conditional", "No"], is_required: true },
+        { field_name: "description", field_label: "Description", field_type: "text", is_required: false }
+    ],
+    // Computers - Desktop PCs / Desktop PC
+    "Desktop PCs": [
+        { field_name: "processor", field_label: "Processor", field_type: "text", is_required: true },
+        { field_name: "generation", field_label: "Generation", field_type: "text", is_required: true },
+        { field_name: "ram", field_label: "RAM", field_type: "text", is_required: true },
+        { field_name: "storage", field_label: "Storage", field_type: "text", is_required: true },
+        { field_name: "storage_type", field_label: "Storage Type", field_type: "text", is_required: true },
+        { field_name: "graphics_card", field_label: "Graphics Card", field_type: "text", is_required: true },
+        { field_name: "graphics_memory", field_label: "Graphics Memory", field_type: "text", is_required: true },
+        { field_name: "motherboard", field_label: "Motherboard", field_type: "text", is_required: true },
+        { field_name: "psu", field_label: "PSU", field_type: "text", is_required: true },
+        { field_name: "case_type", field_label: "Case Type", field_type: "text", is_required: true }
+    ],
+    "Desktop PC": [
+        { field_name: "processor", field_label: "Processor", field_type: "text", is_required: true },
+        { field_name: "generation", field_label: "Generation", field_type: "text", is_required: true },
+        { field_name: "ram", field_label: "RAM", field_type: "text", is_required: true },
+        { field_name: "storage", field_label: "Storage", field_type: "text", is_required: true },
+        { field_name: "storage_type", field_label: "Storage Type", field_type: "text", is_required: true },
+        { field_name: "graphics_card", field_label: "Graphics Card", field_type: "text", is_required: true },
+        { field_name: "graphics_memory", field_label: "Graphics Memory", field_type: "text", is_required: true },
+        { field_name: "motherboard", field_label: "Motherboard", field_type: "text", is_required: true },
+        { field_name: "psu", field_label: "PSU", field_type: "text", is_required: true },
+        { field_name: "case_type", field_label: "Case Type", field_type: "text", is_required: true }
+    ],
+    // Monitors
+    "Monitors": [
+        { field_name: "screen_size", field_label: "Screen Size", field_type: "text", is_required: true },
+        { field_name: "resolution", field_label: "Resolution", field_type: "text", is_required: true },
+        { field_name: "panel_type", field_label: "Panel Type", field_type: "text", is_required: true },
+        { field_name: "refresh_rate", field_label: "Refresh Rate", field_type: "text", is_required: true },
+        { field_name: "response_time", field_label: "Response Time", field_type: "text", is_required: true },
+        { field_name: "aspect_ratio", field_label: "Aspect Ratio", field_type: "text", is_required: true },
+        { field_name: "ports", field_label: "Ports (Multi-select)", field_type: "text", is_required: true },
+        { field_name: "adaptive_sync", field_label: "Adaptive Sync", field_type: "text", is_required: true },
+        { field_name: "curved", field_label: "Curved", field_type: "text", is_required: true }
+    ],
+    // Printers / Printers & Scanners
+    "Printers": [
+        { field_name: "item_name", field_label: "Item / Product Name", field_type: "text", is_required: true },
+        { field_name: "brand", field_label: "Brand", field_type: "select", field_options: ["HP", "Canon", "Epson", "Brother", "Samsung", "Pantum", "Xerox", "Ricoh", "Other"], is_required: true },
+        { field_name: "image", field_label: "Product Image", field_type: "image", is_required: false },
+        { field_name: "model", field_label: "Model", field_type: "text", is_required: true },
+        { field_name: "printer_type", field_label: "Printer Type", field_type: "select", field_options: ["Inkjet", "Laser", "LED", "Dot Matrix", "Thermal", "All-in-One"], is_required: true },
+        { field_name: "technology", field_label: "Technology", field_type: "select", field_options: ["Monochrome", "Color"], is_required: true },
+        { field_name: "print_color", field_label: "Print Color", field_type: "select", field_options: ["Black & White", "Color", "B&W + Color"], is_required: true },
+        { field_name: "print_speed", field_label: "Print Speed (PPM)", field_type: "number", is_required: false },
+        { field_name: "print_resolution", field_label: "Print Resolution", field_type: "text", is_required: false },
+        { field_name: "duplex_printing", field_label: "Duplex Printing", field_type: "select", field_options: ["Automatic", "Manual", "Not Supported"], is_required: false },
+        { field_name: "scanner", field_label: "Scanner", field_type: "select", field_options: ["Yes", "No"], is_required: false },
+        { field_name: "copier", field_label: "Copier", field_type: "select", field_options: ["Yes", "No"], is_required: false },
+        { field_name: "fax", field_label: "Fax", field_type: "select", field_options: ["Yes", "No"], is_required: false },
+        { field_name: "connectivity", field_label: "Connectivity (Multi-select)", field_type: "select", field_options: ["USB", "Wi-Fi", "Ethernet", "Bluetooth", "Wi-Fi Direct"], is_required: true },
+        { field_name: "paper_size", field_label: "Paper Size (Multi-select)", field_type: "select", field_options: ["A4", "A3", "A5", "A6", "Letter", "Legal", "Envelopes"], is_required: true },
+        { field_name: "paper_tray_capacity", field_label: "Paper Tray Capacity", field_type: "number", is_required: false },
+        { field_name: "monthly_duty_cycle", field_label: "Monthly Duty Cycle", field_type: "number", is_required: false },
+        { field_name: "ink_toner_type", field_label: "Ink / Toner Type", field_type: "text", is_required: false },
+        { field_name: "ink_toner_yield", field_label: "Ink / Toner Yield", field_type: "text", is_required: false },
+        { field_name: "condition", field_label: "Condition", field_type: "select", field_options: ["New", "Used", "Refurbished"], is_required: true },
+        { field_name: "price", field_label: "Price", field_type: "number", is_required: true },
+        { field_name: "stock_status", field_label: "Stock Status", field_type: "select", field_options: ["In Stock", "Out of Stock", "Pre-Order"], is_required: true },
+        { field_name: "warranty", field_label: "Warranty", field_type: "select", field_options: ["No Warranty", "3 Months", "6 Months", "1 Year", "2 Years", "Seller Warranty", "Brand Warranty"], is_required: false },
+        { field_name: "description", field_label: "Description", field_type: "text", is_required: false }
+    ],
+    "Printers & Scanners": [
+        { field_name: "item_name", field_label: "Item / Product Name", field_type: "text", is_required: true },
+        { field_name: "brand", field_label: "Brand", field_type: "select", field_options: ["HP", "Canon", "Epson", "Brother", "Samsung", "Pantum", "Xerox", "Ricoh", "Other"], is_required: true },
+        { field_name: "image", field_label: "Product Image", field_type: "image", is_required: false },
+        { field_name: "model", field_label: "Model", field_type: "text", is_required: true },
+        { field_name: "printer_type", field_label: "Printer Type", field_type: "select", field_options: ["Inkjet", "Laser", "LED", "Dot Matrix", "Thermal", "All-in-One"], is_required: true },
+        { field_name: "technology", field_label: "Technology", field_type: "select", field_options: ["Monochrome", "Color"], is_required: true },
+        { field_name: "print_color", field_label: "Print Color", field_type: "select", field_options: ["Black & White", "Color", "B&W + Color"], is_required: true },
+        { field_name: "print_speed", field_label: "Print Speed (PPM)", field_type: "number", is_required: false },
+        { field_name: "print_resolution", field_label: "Print Resolution", field_type: "text", is_required: false },
+        { field_name: "duplex_printing", field_label: "Duplex Printing", field_type: "select", field_options: ["Automatic", "Manual", "Not Supported"], is_required: false },
+        { field_name: "scanner", field_label: "Scanner", field_type: "select", field_options: ["Yes", "No"], is_required: false },
+        { field_name: "copier", field_label: "Copier", field_type: "select", field_options: ["Yes", "No"], is_required: false },
+        { field_name: "fax", field_label: "Fax", field_type: "select", field_options: ["Yes", "No"], is_required: false },
+        { field_name: "connectivity", field_label: "Connectivity (Multi-select)", field_type: "select", field_options: ["USB", "Wi-Fi", "Ethernet", "Bluetooth", "Wi-Fi Direct"], is_required: true },
+        { field_name: "paper_size", field_label: "Paper Size (Multi-select)", field_type: "select", field_options: ["A4", "A3", "A5", "A6", "Letter", "Legal", "Envelopes"], is_required: true },
+        { field_name: "paper_tray_capacity", field_label: "Paper Tray Capacity", field_type: "number", is_required: false },
+        { field_name: "monthly_duty_cycle", field_label: "Monthly Duty Cycle", field_type: "number", is_required: false },
+        { field_name: "ink_toner_type", field_label: "Ink / Toner Type", field_type: "text", is_required: false },
+        { field_name: "ink_toner_yield", field_label: "Ink / Toner Yield", field_type: "text", is_required: false },
+        { field_name: "condition", field_label: "Condition", field_type: "select", field_options: ["New", "Used", "Refurbished"], is_required: true },
+        { field_name: "price", field_label: "Price", field_type: "number", is_required: true },
+        { field_name: "stock_status", field_label: "Stock Status", field_type: "select", field_options: ["In Stock", "Out of Stock", "Pre-Order"], is_required: true },
+        { field_name: "warranty", field_label: "Warranty", field_type: "select", field_options: ["No Warranty", "3 Months", "6 Months", "1 Year", "2 Years", "Seller Warranty", "Brand Warranty"], is_required: false },
+        { field_name: "description", field_label: "Description", field_type: "text", is_required: false }
+    ],
+    // Storage Devices
+    "Storage Devices": [
+        { field_name: "storage_type", field_label: "Storage Type", field_type: "text", is_required: true },
+        { field_name: "capacity", field_label: "Capacity", field_type: "text", is_required: true },
+        { field_name: "interface", field_label: "Interface", field_type: "text", is_required: true },
+        { field_name: "form_factor", field_label: "Form Factor", field_type: "text", is_required: true },
+        { field_name: "read_speed", field_label: "Read Speed", field_type: "text", is_required: false },
+        { field_name: "write_speed", field_label: "Write Speed", field_type: "text", is_required: false }
+    ],
+    // Laptop Charger
+    "Laptop Charger": [
+        { field_name: "item_name", field_label: "Item / Product Name", field_type: "text", is_required: true },
+        { field_name: "brand", field_label: "Brand", field_type: "select", field_options: ["HP", "Dell", "Lenovo", "Acer", "Asus", "Apple", "Toshiba", "MSI", "Samsung", "Universal", "Other"], is_required: true },
+        { field_name: "image", field_label: "Product Image", field_type: "image", is_required: false },
+        { field_name: "compatible_brand", field_label: "Compatible Brand", field_type: "select", field_options: ["HP", "Dell", "Lenovo", "Acer", "Asus", "Apple", "Toshiba", "MSI", "Samsung", "Universal", "Other"], is_required: true },
+        { field_name: "compatible_model", field_label: "Compatible Model", field_type: "text", is_required: true },
+        { field_name: "charger_type", field_label: "Charger Type", field_type: "select", field_options: ["Original", "Compatible", "Universal"], is_required: true },
+        { field_name: "output_voltage", field_label: "Output Voltage", field_type: "number", is_required: true },
+        { field_name: "output_current", field_label: "Output Current", field_type: "number", is_required: true },
+        { field_name: "wattage", field_label: "Power / Wattage", field_type: "number", is_required: true },
+        { field_name: "connector_type", field_label: "Connector Type", field_type: "select", field_options: ["Barrel Pin", "USB-C", "MagSafe", "Surface Connector", "Other"], is_required: true },
+        { field_name: "connector_size", field_label: "Connector Size", field_type: "text", is_required: false },
+        { field_name: "input_voltage", field_label: "Input Voltage", field_type: "text", is_required: true },
+        { field_name: "input_frequency", field_label: "Input Frequency", field_type: "text", is_required: false },
+        { field_name: "power_plug_type", field_label: "Power Plug Type", field_type: "select", field_options: ["UK/PK 3-Pin", "EU 2-Pin", "US 2-Pin", "Other"], is_required: false },
+        { field_name: "cable_included", field_label: "Cable Included", field_type: "select", field_options: ["Yes", "No"], is_required: false },
+        { field_name: "cable_length", field_label: "Cable Length", field_type: "number", is_required: false },
+        { field_name: "polarity", field_label: "Polarity", field_type: "select", field_options: ["Center Positive", "Center Negative", "N/A"], is_required: false },
+        { field_name: "condition", field_label: "Condition", field_type: "select", field_options: ["New", "Used", "Refurbished"], is_required: true },
+        { field_name: "price", field_label: "Price", field_type: "number", is_required: true },
+        { field_name: "stock_status", field_label: "Stock Status", field_type: "select", field_options: ["In Stock", "Out of Stock", "Pre-Order"], is_required: true },
+        { field_name: "warranty", field_label: "Warranty", field_type: "select", field_options: ["No Warranty", "3 Months", "6 Months", "1 Year", "2 Years", "Seller Warranty", "Brand Warranty"], is_required: false },
+        { field_name: "description", field_label: "Description", field_type: "text", is_required: false }
+    ],
+    // Laptop Bags
+    "Laptop Bags": [
+        { field_name: "bag_type", field_label: "Bag Type", field_type: "text", is_required: true },
+        { field_name: "compatible_laptop_size", field_label: "Compatible Laptop Size", field_type: "text", is_required: true },
+        { field_name: "material", field_label: "Material", field_type: "text", is_required: true },
+        { field_name: "compartments", field_label: "Compartments", field_type: "number", is_required: true },
+        { field_name: "water_resistant", field_label: "Water Resistant", field_type: "text", is_required: true },
+        { field_name: "color", field_label: "Color", field_type: "text", is_required: true }
+    ],
+    // Keyboards
+    "Keyboard": [
+        { field_name: "keyboard_type", field_label: "Keyboard Type", field_type: "text", is_required: true },
+        { field_name: "switch_type", field_label: "Switch Type", field_type: "text", is_required: true },
+        { field_name: "layout", field_label: "Layout", field_type: "text", is_required: true },
+        { field_name: "connection", field_label: "Connection", field_type: "text", is_required: true },
+        { field_name: "backlit", field_label: "Backlit", field_type: "text", is_required: true },
+        { field_name: "rgb", field_label: "RGB", field_type: "text", is_required: true },
+        { field_name: "wireless", field_label: "Wireless", field_type: "text", is_required: true },
+        { field_name: "compatibility", field_label: "Compatibility", field_type: "text", is_required: true }
+    ],
+    // Mouse
+    "Mouse": [
+        { field_name: "mouse_type", field_label: "Mouse Type", field_type: "text", is_required: true },
+        { field_name: "connection", field_label: "Connection", field_type: "text", is_required: true },
+        { field_name: "dpi", field_label: "DPI", field_type: "number", is_required: true },
+        { field_name: "buttons", field_label: "Buttons", field_type: "number", is_required: true },
+        { field_name: "sensor_type", field_label: "Sensor Type", field_type: "text", is_required: true },
+        { field_name: "wireless", field_label: "Wireless", field_type: "text", is_required: true },
+        { field_name: "rgb", field_label: "RGB", field_type: "text", is_required: true },
+        { field_name: "compatibility", field_label: "Compatibility", field_type: "text", is_required: true }
+    ],
+    // Power Cord
+    "Power Code": [
+        { field_name: "cable_type", field_label: "Cable Type", field_type: "text", is_required: true },
+        { field_name: "connector_type", field_label: "Connector Type", field_type: "text", is_required: true },
+        { field_name: "cable_length", field_label: "Cable Length", field_type: "text", is_required: true },
+        { field_name: "rated_voltage", field_label: "Rated Voltage", field_type: "text", is_required: true },
+        { field_name: "rated_current", field_label: "Rated Current", field_type: "text", is_required: true },
+        { field_name: "compatible_device", field_label: "Compatible Device", field_type: "text", is_required: true }
     ]
 };
 
 function getFallbackFieldsForSubcategory(subCategoryName) {
-    const nameLower = subCategoryName.toLowerCase();
-    
-    if (GROCERY_DEFAULT_FIELDS[subCategoryName]) {
-        return GROCERY_DEFAULT_FIELDS[subCategoryName];
+    if (subCategoryName === "Laptops" || subCategoryName === "Chromebooks" || subCategoryName === "Printers" || subCategoryName === "Printers & Scanners" || subCategoryName === "Laptop Charger") {
+        return SPECIALIZED_FIELDS_MAP[subCategoryName];
     }
     
-    if (nameLower.includes("laptop") || nameLower.includes("chromebook")) {
-        return GROCERY_DEFAULT_FIELDS["Laptops"];
+    const specialized = SPECIALIZED_FIELDS_MAP[subCategoryName] || [];
+    
+    if (subCategoryName === "Retail" || subCategoryName === "Vegetables" || subCategoryName === "Fruits") {
+        const legacyGroceryMapping = {
+            "Retail": [
+                { field_name: "item", field_label: "Item", field_type: "text", is_required: true },
+                { field_name: "quality", field_label: "Quality", field_type: "text", is_required: false },
+                { field_name: "brand", field_label: "Brand", field_type: "text", is_required: false },
+                { field_name: "price", field_label: "Price", field_type: "number", is_required: true }
+            ],
+            "Vegetables": [
+                { field_name: "item", field_label: "Item", field_type: "text", is_required: true },
+                { field_name: "quality", field_label: "Quality", field_type: "text", is_required: false },
+                { field_name: "price", field_label: "Price", field_type: "number", is_required: true },
+                { field_name: "unit", field_label: "Unit", field_type: "text", is_required: false }
+            ],
+            "Fruits": [
+                { field_name: "item", field_label: "Item", field_type: "text", is_required: true },
+                { field_name: "quality", field_label: "Quality", field_type: "text", is_required: false },
+                { field_name: "price", field_label: "Price", field_type: "number", is_required: true },
+                { field_name: "unit", field_label: "Unit", field_type: "text", is_required: false }
+            ]
+        };
+        return legacyGroceryMapping[subCategoryName];
     }
-    if (nameLower.includes("vegetable")) {
-        return GROCERY_DEFAULT_FIELDS["Vegetables"];
-    }
-    if (nameLower.includes("fruit")) {
-        return GROCERY_DEFAULT_FIELDS["Fruits"];
-    }
-    if (nameLower.includes("food") || nameLower.includes("cuisine") || nameLower.includes("bbq") || nameLower.includes("desi") || nameLower.includes("chinese") || nameLower.includes("dessert") || nameLower.includes("beverage")) {
-        return GROCERY_DEFAULT_FIELDS["Chinese"];
-    }
+    
+    const specializedNames = specialized.map(s => s.field_name);
+    const filteredCommon = COMMON_FIELDS.filter(c => !specializedNames.includes(c.field_name));
     
     return [
-        { field_name: "name", field_label: "Item Name", field_type: "text", is_required: true },
-        { field_name: "brand", field_label: "Brand", field_type: "text", is_required: false },
-        { field_name: "price", field_label: "Price", field_type: "number", is_required: true }
+        ...filteredCommon,
+        ...specialized,
+        { field_name: "description", field_label: "Description", field_type: "text", is_required: false }
     ];
+}
+
+function isGroceryCategory(catName) {
+    return catName === 'Grocery' || catName === 'Groceries' || catName === 'Computers' || catName === 'Computer';
+}
+
+function toggleGroceryProductUI() {
+    const isGrocery = groceryCatSelect && isGroceryCategory(groceryCatSelect.value);
+
+    const legacyImageGroup = document.getElementById('legacyImageGroup');
+    const legacyFields = document.getElementById('dynamicProductFields');
+    const legacySubmitBtn = document.getElementById('btnLegacyProductSubmit');
+    const staticStatus = document.getElementById('staticStatusContainer');
+    const legacySearch = document.getElementById('legacySearchToolbar');
+    const legacyTableHeader = document.getElementById('legacyTableHeader');
+    const adminProductList = document.getElementById('adminProductList');
+    const adminProductPagination = document.getElementById('adminProductPagination');
+
+    if (isGrocery) {
+        if (legacyImageGroup) legacyImageGroup.style.display = 'none';
+        if (legacyFields) legacyFields.style.display = 'none';
+        if (legacySubmitBtn) legacySubmitBtn.style.display = 'none';
+        if (staticStatus) staticStatus.style.display = 'none';
+        if (legacySearch) legacySearch.style.display = 'none';
+        if (legacyTableHeader) legacyTableHeader.style.display = 'none';
+        if (adminProductList) adminProductList.style.display = 'none';
+        if (adminProductPagination) adminProductPagination.style.display = 'none';
+
+        if (groceryFields) groceryFields.style.display = 'block';
+        if (groceryTable) groceryTable.style.display = 'block';
+
+        if (grocerySubCatSelect && grocerySubCatSelect.value) {
+            loadGrocerySubcategoryFields(grocerySubCatSelect.value);
+            loadGroceryProducts(grocerySubCatSelect.value);
+        } else {
+            if (groceryFields) groceryFields.innerHTML = "";
+            if (groceryTable) groceryTable.innerHTML = "";
+        }
+    } else {
+        if (legacyImageGroup) legacyImageGroup.style.display = 'block';
+        if (legacyFields) legacyFields.style.display = 'block';
+        if (legacySubmitBtn) legacySubmitBtn.style.display = 'block';
+        if (staticStatus) staticStatus.style.display = 'block';
+        if (legacySearch) legacySearch.style.display = 'block';
+        if (legacyTableHeader) legacyTableHeader.style.display = 'grid';
+        if (adminProductList) adminProductList.style.display = 'block';
+        if (adminProductPagination) adminProductPagination.style.display = 'flex';
+
+        if (groceryFields) groceryFields.style.display = 'none';
+        if (groceryTable) groceryTable.style.display = 'none';
+    }
 }
 
 // Hook category selection change
 if (groceryCatSelect) {
-    groceryCatSelect.addEventListener('change', () => {
-        if (groceryFields) groceryFields.innerHTML = "";
-        if (groceryTable) groceryTable.innerHTML = "";
-    });
+    groceryCatSelect.addEventListener('change', toggleGroceryProductUI);
 }
 
 // Hook subcategory selection change
 if (grocerySubCatSelect) {
     grocerySubCatSelect.addEventListener('change', () => {
-        const subCategoryName = grocerySubCatSelect.value;
-        if (subCategoryName) {
-            loadGrocerySubcategoryFields(subCategoryName);
-            loadGroceryProducts(subCategoryName);
-        } else {
-            if (groceryFields) groceryFields.innerHTML = "";
-            if (groceryTable) groceryTable.innerHTML = "";
+        if (groceryCatSelect && isGroceryCategory(groceryCatSelect.value)) {
+            const subCategoryName = grocerySubCatSelect.value;
+            if (subCategoryName) {
+                loadGrocerySubcategoryFields(subCategoryName);
+                loadGroceryProducts(subCategoryName);
+            } else {
+                if (groceryFields) groceryFields.innerHTML = "";
+                if (groceryTable) groceryTable.innerHTML = "";
+            }
         }
     });
 }
+
+// Also trigger on initial load check
+setTimeout(toggleGroceryProductUI, 1000);
 
 
 /* =========================================
@@ -6108,7 +6369,8 @@ async function loadGrocerySubcategoryFields(subCategoryName) {
             field_name: f.field_name,
             field_label: f.field_label,
             field_type: f.field_type,
-            is_required: f.is_required
+            is_required: f.is_required,
+            field_options: f.field_options
         }));
     }
 
@@ -6143,7 +6405,52 @@ function renderGroceryProductForm() {
         let input = "";
         const required = field.is_required ? "required" : "";
 
-        if (field.field_type === "number") {
+        if (field.field_type === "select") {
+            const optionsHtml = (field.field_options || []).map(opt => `<option value="${opt}">${opt}</option>`).join('');
+            input = `
+                <select
+                    id="field_${field.id}"
+                    data-field-id="${field.id}"
+                    ${required}
+                >
+                    <option value="">Select ${field.field_label}</option>
+                    ${optionsHtml}
+                </select>
+            `;
+        } else if (field.field_type === "image") {
+            input = `
+                <div style="display: flex; gap: 10px; width: 100%;">
+                    <input
+                        type="url"
+                        id="field_${field.id}"
+                        data-field-id="${field.id}"
+                        placeholder="https://..."
+                        style="flex: 1;"
+                        ${required}
+                    >
+                    <input
+                        type="file"
+                        id="upload_${field.id}"
+                        accept="image/*"
+                        style="display: none;"
+                    >
+                    <button
+                        type="button"
+                        class="btn btn-secondary"
+                        onclick="document.getElementById('upload_${field.id}').click()"
+                        style="padding: 10px 15px;"
+                    >
+                        <i class="fa-solid fa-upload"></i>
+                    </button>
+                </div>
+                <span
+                    id="status_${field.id}"
+                    style="font-size: 0.8rem; color: var(--accent-color); margin-top: 5px; display: none;"
+                >
+                    Uploading...
+                </span>
+            `;
+        } else if (field.field_type === "number") {
             input = `
                 <input
                     type="number"
@@ -6161,6 +6468,16 @@ function renderGroceryProductForm() {
                     ${required}
                 >
             `;
+        } else if (field.field_name === "description") {
+            input = `
+                <textarea
+                    id="field_${field.id}"
+                    data-field-id="${field.id}"
+                    style="width: 100%; height: 60px; padding: 10px; border-radius: 10px; border: 1px solid rgba(0,0,0,0.1); resize: vertical;"
+                    placeholder="Enter complete details..."
+                    ${required}
+                ></textarea>
+            `;
         } else {
             input = `
                 <input
@@ -6172,8 +6489,11 @@ function renderGroceryProductForm() {
             `;
         }
 
+        const isDescription = field.field_name === "description";
+        const groupStyle = isDescription ? `style="grid-column: 1 / -1; width: 100%;"` : "";
+
         html += `
-            <div class="input-group">
+            <div class="input-group" ${groupStyle}>
                 <label>
                     ${escapeHtml(field.field_label)}
                     ${field.is_required
@@ -6320,6 +6640,50 @@ function renderGroceryProductForm() {
             window.updateBlockOptionsGlobal(prodAreaSelect.value, prodBlockNoSelect);
         });
     }
+
+    // Attach ImgBB Upload listener for type "image" dynamic fields
+    currentGroceryFields.forEach(field => {
+        if (field.field_type === "image") {
+            const uploadEl = document.getElementById(`upload_${field.id}`);
+            const inputEl = document.getElementById(`field_${field.id}`);
+            const statusEl = document.getElementById(`status_${field.id}`);
+            if (uploadEl && inputEl && statusEl) {
+                uploadEl.addEventListener('change', async function () {
+                    const file = this.files[0];
+                    if (!file) return;
+
+                    statusEl.style.display = 'inline-block';
+                    statusEl.textContent = 'Uploading...';
+                    statusEl.style.color = 'var(--accent-color)';
+
+                    const formData = new FormData();
+                    formData.append('image', file);
+
+                    try {
+                        const response = await fetch(`https://api.imgbb.com/1/upload?key=${IMGBB_API_KEY}`, {
+                            method: 'POST',
+                            body: formData
+                        });
+                        const resData = await response.json();
+                        if (resData.success) {
+                            inputEl.value = resData.data.url;
+                            statusEl.textContent = 'Upload successful!';
+                            statusEl.style.color = '#2ecc71';
+                        } else {
+                            throw new Error(resData.error?.message || 'Upload failed');
+                        }
+                    } catch (error) {
+                        console.error('Upload Error:', error);
+                        statusEl.textContent = 'Upload failed.';
+                        statusEl.style.color = '#e74c3c';
+                        alert('Failed to upload image: ' + error.message);
+                    } finally {
+                        setTimeout(() => { statusEl.style.display = 'none'; }, 3000);
+                    }
+                });
+            }
+        }
+    });
 }
 
 
