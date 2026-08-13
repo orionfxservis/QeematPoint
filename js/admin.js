@@ -6185,25 +6185,58 @@ const SPECIALIZED_FIELDS_MAP = {
     ],
     // Keyboards
     "Keyboard": [
-        { field_name: "keyboard_type", field_label: "Keyboard Type", field_type: "text", is_required: true },
-        { field_name: "switch_type", field_label: "Switch Type", field_type: "text", is_required: true },
-        { field_name: "layout", field_label: "Layout", field_type: "text", is_required: true },
-        { field_name: "connection", field_label: "Connection", field_type: "text", is_required: true },
-        { field_name: "backlit", field_label: "Backlit", field_type: "text", is_required: true },
-        { field_name: "rgb", field_label: "RGB", field_type: "text", is_required: true },
-        { field_name: "wireless", field_label: "Wireless", field_type: "text", is_required: true },
-        { field_name: "compatibility", field_label: "Compatibility", field_type: "text", is_required: true }
+        { field_name: "item_name", field_label: "Item / Product Name", field_type: "text", is_required: true },
+        { field_name: "brand", field_label: "Brand", field_type: "select", field_options: ["Logitech", "HP", "Dell", "Lenovo", "Razer", "Corsair", "Redragon", "A4Tech", "Rapoo", "Fantech", "Other"], is_required: true },
+        { field_name: "image", field_label: "Product Image", field_type: "image", is_required: false },
+        { field_name: "model", field_label: "Model", field_type: "text", is_required: true },
+        { field_name: "keyboard_type", field_label: "Keyboard Type", field_type: "select", field_options: ["Standard", "Mechanical", "Membrane", "Scissor", "Gaming", "Ergonomic"], is_required: true },
+        { field_name: "switch_type", field_label: "Switch Type", field_type: "select", field_options: ["Membrane", "Mechanical", "Linear", "Tactile", "Clicky", "Scissor", "N/A"], is_required: false },
+        { field_name: "layout", field_label: "Layout", field_type: "select", field_options: ["Full Size", "Tenkeyless (TKL)", "75%", "65%", "60%", "Compact", "Other"], is_required: true },
+        { field_name: "connection", field_label: "Connection", field_type: "select", field_options: ["USB", "Wireless 2.4GHz", "Bluetooth", "USB + Bluetooth", "USB + Wireless"], is_required: true },
+        { field_name: "wireless", field_label: "Wireless", field_type: "select", field_options: ["Yes", "No"], is_required: true },
+        { field_name: "backlit", field_label: "Backlit", field_type: "select", field_options: ["Yes", "No"], is_required: false },
+        { field_name: "rgb_lighting", field_label: "RGB Lighting", field_type: "select", field_options: ["Yes", "No"], is_required: false },
+        { field_name: "number_of_keys", field_label: "Number of Keys", field_type: "number", is_required: false },
+        { field_name: "n_key_rollover", field_label: "N-Key Rollover", field_type: "select", field_options: ["Yes", "No"], is_required: false },
+        { field_name: "anti_ghosting", field_label: "Anti-Ghosting", field_type: "select", field_options: ["Yes", "No"], is_required: false },
+        { field_name: "multimedia_keys", field_label: "Multimedia Keys", field_type: "select", field_options: ["Dedicated", "Function Keys", "No"], is_required: false },
+        { field_name: "range", field_label: "Wired / Wireless Range", field_type: "text", is_required: false },
+        { field_name: "battery", field_label: "Battery / Battery Life", field_type: "text", is_required: false },
+        { field_name: "compatibility", field_label: "Compatibility (Multi-select)", field_type: "select", field_options: ["Windows", "macOS", "Linux", "ChromeOS", "Android", "iOS"], is_required: false },
+        { field_name: "color", field_label: "Color", field_type: "select", field_options: ["Black", "White", "Grey", "Other"], is_required: false },
+        { field_name: "condition", field_label: "Condition", field_type: "select", field_options: ["New", "Used", "Refurbished"], is_required: true },
+        { field_name: "price", field_label: "Price", field_type: "number", is_required: true },
+        { field_name: "stock_status", field_label: "Stock Status", field_type: "select", field_options: ["In Stock", "Out of Stock", "Pre-Order"], is_required: true },
+        { field_name: "warranty", field_label: "Warranty", field_type: "select", field_options: ["No Warranty", "3 Months", "6 Months", "1 Year", "2 Years", "Seller Warranty", "Brand Warranty"], is_required: false },
+        { field_name: "description", field_label: "Description", field_type: "text", is_required: false }
     ],
     // Mouse
     "Mouse": [
-        { field_name: "mouse_type", field_label: "Mouse Type", field_type: "text", is_required: true },
-        { field_name: "connection", field_label: "Connection", field_type: "text", is_required: true },
-        { field_name: "dpi", field_label: "DPI", field_type: "number", is_required: true },
-        { field_name: "buttons", field_label: "Buttons", field_type: "number", is_required: true },
-        { field_name: "sensor_type", field_label: "Sensor Type", field_type: "text", is_required: true },
-        { field_name: "wireless", field_label: "Wireless", field_type: "text", is_required: true },
-        { field_name: "rgb", field_label: "RGB", field_type: "text", is_required: true },
-        { field_name: "compatibility", field_label: "Compatibility", field_type: "text", is_required: true }
+        { field_name: "item_name", field_label: "Item / Product Name", field_type: "text", is_required: true },
+        { field_name: "brand", field_label: "Brand", field_type: "select", field_options: ["Logitech", "HP", "Dell", "Lenovo", "Razer", "Corsair", "A4Tech", "Rapoo", "Fantech", "Redragon", "Other"], is_required: true },
+        { field_name: "image", field_label: "Product Image", field_type: "image", is_required: false },
+        { field_name: "model", field_label: "Model", field_type: "text", is_required: true },
+        { field_name: "mouse_type", field_label: "Mouse Type", field_type: "select", field_options: ["Standard", "Gaming", "Ergonomic", "Vertical", "Trackball", "Travel"], is_required: true },
+        { field_name: "connection", field_label: "Connection", field_type: "select", field_options: ["USB", "Wireless 2.4GHz", "Bluetooth", "USB + Bluetooth"], is_required: true },
+        { field_name: "wireless", field_label: "Wireless", field_type: "select", field_options: ["Yes", "No"], is_required: true },
+        { field_name: "sensor_type", field_label: "Sensor Type", field_type: "select", field_options: ["Optical", "Laser", "BlueTrack", "Other"], is_required: false },
+        { field_name: "dpi", field_label: "DPI", field_type: "number", is_required: false },
+        { field_name: "adjustable_dpi", field_label: "Adjustable DPI", field_type: "select", field_options: ["Yes", "No"], is_required: false },
+        { field_name: "buttons", field_label: "Buttons", field_type: "number", is_required: false },
+        { field_name: "polling_rate", field_label: "Polling Rate", field_type: "select", field_options: ["125Hz", "250Hz", "500Hz", "1000Hz", "2000Hz", "4000Hz", "8000Hz"], is_required: false },
+        { field_name: "tracking_speed", field_label: "Tracking Speed", field_type: "text", is_required: false },
+        { field_name: "acceleration", field_label: "Acceleration", field_type: "text", is_required: false },
+        { field_name: "rgb_lighting", field_label: "RGB Lighting", field_type: "select", field_options: ["Yes", "No"], is_required: false },
+        { field_name: "cable_length", field_label: "Cable Length", field_type: "number", is_required: false },
+        { field_name: "battery_type", field_label: "Battery Type", field_type: "select", field_options: ["AA", "AAA", "Rechargeable", "Built-in", "N/A"], is_required: false },
+        { field_name: "battery_life", field_label: "Battery Life", field_type: "text", is_required: false },
+        { field_name: "compatibility", field_label: "Compatibility (Multi-select)", field_type: "select", field_options: ["Windows", "macOS", "Linux", "ChromeOS"], is_required: false },
+        { field_name: "color", field_label: "Color", field_type: "select", field_options: ["Black", "White", "Grey", "Other"], is_required: false },
+        { field_name: "condition", field_label: "Condition", field_type: "select", field_options: ["New", "Used", "Refurbished"], is_required: true },
+        { field_name: "price", field_label: "Price", field_type: "number", is_required: true },
+        { field_name: "stock_status", field_label: "Stock Status", field_type: "select", field_options: ["In Stock", "Out of Stock", "Pre-Order"], is_required: true },
+        { field_name: "warranty", field_label: "Warranty", field_type: "select", field_options: ["No Warranty", "3 Months", "6 Months", "1 Year", "2 Years", "Seller Warranty", "Brand Warranty"], is_required: false },
+        { field_name: "description", field_label: "Description", field_type: "text", is_required: false }
     ],
     // Power Cord
     "Power Code": [
@@ -6217,7 +6250,7 @@ const SPECIALIZED_FIELDS_MAP = {
 };
 
 function getFallbackFieldsForSubcategory(subCategoryName) {
-    if (subCategoryName === "Laptops" || subCategoryName === "Chromebooks" || subCategoryName === "Printers" || subCategoryName === "Printers & Scanners" || subCategoryName === "Laptop Charger") {
+    if (subCategoryName === "Laptops" || subCategoryName === "Chromebooks" || subCategoryName === "Printers" || subCategoryName === "Printers & Scanners" || subCategoryName === "Laptop Charger" || subCategoryName === "Keyboard" || subCategoryName === "Mouse") {
         return SPECIALIZED_FIELDS_MAP[subCategoryName];
     }
     
