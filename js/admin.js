@@ -6808,6 +6808,9 @@ window.saveDynamicGroceryProduct = async function() {
 async function loadGroceryProducts(subCategoryName) {
     const client = await DataService.ensureSupabase();
     const categoryName = groceryCatSelect.options[groceryCatSelect.selectedIndex]?.text || groceryCatSelect.value;
+    const categoryQueryValue = (categoryName === "Computers" || categoryName === "Computer")
+        ? ["Computers", "Computer"]
+        : [categoryName];
 
     const { data, error } = await client
         .from("products")
@@ -6822,7 +6825,7 @@ async function loadGroceryProducts(subCategoryName) {
             updated_date,
             extra_fields
         `)
-        .eq("category", categoryName)
+        .in("category", categoryQueryValue)
         .eq("sub_category", subCategoryName)
         .order("created_date", {
             ascending: false
