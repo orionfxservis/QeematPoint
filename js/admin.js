@@ -6871,6 +6871,79 @@ function renderGroceryProductTable() {
         return;
     }
 
+    const categoryName = groceryCatSelect.options[groceryCatSelect.selectedIndex]?.text || groceryCatSelect.value;
+    const subCategory = grocerySubCatSelect?.value || "";
+    const isComputer = categoryName === "Computers" || categoryName === "Computer";
+
+    if (isComputer) {
+        let html = `
+            <div class="list-container" style="margin-top: 20px;">
+                <h3>Existing Products</h3>
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 70px; text-align: center;">Image</th>
+                            <th>Brand</th>
+                            <th>Model</th>
+                            <th>Category</th>
+                            <th>Price</th>
+                            <th>Post By</th>
+                            <th style="text-align: center; width: 150px;">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+        `;
+
+        currentGroceryProducts.forEach(product => {
+            const brandVal = product.data?.brand ?? "";
+            const modelVal = product.data?.model ?? "";
+            const priceVal = product.data?.price ?? "";
+            const imgUrl = product.image || "https://via.placeholder.com/150";
+
+            html += `
+                <tr>
+                    <td style="text-align: center; vertical-align: middle;">
+                        <img src="${imgUrl}" alt="${escapeHtml(brandVal)}" style="width: 40px; height: 40px; object-fit: cover; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);">
+                    </td>
+                    <td style="vertical-align: middle;">${escapeHtml(brandVal)}</td>
+                    <td style="vertical-align: middle;">${escapeHtml(modelVal)}</td>
+                    <td style="vertical-align: middle;">${escapeHtml(product.subCategory || subCategory)}</td>
+                    <td style="vertical-align: middle;">${escapeHtml(String(priceVal))}</td>
+                    <td style="vertical-align: middle;">${escapeHtml(product.addedBy || "Admin")}</td>
+                    <td style="text-align: center; vertical-align: middle; white-space: nowrap;">
+                        <button
+                            onclick="toggleGroceryProductApproval('${product.id}')"
+                            style="background: ${product.status === 'Draft' ? '#ef4444' : '#22c55e'}; color: white; border: none; padding: 4px 10px; border-radius: 9999px; cursor: pointer; font-size: 0.75rem; font-weight: 600; margin-right: 5px;"
+                            title="${product.status === 'Draft' ? 'Click to Approve' : 'Click to reject to Draft'}"
+                        >
+                            ${product.status === 'Draft' ? 'Approve' : 'Approved'}
+                        </button>
+                        <button
+                            onclick="editGroceryProduct('${product.id}')"
+                            style="background: #e2e8f0; color: #475569; border: none; padding: 4px 10px; border-radius: 9999px; cursor: pointer; font-size: 0.75rem; font-weight: 600; margin-right: 5px;"
+                        >
+                            Edit
+                        </button>
+                        <button
+                            onclick="deleteGroceryProduct('${product.id}')"
+                            style="background: #fee2e2; color: #ef4444; border: none; padding: 4px 10px; border-radius: 9999px; cursor: pointer; font-size: 0.75rem; font-weight: 600;"
+                        >
+                            Delete
+                        </button>
+                    </td>
+                </tr>
+            `;
+        });
+
+        html += `
+                    </tbody>
+                </table>
+            </div>
+        `;
+        groceryTable.innerHTML = html;
+        return;
+    }
+
     let html = `
         <div class="list-container" style="margin-top: 20px;">
             <h3>Existing Products</h3>
@@ -6910,15 +6983,24 @@ function renderGroceryProductTable() {
         });
 
         html += `
-            <td style="text-align: center;">
+            <td style="text-align: center; vertical-align: middle; white-space: nowrap;">
+                <button
+                    onclick="toggleGroceryProductApproval('${product.id}')"
+                    style="background: ${product.status === 'Draft' ? '#ef4444' : '#22c55e'}; color: white; border: none; padding: 4px 10px; border-radius: 9999px; cursor: pointer; font-size: 0.75rem; font-weight: 600; margin-right: 5px;"
+                    title="${product.status === 'Draft' ? 'Click to Approve' : 'Click to reject to Draft'}"
+                >
+                    ${product.status === 'Draft' ? 'Approve' : 'Approved'}
+                </button>
                 <button
                     onclick="editGroceryProduct('${product.id}')"
-                    class="text-blue-400 hover:text-blue-300 mr-3 transition-colors" style="background: none; border: none; cursor: pointer; color: #38bdf8;">
+                    style="background: #e2e8f0; color: #475569; border: none; padding: 4px 10px; border-radius: 9999px; cursor: pointer; font-size: 0.75rem; font-weight: 600; margin-right: 5px;"
+                >
                     Edit
                 </button>
                 <button
                     onclick="deleteGroceryProduct('${product.id}')"
-                    class="text-red-400 hover:text-red-300 transition-colors" style="background: none; border: none; cursor: pointer; color: #f87171;">
+                    style="background: #fee2e2; color: #ef4444; border: none; padding: 4px 10px; border-radius: 9999px; cursor: pointer; font-size: 0.75rem; font-weight: 600;"
+                >
                     Delete
                 </button>
             </td>
@@ -6957,6 +7039,32 @@ window.deleteGroceryProduct = async function(productId) {
         return;
     }
 
+    await loadGroceryProducts(grocerySubCatSelect.value);
+}
+
+
+/* =========================================
+   TOGGLE GROCERY PRODUCT APPROVAL
+========================================= */
+
+window.toggleGroceryProductApproval = async function(productId) {
+    const product = currentGroceryProducts.find(p => p.id === productId);
+    if (!product) return;
+
+    const newStatus = product.status === "Publish" ? "Draft" : "Publish";
+    const client = await DataService.ensureSupabase();
+    const { error } = await client
+        .from("products")
+        .update({ status: newStatus, updated_date: new Date().toISOString() })
+        .eq("id", productId);
+
+    if (error) {
+        console.error(error);
+        alert("Failed to update status: " + error.message);
+        return;
+    }
+
+    alert(`Product status changed to ${newStatus}.`);
     await loadGroceryProducts(grocerySubCatSelect.value);
 }
 
