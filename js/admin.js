@@ -985,9 +985,9 @@ if (dealForm) {
             address: document.getElementById('dealAddress') ? document.getElementById('dealAddress').value : (existingDeal.address || ''),
             area: document.getElementById('dealArea') ? document.getElementById('dealArea').value : (existingDeal.area || ''),
             blockNo: document.getElementById('dealBlockNo') ? document.getElementById('dealBlockNo').value : (existingDeal.blockNo || ''),
-            areaBlock: (document.getElementById('dealArea') && document.getElementById('dealBlockNo')) 
-                ? (document.getElementById('dealArea').value && document.getElementById('dealBlockNo').value 
-                    ? `${document.getElementById('dealArea').value} - ${document.getElementById('dealBlockNo').value}` 
+            areaBlock: (document.getElementById('dealArea') && document.getElementById('dealBlockNo'))
+                ? (document.getElementById('dealArea').value && document.getElementById('dealBlockNo').value
+                    ? `${document.getElementById('dealArea').value} - ${document.getElementById('dealBlockNo').value}`
                     : (document.getElementById('dealArea').value || document.getElementById('dealBlockNo').value || ''))
                 : (existingDeal.areaBlock || ''),
             addedBy: dealEditIndex === -1 ? userName : (existingDeal.addedBy || userName),
@@ -1488,11 +1488,11 @@ function populateCategoryDropdown() {
     }
 }
 
-window.updateBlockOptionsGlobal = function(areaVal, blockNoSelect) {
+window.updateBlockOptionsGlobal = function (areaVal, blockNoSelect) {
     if (!blockNoSelect) return;
     const currentBlockVal = blockNoSelect.value;
     let optionsHtml = '<option value="">Select Sub Area / Block / Sector</option>';
-    
+
     if (areaVal === 'Metroville') {
         ['Metroville 1st', 'Metroville 2nd', 'Metroville 3rd', 'Metroville 4th'].forEach(sub => {
             optionsHtml += `<option value="${sub}">${sub}</option>`;
@@ -1723,7 +1723,7 @@ window.updateBlockOptionsGlobal = function(areaVal, blockNoSelect) {
     }
 };
 
-window.initAddressDropdowns = function() {
+window.initAddressDropdowns = function () {
     const dealAreaSelect = document.getElementById('dealArea');
     const dealBlockNoSelect = document.getElementById('dealBlockNo');
     if (dealAreaSelect && dealBlockNoSelect) {
@@ -1752,7 +1752,7 @@ const cleanSellerNameStr = (str) => {
     return str.replace(/[\s\u00A0]+/g, ' ').trim().toLowerCase();
 };
 
-window.autofillSellerDetailsForProducts = function(businessName) {
+window.autofillSellerDetailsForProducts = function (businessName) {
     if (!businessName) return;
     if (typeof sellers === 'undefined') return;
     console.log("Autofill products matching for brand:", businessName, "Sellers array:", sellers);
@@ -1772,7 +1772,7 @@ window.autofillSellerDetailsForProducts = function(businessName) {
         if (whatsappField) whatsappField.value = matchedSeller.whatsappNumber || '';
         if (deliveryField) deliveryField.value = matchedSeller.branchPhone || matchedSeller.mobileNumber || '';
         if (addressField) addressField.value = matchedSeller.address || '';
-        
+
         if (areaField) {
             areaField.value = matchedSeller.area || '';
             areaField.dispatchEvent(new Event('change'));
@@ -1786,7 +1786,7 @@ window.autofillSellerDetailsForProducts = function(businessName) {
     }
 };
 
-window.autofillSellerDetailsForDeals = function(businessName) {
+window.autofillSellerDetailsForDeals = function (businessName) {
     if (!businessName) return;
     if (typeof sellers === 'undefined') return;
     console.log("Autofill deals matching for brand:", businessName, "Sellers array:", sellers);
@@ -1806,7 +1806,7 @@ window.autofillSellerDetailsForDeals = function(businessName) {
         if (whatsappField) whatsappField.value = matchedSeller.whatsappNumber || '';
         if (deliveryField) deliveryField.value = matchedSeller.branchPhone || matchedSeller.mobileNumber || '';
         if (addressField) addressField.value = matchedSeller.address || '';
-        
+
         if (areaField) {
             areaField.value = matchedSeller.area || '';
             areaField.dispatchEvent(new Event('change'));
@@ -3111,8 +3111,9 @@ function renderDynamicAdminFields() {
         }
     }
 
-    const prodAreaSelect = document.getElementById('prodArea');
-    const prodBlockNoSelect = document.getElementById('prodBlockNo');
+    const dynamicContainer = document.getElementById('dynamicProductFields');
+    const prodAreaSelect = dynamicContainer ? dynamicContainer.querySelector('#prodArea') : null;
+    const prodBlockNoSelect = dynamicContainer ? dynamicContainer.querySelector('#prodBlockNo') : null;
     if (prodAreaSelect && prodBlockNoSelect) {
         const updateBlocks = () => {
             window.updateBlockOptionsGlobal(prodAreaSelect.value, prodBlockNoSelect);
@@ -3141,9 +3142,10 @@ function renderDynamicAdminFields() {
 }
 
 window.toggleLaptopShopField = function () {
-    const seller = document.getElementById('prodSeller')?.value;
-    const shopField = document.getElementById('prodCompanyName');
-    const shopGroup = document.getElementById('laptopCompanyGroup');
+    const container = document.getElementById('dynamicProductFields');
+    const seller = container ? container.querySelector('#prodSeller')?.value : '';
+    const shopField = container ? container.querySelector('#prodCompanyName') : null;
+    const shopGroup = container ? container.querySelector('#laptopCompanyGroup') : null;
     if (shopField && shopGroup) {
         if (seller === 'Retailer' || seller === 'Wholesaler') {
             shopField.disabled = false;
@@ -3161,85 +3163,85 @@ window.toggleLaptopShopField = function () {
 };
 
 // Add event listeners to redraw when category or subcategory changes
-    const pCat = document.getElementById('prodCategory');
-    const pSub = document.getElementById('prodSubCategory');
-    if (pCat) pCat.addEventListener('change', renderDynamicAdminFields);
-    if (pSub) pSub.addEventListener('change', renderDynamicAdminFields);
+const pCat = document.getElementById('prodCategory');
+const pSub = document.getElementById('prodSubCategory');
+if (pCat) pCat.addEventListener('change', renderDynamicAdminFields);
+if (pSub) pSub.addEventListener('change', renderDynamicAdminFields);
 
-    if (typeof window.initAddressDropdowns === 'function') {
-        window.initAddressDropdowns();
-    }
+if (typeof window.initAddressDropdowns === 'function') {
+    window.initAddressDropdowns();
+}
 
-    // Filter controls event listeners
-    const searchInput = document.getElementById('prodSearchInput');
-    const filterCat = document.getElementById('prodFilterCategory');
-    const filterPost = document.getElementById('prodFilterPostBy');
+// Filter controls event listeners
+const searchInput = document.getElementById('prodSearchInput');
+const filterCat = document.getElementById('prodFilterCategory');
+const filterPost = document.getElementById('prodFilterPostBy');
 
-    if (searchInput) {
-        searchInput.addEventListener('input', (e) => {
-            prodSearchQuery = e.target.value.toLowerCase().trim();
-            prodCurrentPage = 1;
-            renderAdminProducts();
-        });
-    }
-    if (filterCat) {
-        filterCat.addEventListener('change', (e) => {
-            prodFilterCategory = e.target.value;
-            prodCurrentPage = 1;
-            renderAdminProducts();
-        });
-    }
-    if (filterPost) {
-        filterPost.addEventListener('change', (e) => {
-            prodFilterPostBy = e.target.value;
-            prodCurrentPage = 1;
-            renderAdminProducts();
-        });
-    }
+if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+        prodSearchQuery = e.target.value.toLowerCase().trim();
+        prodCurrentPage = 1;
+        renderAdminProducts();
+    });
+}
+if (filterCat) {
+    filterCat.addEventListener('change', (e) => {
+        prodFilterCategory = e.target.value;
+        prodCurrentPage = 1;
+        renderAdminProducts();
+    });
+}
+if (filterPost) {
+    filterPost.addEventListener('change', (e) => {
+        prodFilterPostBy = e.target.value;
+        prodCurrentPage = 1;
+        renderAdminProducts();
+    });
+}
 
-    // Deal filter controls event listeners
-    const dealSearchInput = document.getElementById('dealSearchInput');
-    const dealFilterCat = document.getElementById('dealFilterCategory');
-    const dealFilterSub = document.getElementById('dealFilterSubCategory');
-    const dealFilterPost = document.getElementById('dealFilterPostBy');
+// Deal filter controls event listeners
+const dealSearchInput = document.getElementById('dealSearchInput');
+const dealFilterCat = document.getElementById('dealFilterCategory');
+const dealFilterSub = document.getElementById('dealFilterSubCategory');
+const dealFilterPost = document.getElementById('dealFilterPostBy');
 
-    if (dealSearchInput) {
-        dealSearchInput.addEventListener('input', (e) => {
-            dealSearchQuery = e.target.value.toLowerCase().trim();
-            renderDeals();
-        });
-    }
-    if (dealFilterCat) {
-        dealFilterCat.addEventListener('change', (e) => {
-            dealFilterCategory = e.target.value;
-            renderDeals();
-        });
-    }
-    if (dealFilterSub) {
-        dealFilterSub.addEventListener('change', (e) => {
-            dealFilterSubCategory = e.target.value;
-            renderDeals();
-        });
-    }
-    if (dealFilterPost) {
-        dealFilterPost.addEventListener('change', (e) => {
-            dealFilterPostBy = e.target.value;
-            renderDeals();
-        });
-    }
+if (dealSearchInput) {
+    dealSearchInput.addEventListener('input', (e) => {
+        dealSearchQuery = e.target.value.toLowerCase().trim();
+        renderDeals();
+    });
+}
+if (dealFilterCat) {
+    dealFilterCat.addEventListener('change', (e) => {
+        dealFilterCategory = e.target.value;
+        renderDeals();
+    });
+}
+if (dealFilterSub) {
+    dealFilterSub.addEventListener('change', (e) => {
+        dealFilterSubCategory = e.target.value;
+        renderDeals();
+    });
+}
+if (dealFilterPost) {
+    dealFilterPost.addEventListener('change', (e) => {
+        dealFilterPostBy = e.target.value;
+        renderDeals();
+    });
+}
 
-    // Global event delegation for autofilling seller details (handles typing, blur, and selecting from datalist)
-    const handleAutofillEvent = (e) => {
-        if (!e.target) return;
-        if (e.target.id === 'dealBrand') {
-            window.autofillSellerDetailsForDeals(e.target.value);
-        } else if (e.target.id === 'prodBrand') {
-            window.autofillSellerDetailsForProducts(e.target.value);
-        }
-    };
-    document.addEventListener('input', handleAutofillEvent);
-    document.addEventListener('change', handleAutofillEvent);
-    document.addEventListener('blur', handleAutofillEvent, true);
+// Global event delegation for autofilling seller details (handles typing, blur, and selecting from datalist)
+const handleAutofillEvent = (e) => {
+    if (!e.target) return;
+    if (e.target.id === 'dealBrand') {
+        window.autofillSellerDetailsForDeals(e.target.value);
+    } else if (e.target.id === 'prodBrand') {
+        window.autofillSellerDetailsForProducts(e.target.value);
+    }
+};
+document.addEventListener('input', handleAutofillEvent);
+document.addEventListener('change', handleAutofillEvent);
+document.addEventListener('blur', handleAutofillEvent, true);
 
 const adminProductForm = document.getElementById('adminProductForm');
 
@@ -5516,7 +5518,7 @@ window.printUserInvoice = function () {
 
 // --- Seller Management Functions ---
 
-window.generateSellerId = function() {
+window.generateSellerId = function () {
     const idField = document.getElementById('sellerId');
     if (idField && sellerEditIndex === -1) {
         const num = Math.floor(100000 + Math.random() * 900000);
@@ -5524,7 +5526,7 @@ window.generateSellerId = function() {
     }
 };
 
-window.toggleSellerBranchFields = function() {
+window.toggleSellerBranchFields = function () {
     const branches = document.getElementById('sellerBranches')?.value || 'No';
     const branchFields = document.getElementById('sellerBranchFields');
     const nonBranchFields = document.getElementById('sellerNonBranchFields');
@@ -5541,7 +5543,7 @@ window.toggleSellerBranchFields = function() {
     }
 };
 
-window.toggleSellerStatusCheckbox = function(status) {
+window.toggleSellerStatusCheckbox = function (status) {
     const active = document.getElementById('sellerStatusActive');
     const inactive = document.getElementById('sellerStatusInactive');
     const suspended = document.getElementById('sellerStatusSuspended');
@@ -5563,7 +5565,7 @@ window.toggleSellerStatusCheckbox = function(status) {
     }
 };
 
-window.cancelSellerEdit = function() {
+window.cancelSellerEdit = function () {
     sellerEditIndex = -1;
     document.getElementById('sellerForm').reset();
     if (document.getElementById('sellerArea')) {
@@ -5575,7 +5577,7 @@ window.cancelSellerEdit = function() {
     window.toggleSellerBranchFields();
 };
 
-window.updateSellerDatalist = function() {
+window.updateSellerDatalist = function () {
     let dl = document.getElementById('sellerNamesDatalist');
     if (!dl) {
         dl = document.createElement('datalist');
@@ -5588,7 +5590,7 @@ window.updateSellerDatalist = function() {
     }
 };
 
-window.renderSellers = function() {
+window.renderSellers = function () {
     const list = document.getElementById('sellerList');
     if (!list) return;
 
@@ -5641,14 +5643,14 @@ window.renderSellers = function() {
         const dealCount = (deals || []).filter(d => matchSellerPost(d, s)).length;
         const orderCount = 0;
 
-        const verifiedBadge = s.verifiedSeller 
-            ? `<span class="status-pill active" style="background:#d1fae5 !important; border:1px solid #a7f3d0 !important; padding:4px 10px; border-radius:12px; display:inline-flex; align-items:center; gap:4px; font-weight:bold; color:#047857 !important;"><i class="fa-solid fa-circle-check"></i> Yes</span>` 
+        const verifiedBadge = s.verifiedSeller
+            ? `<span class="status-pill active" style="background:#d1fae5 !important; border:1px solid #a7f3d0 !important; padding:4px 10px; border-radius:12px; display:inline-flex; align-items:center; gap:4px; font-weight:bold; color:#047857 !important;"><i class="fa-solid fa-circle-check"></i> Yes</span>`
             : `<span class="status-pill pending" style="background:#f1f5f9 !important; border:1px solid #cbd5e1 !important; padding:4px 10px; border-radius:12px; display:inline-flex; align-items:center; gap:4px; font-weight:bold; color:#64748b !important;"><i class="fa-solid fa-circle-xmark"></i> No</span>`;
 
         let statusClass = 'active';
         if (s.status === 'Inactive') statusClass = 'pending';
         if (s.status === 'Suspended') statusClass = 'suspended';
-        
+
         let statusStyle = '';
         if (s.status === 'Suspended') statusStyle = 'background:#fee2e2 !important; color:#b91c1c !important; border:1px solid #fca5a5 !important; padding:4px 10px; border-radius:12px; font-weight:bold;';
         else if (s.status === 'Inactive') statusStyle = 'background:#fef3c7 !important; color:#b45309 !important; border:1px solid #fde68a !important; padding:4px 10px; border-radius:12px; font-weight:bold;';
@@ -5737,7 +5739,7 @@ window.changeSellerPage = function (page) {
     renderSellers();
 };
 
-window.editSeller = function(index) {
+window.editSeller = function (index) {
     const s = sellers[index];
     if (!s) return;
 
@@ -5772,21 +5774,21 @@ window.editSeller = function(index) {
     document.getElementById('sellerSubCategories').value = s.subCategories || '';
     document.getElementById('sellerDescription').value = s.businessDescription || '';
     document.getElementById('sellerHours').value = s.operatingHours || '';
-    
+
     document.getElementById('sellerVerified').checked = !!s.verifiedSeller;
     document.getElementById('sellerFeatured').checked = !!s.featuredSeller;
     document.getElementById('sellerPremium').checked = !!s.premiumSeller;
-    
+
     document.getElementById('sellerStatusActive').checked = !!s.statusActive;
     document.getElementById('sellerStatusInactive').checked = !!s.statusInactive;
     document.getElementById('sellerStatusSuspended').checked = !!s.statusSuspended;
 
     window.toggleSellerBranchFields();
-    
+
     document.getElementById('sellerFormTitle').scrollIntoView({ behavior: 'smooth' });
 };
 
-window.deleteSeller = async function(index) {
+window.deleteSeller = async function (index) {
     if (confirm('Are you sure you want to delete this seller?')) {
         sellers.splice(index, 1);
         try {
@@ -5799,7 +5801,7 @@ window.deleteSeller = async function(index) {
     }
 };
 
-window.viewSellerProfile = function(index) {
+window.viewSellerProfile = function (index) {
     const s = sellers[index];
     if (!s) return;
 
@@ -5827,14 +5829,14 @@ window.viewSellerProfile = function(index) {
     document.getElementById('profileCity').textContent = s.city || 'City';
     document.getElementById('profilePhone').textContent = s.mobileNumber || 'Phone';
     document.getElementById('profileWhatsApp').textContent = s.whatsappNumber || 'WhatsApp';
-    
+
     document.getElementById('profileProductsCount').textContent = prodCount;
     document.getElementById('profileDealsCount').textContent = dealCount;
     document.getElementById('profileOrdersCount').textContent = orderCount;
-    
+
     document.getElementById('profileHours').textContent = s.operatingHours || 'Not specified';
     document.getElementById('profileDescription').textContent = s.businessDescription || 'No description provided.';
-    
+
     const verifiedBadge = document.getElementById('profileVerifiedBadge');
     if (s.verifiedSeller) {
         verifiedBadge.className = 'border-emerald-500/30 bg-emerald-500/10 text-emerald-400 rounded-xl p-3 text-center';
@@ -5863,7 +5865,7 @@ window.viewSellerProfile = function(index) {
     }
 };
 
-window.closeSellerProfile = function() {
+window.closeSellerProfile = function () {
     const modal = document.getElementById('sellerProfileModal');
     if (modal) {
         modal.classList.add('hidden');
@@ -5871,12 +5873,12 @@ window.closeSellerProfile = function() {
     }
 };
 
-    const sellerForm = document.getElementById('sellerForm');
-    if (sellerForm) {
-        sellerForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            try {
-                const sellerId = document.getElementById('sellerId').value;
+const sellerForm = document.getElementById('sellerForm');
+if (sellerForm) {
+    sellerForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        try {
+            const sellerId = document.getElementById('sellerId').value;
             const businessName = document.getElementById('sellerBusinessName').value;
             const ownerName = document.getElementById('sellerOwnerName').value;
             const businessType = document.getElementById('sellerBusinessType').value;
@@ -5901,15 +5903,15 @@ window.closeSellerProfile = function() {
             const subCategories = document.getElementById('sellerSubCategories').value;
             const businessDescription = document.getElementById('sellerDescription').value;
             const operatingHours = document.getElementById('sellerHours').value;
-            
+
             const verifiedSeller = document.getElementById('sellerVerified').checked;
             const featuredSeller = document.getElementById('sellerFeatured').checked;
             const premiumSeller = document.getElementById('sellerPremium').checked;
-            
+
             const statusActive = document.getElementById('sellerStatusActive').checked;
             const statusInactive = document.getElementById('sellerStatusInactive').checked;
             const statusSuspended = document.getElementById('sellerStatusSuspended').checked;
-            
+
             let status = 'Active';
             if (statusInactive) status = 'Inactive';
             if (statusSuspended) status = 'Suspended';
@@ -5965,15 +5967,18 @@ window.closeSellerProfile = function() {
                 alert(sellerEditIndex === -1 ? 'Seller Added Successfully!' : 'Seller Updated Successfully!');
                 window.cancelSellerEdit();
                 window.renderSellers();
+                if (typeof window.populateSellersDatalist === 'function') {
+                    window.populateSellersDatalist();
+                }
             } catch (err) {
                 alert('Error saving seller: ' + err.message);
             }
-            } catch (outerErr) {
-                console.error("Error in seller submit:", outerErr);
-                alert("Error in seller submit: " + outerErr.message);
-            }
-        });
-    }
+        } catch (outerErr) {
+            console.error("Error in seller submit:", outerErr);
+            alert("Error in seller submit: " + outerErr.message);
+        }
+    });
+}
 
 /* =========================================================================
    DYNAMIC GROCERY SCHEMA LOGIC (SCHEMA-ADAPTED)
@@ -6934,9 +6939,9 @@ function getFallbackFieldsForSubcategory(subCategoryName) {
     if (subCategoryName === "Laptops" || subCategoryName === "Chromebooks" || subCategoryName === "Printers" || subCategoryName === "Printers & Scanners" || subCategoryName === "Laptop Charger" || subCategoryName === "Keyboard" || subCategoryName === "Mouse") {
         return SPECIALIZED_FIELDS_MAP[subCategoryName];
     }
-    
+
     const specialized = SPECIALIZED_FIELDS_MAP[subCategoryName] || [];
-    
+
     if (subCategoryName === "Retail" || subCategoryName === "Vegetables" || subCategoryName === "Fruits") {
         const legacyGroceryMapping = {
             "Retail": [
@@ -6960,10 +6965,10 @@ function getFallbackFieldsForSubcategory(subCategoryName) {
         };
         return legacyGroceryMapping[subCategoryName];
     }
-    
+
     const specializedNames = specialized.map(s => s.field_name);
     const filteredCommon = COMMON_FIELDS.filter(c => !specializedNames.includes(c.field_name));
-    
+
     return [
         ...filteredCommon,
         ...specialized,
@@ -7032,10 +7037,10 @@ if (grocerySubCatSelect) {
     grocerySubCatSelect.addEventListener('change', () => {
         const multimediaType = document.getElementById("multimediaType");
         const multimediaTypeWrapper = document.getElementById("multimediaTypeWrapper");
-        
+
         if (multimediaType) multimediaType.value = "";
         if (multimediaTypeWrapper) multimediaTypeWrapper.classList.add("hidden");
-        
+
         if (groceryFields) groceryFields.innerHTML = "";
         if (groceryTable) groceryTable.innerHTML = "";
 
@@ -7069,7 +7074,7 @@ if (multimediaTypeSelect) {
 
 async function loadMultimediaFields(type) {
     const fields = [...(multimediaFieldConfig[type] || [])];
-    
+
     // Inject image field next to warranty
     const warrantyIndex = fields.findIndex(f => f.name === "warranty");
     if (warrantyIndex !== -1 && !fields.some(f => f.name === "image")) {
@@ -7283,8 +7288,8 @@ function renderGroceryProductForm() {
                 <label>
                     ${escapeHtml(field.field_label)}
                     ${field.is_required
-                        ? '<span style="color: var(--accent-color);">*</span>'
-                        : ''}
+                ? '<span style="color: var(--accent-color);">*</span>'
+                : ''}
                 </label>
                 ${input}
             </div>
@@ -7420,9 +7425,10 @@ function renderGroceryProductForm() {
     groceryFields.innerHTML = html;
 
     // Attach listeners for Seller Type toggle & Block updates
-    const sellerSelect = document.getElementById('prodSeller');
-    const shopField = document.getElementById('prodCompanyName');
-    const shopGroup = document.getElementById('laptopCompanyGroup');
+    const containerGrocery = document.getElementById('groceryProductFields');
+    const sellerSelect = containerGrocery ? containerGrocery.querySelector('#prodSeller') : null;
+    const shopField = containerGrocery ? containerGrocery.querySelector('#prodCompanyName') : null;
+    const shopGroup = containerGrocery ? containerGrocery.querySelector('#laptopCompanyGroup') : null;
     if (sellerSelect && shopField && shopGroup) {
         sellerSelect.addEventListener('change', () => {
             const val = sellerSelect.value;
@@ -7441,8 +7447,8 @@ function renderGroceryProductForm() {
         });
     }
 
-    const prodAreaSelect = document.getElementById('prodArea');
-    const prodBlockNoSelect = document.getElementById('prodBlockNo');
+    const prodAreaSelect = containerGrocery ? containerGrocery.querySelector('#prodArea') : null;
+    const prodBlockNoSelect = containerGrocery ? containerGrocery.querySelector('#prodBlockNo') : null;
     if (prodAreaSelect && prodBlockNoSelect) {
         prodAreaSelect.addEventListener('change', () => {
             window.updateBlockOptionsGlobal(prodAreaSelect.value, prodBlockNoSelect);
@@ -7499,7 +7505,7 @@ function renderGroceryProductForm() {
    SAVE GROCERY PRODUCT
 ========================================= */
 
-window.saveDynamicGroceryProduct = async function() {
+window.saveDynamicGroceryProduct = async function () {
     const categoryName = groceryCatSelect.options[groceryCatSelect.selectedIndex]?.text || groceryCatSelect.value;
     const subCategoryName = grocerySubCatSelect.value;
 
@@ -7568,7 +7574,7 @@ window.saveDynamicGroceryProduct = async function() {
     });
 
     const client = await DataService.ensureSupabase();
-    
+
     let userName = "Admin";
     try {
         const currentUserStr = localStorage.getItem('currentUser');
@@ -7576,7 +7582,7 @@ window.saveDynamicGroceryProduct = async function() {
             const currentUser = JSON.parse(currentUserStr);
             userName = currentUser.fullName || currentUser.username || currentUser.userId || 'Admin';
         }
-    } catch(e) {}
+    } catch (e) { }
 
     const multimediaTypeEl = document.getElementById("multimediaType");
     let multimediaTypeValue = null;
@@ -7860,7 +7866,7 @@ function renderGroceryProductTable() {
    DELETE GROCERY PRODUCT
 ========================================= */
 
-window.deleteGroceryProduct = async function(productId) {
+window.deleteGroceryProduct = async function (productId) {
     if (!confirm("Delete this product?")) return;
 
     const client = await DataService.ensureSupabase();
@@ -7883,7 +7889,7 @@ window.deleteGroceryProduct = async function(productId) {
    TOGGLE GROCERY PRODUCT APPROVAL
 ========================================= */
 
-window.toggleGroceryProductApproval = async function(productId) {
+window.toggleGroceryProductApproval = async function (productId) {
     const product = currentGroceryProducts.find(p => p.id === productId);
     if (!product) return;
 
@@ -7909,7 +7915,7 @@ window.toggleGroceryProductApproval = async function(productId) {
    EDIT GROCERY PRODUCT
 ========================================= */
 
-window.editGroceryProduct = async function(productId) {
+window.editGroceryProduct = async function (productId) {
     const product = currentGroceryProducts.find(p => p.id === productId);
     if (!product) return;
 
@@ -7917,7 +7923,7 @@ window.editGroceryProduct = async function(productId) {
         const multimediaTypeEl = document.getElementById("multimediaType");
         const multimediaTypeWrapper = document.getElementById("multimediaTypeWrapper");
         if (multimediaTypeWrapper) multimediaTypeWrapper.classList.remove("hidden");
-        
+
         if (multimediaTypeEl && product.multimediaType) {
             for (let i = 0; i < multimediaTypeEl.options.length; i++) {
                 if (multimediaTypeEl.options[i].text.toLowerCase() === product.multimediaType.toLowerCase()) {
@@ -7932,7 +7938,7 @@ window.editGroceryProduct = async function(productId) {
     currentGroceryFields.forEach(field => {
         const input = document.getElementById(`field_${field.id}`);
         if (!input) return;
-        
+
         if (field.field_type === "multiselect") {
             const val = product.data?.[field.field_name] ?? "";
             const selectedVals = val.split(',').map(s => s.trim());
@@ -7950,7 +7956,7 @@ window.editGroceryProduct = async function(productId) {
         sellerSelect.value = product.data?.seller || "";
         sellerSelect.dispatchEvent(new Event('change'));
     }
-    
+
     const fieldsToMap = {
         'prodCompanyName': product.data?.companyName || "",
         'prodAddress': product.data?.address || "",
@@ -7977,10 +7983,10 @@ window.editGroceryProduct = async function(productId) {
     }
 
     window.currentEditingProductId = productId;
-    
+
     const btn = document.getElementById('btnSaveDynamicProduct');
     if (btn) btn.textContent = 'Save Changes';
-    
+
     // Scroll to form
     const formEl = document.getElementById('products').querySelector('.form-container');
     if (formEl) formEl.scrollIntoView({ behavior: 'smooth' });
@@ -8000,7 +8006,7 @@ function escapeHtml(value) {
         .replace(/'/g, "&#039;");
 }
 
-window.populateSellersDatalist = function() {
+window.populateSellersDatalist = function () {
     const datalist = document.getElementById('sellersDatalist');
     if (datalist) {
         datalist.innerHTML = '';
@@ -8014,35 +8020,48 @@ window.populateSellersDatalist = function() {
     }
 };
 
-document.addEventListener('input', function(e) {
+document.addEventListener('input', function (e) {
     if (e.target && e.target.id === 'prodCompanyName') {
         const enteredVal = e.target.value.trim().toLowerCase();
         if (!enteredVal) return;
 
         console.log("Searching for seller with query:", enteredVal);
 
-        const matchedSeller = sellers.find(s => 
+        // Find the matched seller using the global sellers array
+        const matchedSeller = (sellers || []).find(s =>
             (s.businessName && s.businessName.trim().toLowerCase() === enteredVal) ||
             (s.ownerName && s.ownerName.trim().toLowerCase() === enteredVal)
         );
 
         if (matchedSeller) {
-            console.log("Matched Seller Profile Found:", matchedSeller);
+            console.log("Matched Seller Profile Found in Admin:", matchedSeller);
 
-            const addrField = document.getElementById('prodAddress');
-            const areaField = document.getElementById('prodArea');
-            const blockField = document.getElementById('prodBlockNo');
-            const cityField = document.getElementById('prodCity');
-            const phoneField = document.getElementById('prodPhone');
-            const whatsappField = document.getElementById('prodWhatsapp');
-            const websiteField = document.getElementById('prodWebsite');
+            // Scope the selector lookup to the active container to prevent duplicate ID collisions
+            const container = e.target.closest('#groceryProductFields') || 
+                              e.target.closest('#dynamicProductFields') || 
+                              document;
+
+            const addrField = container.querySelector('#prodAddress');
+            const areaField = container.querySelector('#prodArea');
+            const blockField = container.querySelector('#prodBlockNo');
+            const cityField = container.querySelector('#prodCity');
+            const phoneField = container.querySelector('#prodPhone');
+            const whatsappField = container.querySelector('#prodWhatsapp');
+            const websiteField = container.querySelector('#prodWebsite');
+            const sellerTypeField = container.querySelector('#prodSeller');
+
+            // Autofill Seller Type dropdown
+            if (sellerTypeField && matchedSeller.businessType) {
+                sellerTypeField.value = matchedSeller.businessType;
+                sellerTypeField.dispatchEvent(new Event('change'));
+            }
 
             if (addrField) {
                 addrField.value = matchedSeller.address || "";
             }
 
             if (cityField) {
-                const targetCity = (matchedSeller.city || "").trim().toLowerCase();
+                const targetCity = (matchedSeller.city || "Karachi").trim().toLowerCase();
                 for (let i = 0; i < cityField.options.length; i++) {
                     const optText = cityField.options[i].text.trim().toLowerCase();
                     const optVal = cityField.options[i].value.trim().toLowerCase();
@@ -8055,14 +8074,12 @@ document.addEventListener('input', function(e) {
 
             if (areaField) {
                 const targetArea = (matchedSeller.area || "").trim().toLowerCase();
-                let areaMatched = false;
                 for (let i = 0; i < areaField.options.length; i++) {
                     const optText = areaField.options[i].text.trim().toLowerCase();
                     const optVal = areaField.options[i].value.trim().toLowerCase();
                     if (optText === targetArea || optVal === targetArea) {
                         areaField.selectedIndex = i;
                         areaField.dispatchEvent(new Event('change'));
-                        areaMatched = true;
                         break;
                     }
                 }
@@ -8070,7 +8087,7 @@ document.addEventListener('input', function(e) {
 
             setTimeout(() => {
                 if (blockField) {
-                    const targetBlock = (matchedSeller.blockNo || "").trim().toLowerCase();
+                    const targetBlock = (matchedSeller.blockNo || matchedSeller.block_no || "").trim().toLowerCase();
                     for (let i = 0; i < blockField.options.length; i++) {
                         const optText = blockField.options[i].text.trim().toLowerCase();
                         const optVal = blockField.options[i].value.trim().toLowerCase();
@@ -8083,10 +8100,10 @@ document.addEventListener('input', function(e) {
             }, 150);
 
             if (phoneField) {
-                phoneField.value = matchedSeller.mobileNumber || "";
+                phoneField.value = matchedSeller.mobileNumber || matchedSeller.phone || "";
             }
             if (whatsappField) {
-                whatsappField.value = matchedSeller.whatsappNumber || "";
+                whatsappField.value = matchedSeller.whatsappNumber || matchedSeller.whatsapp || "";
             }
             if (websiteField) {
                 websiteField.value = matchedSeller.website || "";
@@ -8094,5 +8111,6 @@ document.addEventListener('input', function(e) {
         }
     }
 });
+
 
 
