@@ -7270,19 +7270,22 @@ function renderGroceryProductForm() {
                 >
             `;
         } else if (field.field_type === "multiselect") {
-            const optionsHtml = (field.field_options || []).map(opt => `<option value="${opt}" style="background: #1e293b; color: #fff; padding: 4px;">${opt}</option>`).join('');
+            const checkboxHtml = (field.field_options || []).map((opt, i) => `
+                <label style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px; cursor: pointer; color: #fff; font-size: 0.85rem; user-select: none;">
+                    <input 
+                        type="checkbox" 
+                        class="multiselect-checkbox-${field.id}" 
+                        value="${opt}" 
+                        style="width: 16px !important; height: 16px !important; margin: 0 !important; cursor: pointer;"
+                    >
+                    <span>${opt}</span>
+                </label>
+            `).join('');
+            
             input = `
-                <select
-                    id="field_${field.id}"
-                    data-field-id="${field.id}"
-                    multiple
-                    size="${field.field_options ? field.field_options.length : 5}"
-                    style="height: auto; min-height: 125px; padding: 8px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); border-radius: 6px; color: #fff; width: 100%;"
-                    ${required}
-                >
-                    ${optionsHtml}
-                </select>
-                <span style="font-size: 0.75rem; color: #888; margin-top: 2px; display: block;">Hold Ctrl (Cmd) to select multiple</span>
+                <div id="field_${field.id}" data-field-id="${field.id}" data-type="checkbox-group" style="padding: 10px; background: rgba(15, 23, 42, 0.4); border: 1px solid var(--border-color); border-radius: 8px; max-height: 150px; overflow-y: auto; box-sizing: border-box; width: 100%;">
+                    ${checkboxHtml}
+                </div>
             `;
         } else {
             input = `
@@ -7545,9 +7548,17 @@ window.saveDynamicGroceryProduct = async function () {
                 continue;
             }
 
-            const hasVal = (field.field_type === "multiselect" || input.multiple)
-                ? (Array.from(input.selectedOptions).length > 0)
-                : !!input.value.trim();
+            let hasVal = false;
+            if (field.field_type === "multiselect" || input.multiple) {
+                if (input.dataset.type === "checkbox-group") {
+                    const checked = input.querySelectorAll('input[type="checkbox"]:checked');
+                    hasVal = checked.length > 0;
+                } else {
+                    hasVal = Array.from(input.selectedOptions).length > 0;
+                }
+            } else {
+                hasVal = !!input.value.trim();
+            }
             
             if (!hasVal) {
                 // Safely bypass connection field to prevent user blocking from database sync issues
@@ -7563,7 +7574,12 @@ window.saveDynamicGroceryProduct = async function () {
         }
 
         if (field.field_type === "multiselect") {
-            const selectedOptions = Array.from(input.selectedOptions).map(opt => opt.value);
+            let selectedOptions = [];
+            if (input.dataset.type === "checkbox-group") {
+                selectedOptions = Array.from(input.querySelectorAll('input[type="checkbox"]:checked')).map(cb => cb.value);
+            } else {
+                selectedOptions = Array.from(input.selectedOptions).map(opt => opt.value);
+            }
             dynamicData[field.field_name] = selectedOptions.join(', ');
         } else {
             dynamicData[field.field_name] =
@@ -7973,9 +7989,15 @@ window.editGroceryProduct = async function (productId) {
         if (field.field_type === "multiselect") {
             const val = product.data?.[field.field_name] ?? "";
             const selectedVals = val.split(',').map(s => s.trim());
-            Array.from(input.options).forEach(opt => {
-                opt.selected = selectedVals.includes(opt.value);
-            });
+            if (input.dataset.type === "checkbox-group") {
+                input.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+                    cb.checked = selectedVals.includes(cb.value);
+                });
+            } else {
+                Array.from(input.options).forEach(opt => {
+                    opt.selected = selectedVals.includes(opt.value);
+                });
+            }
         } else {
             input.value = product.data?.[field.field_name] ?? "";
         }
