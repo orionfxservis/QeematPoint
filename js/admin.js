@@ -8019,12 +8019,16 @@ document.addEventListener('input', function(e) {
         const enteredVal = e.target.value.trim().toLowerCase();
         if (!enteredVal) return;
 
+        console.log("Searching for seller with query:", enteredVal);
+
         const matchedSeller = sellers.find(s => 
-            (s.businessName && s.businessName.toLowerCase() === enteredVal) ||
-            (s.ownerName && s.ownerName.toLowerCase() === enteredVal)
+            (s.businessName && s.businessName.trim().toLowerCase() === enteredVal) ||
+            (s.ownerName && s.ownerName.trim().toLowerCase() === enteredVal)
         );
 
         if (matchedSeller) {
+            console.log("Matched Seller Profile Found:", matchedSeller);
+
             const addrField = document.getElementById('prodAddress');
             const areaField = document.getElementById('prodArea');
             const blockField = document.getElementById('prodBlockNo');
@@ -8033,11 +8037,16 @@ document.addEventListener('input', function(e) {
             const whatsappField = document.getElementById('prodWhatsapp');
             const websiteField = document.getElementById('prodWebsite');
 
-            if (addrField) addrField.value = matchedSeller.address || "";
+            if (addrField) {
+                addrField.value = matchedSeller.address || "";
+            }
 
             if (cityField) {
+                const targetCity = (matchedSeller.city || "").trim().toLowerCase();
                 for (let i = 0; i < cityField.options.length; i++) {
-                    if (cityField.options[i].text.toLowerCase() === (matchedSeller.city || "").toLowerCase()) {
+                    const optText = cityField.options[i].text.trim().toLowerCase();
+                    const optVal = cityField.options[i].value.trim().toLowerCase();
+                    if (optText === targetCity || optVal === targetCity) {
                         cityField.selectedIndex = i;
                         break;
                     }
@@ -8045,10 +8054,15 @@ document.addEventListener('input', function(e) {
             }
 
             if (areaField) {
+                const targetArea = (matchedSeller.area || "").trim().toLowerCase();
+                let areaMatched = false;
                 for (let i = 0; i < areaField.options.length; i++) {
-                    if (areaField.options[i].text.toLowerCase() === (matchedSeller.area || "").toLowerCase()) {
+                    const optText = areaField.options[i].text.trim().toLowerCase();
+                    const optVal = areaField.options[i].value.trim().toLowerCase();
+                    if (optText === targetArea || optVal === targetArea) {
                         areaField.selectedIndex = i;
                         areaField.dispatchEvent(new Event('change'));
+                        areaMatched = true;
                         break;
                     }
                 }
@@ -8056,18 +8070,27 @@ document.addEventListener('input', function(e) {
 
             setTimeout(() => {
                 if (blockField) {
+                    const targetBlock = (matchedSeller.blockNo || "").trim().toLowerCase();
                     for (let i = 0; i < blockField.options.length; i++) {
-                        if (blockField.options[i].text.toLowerCase() === (matchedSeller.blockNo || "").toLowerCase()) {
+                        const optText = blockField.options[i].text.trim().toLowerCase();
+                        const optVal = blockField.options[i].value.trim().toLowerCase();
+                        if (optText === targetBlock || optVal === targetBlock) {
                             blockField.selectedIndex = i;
                             break;
                         }
                     }
                 }
-            }, 100);
+            }, 150);
 
-            if (phoneField) phoneField.value = matchedSeller.mobileNumber || "";
-            if (whatsappField) whatsappField.value = matchedSeller.whatsappNumber || "";
-            if (websiteField) websiteField.value = matchedSeller.website || "";
+            if (phoneField) {
+                phoneField.value = matchedSeller.mobileNumber || "";
+            }
+            if (whatsappField) {
+                whatsappField.value = matchedSeller.whatsappNumber || "";
+            }
+            if (websiteField) {
+                websiteField.value = matchedSeller.website || "";
+            }
         }
     }
 });
