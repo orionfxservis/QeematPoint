@@ -9,19 +9,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="../css/style.css">
     <script src="../js/data-service.js"></script>
-	
-	<!-- Your Food Section Here -->
-	<!-- HIDE SCROLLBAR -->
-<style>
-    .no-scrollbar::-webkit-scrollbar {
-        display: none;
-    }
 
-    .no-scrollbar {
-        -ms-overflow-style: none;
-        scrollbar-width: none;
-    }
-</style>
+    <!-- Your Food Section Here -->
+    <!-- HIDE SCROLLBAR -->
+    <style>
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
 </head>
 
 <body class="text-[#1F2937] antialiased selection:bg-emerald-200 selection:text-emerald-900 overflow-x-hidden">
@@ -46,18 +46,21 @@
                         </span>
                         <div
                             class="hidden md:block border border-[#24533e] bg-emerald-900/20 text-[#58b284] px-2 py-[2px] rounded text-[10px] font-semibold tracking-wide">
-                            <span class="lang-en">Price Smart, Save More</span><span class="lang-ur">سمارٹ قیمت، زیادہ بچت</span>
+                            <span class="lang-en">Price Smart, Save More</span><span class="lang-ur">سمارٹ قیمت، زیادہ
+                                بچت</span>
                         </div>
                     </div>
                     <span class="hidden md:block text-[11px] text-gray-300 mt-0.5">
-                        <span class="lang-en">Smart Price Comparison for Pakistan</span><span class="lang-ur">پاکستان کے لیے سمارٹ پرائس کیئر</span>
+                        <span class="lang-en">Smart Price Comparison for Pakistan</span><span class="lang-ur">پاکستان کے
+                            لیے سمارٹ پرائس کیئر</span>
                     </span>
                 </div>
             </a>
 
 
             <!-- CENTER: Location -->
-            <div class="order-3 sm:order-none w-full sm:w-auto flex justify-center sm:flex-1 lg:absolute lg:left-1/2 lg:-translate-x-1/2 lg:transform">
+            <div
+                class="order-3 sm:order-none w-full sm:w-auto flex justify-center sm:flex-1 lg:absolute lg:left-1/2 lg:-translate-x-1/2 lg:transform">
                 <div class="hidden lg:flex items-center gap-1 text-slate-700 text-sm bg-slate-100 px-3 py-1.5 rounded-full border border-slate-200 cursor-pointer hover:bg-slate-200 transition whitespace-nowrap"
                     onclick="showLocationModal()" id="locationBox">
                     <span>📍</span>
@@ -110,9 +113,9 @@
     <div class="max-w-screen-2xl mx-auto px-4 py-6">
 
         <!-- HERO Banner -->
-        <div class="relative w-full rounded-3xl overflow-hidden shadow-lg border border-emerald-200 mb-8 bg-[#F4F9F2]">
-            <img src="../images/grafix/Browse categories.png" alt="Category Banner"
-                class="w-full h-[150px] sm:h-[200px] md:h-[300px] object-cover md:object-fill">
+        <div class="relative w-full rounded-3xl overflow-hidden shadow-md border border-slate-200 mb-8 bg-slate-950 flex items-center justify-center">
+            <img src="../images/banner/OrionFx - Web Banner.gif" alt="Stop Buy Promotional Banner"
+                class="w-full h-auto max-h-[140px] md:max-h-[180px] object-cover md:object-fill">
         </div>
 
         <!-- TOP FILTER -->
@@ -126,7 +129,8 @@
                     <span class="lang-en">Food Stuffs</span><span class="lang-ur">کھانے پینے کی اشیاء</span></button>
                 <button onclick="go('groceries', this)"
                     class="hidden px-3 py-1.5 bg-white text-gray-600 hover:bg-emerald-50 hover:text-emerald-700 border border-gray-200 rounded-full text-xs font-semibold whitespace-nowrap transition-all shadow-sm">🛒
-                    <span class="lang-en">Daily Groceries</span><span class="lang-ur">روزمرہ کی اشیائے خوردونوش</span></button>
+                    <span class="lang-en">Daily Groceries</span><span class="lang-ur">روزمرہ کی اشیائے
+                        خوردونوش</span></button>
                 <button onclick="go('electronics', this)"
                     class="hidden px-3 py-1.5 bg-white text-gray-600 hover:bg-emerald-50 hover:text-emerald-700 border border-gray-200 rounded-full text-xs font-semibold whitespace-nowrap transition-all shadow-sm">🔌
                     <span class="lang-en">Electronics</span><span class="lang-ur">الیکٹرونکس</span></button>
@@ -156,1749 +160,1670 @@
         <!-- SECTIONS -->
 
         <!-- FOOD STUFFS - NETFLIX STYLE -->
-<section id="food" class="mb-10">
+        <section id="food" class="mb-10">
 
-    <div
-        class="relative bg-gradient-to-br from-orange-50/90 to-white/60 backdrop-blur-xl rounded-3xl p-6 border-t-[4px] border-t-orange-500 border border-white/60 shadow-lg overflow-hidden">
+            <div
+                class="relative bg-gradient-to-br from-orange-50/90 to-white/60 backdrop-blur-xl rounded-3xl p-6 border-t-[4px] border-t-orange-500 border border-white/60 shadow-lg overflow-hidden">
 
-        <!-- Glow Effect -->
-        <div
-            class="absolute -top-10 -right-10 w-48 h-48 bg-orange-400/20 rounded-full blur-3xl pointer-events-none">
-        </div>
-
-        <!-- Header -->
-        <div class="flex justify-between items-center mb-6 relative z-10">
-
-            <div class="flex items-center gap-2 md:gap-4">
+                <!-- Glow Effect -->
                 <div
-                    class="w-8 h-8 md:w-12 md:h-12 rounded-xl md:rounded-2xl bg-gradient-to-br from-white to-orange-50 text-orange-600 flex items-center justify-center text-lg md:text-2xl shadow border border-orange-100">
-                    🍲
+                    class="absolute -top-10 -right-10 w-48 h-48 bg-orange-400/20 rounded-full blur-3xl pointer-events-none">
                 </div>
 
-                <h2
-                    class="text-lg md:text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-gray-900 to-orange-800 tracking-tight">
-                    <span class="lang-en">Food Stuffs</span><span class="lang-ur">کھانے پینے کی اشیاء</span>
-                </h2>
-            </div>
+                <!-- Header -->
+                <div class="flex justify-between items-center mb-6 relative z-10">
 
-            <div class="flex items-center gap-1.5 md:gap-3">
-                <!-- VIEW ALL -->
-                <a href="food.html"
-                    class="text-orange-600 hover:text-orange-800 font-semibold text-sm transition-all hover:translate-x-1 flex items-center gap-1 mr-2">
-                    View All
-                    <i class="fas fa-arrow-right text-[10px]"></i>
-                </a>
-                <select id="foodProductFilter" class="bg-white border border-orange-200 text-xs md:text-sm font-semibold rounded-lg md:rounded-xl px-2 md:px-4 py-1.5 md:py-2.5 text-orange-800 outline-none focus:ring-2 focus:ring-orange-500 shadow-sm cursor-pointer w-[100px] md:w-auto">
-                    <option value="">All Products</option>
-                </select>
-                <select id="foodPriceSort" class="bg-white border border-orange-200 text-xs md:text-sm font-semibold rounded-lg md:rounded-xl px-2 md:px-4 py-1.5 md:py-2.5 text-orange-800 outline-none focus:ring-2 focus:ring-orange-500 shadow-sm cursor-pointer w-[100px] md:w-auto">
-                    <option value="">Sort by Price</option>
-                    <option value="Lowest Price">Lowest Price</option>
-                    <option value="Highest Price">Highest Price</option>
-                </select>
-            </div>
-        </div>
+                    <div class="flex items-center gap-2 md:gap-4">
+                        <div
+                            class="w-8 h-8 md:w-12 md:h-12 rounded-xl md:rounded-2xl bg-gradient-to-br from-white to-orange-50 text-orange-600 flex items-center justify-center text-lg md:text-2xl shadow border border-orange-100">
+                            🍲
+                        </div>
 
-        <!-- NETFLIX SCROLL AREA WRAPPER -->
-        <div class="relative group z-10 -mx-2 px-2">
-            <!-- Left Button -->
-            <div onclick="scrollFood(-1)"
-                class="absolute left-[-20px] top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/95 backdrop-blur border border-orange-200 shadow-xl hover:bg-orange-50 transition-all flex items-center justify-center z-20 opacity-0 group-hover:opacity-100 hidden md:flex cursor-pointer">
-                <i class="fas fa-chevron-left text-orange-600 text-xl"></i>
-            </div>
-            
-            <!-- Right Button -->
-            <div onclick="scrollFood(1)"
-                class="absolute right-[-20px] top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/95 backdrop-blur border border-orange-200 shadow-xl hover:bg-orange-50 transition-all flex items-center justify-center z-20 opacity-0 group-hover:opacity-100 hidden md:flex cursor-pointer">
-                <i class="fas fa-chevron-right text-orange-600 text-xl"></i>
-            </div>
+                        <h2
+                            class="text-lg md:text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-gray-900 to-orange-800 tracking-tight">
+                            <span class="lang-en">Food Stuffs</span><span class="lang-ur">کھانے پینے کی اشیاء</span>
+                        </h2>
+                    </div>
 
-            <!-- NETFLIX SCROLL AREA -->
-            <div id="foodSlider"
-                class="flex gap-5 overflow-x-auto scroll-smooth no-scrollbar pb-4 relative z-10 px-2 py-2 snap-x snap-mandatory">
-
-            <!-- CARD -->
-            <div
-                class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] bg-white rounded-3xl overflow-hidden border border-orange-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
-
-                <img src="../images/categories/food/zinger-burger.png"
-                    class="w-full h-40 object-cover">
-
-                <div class="p-4">
-                    <h4 class="font-bold text-gray-800 text-base">Zinger Burger</h4>
-
-                    <div class="flex justify-between items-center mt-2">
-                        <p class="text-emerald-600 font-bold">Rs. ---</p>
-
-                        <span
-                            class="text-xs bg-orange-100 text-orange-700 px-2 py-1 rounded-full">
-                            Popular
-                        </span>
+                    <div class="flex items-center gap-1.5 md:gap-3">
+                        <!-- VIEW ALL -->
+                        <a href="food.html"
+                            class="text-orange-600 hover:text-orange-800 font-semibold text-sm transition-all hover:translate-x-1 flex items-center gap-1 mr-2">
+                            View All
+                            <i class="fas fa-arrow-right text-[10px]"></i>
+                        </a>
+                        <select id="foodProductFilter"
+                            class="bg-white border border-orange-200 text-xs md:text-sm font-semibold rounded-lg md:rounded-xl px-2 md:px-4 py-1.5 md:py-2.5 text-orange-800 outline-none focus:ring-2 focus:ring-orange-500 shadow-sm cursor-pointer w-[100px] md:w-auto">
+                            <option value="">All Products</option>
+                        </select>
+                        <select id="foodPriceSort"
+                            class="bg-white border border-orange-200 text-xs md:text-sm font-semibold rounded-lg md:rounded-xl px-2 md:px-4 py-1.5 md:py-2.5 text-orange-800 outline-none focus:ring-2 focus:ring-orange-500 shadow-sm cursor-pointer w-[100px] md:w-auto">
+                            <option value="">Sort by Price</option>
+                            <option value="Lowest Price">Lowest Price</option>
+                            <option value="Highest Price">Highest Price</option>
+                        </select>
                     </div>
                 </div>
-            </div>
 
-            <!-- CARD -->
-            <div
-                class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] bg-white rounded-3xl overflow-hidden border border-orange-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
-
-                <img src="../images/categories/food/pizza.jpg"
-                    class="w-full h-40 object-cover">
-
-                <div class="p-4">
-                    <h4 class="font-bold text-gray-800 text-base">Pizza</h4>
-
-                    <div class="flex justify-between items-center mt-2">
-                        <p class="text-emerald-600 font-bold">Rs. ---</p>
-
-                        <span
-                            class="text-xs bg-red-100 text-red-700 px-2 py-1 rounded-full">
-                            Trending
-                        </span>
+                <!-- NETFLIX SCROLL AREA WRAPPER -->
+                <div class="relative group z-10 -mx-2 px-2">
+                    <!-- Left Button -->
+                    <div onclick="scrollFood(-1)"
+                        class="absolute left-[-20px] top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/95 backdrop-blur border border-orange-200 shadow-xl hover:bg-orange-50 transition-all flex items-center justify-center z-20 opacity-0 group-hover:opacity-100 hidden md:flex cursor-pointer">
+                        <i class="fas fa-chevron-left text-orange-600 text-xl"></i>
                     </div>
-                </div>
-            </div>
 
-            <!-- CARD -->
-            <div
-                class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] bg-white rounded-3xl overflow-hidden border border-orange-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
-
-                <img src="../images/categories/food/pizza-fries.jpg"
-                    class="w-full h-40 object-cover">
-
-                <div class="p-4">
-                    <h4 class="font-bold text-gray-800 text-base">Pizza Fries</h4>
-
-                    <div class="flex justify-between items-center mt-2">
-                        <p class="text-emerald-600 font-bold">Rs. ---</p>
-
-                        <span
-                            class="text-xs bg-yellow-100 text-yellow-700 px-2 py-1 rounded-full">
-                            Hot Deal
-                        </span>
+                    <!-- Right Button -->
+                    <div onclick="scrollFood(1)"
+                        class="absolute right-[-20px] top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/95 backdrop-blur border border-orange-200 shadow-xl hover:bg-orange-50 transition-all flex items-center justify-center z-20 opacity-0 group-hover:opacity-100 hidden md:flex cursor-pointer">
+                        <i class="fas fa-chevron-right text-orange-600 text-xl"></i>
                     </div>
-                </div>
-            </div>
 
-            <!-- CARD -->
-            <div
-                class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] bg-white rounded-3xl overflow-hidden border border-orange-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
+                    <!-- NETFLIX SCROLL AREA -->
+                    <div id="foodSlider"
+                        class="flex gap-5 overflow-x-auto scroll-smooth no-scrollbar pb-4 relative z-10 px-2 py-2 snap-x snap-mandatory">
 
-                <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=1200&auto=format&fit=crop"
-                    class="w-full h-40 object-cover">
+                        <!-- CARD -->
+                        <div
+                            class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] bg-white rounded-3xl overflow-hidden border border-orange-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
 
-                <div class="p-4">
-                    <h4 class="font-bold text-gray-800 text-base">Cheese Pizza</h4>
+                            <img src="../images/categories/food/zinger-burger.png" class="w-full h-40 object-cover">
 
-                    <div class="flex justify-between items-center mt-2">
-                        <p class="text-emerald-600 font-bold">Rs. ---</p>
+                            <div class="p-4">
+                                <h4 class="font-bold text-gray-800 text-base">Zinger Burger</h4>
 
-                        <span
-                            class="text-xs bg-emerald-100 text-emerald-700 px-2 py-1 rounded-full">
-                            Best Seller
-                        </span>
+                                <div class="flex justify-between items-center mt-2">
+                                    <p class="text-emerald-600 font-bold">Rs. ---</p>
+
+                                    <span class="text-xs bg-orange-100 text-orange-700 px-2 py-1 rounded-full">
+                                        Popular
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- CARD -->
+                        <div
+                            class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] bg-white rounded-3xl overflow-hidden border border-orange-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
+
+                            <img src="../images/categories/food/pizza.jpg" class="w-full h-40 object-cover">
+
+                            <div class="p-4">
+                                <h4 class="font-bold text-gray-800 text-base">Pizza</h4>
+
+                                <div class="flex justify-between items-center mt-2">
+                                    <p class="text-emerald-600 font-bold">Rs. ---</p>
+
+                                    <span class="text-xs bg-red-100 text-red-700 px-2 py-1 rounded-full">
+                                        Trending
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- CARD -->
+                        <div
+                            class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] bg-white rounded-3xl overflow-hidden border border-orange-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
+
+                            <img src="../images/categories/food/pizza-fries.jpg" class="w-full h-40 object-cover">
+
+                            <div class="p-4">
+                                <h4 class="font-bold text-gray-800 text-base">Pizza Fries</h4>
+
+                                <div class="flex justify-between items-center mt-2">
+                                    <p class="text-emerald-600 font-bold">Rs. ---</p>
+
+                                    <span class="text-xs bg-yellow-100 text-yellow-700 px-2 py-1 rounded-full">
+                                        Hot Deal
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- CARD -->
+                        <div
+                            class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] bg-white rounded-3xl overflow-hidden border border-orange-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
+
+                            <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=1200&auto=format&fit=crop"
+                                class="w-full h-40 object-cover">
+
+                            <div class="p-4">
+                                <h4 class="font-bold text-gray-800 text-base">Cheese Pizza</h4>
+
+                                <div class="flex justify-between items-center mt-2">
+                                    <p class="text-emerald-600 font-bold">Rs. ---</p>
+
+                                    <span class="text-xs bg-emerald-100 text-emerald-700 px-2 py-1 rounded-full">
+                                        Best Seller
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- CARD -->
+                        <div
+                            class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] bg-white rounded-3xl overflow-hidden border border-orange-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
+
+                            <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=1200&auto=format&fit=crop"
+                                class="w-full h-40 object-cover">
+
+                            <div class="p-4">
+                                <h4 class="font-bold text-gray-800 text-base">Double Burger</h4>
+
+                                <div class="flex justify-between items-center mt-2">
+                                    <p class="text-emerald-600 font-bold">Rs. ---</p>
+
+                                    <span class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full">
+                                        Recommended
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- CARD -->
+                        <div
+                            class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] bg-white rounded-3xl overflow-hidden border border-orange-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
+
+                            <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=1200&auto=format&fit=crop"
+                                class="w-full h-40 object-cover">
+
+                            <div class="p-4">
+                                <h4 class="font-bold text-gray-800 text-base">Italian Pizza</h4>
+
+                                <div class="flex justify-between items-center mt-2">
+                                    <p class="text-emerald-600 font-bold">Rs. ---</p>
+
+                                    <span class="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded-full">
+                                        Featured
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
-                </div>
+                </div> <!-- End of NETFLIX SCROLL AREA WRAPPER -->
             </div>
-
-            <!-- CARD -->
-            <div
-                class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] bg-white rounded-3xl overflow-hidden border border-orange-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
-
-                <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=1200&auto=format&fit=crop"
-                    class="w-full h-40 object-cover">
-
-                <div class="p-4">
-                    <h4 class="font-bold text-gray-800 text-base">Double Burger</h4>
-
-                    <div class="flex justify-between items-center mt-2">
-                        <p class="text-emerald-600 font-bold">Rs. ---</p>
-
-                        <span
-                            class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full">
-                            Recommended
-                        </span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- CARD -->
-            <div
-                class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] bg-white rounded-3xl overflow-hidden border border-orange-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
-
-                <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=1200&auto=format&fit=crop"
-                    class="w-full h-40 object-cover">
-
-                <div class="p-4">
-                    <h4 class="font-bold text-gray-800 text-base">Italian Pizza</h4>
-
-                    <div class="flex justify-between items-center mt-2">
-                        <p class="text-emerald-600 font-bold">Rs. ---</p>
-
-                        <span
-                            class="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded-full">
-                            Featured
-                        </span>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-        </div> <!-- End of NETFLIX SCROLL AREA WRAPPER -->
-    </div>
-</section>
+        </section>
 
         <!-- Daily Groceries -->
         <!-- DAILY GROCERIES - NETFLIX STYLE -->
-<section id="groceries" class="mb-10 hidden">
+        <section id="groceries" class="mb-10 hidden">
 
-    <div
-        class="bg-gradient-to-br from-emerald-50/90 to-white/60 backdrop-blur-xl rounded-3xl p-6 border-t-[4px] border-t-emerald-500 border border-white/60 shadow-lg hover:shadow-xl hover:shadow-emerald-500/20 transition-all duration-300 relative overflow-hidden group">
+            <div
+                class="bg-gradient-to-br from-emerald-50/90 to-white/60 backdrop-blur-xl rounded-3xl p-6 border-t-[4px] border-t-emerald-500 border border-white/60 shadow-lg hover:shadow-xl hover:shadow-emerald-500/20 transition-all duration-300 relative overflow-hidden group">
 
-        <!-- Glow -->
-        <div
-            class="absolute -top-10 -right-10 w-48 h-48 bg-emerald-400/20 rounded-full blur-3xl group-hover:bg-emerald-400/30 transition-colors duration-500 pointer-events-none">
-        </div>
-
-        <!-- HEADER -->
-        <div class="flex justify-between items-center mb-6 relative z-10">
-
-            <!-- LEFT -->
-            <div class="flex items-center gap-4">
-
+                <!-- Glow -->
                 <div
-                    class="w-12 h-12 rounded-2xl bg-gradient-to-br from-white to-emerald-50 text-emerald-600 flex items-center justify-center text-2xl shadow border border-emerald-100">
-                    🛒
+                    class="absolute -top-10 -right-10 w-48 h-48 bg-emerald-400/20 rounded-full blur-3xl group-hover:bg-emerald-400/30 transition-colors duration-500 pointer-events-none">
                 </div>
 
-                <h2
-                    class="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-gray-900 to-emerald-800 tracking-tight">
-                    <span class="lang-en">Daily Groceries</span><span class="lang-ur">روزمرہ کی اشیائے خوردونوش</span>
-                </h2>
-            </div>
+                <!-- HEADER -->
+                <div class="flex justify-between items-center mb-6 relative z-10">
 
-            <!-- RIGHT -->
-            <div class="flex items-center gap-3">
+                    <!-- LEFT -->
+                    <div class="flex items-center gap-4">
 
-                <!-- VIEW MORE -->
-                <a href="grocery.html"
-                    class="text-emerald-600 hover:text-emerald-800 font-semibold text-sm transition-all hover:translate-x-1 flex items-center gap-1">
-                    View More
-                    <i class="fas fa-arrow-right text-[10px]"></i>
-                </a>
+                        <div
+                            class="w-12 h-12 rounded-2xl bg-gradient-to-br from-white to-emerald-50 text-emerald-600 flex items-center justify-center text-2xl shadow border border-emerald-100">
+                            🛒
+                        </div>
 
-                <!-- LEFT BUTTON -->
-                <button onclick="scrollGroceries(-1)"
-                    class="w-11 h-11 rounded-full bg-white border border-emerald-100 shadow hover:bg-emerald-50 transition flex items-center justify-center">
+                        <h2
+                            class="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-gray-900 to-emerald-800 tracking-tight">
+                            <span class="lang-en">Daily Groceries</span><span class="lang-ur">روزمرہ کی اشیائے
+                                خوردونوش</span>
+                        </h2>
+                    </div>
 
-                    <i class="fas fa-chevron-left text-emerald-600 text-lg"></i>
-                </button>
+                    <!-- RIGHT -->
+                    <div class="flex items-center gap-3">
 
-                <!-- RIGHT BUTTON -->
-                <button onclick="scrollGroceries(1)"
-                    class="w-11 h-11 rounded-full bg-white border border-emerald-100 shadow hover:bg-emerald-50 transition flex items-center justify-center">
+                        <!-- VIEW MORE -->
+                        <a href="grocery.html"
+                            class="text-emerald-600 hover:text-emerald-800 font-semibold text-sm transition-all hover:translate-x-1 flex items-center gap-1">
+                            View More
+                            <i class="fas fa-arrow-right text-[10px]"></i>
+                        </a>
 
-                    <i class="fas fa-chevron-right text-emerald-600 text-lg"></i>
-                </button>
+                        <!-- LEFT BUTTON -->
+                        <button onclick="scrollGroceries(-1)"
+                            class="w-11 h-11 rounded-full bg-white border border-emerald-100 shadow hover:bg-emerald-50 transition flex items-center justify-center">
 
-            </div>
-        </div>
+                            <i class="fas fa-chevron-left text-emerald-600 text-lg"></i>
+                        </button>
 
-        <!-- NETFLIX STYLE SCROLL -->
-        <div id="grocerySlider"
-            class="flex gap-5 overflow-x-auto scroll-smooth no-scrollbar pb-2 relative z-10">
+                        <!-- RIGHT BUTTON -->
+                        <button onclick="scrollGroceries(1)"
+                            class="w-11 h-11 rounded-full bg-white border border-emerald-100 shadow hover:bg-emerald-50 transition flex items-center justify-center">
 
-            <!-- CARD -->
-            <div
-                class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] bg-white rounded-3xl overflow-hidden border border-emerald-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
+                            <i class="fas fa-chevron-right text-emerald-600 text-lg"></i>
+                        </button>
 
-                <img src="../images/categories/grocery/daily-grocery.jpg"
-                    class="w-full h-40 object-cover">
-
-                <div class="p-4">
-                    <h4 class="font-bold text-gray-800 text-base">Daily Grocery</h4>
-
-                    <div class="flex justify-between items-center mt-2">
-                        <p class="text-emerald-600 font-bold">Rs. ---</p>
-
-                        <span
-                            class="text-xs bg-emerald-100 text-emerald-700 px-2 py-1 rounded-full">
-                            Fresh
-                        </span>
                     </div>
                 </div>
-            </div>
 
-            <!-- CARD -->
-            <div
-                class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] bg-white rounded-3xl overflow-hidden border border-emerald-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
+                <!-- NETFLIX STYLE SCROLL -->
+                <div id="grocerySlider"
+                    class="flex gap-5 overflow-x-auto scroll-smooth no-scrollbar pb-2 relative z-10">
 
-                <img src="../images/categories/grocery/daily-grocery-02.jpg"
-                    class="w-full h-40 object-cover">
+                    <!-- CARD -->
+                    <div
+                        class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] bg-white rounded-3xl overflow-hidden border border-emerald-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
 
-                <div class="p-4">
-                    <h4 class="font-bold text-gray-800 text-base">Rice & Flour</h4>
+                        <img src="../images/categories/grocery/daily-grocery.jpg" class="w-full h-40 object-cover">
 
-                    <div class="flex justify-between items-center mt-2">
-                        <p class="text-emerald-600 font-bold">Rs. ---</p>
+                        <div class="p-4">
+                            <h4 class="font-bold text-gray-800 text-base">Daily Grocery</h4>
 
-                        <span
-                            class="text-xs bg-yellow-100 text-yellow-700 px-2 py-1 rounded-full">
-                            Popular
-                        </span>
+                            <div class="flex justify-between items-center mt-2">
+                                <p class="text-emerald-600 font-bold">Rs. ---</p>
+
+                                <span class="text-xs bg-emerald-100 text-emerald-700 px-2 py-1 rounded-full">
+                                    Fresh
+                                </span>
+                            </div>
+                        </div>
                     </div>
+
+                    <!-- CARD -->
+                    <div
+                        class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] bg-white rounded-3xl overflow-hidden border border-emerald-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
+
+                        <img src="../images/categories/grocery/daily-grocery-02.jpg" class="w-full h-40 object-cover">
+
+                        <div class="p-4">
+                            <h4 class="font-bold text-gray-800 text-base">Rice & Flour</h4>
+
+                            <div class="flex justify-between items-center mt-2">
+                                <p class="text-emerald-600 font-bold">Rs. ---</p>
+
+                                <span class="text-xs bg-yellow-100 text-yellow-700 px-2 py-1 rounded-full">
+                                    Popular
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CARD -->
+                    <div
+                        class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] bg-white rounded-3xl overflow-hidden border border-emerald-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
+
+                        <img src="../images/categories/grocery/daily-grocery-03.jpg" class="w-full h-40 object-cover">
+
+                        <div class="p-4">
+                            <h4 class="font-bold text-gray-800 text-base">Cooking Oil</h4>
+
+                            <div class="flex justify-between items-center mt-2">
+                                <p class="text-emerald-600 font-bold">Rs. ---</p>
+
+                                <span class="text-xs bg-red-100 text-red-700 px-2 py-1 rounded-full">
+                                    Hot
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CARD -->
+                    <div
+                        class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] bg-white rounded-3xl overflow-hidden border border-emerald-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
+
+                        <img src="../images/categories/grocery/daily-grocery-02.jpg" class="w-full h-40 object-cover">
+
+                        <div class="p-4">
+                            <h4 class="font-bold text-gray-800 text-base">Snacks</h4>
+
+                            <div class="flex justify-between items-center mt-2">
+                                <p class="text-emerald-600 font-bold">Rs. ---</p>
+
+                                <span class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full">
+                                    Trending
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CARD -->
+                    <div
+                        class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] bg-white rounded-3xl overflow-hidden border border-emerald-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
+
+                        <img src="../images/categories/grocery/daily-grocery-03.jpg" class="w-full h-40 object-cover">
+
+                        <div class="p-4">
+                            <h4 class="font-bold text-gray-800 text-base">Bakery Items</h4>
+
+                            <div class="flex justify-between items-center mt-2">
+                                <p class="text-emerald-600 font-bold">Rs. ---</p>
+
+                                <span class="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded-full">
+                                    Featured
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
-
-            <!-- CARD -->
-            <div
-                class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] bg-white rounded-3xl overflow-hidden border border-emerald-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
-
-                <img src="../images/categories/grocery/daily-grocery-03.jpg"
-                    class="w-full h-40 object-cover">
-
-                <div class="p-4">
-                    <h4 class="font-bold text-gray-800 text-base">Cooking Oil</h4>
-
-                    <div class="flex justify-between items-center mt-2">
-                        <p class="text-emerald-600 font-bold">Rs. ---</p>
-
-                        <span
-                            class="text-xs bg-red-100 text-red-700 px-2 py-1 rounded-full">
-                            Hot
-                        </span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- CARD -->
-            <div
-                class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] bg-white rounded-3xl overflow-hidden border border-emerald-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
-
-                <img src="../images/categories/grocery/daily-grocery-02.jpg"
-                    class="w-full h-40 object-cover">
-
-                <div class="p-4">
-                    <h4 class="font-bold text-gray-800 text-base">Snacks</h4>
-
-                    <div class="flex justify-between items-center mt-2">
-                        <p class="text-emerald-600 font-bold">Rs. ---</p>
-
-                        <span
-                            class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full">
-                            Trending
-                        </span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- CARD -->
-            <div
-                class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] bg-white rounded-3xl overflow-hidden border border-emerald-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
-
-                <img src="../images/categories/grocery/daily-grocery-03.jpg"
-                    class="w-full h-40 object-cover">
-
-                <div class="p-4">
-                    <h4 class="font-bold text-gray-800 text-base">Bakery Items</h4>
-
-                    <div class="flex justify-between items-center mt-2">
-                        <p class="text-emerald-600 font-bold">Rs. ---</p>
-
-                        <span
-                            class="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded-full">
-                            Featured
-                        </span>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
+        </section>
 
         <!-- ELECTRONICS - NETFLIX STYLE -->
-<section id="electronics" class="mb-10 hidden">
+        <section id="electronics" class="mb-10 hidden">
 
-    <div
-        class="bg-gradient-to-br from-blue-50/90 to-white/60 backdrop-blur-xl rounded-3xl p-6 border-t-[4px] border-t-blue-500 border border-white/60 shadow-lg hover:shadow-xl hover:shadow-blue-500/20 transition-all duration-300 relative overflow-hidden group">
+            <div
+                class="bg-gradient-to-br from-blue-50/90 to-white/60 backdrop-blur-xl rounded-3xl p-6 border-t-[4px] border-t-blue-500 border border-white/60 shadow-lg hover:shadow-xl hover:shadow-blue-500/20 transition-all duration-300 relative overflow-hidden group">
 
-        <!-- GLOW -->
-        <div
-            class="absolute -top-10 -right-10 w-48 h-48 bg-blue-400/20 rounded-full blur-3xl group-hover:bg-blue-400/30 transition-colors duration-500 pointer-events-none">
-        </div>
-
-        <!-- HEADER -->
-        <div class="flex justify-between items-center mb-6 relative z-10">
-
-            <!-- LEFT -->
-            <div class="flex items-center gap-4">
-
+                <!-- GLOW -->
                 <div
-                    class="w-12 h-12 rounded-2xl bg-gradient-to-br from-white to-blue-50 text-blue-600 flex items-center justify-center text-2xl shadow border border-blue-100">
-                    🔌
+                    class="absolute -top-10 -right-10 w-48 h-48 bg-blue-400/20 rounded-full blur-3xl group-hover:bg-blue-400/30 transition-colors duration-500 pointer-events-none">
                 </div>
 
-                <h2
-                    class="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-gray-900 to-blue-800 tracking-tight">
-                    <span class="lang-en">Electronics</span><span class="lang-ur">الیکٹرونکس</span>
-                </h2>
+                <!-- HEADER -->
+                <div class="flex justify-between items-center mb-6 relative z-10">
 
-            </div>
+                    <!-- LEFT -->
+                    <div class="flex items-center gap-4">
 
-            <!-- RIGHT -->
-            <div class="flex items-center gap-3">
+                        <div
+                            class="w-12 h-12 rounded-2xl bg-gradient-to-br from-white to-blue-50 text-blue-600 flex items-center justify-center text-2xl shadow border border-blue-100">
+                            🔌
+                        </div>
 
-                <!-- VIEW MORE -->
-                <a href="electronics.html"
-                    class="text-emerald-600 hover:text-emerald-800 font-semibold text-sm transition-all hover:translate-x-1 flex items-center gap-1">
+                        <h2
+                            class="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-gray-900 to-blue-800 tracking-tight">
+                            <span class="lang-en">Electronics</span><span class="lang-ur">الیکٹرونکس</span>
+                        </h2>
 
-                    View More
-                    <i class="fas fa-arrow-right text-[10px]"></i>
-                </a>
+                    </div>
 
-                <!-- LEFT BUTTON -->
-                <button onclick="scrollElectronics(-1)"
-                    class="w-11 h-11 rounded-full bg-white border border-blue-100 shadow hover:bg-blue-50 transition flex items-center justify-center">
+                    <!-- RIGHT -->
+                    <div class="flex items-center gap-3">
 
-                    <i class="fas fa-chevron-left text-blue-600 text-lg"></i>
-                </button>
+                        <!-- VIEW MORE -->
+                        <a href="electronics.html"
+                            class="text-emerald-600 hover:text-emerald-800 font-semibold text-sm transition-all hover:translate-x-1 flex items-center gap-1">
 
-                <!-- RIGHT BUTTON -->
-                <button onclick="scrollElectronics(1)"
-                    class="w-11 h-11 rounded-full bg-white border border-blue-100 shadow hover:bg-blue-50 transition flex items-center justify-center">
+                            View More
+                            <i class="fas fa-arrow-right text-[10px]"></i>
+                        </a>
 
-                    <i class="fas fa-chevron-right text-blue-600 text-lg"></i>
-                </button>
+                        <!-- LEFT BUTTON -->
+                        <button onclick="scrollElectronics(-1)"
+                            class="w-11 h-11 rounded-full bg-white border border-blue-100 shadow hover:bg-blue-50 transition flex items-center justify-center">
 
-            </div>
-        </div>
+                            <i class="fas fa-chevron-left text-blue-600 text-lg"></i>
+                        </button>
 
-        <!-- NETFLIX SCROLL AREA -->
-        <div id="electronicsSlider"
-            class="flex gap-5 overflow-x-auto scroll-smooth no-scrollbar pb-2 relative z-10">
+                        <!-- RIGHT BUTTON -->
+                        <button onclick="scrollElectronics(1)"
+                            class="w-11 h-11 rounded-full bg-white border border-blue-100 shadow hover:bg-blue-50 transition flex items-center justify-center">
 
-            <!-- CARD -->
-            <div
-                class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] md:max-w-[220px] bg-white rounded-3xl overflow-hidden border border-blue-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
-
-                <img src="../images/categories/electronics/mix-items.jpeg"
-                    class="w-full h-40 object-cover">
-
-                <div class="p-4">
-
-                    <h4 class="font-bold text-gray-800 text-base truncate">
-                        Mix Items
-                    </h4>
-
-                    <div class="flex justify-between items-center mt-2">
-
-                        <p class="text-emerald-600 font-bold">
-                            Rs. ---
-                        </p>
-
-                        <span
-                            class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full">
-                            Trending
-                        </span>
+                            <i class="fas fa-chevron-right text-blue-600 text-lg"></i>
+                        </button>
 
                     </div>
                 </div>
-            </div>
 
-            <!-- CARD -->
-            <div
-                class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] md:max-w-[220px] bg-white rounded-3xl overflow-hidden border border-blue-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
+                <!-- NETFLIX SCROLL AREA -->
+                <div id="electronicsSlider"
+                    class="flex gap-5 overflow-x-auto scroll-smooth no-scrollbar pb-2 relative z-10">
 
-                <img src="../images/categories/electronics/mobile-phones.jpg"
-                    class="w-full h-40 object-cover">
+                    <!-- CARD -->
+                    <div
+                        class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] md:max-w-[220px] bg-white rounded-3xl overflow-hidden border border-blue-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
 
-                <div class="p-4">
+                        <img src="../images/categories/electronics/mix-items.jpeg" class="w-full h-40 object-cover">
 
-                    <h4 class="font-bold text-gray-800 text-base truncate">
-                        Mobile Phones
-                    </h4>
+                        <div class="p-4">
 
-                    <div class="flex justify-between items-center mt-2">
+                            <h4 class="font-bold text-gray-800 text-base truncate">
+                                Mix Items
+                            </h4>
 
-                        <p class="text-emerald-600 font-bold">
-                            Rs. ---
-                        </p>
+                            <div class="flex justify-between items-center mt-2">
 
-                        <span
-                            class="text-xs bg-emerald-100 text-emerald-700 px-2 py-1 rounded-full">
-                            Popular
-                        </span>
+                                <p class="text-emerald-600 font-bold">
+                                    Rs. ---
+                                </p>
 
+                                <span class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full">
+                                    Trending
+                                </span>
+
+                            </div>
+                        </div>
                     </div>
+
+                    <!-- CARD -->
+                    <div
+                        class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] md:max-w-[220px] bg-white rounded-3xl overflow-hidden border border-blue-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
+
+                        <img src="../images/categories/electronics/mobile-phones.jpg" class="w-full h-40 object-cover">
+
+                        <div class="p-4">
+
+                            <h4 class="font-bold text-gray-800 text-base truncate">
+                                Mobile Phones
+                            </h4>
+
+                            <div class="flex justify-between items-center mt-2">
+
+                                <p class="text-emerald-600 font-bold">
+                                    Rs. ---
+                                </p>
+
+                                <span class="text-xs bg-emerald-100 text-emerald-700 px-2 py-1 rounded-full">
+                                    Popular
+                                </span>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CARD -->
+                    <div
+                        class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] md:max-w-[220px] bg-white rounded-3xl overflow-hidden border border-blue-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
+
+                        <img src="../images/categories/electronics/tv-deals.jpg" class="w-full h-40 object-cover">
+
+                        <div class="p-4">
+
+                            <h4 class="font-bold text-gray-800 text-base truncate">
+                                TV Deals
+                            </h4>
+
+                            <div class="flex justify-between items-center mt-2">
+
+                                <p class="text-emerald-600 font-bold">
+                                    Rs. ---
+                                </p>
+
+                                <span class="text-xs bg-red-100 text-red-700 px-2 py-1 rounded-full">
+                                    Hot
+                                </span>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CARD -->
+                    <div
+                        class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] md:max-w-[220px] bg-white rounded-3xl overflow-hidden border border-blue-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
+
+                        <img src="../images/categories/electronics/mobile-phones.jpg" class="w-full h-40 object-cover">
+
+                        <div class="p-4">
+
+                            <h4 class="font-bold text-gray-800 text-base truncate">
+                                Smart Phones
+                            </h4>
+
+                            <div class="flex justify-between items-center mt-2">
+
+                                <p class="text-emerald-600 font-bold">
+                                    Rs. ---
+                                </p>
+
+                                <span class="text-xs bg-yellow-100 text-yellow-700 px-2 py-1 rounded-full">
+                                    Featured
+                                </span>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CARD -->
+                    <div
+                        class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] md:max-w-[220px] bg-white rounded-3xl overflow-hidden border border-blue-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
+
+                        <img src="../images/categories/electronics/tv-deals.jpg" class="w-full h-40 object-cover">
+
+                        <div class="p-4">
+
+                            <h4 class="font-bold text-gray-800 text-base truncate">
+                                LED TVs
+                            </h4>
+
+                            <div class="flex justify-between items-center mt-2">
+
+                                <p class="text-emerald-600 font-bold">
+                                    Rs. ---
+                                </p>
+
+                                <span class="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded-full">
+                                    New
+                                </span>
+
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
-
-            <!-- CARD -->
-            <div
-                class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] md:max-w-[220px] bg-white rounded-3xl overflow-hidden border border-blue-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
-
-                <img src="../images/categories/electronics/tv-deals.jpg"
-                    class="w-full h-40 object-cover">
-
-                <div class="p-4">
-
-                    <h4 class="font-bold text-gray-800 text-base truncate">
-                        TV Deals
-                    </h4>
-
-                    <div class="flex justify-between items-center mt-2">
-
-                        <p class="text-emerald-600 font-bold">
-                            Rs. ---
-                        </p>
-
-                        <span
-                            class="text-xs bg-red-100 text-red-700 px-2 py-1 rounded-full">
-                            Hot
-                        </span>
-
-                    </div>
-                </div>
-            </div>
-
-            <!-- CARD -->
-            <div
-                class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] md:max-w-[220px] bg-white rounded-3xl overflow-hidden border border-blue-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
-
-                <img src="../images/categories/electronics/mobile-phones.jpg"
-                    class="w-full h-40 object-cover">
-
-                <div class="p-4">
-
-                    <h4 class="font-bold text-gray-800 text-base truncate">
-                        Smart Phones
-                    </h4>
-
-                    <div class="flex justify-between items-center mt-2">
-
-                        <p class="text-emerald-600 font-bold">
-                            Rs. ---
-                        </p>
-
-                        <span
-                            class="text-xs bg-yellow-100 text-yellow-700 px-2 py-1 rounded-full">
-                            Featured
-                        </span>
-
-                    </div>
-                </div>
-            </div>
-
-            <!-- CARD -->
-            <div
-                class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] md:max-w-[220px] bg-white rounded-3xl overflow-hidden border border-blue-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
-
-                <img src="../images/categories/electronics/tv-deals.jpg"
-                    class="w-full h-40 object-cover">
-
-                <div class="p-4">
-
-                    <h4 class="font-bold text-gray-800 text-base truncate">
-                        LED TVs
-                    </h4>
-
-                    <div class="flex justify-between items-center mt-2">
-
-                        <p class="text-emerald-600 font-bold">
-                            Rs. ---
-                        </p>
-
-                        <span
-                            class="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded-full">
-                            New
-                        </span>
-
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
+        </section>
 
         <!-- MOBILES - NETFLIX STYLE -->
-<section id="mobiles" class="mb-10 hidden">
+        <section id="mobiles" class="mb-10 hidden">
 
-    <div
-        class="bg-gradient-to-br from-purple-50/90 to-white/60 backdrop-blur-xl rounded-3xl p-6 border-t-[4px] border-t-purple-500 border border-white/60 shadow-lg hover:shadow-xl hover:shadow-purple-500/20 transition-all duration-300 relative overflow-hidden group">
+            <div
+                class="bg-gradient-to-br from-purple-50/90 to-white/60 backdrop-blur-xl rounded-3xl p-6 border-t-[4px] border-t-purple-500 border border-white/60 shadow-lg hover:shadow-xl hover:shadow-purple-500/20 transition-all duration-300 relative overflow-hidden group">
 
-        <!-- GLOW -->
-        <div
-            class="absolute -top-10 -right-10 w-48 h-48 bg-purple-400/20 rounded-full blur-3xl group-hover:bg-purple-400/30 transition-colors duration-500 pointer-events-none">
-        </div>
-
-        <!-- HEADER -->
-        <div class="flex justify-between items-center mb-6 relative z-10">
-
-            <!-- LEFT -->
-            <div class="flex items-center gap-4">
-
+                <!-- GLOW -->
                 <div
-                    class="w-12 h-12 rounded-2xl bg-gradient-to-br from-white to-purple-50 text-purple-600 flex items-center justify-center text-2xl shadow border border-purple-100">
-                    📱
+                    class="absolute -top-10 -right-10 w-48 h-48 bg-purple-400/20 rounded-full blur-3xl group-hover:bg-purple-400/30 transition-colors duration-500 pointer-events-none">
                 </div>
 
-                <h2
-                    class="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-gray-900 to-purple-800 tracking-tight">
-                    <span class="lang-en">Mobiles</span><span class="lang-ur">موبائیلز</span>
-                </h2>
+                <!-- HEADER -->
+                <div class="flex justify-between items-center mb-6 relative z-10">
 
-            </div>
+                    <!-- LEFT -->
+                    <div class="flex items-center gap-4">
 
-            <!-- RIGHT -->
-            <div class="flex items-center gap-3">
+                        <div
+                            class="w-12 h-12 rounded-2xl bg-gradient-to-br from-white to-purple-50 text-purple-600 flex items-center justify-center text-2xl shadow border border-purple-100">
+                            📱
+                        </div>
 
-                <!-- VIEW MORE -->
-                <a href="mobiles.html"
-                    class="text-emerald-600 hover:text-emerald-800 font-semibold text-sm transition-all hover:translate-x-1 flex items-center gap-1">
+                        <h2
+                            class="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-gray-900 to-purple-800 tracking-tight">
+                            <span class="lang-en">Mobiles</span><span class="lang-ur">موبائیلز</span>
+                        </h2>
 
-                    View More
-                    <i class="fas fa-arrow-right text-[10px]"></i>
-                </a>
+                    </div>
 
-                <!-- LEFT BUTTON -->
-                <button onclick="scrollMobiles(-1)"
-                    class="w-11 h-11 rounded-full bg-white border border-purple-100 shadow hover:bg-purple-50 transition flex items-center justify-center">
+                    <!-- RIGHT -->
+                    <div class="flex items-center gap-3">
 
-                    <i class="fas fa-chevron-left text-purple-600 text-lg"></i>
-                </button>
+                        <!-- VIEW MORE -->
+                        <a href="mobiles.html"
+                            class="text-emerald-600 hover:text-emerald-800 font-semibold text-sm transition-all hover:translate-x-1 flex items-center gap-1">
 
-                <!-- RIGHT BUTTON -->
-                <button onclick="scrollMobiles(1)"
-                    class="w-11 h-11 rounded-full bg-white border border-purple-100 shadow hover:bg-purple-50 transition flex items-center justify-center">
+                            View More
+                            <i class="fas fa-arrow-right text-[10px]"></i>
+                        </a>
 
-                    <i class="fas fa-chevron-right text-purple-600 text-lg"></i>
-                </button>
+                        <!-- LEFT BUTTON -->
+                        <button onclick="scrollMobiles(-1)"
+                            class="w-11 h-11 rounded-full bg-white border border-purple-100 shadow hover:bg-purple-50 transition flex items-center justify-center">
 
-            </div>
-        </div>
+                            <i class="fas fa-chevron-left text-purple-600 text-lg"></i>
+                        </button>
 
-        <!-- NETFLIX STYLE SCROLL -->
-        <div id="mobilesSlider"
-            class="flex gap-5 overflow-x-auto scroll-smooth no-scrollbar pb-2 relative z-10">
+                        <!-- RIGHT BUTTON -->
+                        <button onclick="scrollMobiles(1)"
+                            class="w-11 h-11 rounded-full bg-white border border-purple-100 shadow hover:bg-purple-50 transition flex items-center justify-center">
 
-            <!-- CARD -->
-            <div
-                class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] md:max-w-[220px] bg-white rounded-3xl overflow-hidden border border-purple-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
-
-                <img src="../images/categories/mobile-phones/01.jpg"
-                    class="w-full h-40 object-cover">
-
-                <div class="p-4">
-
-                    <h4 class="font-bold text-gray-800 text-base truncate">
-                        iPhone Collection
-                    </h4>
-
-                    <div class="flex justify-between items-center mt-2">
-
-                        <p class="text-emerald-600 font-bold">
-                            Rs. ---
-                        </p>
-
-                        <span
-                            class="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded-full">
-                            Premium
-                        </span>
+                            <i class="fas fa-chevron-right text-purple-600 text-lg"></i>
+                        </button>
 
                     </div>
                 </div>
-            </div>
 
-            <!-- CARD -->
-            <div
-                class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] md:max-w-[220px] bg-white rounded-3xl overflow-hidden border border-purple-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
+                <!-- NETFLIX STYLE SCROLL -->
+                <div id="mobilesSlider"
+                    class="flex gap-5 overflow-x-auto scroll-smooth no-scrollbar pb-2 relative z-10">
 
-                <img src="../images/categories/mobile-phones/mix-phones.jpg"
-                    class="w-full h-40 object-cover">
+                    <!-- CARD -->
+                    <div
+                        class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] md:max-w-[220px] bg-white rounded-3xl overflow-hidden border border-purple-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
 
-                <div class="p-4">
+                        <img src="../images/categories/mobile-phones/01.jpg" class="w-full h-40 object-cover">
 
-                    <h4 class="font-bold text-gray-800 text-base truncate">
-                        Mix Phones
-                    </h4>
+                        <div class="p-4">
 
-                    <div class="flex justify-between items-center mt-2">
+                            <h4 class="font-bold text-gray-800 text-base truncate">
+                                iPhone Collection
+                            </h4>
 
-                        <p class="text-emerald-600 font-bold">
-                            Rs. ---
-                        </p>
+                            <div class="flex justify-between items-center mt-2">
 
-                        <span
-                            class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full">
-                            Trending
-                        </span>
+                                <p class="text-emerald-600 font-bold">
+                                    Rs. ---
+                                </p>
 
+                                <span class="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded-full">
+                                    Premium
+                                </span>
+
+                            </div>
+                        </div>
                     </div>
+
+                    <!-- CARD -->
+                    <div
+                        class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] md:max-w-[220px] bg-white rounded-3xl overflow-hidden border border-purple-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
+
+                        <img src="../images/categories/mobile-phones/mix-phones.jpg" class="w-full h-40 object-cover">
+
+                        <div class="p-4">
+
+                            <h4 class="font-bold text-gray-800 text-base truncate">
+                                Mix Phones
+                            </h4>
+
+                            <div class="flex justify-between items-center mt-2">
+
+                                <p class="text-emerald-600 font-bold">
+                                    Rs. ---
+                                </p>
+
+                                <span class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full">
+                                    Trending
+                                </span>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CARD -->
+                    <div
+                        class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] md:max-w-[220px] bg-white rounded-3xl overflow-hidden border border-purple-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
+
+                        <img src="../images/categories/mobile-phones/samsung-galaxy-s24-qmart-5.jpg"
+                            class="w-full h-40 object-cover">
+
+                        <div class="p-4">
+
+                            <h4 class="font-bold text-gray-800 text-base truncate">
+                                Samsung S24
+                            </h4>
+
+                            <div class="flex justify-between items-center mt-2">
+
+                                <p class="text-emerald-600 font-bold">
+                                    Rs. ---
+                                </p>
+
+                                <span class="text-xs bg-emerald-100 text-emerald-700 px-2 py-1 rounded-full">
+                                    Popular
+                                </span>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CARD -->
+                    <div
+                        class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] md:max-w-[220px] bg-white rounded-3xl overflow-hidden border border-purple-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
+
+                        <img src="../images/categories/mobile-phones/mix-phones.jpg" class="w-full h-40 object-cover">
+
+                        <div class="p-4">
+
+                            <h4 class="font-bold text-gray-800 text-base truncate">
+                                Android Phones
+                            </h4>
+
+                            <div class="flex justify-between items-center mt-2">
+
+                                <p class="text-emerald-600 font-bold">
+                                    Rs. ---
+                                </p>
+
+                                <span class="text-xs bg-red-100 text-red-700 px-2 py-1 rounded-full">
+                                    Hot
+                                </span>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CARD -->
+                    <div
+                        class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] md:max-w-[220px] bg-white rounded-3xl overflow-hidden border border-purple-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
+
+                        <img src="../images/categories/mobile-phones/samsung-galaxy-s24-qmart-5.jpg"
+                            class="w-full h-40 object-cover">
+
+                        <div class="p-4">
+
+                            <h4 class="font-bold text-gray-800 text-base truncate">
+                                Samsung Galaxy
+                            </h4>
+
+                            <div class="flex justify-between items-center mt-2">
+
+                                <p class="text-emerald-600 font-bold">
+                                    Rs. ---
+                                </p>
+
+                                <span class="text-xs bg-yellow-100 text-yellow-700 px-2 py-1 rounded-full">
+                                    Featured
+                                </span>
+
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
-
-            <!-- CARD -->
-            <div
-                class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] md:max-w-[220px] bg-white rounded-3xl overflow-hidden border border-purple-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
-
-                <img src="../images/categories/mobile-phones/samsung-galaxy-s24-qmart-5.jpg"
-                    class="w-full h-40 object-cover">
-
-                <div class="p-4">
-
-                    <h4 class="font-bold text-gray-800 text-base truncate">
-                        Samsung S24
-                    </h4>
-
-                    <div class="flex justify-between items-center mt-2">
-
-                        <p class="text-emerald-600 font-bold">
-                            Rs. ---
-                        </p>
-
-                        <span
-                            class="text-xs bg-emerald-100 text-emerald-700 px-2 py-1 rounded-full">
-                            Popular
-                        </span>
-
-                    </div>
-                </div>
-            </div>
-
-            <!-- CARD -->
-            <div
-                class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] md:max-w-[220px] bg-white rounded-3xl overflow-hidden border border-purple-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
-
-                <img src="../images/categories/mobile-phones/mix-phones.jpg"
-                    class="w-full h-40 object-cover">
-
-                <div class="p-4">
-
-                    <h4 class="font-bold text-gray-800 text-base truncate">
-                        Android Phones
-                    </h4>
-
-                    <div class="flex justify-between items-center mt-2">
-
-                        <p class="text-emerald-600 font-bold">
-                            Rs. ---
-                        </p>
-
-                        <span
-                            class="text-xs bg-red-100 text-red-700 px-2 py-1 rounded-full">
-                            Hot
-                        </span>
-
-                    </div>
-                </div>
-            </div>
-
-            <!-- CARD -->
-            <div
-                class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] md:max-w-[220px] bg-white rounded-3xl overflow-hidden border border-purple-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
-
-                <img src="../images/categories/mobile-phones/samsung-galaxy-s24-qmart-5.jpg"
-                    class="w-full h-40 object-cover">
-
-                <div class="p-4">
-
-                    <h4 class="font-bold text-gray-800 text-base truncate">
-                        Samsung Galaxy
-                    </h4>
-
-                    <div class="flex justify-between items-center mt-2">
-
-                        <p class="text-emerald-600 font-bold">
-                            Rs. ---
-                        </p>
-
-                        <span
-                            class="text-xs bg-yellow-100 text-yellow-700 px-2 py-1 rounded-full">
-                            Featured
-                        </span>
-
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
+        </section>
 
         <!-- LAPTOPS - NETFLIX STYLE -->
-<section id="computers" class="mb-10">
+        <section id="computers" class="mb-10">
 
-    <div
-        class="bg-gradient-to-br from-teal-50/90 to-white/60 backdrop-blur-xl rounded-3xl p-6 border-t-[4px] border-t-teal-500 border border-white/60 shadow-lg hover:shadow-xl hover:shadow-teal-500/20 transition-all duration-300 relative overflow-hidden group">
+            <div
+                class="bg-gradient-to-br from-teal-50/90 to-white/60 backdrop-blur-xl rounded-3xl p-6 border-t-[4px] border-t-teal-500 border border-white/60 shadow-lg hover:shadow-xl hover:shadow-teal-500/20 transition-all duration-300 relative overflow-hidden group">
 
-        <!-- GLOW -->
-        <div
-            class="absolute -top-10 -right-10 w-48 h-48 bg-teal-400/20 rounded-full blur-3xl group-hover:bg-teal-400/30 transition-colors duration-500 pointer-events-none">
-        </div>
-
-        <!-- HEADER -->
-        <div class="flex flex-col md:flex-row md:justify-between md:items-center gap-3 mb-6 relative z-10">
-
-            <!-- LEFT: Title & Icon -->
-            <div class="flex items-center gap-4 w-full md:w-auto">
+                <!-- GLOW -->
                 <div
-                    class="w-12 h-12 rounded-2xl bg-gradient-to-br from-white to-teal-50 text-teal-600 flex items-center justify-center text-2xl shadow border border-teal-100">
-                    💻
-                </div>
-                <h2
-                    class="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-gray-900 to-teal-800 tracking-tight">
-                    <span class="lang-en">Computer Items</span><span class="lang-ur">کمپیوٹرز</span>
-                </h2>
-            </div>
-
-            <!-- Mobile View More Link below title -->
-            <div class="md:hidden w-full flex justify-start -mt-1 mb-1">
-                <a href="computers.html"
-                    class="text-teal-600 hover:text-teal-800 font-semibold text-sm transition-all hover:translate-x-1 flex items-center gap-1">
-                    View More
-                </a>
-            </div>
-
-            <!-- RIGHT: Controls Container -->
-            <div class="flex flex-col md:flex-row md:items-center gap-3 w-full md:w-auto">
-                
-                <!-- Dropdowns arranged horizontally on the same line on mobile -->
-                <div class="flex items-center gap-2 w-full md:w-auto">
-                    <select id="computerProductFilter" class="flex-1 md:flex-none bg-white border border-teal-200 text-xs md:text-sm font-semibold rounded-lg md:rounded-xl px-2.5 md:px-4 py-1.5 md:py-2.5 text-teal-800 outline-none focus:ring-2 focus:ring-teal-500 shadow-sm cursor-pointer md:w-auto">
-                        <option value="">All Products</option>
-                    </select>
-                    <select id="computerPriceSort" class="flex-1 md:flex-none bg-white border border-teal-200 text-xs md:text-sm font-semibold rounded-lg md:rounded-xl px-2.5 md:px-4 py-1.5 md:py-2.5 text-teal-800 outline-none focus:ring-2 focus:ring-teal-500 shadow-sm cursor-pointer md:w-auto">
-                        <option value="">Sort by Price</option>
-                        <option value="Lowest Price">Lowest Price</option>
-                        <option value="Highest Price">Highest Price</option>
-                    </select>
+                    class="absolute -top-10 -right-10 w-48 h-48 bg-teal-400/20 rounded-full blur-3xl group-hover:bg-teal-400/30 transition-colors duration-500 pointer-events-none">
                 </div>
 
-                <!-- Desktop-only navigation triggers -->
-                <div class="hidden md:flex items-center gap-3">
-                    <a href="computers.html"
-                        class="text-teal-600 hover:text-teal-800 font-semibold text-sm transition-all hover:translate-x-1 flex items-center gap-1 mr-2 flex-shrink-0">
-                        View More
-                        <i class="fas fa-arrow-right text-[10px]"></i>
-                    </a>
+                <!-- HEADER -->
+                <div class="flex flex-col md:flex-row md:justify-between md:items-center gap-3 mb-6 relative z-10">
 
+                    <!-- LEFT: Title & Icon -->
+                    <div class="flex items-center gap-4 w-full md:w-auto">
+                        <div
+                            class="w-12 h-12 rounded-2xl bg-gradient-to-br from-white to-teal-50 text-teal-600 flex items-center justify-center text-2xl shadow border border-teal-100">
+                            💻
+                        </div>
+                        <h2
+                            class="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-gray-900 to-teal-800 tracking-tight">
+                            <span class="lang-en">Computer Items</span><span class="lang-ur">کمپیوٹرز</span>
+                        </h2>
+                    </div>
+
+                    <!-- Mobile View More Link below title -->
+                    <div class="md:hidden w-full flex justify-start -mt-1 mb-1">
+                        <a href="computers.html"
+                            class="text-teal-600 hover:text-teal-800 font-semibold text-sm transition-all hover:translate-x-1 flex items-center gap-1">
+                            View More
+                        </a>
+                    </div>
+
+                    <!-- RIGHT: Controls Container -->
+                    <div class="flex flex-col md:flex-row md:items-center gap-3 w-full md:w-auto">
+
+                        <!-- Dropdowns arranged horizontally on the same line on mobile -->
+                        <div class="flex items-center gap-2 w-full md:w-auto">
+                            <select id="computerProductFilter"
+                                class="flex-1 md:flex-none bg-white border border-teal-200 text-xs md:text-sm font-semibold rounded-lg md:rounded-xl px-2.5 md:px-4 py-1.5 md:py-2.5 text-teal-800 outline-none focus:ring-2 focus:ring-teal-500 shadow-sm cursor-pointer md:w-auto">
+                                <option value="">All Products</option>
+                            </select>
+                            <select id="computerPriceSort"
+                                class="flex-1 md:flex-none bg-white border border-teal-200 text-xs md:text-sm font-semibold rounded-lg md:rounded-xl px-2.5 md:px-4 py-1.5 md:py-2.5 text-teal-800 outline-none focus:ring-2 focus:ring-teal-500 shadow-sm cursor-pointer md:w-auto">
+                                <option value="">Sort by Price</option>
+                                <option value="Lowest Price">Lowest Price</option>
+                                <option value="Highest Price">Highest Price</option>
+                            </select>
+                        </div>
+
+                        <!-- Desktop-only navigation triggers -->
+                        <div class="hidden md:flex items-center gap-3">
+                            <a href="computers.html"
+                                class="text-teal-600 hover:text-teal-800 font-semibold text-sm transition-all hover:translate-x-1 flex items-center gap-1 mr-2 flex-shrink-0">
+                                View More
+                                <i class="fas fa-arrow-right text-[10px]"></i>
+                            </a>
+
+                            <button onclick="scrollLaptops(-1)"
+                                class="w-11 h-11 rounded-full bg-white border border-teal-100 shadow hover:bg-teal-50 transition flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-chevron-left text-teal-600 text-lg"></i>
+                            </button>
+
+                            <button onclick="scrollLaptops(1)"
+                                class="w-11 h-11 rounded-full bg-white border border-teal-100 shadow hover:bg-teal-50 transition flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-chevron-right text-teal-600 text-lg"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- slider container wrapper to support relative positioning for mobile-only arrows -->
+                <div class="relative">
+                    <!-- Mobile-only Left Arrow -->
                     <button onclick="scrollLaptops(-1)"
-                        class="w-11 h-11 rounded-full bg-white border border-teal-100 shadow hover:bg-teal-50 transition flex items-center justify-center flex-shrink-0">
-                        <i class="fas fa-chevron-left text-teal-600 text-lg"></i>
+                        class="absolute -left-2 top-1/2 -translate-y-1/2 z-20 w-9 h-9 rounded-full bg-white/95 border border-teal-100 shadow hover:bg-teal-50 transition flex items-center justify-center md:hidden">
+                        <i class="fas fa-chevron-left text-teal-600 text-sm"></i>
                     </button>
 
+                    <!-- Mobile-only Right Arrow -->
                     <button onclick="scrollLaptops(1)"
-                        class="w-11 h-11 rounded-full bg-white border border-teal-100 shadow hover:bg-teal-50 transition flex items-center justify-center flex-shrink-0">
-                        <i class="fas fa-chevron-right text-teal-600 text-lg"></i>
+                        class="absolute -right-2 top-1/2 -translate-y-1/2 z-20 w-9 h-9 rounded-full bg-white/95 border border-teal-100 shadow hover:bg-teal-50 transition flex items-center justify-center md:hidden">
+                        <i class="fas fa-chevron-right text-teal-600 text-sm"></i>
                     </button>
-                </div>
-            </div>
-        </div>
 
-        <!-- slider container wrapper to support relative positioning for mobile-only arrows -->
-        <div class="relative">
-            <!-- Mobile-only Left Arrow -->
-            <button onclick="scrollLaptops(-1)"
-                class="absolute -left-2 top-1/2 -translate-y-1/2 z-20 w-9 h-9 rounded-full bg-white/95 border border-teal-100 shadow hover:bg-teal-50 transition flex items-center justify-center md:hidden">
-                <i class="fas fa-chevron-left text-teal-600 text-sm"></i>
-            </button>
+                    <!-- NETFLIX STYLE SCROLL -->
+                    <div id="laptopsSlider"
+                        class="flex gap-5 overflow-x-auto scroll-smooth no-scrollbar pb-2 relative z-10">
 
-            <!-- Mobile-only Right Arrow -->
-            <button onclick="scrollLaptops(1)"
-                class="absolute -right-2 top-1/2 -translate-y-1/2 z-20 w-9 h-9 rounded-full bg-white/95 border border-teal-100 shadow hover:bg-teal-50 transition flex items-center justify-center md:hidden">
-                <i class="fas fa-chevron-right text-teal-600 text-sm"></i>
-            </button>
+                        <!-- CARD -->
+                        <div
+                            class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] md:max-w-[220px] bg-white rounded-3xl overflow-hidden border border-teal-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
 
-            <!-- NETFLIX STYLE SCROLL -->
-            <div id="laptopsSlider"
-                class="flex gap-5 overflow-x-auto scroll-smooth no-scrollbar pb-2 relative z-10">
+                            <img src="../images/categories/laptops/acer.jpg" class="w-full h-40 object-cover">
 
-            <!-- CARD -->
-            <div
-                class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] md:max-w-[220px] bg-white rounded-3xl overflow-hidden border border-teal-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
+                            <div class="p-4">
 
-                <img src="../images/categories/laptops/acer.jpg"
-                    class="w-full h-40 object-cover">
+                                <h4 class="font-bold text-gray-800 text-base truncate">
+                                    Acer Laptop
+                                </h4>
 
-                <div class="p-4">
+                                <div class="flex justify-between items-center mt-2">
 
-                    <h4 class="font-bold text-gray-800 text-base truncate">
-                        Acer Laptop
-                    </h4>
+                                    <p class="text-emerald-600 font-bold">
+                                        Rs. ---
+                                    </p>
 
-                    <div class="flex justify-between items-center mt-2">
+                                    <span class="text-xs bg-teal-100 text-teal-700 px-2 py-1 rounded-full">
+                                        Trending
+                                    </span>
 
-                        <p class="text-emerald-600 font-bold">
-                            Rs. ---
-                        </p>
+                                </div>
+                            </div>
+                        </div>
 
-                        <span
-                            class="text-xs bg-teal-100 text-teal-700 px-2 py-1 rounded-full">
-                            Trending
-                        </span>
+                        <!-- CARD -->
+                        <div
+                            class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] md:max-w-[220px] bg-white rounded-3xl overflow-hidden border border-teal-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
 
-                    </div>
-                </div>
-            </div>
+                            <img src="../images/categories/laptops/best-laptops.jpg" class="w-full h-40 object-cover">
 
-            <!-- CARD -->
-            <div
-                class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] md:max-w-[220px] bg-white rounded-3xl overflow-hidden border border-teal-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
+                            <div class="p-4">
 
-                <img src="../images/categories/laptops/best-laptops.jpg"
-                    class="w-full h-40 object-cover">
+                                <h4 class="font-bold text-gray-800 text-base truncate">
+                                    Best Laptops
+                                </h4>
 
-                <div class="p-4">
+                                <div class="flex justify-between items-center mt-2">
 
-                    <h4 class="font-bold text-gray-800 text-base truncate">
-                        Best Laptops
-                    </h4>
+                                    <p class="text-emerald-600 font-bold">
+                                        Rs. ---
+                                    </p>
 
-                    <div class="flex justify-between items-center mt-2">
+                                    <span class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full">
+                                        Featured
+                                    </span>
 
-                        <p class="text-emerald-600 font-bold">
-                            Rs. ---
-                        </p>
+                                </div>
+                            </div>
+                        </div>
 
-                        <span
-                            class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full">
-                            Featured
-                        </span>
+                        <!-- CARD -->
+                        <div
+                            class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] md:max-w-[220px] bg-white rounded-3xl overflow-hidden border border-teal-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
 
-                    </div>
-                </div>
-            </div>
+                            <img src="../images/categories/laptops/hp.jpg" class="w-full h-40 object-cover">
 
-            <!-- CARD -->
-            <div
-                class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] md:max-w-[220px] bg-white rounded-3xl overflow-hidden border border-teal-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
+                            <div class="p-4">
 
-                <img src="../images/categories/laptops/hp.jpg"
-                    class="w-full h-40 object-cover">
+                                <h4 class="font-bold text-gray-800 text-base truncate">
+                                    HP Laptop
+                                </h4>
 
-                <div class="p-4">
+                                <div class="flex justify-between items-center mt-2">
 
-                    <h4 class="font-bold text-gray-800 text-base truncate">
-                        HP Laptop
-                    </h4>
+                                    <p class="text-emerald-600 font-bold">
+                                        Rs. ---
+                                    </p>
 
-                    <div class="flex justify-between items-center mt-2">
+                                    <span class="text-xs bg-emerald-100 text-emerald-700 px-2 py-1 rounded-full">
+                                        Popular
+                                    </span>
 
-                        <p class="text-emerald-600 font-bold">
-                            Rs. ---
-                        </p>
+                                </div>
+                            </div>
+                        </div>
 
-                        <span
-                            class="text-xs bg-emerald-100 text-emerald-700 px-2 py-1 rounded-full">
-                            Popular
-                        </span>
+                        <!-- CARD -->
+                        <div
+                            class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] md:max-w-[220px] bg-white rounded-3xl overflow-hidden border border-teal-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
 
-                    </div>
-                </div>
-            </div>
+                            <img src="../images/categories/laptops/best-laptops.jpg" class="w-full h-40 object-cover">
 
-            <!-- CARD -->
-            <div
-                class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] md:max-w-[220px] bg-white rounded-3xl overflow-hidden border border-teal-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
+                            <div class="p-4">
 
-                <img src="../images/categories/laptops/best-laptops.jpg"
-                    class="w-full h-40 object-cover">
+                                <h4 class="font-bold text-gray-800 text-base truncate">
+                                    Gaming Laptop
+                                </h4>
 
-                <div class="p-4">
+                                <div class="flex justify-between items-center mt-2">
 
-                    <h4 class="font-bold text-gray-800 text-base truncate">
-                        Gaming Laptop
-                    </h4>
+                                    <p class="text-emerald-600 font-bold">
+                                        Rs. ---
+                                    </p>
 
-                    <div class="flex justify-between items-center mt-2">
+                                    <span class="text-xs bg-red-100 text-red-700 px-2 py-1 rounded-full">
+                                        Hot
+                                    </span>
 
-                        <p class="text-emerald-600 font-bold">
-                            Rs. ---
-                        </p>
+                                </div>
+                            </div>
+                        </div>
 
-                        <span
-                            class="text-xs bg-red-100 text-red-700 px-2 py-1 rounded-full">
-                            Hot
-                        </span>
+                        <!-- CARD -->
+                        <div
+                            class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] md:max-w-[220px] bg-white rounded-3xl overflow-hidden border border-teal-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
 
-                    </div>
-                </div>
-            </div>
+                            <img src="../images/categories/laptops/hp.jpg" class="w-full h-40 object-cover">
 
-            <!-- CARD -->
-            <div
-                class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] md:max-w-[220px] bg-white rounded-3xl overflow-hidden border border-teal-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
+                            <div class="p-4">
 
-                <img src="../images/categories/laptops/hp.jpg"
-                    class="w-full h-40 object-cover">
+                                <h4 class="font-bold text-gray-800 text-base truncate">
+                                    Office Laptop
+                                </h4>
 
-                <div class="p-4">
+                                <div class="flex justify-between items-center mt-2">
 
-                    <h4 class="font-bold text-gray-800 text-base truncate">
-                        Office Laptop
-                    </h4>
+                                    <p class="text-emerald-600 font-bold">
+                                        Rs. ---
+                                    </p>
 
-                    <div class="flex justify-between items-center mt-2">
+                                    <span class="text-xs bg-yellow-100 text-yellow-700 px-2 py-1 rounded-full">
+                                        Recommended
+                                    </span>
 
-                        <p class="text-emerald-600 font-bold">
-                            Rs. ---
-                        </p>
-
-                        <span
-                            class="text-xs bg-yellow-100 text-yellow-700 px-2 py-1 rounded-full">
-                            Recommended
-                        </span>
+                                </div>
+                            </div>
+                        </div>
 
                     </div>
                 </div>
             </div>
-
-        </div>
-    </div>
-</div>
-</section>
+        </section>
 
         <!-- PROPERTY - NETFLIX STYLE -->
-<section id="property" class="mb-10 hidden">
+        <section id="property" class="mb-10 hidden">
 
-    <div
-        class="bg-gradient-to-br from-red-50/90 to-white/60 backdrop-blur-xl rounded-3xl p-6 border-t-[4px] border-t-red-500 border border-white/60 shadow-lg hover:shadow-xl hover:shadow-red-500/20 transition-all duration-300 relative overflow-hidden group">
+            <div
+                class="bg-gradient-to-br from-red-50/90 to-white/60 backdrop-blur-xl rounded-3xl p-6 border-t-[4px] border-t-red-500 border border-white/60 shadow-lg hover:shadow-xl hover:shadow-red-500/20 transition-all duration-300 relative overflow-hidden group">
 
-        <!-- GLOW -->
-        <div
-            class="absolute -top-10 -right-10 w-48 h-48 bg-red-400/20 rounded-full blur-3xl group-hover:bg-red-400/30 transition-colors duration-500 pointer-events-none">
-        </div>
-
-        <!-- HEADER -->
-        <div class="flex justify-between items-center mb-6 relative z-10">
-
-            <!-- LEFT -->
-            <div class="flex items-center gap-4">
-
+                <!-- GLOW -->
                 <div
-                    class="w-12 h-12 rounded-2xl bg-gradient-to-br from-white to-red-50 text-red-600 flex items-center justify-center text-2xl shadow border border-red-100">
-                    🏠
+                    class="absolute -top-10 -right-10 w-48 h-48 bg-red-400/20 rounded-full blur-3xl group-hover:bg-red-400/30 transition-colors duration-500 pointer-events-none">
                 </div>
 
-                <h2
-                    class="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-gray-900 to-red-800 tracking-tight">
-                    <span class="lang-en">Property</span><span class="lang-ur">پروپرٹی</span>
-                </h2>
+                <!-- HEADER -->
+                <div class="flex justify-between items-center mb-6 relative z-10">
 
-            </div>
+                    <!-- LEFT -->
+                    <div class="flex items-center gap-4">
 
-            <!-- RIGHT -->
-            <div class="flex items-center gap-3">
+                        <div
+                            class="w-12 h-12 rounded-2xl bg-gradient-to-br from-white to-red-50 text-red-600 flex items-center justify-center text-2xl shadow border border-red-100">
+                            🏠
+                        </div>
 
-                <!-- VIEW MORE -->
-                <a href="property.html"
-                    class="text-emerald-600 hover:text-emerald-800 font-semibold text-sm transition-all hover:translate-x-1 flex items-center gap-1">
+                        <h2
+                            class="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-gray-900 to-red-800 tracking-tight">
+                            <span class="lang-en">Property</span><span class="lang-ur">پروپرٹی</span>
+                        </h2>
 
-                    View More
-                    <i class="fas fa-arrow-right text-[10px]"></i>
-                </a>
+                    </div>
 
-                <!-- LEFT BUTTON -->
-                <button onclick="scrollProperty(-1)"
-                    class="w-11 h-11 rounded-full bg-white border border-red-100 shadow hover:bg-red-50 transition flex items-center justify-center">
+                    <!-- RIGHT -->
+                    <div class="flex items-center gap-3">
 
-                    <i class="fas fa-chevron-left text-red-600 text-lg"></i>
-                </button>
+                        <!-- VIEW MORE -->
+                        <a href="property.html"
+                            class="text-emerald-600 hover:text-emerald-800 font-semibold text-sm transition-all hover:translate-x-1 flex items-center gap-1">
 
-                <!-- RIGHT BUTTON -->
-                <button onclick="scrollProperty(1)"
-                    class="w-11 h-11 rounded-full bg-white border border-red-100 shadow hover:bg-red-50 transition flex items-center justify-center">
+                            View More
+                            <i class="fas fa-arrow-right text-[10px]"></i>
+                        </a>
 
-                    <i class="fas fa-chevron-right text-red-600 text-lg"></i>
-                </button>
+                        <!-- LEFT BUTTON -->
+                        <button onclick="scrollProperty(-1)"
+                            class="w-11 h-11 rounded-full bg-white border border-red-100 shadow hover:bg-red-50 transition flex items-center justify-center">
 
-            </div>
-        </div>
+                            <i class="fas fa-chevron-left text-red-600 text-lg"></i>
+                        </button>
 
-        <!-- NETFLIX STYLE SCROLL -->
-        <div id="propertySlider"
-            class="flex gap-5 overflow-x-auto scroll-smooth no-scrollbar pb-2 relative z-10">
+                        <!-- RIGHT BUTTON -->
+                        <button onclick="scrollProperty(1)"
+                            class="w-11 h-11 rounded-full bg-white border border-red-100 shadow hover:bg-red-50 transition flex items-center justify-center">
 
-            <!-- CARD -->
-            <div
-                class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] md:max-w-[220px] bg-white rounded-3xl overflow-hidden border border-red-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
-
-                <img src="../images/categories/property/buying-a-house.jpg"
-                    class="w-full h-40 object-cover">
-
-                <div class="p-4">
-
-                    <h4 class="font-bold text-gray-800 text-base truncate">
-                        Buying a House
-                    </h4>
-
-                    <div class="flex justify-between items-center mt-2">
-
-                        <p class="text-emerald-600 font-bold">
-                            Rs. ---
-                        </p>
-
-                        <span
-                            class="text-xs bg-red-100 text-red-700 px-2 py-1 rounded-full">
-                            Featured
-                        </span>
+                            <i class="fas fa-chevron-right text-red-600 text-lg"></i>
+                        </button>
 
                     </div>
                 </div>
-            </div>
 
-            <!-- CARD -->
-            <div
-                class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] md:max-w-[220px] bg-white rounded-3xl overflow-hidden border border-red-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
+                <!-- NETFLIX STYLE SCROLL -->
+                <div id="propertySlider"
+                    class="flex gap-5 overflow-x-auto scroll-smooth no-scrollbar pb-2 relative z-10">
 
-                <img src="../images/categories/property/house-for-sale.jpg"
-                    class="w-full h-40 object-cover">
+                    <!-- CARD -->
+                    <div
+                        class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] md:max-w-[220px] bg-white rounded-3xl overflow-hidden border border-red-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
 
-                <div class="p-4">
+                        <img src="../images/categories/property/buying-a-house.jpg" class="w-full h-40 object-cover">
 
-                    <h4 class="font-bold text-gray-800 text-base truncate">
-                        House for Sale
-                    </h4>
+                        <div class="p-4">
 
-                    <div class="flex justify-between items-center mt-2">
+                            <h4 class="font-bold text-gray-800 text-base truncate">
+                                Buying a House
+                            </h4>
 
-                        <p class="text-emerald-600 font-bold">
-                            Rs. ---
-                        </p>
+                            <div class="flex justify-between items-center mt-2">
 
-                        <span
-                            class="text-xs bg-yellow-100 text-yellow-700 px-2 py-1 rounded-full">
-                            Popular
-                        </span>
+                                <p class="text-emerald-600 font-bold">
+                                    Rs. ---
+                                </p>
 
+                                <span class="text-xs bg-red-100 text-red-700 px-2 py-1 rounded-full">
+                                    Featured
+                                </span>
+
+                            </div>
+                        </div>
                     </div>
+
+                    <!-- CARD -->
+                    <div
+                        class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] md:max-w-[220px] bg-white rounded-3xl overflow-hidden border border-red-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
+
+                        <img src="../images/categories/property/house-for-sale.jpg" class="w-full h-40 object-cover">
+
+                        <div class="p-4">
+
+                            <h4 class="font-bold text-gray-800 text-base truncate">
+                                House for Sale
+                            </h4>
+
+                            <div class="flex justify-between items-center mt-2">
+
+                                <p class="text-emerald-600 font-bold">
+                                    Rs. ---
+                                </p>
+
+                                <span class="text-xs bg-yellow-100 text-yellow-700 px-2 py-1 rounded-full">
+                                    Popular
+                                </span>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CARD -->
+                    <div
+                        class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] md:max-w-[220px] bg-white rounded-3xl overflow-hidden border border-red-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
+
+                        <img src="../images/categories/property/images.jpg" class="w-full h-40 object-cover">
+
+                        <div class="p-4">
+
+                            <h4 class="font-bold text-gray-800 text-base truncate">
+                                Luxury Apartment
+                            </h4>
+
+                            <div class="flex justify-between items-center mt-2">
+
+                                <p class="text-emerald-600 font-bold">
+                                    Rs. ---
+                                </p>
+
+                                <span class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full">
+                                    Trending
+                                </span>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CARD -->
+                    <div
+                        class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] md:max-w-[220px] bg-white rounded-3xl overflow-hidden border border-red-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
+
+                        <img src="../images/categories/property/house-for-sale.jpg" class="w-full h-40 object-cover">
+
+                        <div class="p-4">
+
+                            <h4 class="font-bold text-gray-800 text-base truncate">
+                                Family House
+                            </h4>
+
+                            <div class="flex justify-between items-center mt-2">
+
+                                <p class="text-emerald-600 font-bold">
+                                    Rs. ---
+                                </p>
+
+                                <span class="text-xs bg-emerald-100 text-emerald-700 px-2 py-1 rounded-full">
+                                    Recommended
+                                </span>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CARD -->
+                    <div
+                        class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] md:max-w-[220px] bg-white rounded-3xl overflow-hidden border border-red-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
+
+                        <img src="../images/categories/property/images.jpg" class="w-full h-40 object-cover">
+
+                        <div class="p-4">
+
+                            <h4 class="font-bold text-gray-800 text-base truncate">
+                                Commercial Plaza
+                            </h4>
+
+                            <div class="flex justify-between items-center mt-2">
+
+                                <p class="text-emerald-600 font-bold">
+                                    Rs. ---
+                                </p>
+
+                                <span class="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded-full">
+                                    New
+                                </span>
+
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
-
-            <!-- CARD -->
-            <div
-                class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] md:max-w-[220px] bg-white rounded-3xl overflow-hidden border border-red-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
-
-                <img src="../images/categories/property/images.jpg"
-                    class="w-full h-40 object-cover">
-
-                <div class="p-4">
-
-                    <h4 class="font-bold text-gray-800 text-base truncate">
-                        Luxury Apartment
-                    </h4>
-
-                    <div class="flex justify-between items-center mt-2">
-
-                        <p class="text-emerald-600 font-bold">
-                            Rs. ---
-                        </p>
-
-                        <span
-                            class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full">
-                            Trending
-                        </span>
-
-                    </div>
-                </div>
-            </div>
-
-            <!-- CARD -->
-            <div
-                class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] md:max-w-[220px] bg-white rounded-3xl overflow-hidden border border-red-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
-
-                <img src="../images/categories/property/house-for-sale.jpg"
-                    class="w-full h-40 object-cover">
-
-                <div class="p-4">
-
-                    <h4 class="font-bold text-gray-800 text-base truncate">
-                        Family House
-                    </h4>
-
-                    <div class="flex justify-between items-center mt-2">
-
-                        <p class="text-emerald-600 font-bold">
-                            Rs. ---
-                        </p>
-
-                        <span
-                            class="text-xs bg-emerald-100 text-emerald-700 px-2 py-1 rounded-full">
-                            Recommended
-                        </span>
-
-                    </div>
-                </div>
-            </div>
-
-            <!-- CARD -->
-            <div
-                class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] md:max-w-[220px] bg-white rounded-3xl overflow-hidden border border-red-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
-
-                <img src="../images/categories/property/images.jpg"
-                    class="w-full h-40 object-cover">
-
-                <div class="p-4">
-
-                    <h4 class="font-bold text-gray-800 text-base truncate">
-                        Commercial Plaza
-                    </h4>
-
-                    <div class="flex justify-between items-center mt-2">
-
-                        <p class="text-emerald-600 font-bold">
-                            Rs. ---
-                        </p>
-
-                        <span
-                            class="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded-full">
-                            New
-                        </span>
-
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
+        </section>
 
         <!-- FASHION - NETFLIX STYLE -->
-<section id="fashion" class="mb-10 hidden">
+        <section id="fashion" class="mb-10 hidden">
 
-    <div
-        class="bg-gradient-to-br from-pink-50/90 to-white/60 backdrop-blur-xl rounded-3xl p-6 border-t-[4px] border-t-pink-500 border border-white/60 shadow-lg hover:shadow-xl hover:shadow-pink-500/20 transition-all duration-300 relative overflow-hidden group">
+            <div
+                class="bg-gradient-to-br from-pink-50/90 to-white/60 backdrop-blur-xl rounded-3xl p-6 border-t-[4px] border-t-pink-500 border border-white/60 shadow-lg hover:shadow-xl hover:shadow-pink-500/20 transition-all duration-300 relative overflow-hidden group">
 
-        <!-- GLOW -->
-        <div
-            class="absolute -top-10 -right-10 w-48 h-48 bg-pink-400/20 rounded-full blur-3xl group-hover:bg-pink-400/30 transition-colors duration-500 pointer-events-none">
-        </div>
-
-        <!-- HEADER -->
-        <div class="flex justify-between items-center mb-6 relative z-10">
-
-            <!-- LEFT -->
-            <div class="flex items-center gap-4">
-
+                <!-- GLOW -->
                 <div
-                    class="w-12 h-12 rounded-2xl bg-gradient-to-br from-white to-pink-50 text-pink-600 flex items-center justify-center text-2xl shadow border border-pink-100">
-                    👕
+                    class="absolute -top-10 -right-10 w-48 h-48 bg-pink-400/20 rounded-full blur-3xl group-hover:bg-pink-400/30 transition-colors duration-500 pointer-events-none">
                 </div>
 
-                <h2
-                    class="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-gray-900 to-pink-800 tracking-tight">
-                    <span class="lang-en">Fashion</span><span class="lang-ur">فیشن</span>
-                </h2>
+                <!-- HEADER -->
+                <div class="flex justify-between items-center mb-6 relative z-10">
 
-            </div>
+                    <!-- LEFT -->
+                    <div class="flex items-center gap-4">
 
-            <!-- RIGHT -->
-            <div class="flex items-center gap-3">
+                        <div
+                            class="w-12 h-12 rounded-2xl bg-gradient-to-br from-white to-pink-50 text-pink-600 flex items-center justify-center text-2xl shadow border border-pink-100">
+                            👕
+                        </div>
 
-                <!-- VIEW MORE -->
-                <a href="fashion.html"
-                    class="text-emerald-600 hover:text-emerald-800 font-semibold text-sm transition-all hover:translate-x-1 flex items-center gap-1">
+                        <h2
+                            class="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-gray-900 to-pink-800 tracking-tight">
+                            <span class="lang-en">Fashion</span><span class="lang-ur">فیشن</span>
+                        </h2>
 
-                    View More
-                    <i class="fas fa-arrow-right text-[10px]"></i>
-                </a>
+                    </div>
 
-                <!-- LEFT BUTTON -->
-                <button onclick="scrollFashion(-1)"
-                    class="w-11 h-11 rounded-full bg-white border border-pink-100 shadow hover:bg-pink-50 transition flex items-center justify-center">
+                    <!-- RIGHT -->
+                    <div class="flex items-center gap-3">
 
-                    <i class="fas fa-chevron-left text-pink-600 text-lg"></i>
-                </button>
+                        <!-- VIEW MORE -->
+                        <a href="fashion.html"
+                            class="text-emerald-600 hover:text-emerald-800 font-semibold text-sm transition-all hover:translate-x-1 flex items-center gap-1">
 
-                <!-- RIGHT BUTTON -->
-                <button onclick="scrollFashion(1)"
-                    class="w-11 h-11 rounded-full bg-white border border-pink-100 shadow hover:bg-pink-50 transition flex items-center justify-center">
+                            View More
+                            <i class="fas fa-arrow-right text-[10px]"></i>
+                        </a>
 
-                    <i class="fas fa-chevron-right text-pink-600 text-lg"></i>
-                </button>
+                        <!-- LEFT BUTTON -->
+                        <button onclick="scrollFashion(-1)"
+                            class="w-11 h-11 rounded-full bg-white border border-pink-100 shadow hover:bg-pink-50 transition flex items-center justify-center">
 
-            </div>
-        </div>
+                            <i class="fas fa-chevron-left text-pink-600 text-lg"></i>
+                        </button>
 
-        <!-- NETFLIX STYLE SCROLL -->
-        <div id="fashionSlider"
-            class="flex gap-5 overflow-x-auto scroll-smooth no-scrollbar pb-2 relative z-10">
+                        <!-- RIGHT BUTTON -->
+                        <button onclick="scrollFashion(1)"
+                            class="w-11 h-11 rounded-full bg-white border border-pink-100 shadow hover:bg-pink-50 transition flex items-center justify-center">
 
-            <!-- CARD -->
-            <div
-                class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] md:max-w-[220px] bg-white rounded-3xl overflow-hidden border border-pink-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
-
-                <img src="../images/categories/fashion/ladies.jpg"
-                    class="w-full h-40 object-cover">
-
-                <div class="p-4">
-
-                    <h4 class="font-bold text-gray-800 text-base truncate">
-                        Ladies Collection
-                    </h4>
-
-                    <div class="flex justify-between items-center mt-2">
-
-                        <p class="text-emerald-600 font-bold">
-                            Rs. ---
-                        </p>
-
-                        <span
-                            class="text-xs bg-pink-100 text-pink-700 px-2 py-1 rounded-full">
-                            Trending
-                        </span>
+                            <i class="fas fa-chevron-right text-pink-600 text-lg"></i>
+                        </button>
 
                     </div>
                 </div>
-            </div>
 
-            <!-- CARD -->
-            <div
-                class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] md:max-w-[220px] bg-white rounded-3xl overflow-hidden border border-pink-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
+                <!-- NETFLIX STYLE SCROLL -->
+                <div id="fashionSlider"
+                    class="flex gap-5 overflow-x-auto scroll-smooth no-scrollbar pb-2 relative z-10">
 
-                <img src="../images/categories/fashion/mens.jpg"
-                    class="w-full h-40 object-cover">
+                    <!-- CARD -->
+                    <div
+                        class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] md:max-w-[220px] bg-white rounded-3xl overflow-hidden border border-pink-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
 
-                <div class="p-4">
+                        <img src="../images/categories/fashion/ladies.jpg" class="w-full h-40 object-cover">
 
-                    <h4 class="font-bold text-gray-800 text-base truncate">
-                        Mens Fashion
-                    </h4>
+                        <div class="p-4">
 
-                    <div class="flex justify-between items-center mt-2">
+                            <h4 class="font-bold text-gray-800 text-base truncate">
+                                Ladies Collection
+                            </h4>
 
-                        <p class="text-emerald-600 font-bold">
-                            Rs. ---
-                        </p>
+                            <div class="flex justify-between items-center mt-2">
 
-                        <span
-                            class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full">
-                            Featured
-                        </span>
+                                <p class="text-emerald-600 font-bold">
+                                    Rs. ---
+                                </p>
 
+                                <span class="text-xs bg-pink-100 text-pink-700 px-2 py-1 rounded-full">
+                                    Trending
+                                </span>
+
+                            </div>
+                        </div>
                     </div>
+
+                    <!-- CARD -->
+                    <div
+                        class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] md:max-w-[220px] bg-white rounded-3xl overflow-hidden border border-pink-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
+
+                        <img src="../images/categories/fashion/mens.jpg" class="w-full h-40 object-cover">
+
+                        <div class="p-4">
+
+                            <h4 class="font-bold text-gray-800 text-base truncate">
+                                Mens Fashion
+                            </h4>
+
+                            <div class="flex justify-between items-center mt-2">
+
+                                <p class="text-emerald-600 font-bold">
+                                    Rs. ---
+                                </p>
+
+                                <span class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full">
+                                    Featured
+                                </span>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CARD -->
+                    <div
+                        class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] md:max-w-[220px] bg-white rounded-3xl overflow-hidden border border-pink-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
+
+                        <img src="../images/categories/fashion/kids.jpg" class="w-full h-40 object-cover">
+
+                        <div class="p-4">
+
+                            <h4 class="font-bold text-gray-800 text-base truncate">
+                                Kids Collection
+                            </h4>
+
+                            <div class="flex justify-between items-center mt-2">
+
+                                <p class="text-emerald-600 font-bold">
+                                    Rs. ---
+                                </p>
+
+                                <span class="text-xs bg-yellow-100 text-yellow-700 px-2 py-1 rounded-full">
+                                    Popular
+                                </span>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CARD -->
+                    <div
+                        class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] md:max-w-[220px] bg-white rounded-3xl overflow-hidden border border-pink-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
+
+                        <img src="../images/categories/fashion/mens.jpg" class="w-full h-40 object-cover">
+
+                        <div class="p-4">
+
+                            <h4 class="font-bold text-gray-800 text-base truncate">
+                                Winter Collection
+                            </h4>
+
+                            <div class="flex justify-between items-center mt-2">
+
+                                <p class="text-emerald-600 font-bold">
+                                    Rs. ---
+                                </p>
+
+                                <span class="text-xs bg-emerald-100 text-emerald-700 px-2 py-1 rounded-full">
+                                    Recommended
+                                </span>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CARD -->
+                    <div
+                        class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] md:max-w-[220px] bg-white rounded-3xl overflow-hidden border border-pink-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
+
+                        <img src="../images/categories/fashion/kids.jpg" class="w-full h-40 object-cover">
+
+                        <div class="p-4">
+
+                            <h4 class="font-bold text-gray-800 text-base truncate">
+                                New Arrivals
+                            </h4>
+
+                            <div class="flex justify-between items-center mt-2">
+
+                                <p class="text-emerald-600 font-bold">
+                                    Rs. ---
+                                </p>
+
+                                <span class="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded-full">
+                                    New
+                                </span>
+
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
-
-            <!-- CARD -->
-            <div
-                class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] md:max-w-[220px] bg-white rounded-3xl overflow-hidden border border-pink-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
-
-                <img src="../images/categories/fashion/kids.jpg"
-                    class="w-full h-40 object-cover">
-
-                <div class="p-4">
-
-                    <h4 class="font-bold text-gray-800 text-base truncate">
-                        Kids Collection
-                    </h4>
-
-                    <div class="flex justify-between items-center mt-2">
-
-                        <p class="text-emerald-600 font-bold">
-                            Rs. ---
-                        </p>
-
-                        <span
-                            class="text-xs bg-yellow-100 text-yellow-700 px-2 py-1 rounded-full">
-                            Popular
-                        </span>
-
-                    </div>
-                </div>
-            </div>
-
-            <!-- CARD -->
-            <div
-                class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] md:max-w-[220px] bg-white rounded-3xl overflow-hidden border border-pink-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
-
-                <img src="../images/categories/fashion/mens.jpg"
-                    class="w-full h-40 object-cover">
-
-                <div class="p-4">
-
-                    <h4 class="font-bold text-gray-800 text-base truncate">
-                        Winter Collection
-                    </h4>
-
-                    <div class="flex justify-between items-center mt-2">
-
-                        <p class="text-emerald-600 font-bold">
-                            Rs. ---
-                        </p>
-
-                        <span
-                            class="text-xs bg-emerald-100 text-emerald-700 px-2 py-1 rounded-full">
-                            Recommended
-                        </span>
-
-                    </div>
-                </div>
-            </div>
-
-            <!-- CARD -->
-            <div
-                class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] md:max-w-[220px] bg-white rounded-3xl overflow-hidden border border-pink-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
-
-                <img src="../images/categories/fashion/kids.jpg"
-                    class="w-full h-40 object-cover">
-
-                <div class="p-4">
-
-                    <h4 class="font-bold text-gray-800 text-base truncate">
-                        New Arrivals
-                    </h4>
-
-                    <div class="flex justify-between items-center mt-2">
-
-                        <p class="text-emerald-600 font-bold">
-                            Rs. ---
-                        </p>
-
-                        <span
-                            class="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded-full">
-                            New
-                        </span>
-
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
+        </section>
 
         <!-- PERSONAL CARE / COSMETICS - NETFLIX STYLE -->
-<section id="cosmetics" class="mb-10 hidden">
+        <section id="cosmetics" class="mb-10 hidden">
 
-    <div
-        class="bg-gradient-to-br from-fuchsia-50/90 to-white/60 backdrop-blur-xl rounded-3xl p-6 border-t-[4px] border-t-fuchsia-500 border border-white/60 shadow-lg hover:shadow-xl hover:shadow-fuchsia-500/20 transition-all duration-300 relative overflow-hidden group">
+            <div
+                class="bg-gradient-to-br from-fuchsia-50/90 to-white/60 backdrop-blur-xl rounded-3xl p-6 border-t-[4px] border-t-fuchsia-500 border border-white/60 shadow-lg hover:shadow-xl hover:shadow-fuchsia-500/20 transition-all duration-300 relative overflow-hidden group">
 
-        <!-- GLOW -->
-        <div
-            class="absolute -top-10 -right-10 w-48 h-48 bg-fuchsia-400/20 rounded-full blur-3xl group-hover:bg-fuchsia-400/30 transition-colors duration-500 pointer-events-none">
-        </div>
-
-        <!-- HEADER -->
-        <div class="flex justify-between items-center mb-6 relative z-10">
-
-            <!-- LEFT -->
-            <div class="flex items-center gap-4">
-
+                <!-- GLOW -->
                 <div
-                    class="w-12 h-12 rounded-2xl bg-gradient-to-br from-white to-fuchsia-50 text-fuchsia-600 flex items-center justify-center text-2xl shadow border border-fuchsia-100">
-                    💄
+                    class="absolute -top-10 -right-10 w-48 h-48 bg-fuchsia-400/20 rounded-full blur-3xl group-hover:bg-fuchsia-400/30 transition-colors duration-500 pointer-events-none">
                 </div>
 
-                <h2
-                    class="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-gray-900 to-fuchsia-800 tracking-tight">
-                    <span class="lang-en">Personal Care</span><span class="lang-ur">ذاتی نگہداشت</span>
-                </h2>
+                <!-- HEADER -->
+                <div class="flex justify-between items-center mb-6 relative z-10">
 
-            </div>
+                    <!-- LEFT -->
+                    <div class="flex items-center gap-4">
 
-            <!-- RIGHT -->
-            <div class="flex items-center gap-3">
+                        <div
+                            class="w-12 h-12 rounded-2xl bg-gradient-to-br from-white to-fuchsia-50 text-fuchsia-600 flex items-center justify-center text-2xl shadow border border-fuchsia-100">
+                            💄
+                        </div>
 
-                <!-- VIEW MORE -->
-                <a href="personal-care.html"
-                    class="text-emerald-600 hover:text-emerald-800 font-semibold text-sm transition-all hover:translate-x-1 flex items-center gap-1">
+                        <h2
+                            class="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-gray-900 to-fuchsia-800 tracking-tight">
+                            <span class="lang-en">Personal Care</span><span class="lang-ur">ذاتی نگہداشت</span>
+                        </h2>
 
-                    View More
-                    <i class="fas fa-arrow-right text-[10px]"></i>
-                </a>
+                    </div>
 
-                <!-- LEFT BUTTON -->
-                <button onclick="scrollCosmetics(-1)"
-                    class="w-11 h-11 rounded-full bg-white border border-fuchsia-100 shadow hover:bg-fuchsia-50 transition flex items-center justify-center">
+                    <!-- RIGHT -->
+                    <div class="flex items-center gap-3">
 
-                    <i class="fas fa-chevron-left text-fuchsia-600 text-lg"></i>
-                </button>
+                        <!-- VIEW MORE -->
+                        <a href="personal-care.html"
+                            class="text-emerald-600 hover:text-emerald-800 font-semibold text-sm transition-all hover:translate-x-1 flex items-center gap-1">
 
-                <!-- RIGHT BUTTON -->
-                <button onclick="scrollCosmetics(1)"
-                    class="w-11 h-11 rounded-full bg-white border border-fuchsia-100 shadow hover:bg-fuchsia-50 transition flex items-center justify-center">
+                            View More
+                            <i class="fas fa-arrow-right text-[10px]"></i>
+                        </a>
 
-                    <i class="fas fa-chevron-right text-fuchsia-600 text-lg"></i>
-                </button>
+                        <!-- LEFT BUTTON -->
+                        <button onclick="scrollCosmetics(-1)"
+                            class="w-11 h-11 rounded-full bg-white border border-fuchsia-100 shadow hover:bg-fuchsia-50 transition flex items-center justify-center">
 
-            </div>
-        </div>
+                            <i class="fas fa-chevron-left text-fuchsia-600 text-lg"></i>
+                        </button>
 
-        <!-- NETFLIX STYLE SCROLL -->
-        <div id="cosmeticsSlider"
-            class="flex gap-5 overflow-x-auto scroll-smooth no-scrollbar pb-2 relative z-10">
+                        <!-- RIGHT BUTTON -->
+                        <button onclick="scrollCosmetics(1)"
+                            class="w-11 h-11 rounded-full bg-white border border-fuchsia-100 shadow hover:bg-fuchsia-50 transition flex items-center justify-center">
 
-            <!-- CARD -->
-            <div
-                class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] md:max-w-[220px] bg-white rounded-3xl overflow-hidden border border-fuchsia-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
-
-                <img src="../images/categories/cosmetics/images-01.jpg"
-                    class="w-full h-40 object-cover">
-
-                <div class="p-4">
-
-                    <h4 class="font-bold text-gray-800 text-base truncate">
-                        Makeup Collection
-                    </h4>
-
-                    <div class="flex justify-between items-center mt-2">
-
-                        <p class="text-emerald-600 font-bold">
-                            Rs. ---
-                        </p>
-
-                        <span
-                            class="text-xs bg-fuchsia-100 text-fuchsia-700 px-2 py-1 rounded-full">
-                            Trending
-                        </span>
+                            <i class="fas fa-chevron-right text-fuchsia-600 text-lg"></i>
+                        </button>
 
                     </div>
                 </div>
-            </div>
 
-            <!-- CARD -->
-            <div
-                class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] md:max-w-[220px] bg-white rounded-3xl overflow-hidden border border-fuchsia-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
+                <!-- NETFLIX STYLE SCROLL -->
+                <div id="cosmeticsSlider"
+                    class="flex gap-5 overflow-x-auto scroll-smooth no-scrollbar pb-2 relative z-10">
 
-                <img src="../images/categories/cosmetics/images-02.jpg"
-                    class="w-full h-40 object-cover">
+                    <!-- CARD -->
+                    <div
+                        class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] md:max-w-[220px] bg-white rounded-3xl overflow-hidden border border-fuchsia-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
 
-                <div class="p-4">
+                        <img src="../images/categories/cosmetics/images-01.jpg" class="w-full h-40 object-cover">
 
-                    <h4 class="font-bold text-gray-800 text-base truncate">
-                        Beauty Products
-                    </h4>
+                        <div class="p-4">
 
-                    <div class="flex justify-between items-center mt-2">
+                            <h4 class="font-bold text-gray-800 text-base truncate">
+                                Makeup Collection
+                            </h4>
 
-                        <p class="text-emerald-600 font-bold">
-                            Rs. ---
-                        </p>
+                            <div class="flex justify-between items-center mt-2">
 
-                        <span
-                            class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full">
-                            Featured
-                        </span>
+                                <p class="text-emerald-600 font-bold">
+                                    Rs. ---
+                                </p>
 
+                                <span class="text-xs bg-fuchsia-100 text-fuchsia-700 px-2 py-1 rounded-full">
+                                    Trending
+                                </span>
+
+                            </div>
+                        </div>
                     </div>
+
+                    <!-- CARD -->
+                    <div
+                        class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] md:max-w-[220px] bg-white rounded-3xl overflow-hidden border border-fuchsia-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
+
+                        <img src="../images/categories/cosmetics/images-02.jpg" class="w-full h-40 object-cover">
+
+                        <div class="p-4">
+
+                            <h4 class="font-bold text-gray-800 text-base truncate">
+                                Beauty Products
+                            </h4>
+
+                            <div class="flex justify-between items-center mt-2">
+
+                                <p class="text-emerald-600 font-bold">
+                                    Rs. ---
+                                </p>
+
+                                <span class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full">
+                                    Featured
+                                </span>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CARD -->
+                    <div
+                        class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] md:max-w-[220px] bg-white rounded-3xl overflow-hidden border border-fuchsia-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
+
+                        <img src="../images/categories/cosmetics/images-03.jpg" class="w-full h-40 object-cover">
+
+                        <div class="p-4">
+
+                            <h4 class="font-bold text-gray-800 text-base truncate">
+                                Skin Care
+                            </h4>
+
+                            <div class="flex justify-between items-center mt-2">
+
+                                <p class="text-emerald-600 font-bold">
+                                    Rs. ---
+                                </p>
+
+                                <span class="text-xs bg-yellow-100 text-yellow-700 px-2 py-1 rounded-full">
+                                    Popular
+                                </span>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CARD -->
+                    <div
+                        class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] md:max-w-[220px] bg-white rounded-3xl overflow-hidden border border-fuchsia-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
+
+                        <img src="../images/categories/cosmetics/images-02.jpg" class="w-full h-40 object-cover">
+
+                        <div class="p-4">
+
+                            <h4 class="font-bold text-gray-800 text-base truncate">
+                                Hair Care
+                            </h4>
+
+                            <div class="flex justify-between items-center mt-2">
+
+                                <p class="text-emerald-600 font-bold">
+                                    Rs. ---
+                                </p>
+
+                                <span class="text-xs bg-emerald-100 text-emerald-700 px-2 py-1 rounded-full">
+                                    Recommended
+                                </span>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CARD -->
+                    <div
+                        class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] md:max-w-[220px] bg-white rounded-3xl overflow-hidden border border-fuchsia-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
+
+                        <img src="../images/categories/cosmetics/images-03.jpg" class="w-full h-40 object-cover">
+
+                        <div class="p-4">
+
+                            <h4 class="font-bold text-gray-800 text-base truncate">
+                                Premium Products
+                            </h4>
+
+                            <div class="flex justify-between items-center mt-2">
+
+                                <p class="text-emerald-600 font-bold">
+                                    Rs. ---
+                                </p>
+
+                                <span class="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded-full">
+                                    New
+                                </span>
+
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
-
-            <!-- CARD -->
-            <div
-                class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] md:max-w-[220px] bg-white rounded-3xl overflow-hidden border border-fuchsia-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
-
-                <img src="../images/categories/cosmetics/images-03.jpg"
-                    class="w-full h-40 object-cover">
-
-                <div class="p-4">
-
-                    <h4 class="font-bold text-gray-800 text-base truncate">
-                        Skin Care
-                    </h4>
-
-                    <div class="flex justify-between items-center mt-2">
-
-                        <p class="text-emerald-600 font-bold">
-                            Rs. ---
-                        </p>
-
-                        <span
-                            class="text-xs bg-yellow-100 text-yellow-700 px-2 py-1 rounded-full">
-                            Popular
-                        </span>
-
-                    </div>
-                </div>
-            </div>
-
-            <!-- CARD -->
-            <div
-                class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] md:max-w-[220px] bg-white rounded-3xl overflow-hidden border border-fuchsia-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
-
-                <img src="../images/categories/cosmetics/images-02.jpg"
-                    class="w-full h-40 object-cover">
-
-                <div class="p-4">
-
-                    <h4 class="font-bold text-gray-800 text-base truncate">
-                        Hair Care
-                    </h4>
-
-                    <div class="flex justify-between items-center mt-2">
-
-                        <p class="text-emerald-600 font-bold">
-                            Rs. ---
-                        </p>
-
-                        <span
-                            class="text-xs bg-emerald-100 text-emerald-700 px-2 py-1 rounded-full">
-                            Recommended
-                        </span>
-
-                    </div>
-                </div>
-            </div>
-
-            <!-- CARD -->
-            <div
-                class="w-[80vw] min-w-[80vw] md:w-auto md:min-w-[220px] md:max-w-[220px] bg-white rounded-3xl overflow-hidden border border-fuchsia-100 shadow-md hover:scale-105 hover:shadow-2xl transition duration-300 flex-shrink-0">
-
-                <img src="../images/categories/cosmetics/images-03.jpg"
-                    class="w-full h-40 object-cover">
-
-                <div class="p-4">
-
-                    <h4 class="font-bold text-gray-800 text-base truncate">
-                        Premium Products
-                    </h4>
-
-                    <div class="flex justify-between items-center mt-2">
-
-                        <p class="text-emerald-600 font-bold">
-                            Rs. ---
-                        </p>
-
-                        <span
-                            class="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded-full">
-                            New
-                        </span>
-
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
+        </section>
 
         <!-- Kids -->
-<section id="kids" class="mb-10 min-h-[calc(100vh-140px)] hidden">
-    <div
-        class="bg-gradient-to-br from-yellow-50/90 to-white/60 backdrop-blur-xl rounded-3xl p-6 border-t-[4px] border-t-yellow-500 border border-white/60 shadow-lg hover:shadow-xl hover:shadow-yellow-500/20 transition-all duration-300 relative overflow-hidden group">
+        <section id="kids" class="mb-10 min-h-[calc(100vh-140px)] hidden">
+            <div
+                class="bg-gradient-to-br from-yellow-50/90 to-white/60 backdrop-blur-xl rounded-3xl p-6 border-t-[4px] border-t-yellow-500 border border-white/60 shadow-lg hover:shadow-xl hover:shadow-yellow-500/20 transition-all duration-300 relative overflow-hidden group">
 
-        <!-- Glow Effect -->
-        <div
-            class="absolute -top-10 -right-10 w-48 h-48 bg-yellow-400/20 rounded-full blur-3xl group-hover:bg-yellow-400/30 transition-colors duration-500 pointer-events-none">
-        </div>
-
-        <!-- Header -->
-        <div class="flex justify-between items-center mb-6 relative z-10">
-
-            <!-- Left Side -->
-            <div class="flex items-center gap-4">
+                <!-- Glow Effect -->
                 <div
-                    class="w-12 h-12 rounded-2xl bg-gradient-to-br from-white to-yellow-50 text-yellow-600 flex items-center justify-center text-2xl shadow-[0_4px_10px_rgba(0,0,0,0.05)] border border-yellow-100">
-                    🍼
+                    class="absolute -top-10 -right-10 w-48 h-48 bg-yellow-400/20 rounded-full blur-3xl group-hover:bg-yellow-400/30 transition-colors duration-500 pointer-events-none">
                 </div>
 
-                <h2
-                    class="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-gray-900 to-yellow-800 tracking-tight">
-                    <span class="lang-en">Kids</span><span class="lang-ur">کڈذ</span>
-                </h2>
-            </div>
+                <!-- Header -->
+                <div class="flex justify-between items-center mb-6 relative z-10">
 
-            <!-- Right Side -->
-            <div class="flex items-center gap-3">
+                    <!-- Left Side -->
+                    <div class="flex items-center gap-4">
+                        <div
+                            class="w-12 h-12 rounded-2xl bg-gradient-to-br from-white to-yellow-50 text-yellow-600 flex items-center justify-center text-2xl shadow-[0_4px_10px_rgba(0,0,0,0.05)] border border-yellow-100">
+                            🍼
+                        </div>
 
-                <!-- Scroll Buttons -->
-                <div class="flex items-center gap-2">
-                    <button onclick="scrollKids(-1)"
-                        class="w-11 h-11 rounded-full bg-white/90 backdrop-blur-md border border-yellow-200 shadow-md hover:scale-110 hover:bg-yellow-100 transition-all duration-300 flex items-center justify-center text-yellow-700 text-lg">
-                        <i class="fas fa-chevron-left"></i>
-                    </button>
+                        <h2
+                            class="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-gray-900 to-yellow-800 tracking-tight">
+                            <span class="lang-en">Kids</span><span class="lang-ur">کڈذ</span>
+                        </h2>
+                    </div>
 
-                    <button onclick="scrollKids(1)"
-                        class="w-11 h-11 rounded-full bg-white/90 backdrop-blur-md border border-yellow-200 shadow-md hover:scale-110 hover:bg-yellow-100 transition-all duration-300 flex items-center justify-center text-yellow-700 text-lg">
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
+                    <!-- Right Side -->
+                    <div class="flex items-center gap-3">
+
+                        <!-- Scroll Buttons -->
+                        <div class="flex items-center gap-2">
+                            <button onclick="scrollKids(-1)"
+                                class="w-11 h-11 rounded-full bg-white/90 backdrop-blur-md border border-yellow-200 shadow-md hover:scale-110 hover:bg-yellow-100 transition-all duration-300 flex items-center justify-center text-yellow-700 text-lg">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+
+                            <button onclick="scrollKids(1)"
+                                class="w-11 h-11 rounded-full bg-white/90 backdrop-blur-md border border-yellow-200 shadow-md hover:scale-110 hover:bg-yellow-100 transition-all duration-300 flex items-center justify-center text-yellow-700 text-lg">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+
+                        <!-- View More -->
+                        <a href="kids.html"
+                            class="text-emerald-600 hover:text-emerald-800 font-semibold text-sm transition-all hover:translate-x-1 flex items-center gap-1">
+                            View More
+                            <i class="fas fa-arrow-right text-[10px]"></i>
+                        </a>
+                    </div>
                 </div>
 
-                <!-- View More -->
-                <a href="kids.html"
-                    class="text-emerald-600 hover:text-emerald-800 font-semibold text-sm transition-all hover:translate-x-1 flex items-center gap-1">
-                    View More
-                    <i class="fas fa-arrow-right text-[10px]"></i>
-                </a>
-            </div>
-        </div>
+                <!-- Netflix Style Slider -->
+                <div id="kidsSlider" class="flex gap-5 overflow-x-auto scroll-smooth no-scrollbar relative z-10 pb-2">
 
-        <!-- Netflix Style Slider -->
-        <div id="kidsSlider"
-            class="flex gap-5 overflow-x-auto scroll-smooth no-scrollbar relative z-10 pb-2">
+                    <!-- Card 1 -->
+                    <div
+                        class="min-w-[240px] max-w-[240px] bg-white/90 backdrop-blur-sm rounded-3xl overflow-hidden border border-white shadow-md hover:-translate-y-2 hover:shadow-2xl hover:shadow-yellow-500/20 transition-all duration-300 flex-shrink-0">
+                        <img src="../images/placeholder.jpg" class="w-full h-44 object-cover">
+                        <div class="p-4">
+                            <h4 class="font-bold text-gray-800 truncate">Baby Toys</h4>
+                            <p class="text-emerald-600 font-bold text-sm mt-1">Rs. ---</p>
+                        </div>
+                    </div>
 
-            <!-- Card 1 -->
-            <div
-                class="min-w-[240px] max-w-[240px] bg-white/90 backdrop-blur-sm rounded-3xl overflow-hidden border border-white shadow-md hover:-translate-y-2 hover:shadow-2xl hover:shadow-yellow-500/20 transition-all duration-300 flex-shrink-0">
-                <img src="../images/placeholder.jpg"
-                    class="w-full h-44 object-cover">
-                <div class="p-4">
-                    <h4 class="font-bold text-gray-800 truncate">Baby Toys</h4>
-                    <p class="text-emerald-600 font-bold text-sm mt-1">Rs. ---</p>
+                    <!-- Card 2 -->
+                    <div
+                        class="min-w-[240px] max-w-[240px] bg-white/90 backdrop-blur-sm rounded-3xl overflow-hidden border border-white shadow-md hover:-translate-y-2 hover:shadow-2xl hover:shadow-yellow-500/20 transition-all duration-300 flex-shrink-0">
+                        <img src="../images/placeholder.jpg" class="w-full h-44 object-cover">
+                        <div class="p-4">
+                            <h4 class="font-bold text-gray-800 truncate">Kids Fashion</h4>
+                            <p class="text-emerald-600 font-bold text-sm mt-1">Rs. ---</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div
+                        class="min-w-[240px] max-w-[240px] bg-white/90 backdrop-blur-sm rounded-3xl overflow-hidden border border-white shadow-md hover:-translate-y-2 hover:shadow-2xl hover:shadow-yellow-500/20 transition-all duration-300 flex-shrink-0">
+                        <img src="../images/placeholder.jpg" class="w-full h-44 object-cover">
+                        <div class="p-4">
+                            <h4 class="font-bold text-gray-800 truncate">School Bags</h4>
+                            <p class="text-emerald-600 font-bold text-sm mt-1">Rs. ---</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 4 -->
+                    <div
+                        class="min-w-[240px] max-w-[240px] bg-white/90 backdrop-blur-sm rounded-3xl overflow-hidden border border-white shadow-md hover:-translate-y-2 hover:shadow-2xl hover:shadow-yellow-500/20 transition-all duration-300 flex-shrink-0">
+                        <img src="../images/placeholder.jpg" class="w-full h-44 object-cover">
+                        <div class="p-4">
+                            <h4 class="font-bold text-gray-800 truncate">Kids Shoes</h4>
+                            <p class="text-emerald-600 font-bold text-sm mt-1">Rs. ---</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 5 -->
+                    <div
+                        class="min-w-[240px] max-w-[240px] bg-white/90 backdrop-blur-sm rounded-3xl overflow-hidden border border-white shadow-md hover:-translate-y-2 hover:shadow-2xl hover:shadow-yellow-500/20 transition-all duration-300 flex-shrink-0">
+                        <img src="../images/placeholder.jpg" class="w-full h-44 object-cover">
+                        <div class="p-4">
+                            <h4 class="font-bold text-gray-800 truncate">Baby Care</h4>
+                            <p class="text-emerald-600 font-bold text-sm mt-1">Rs. ---</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 6 -->
+                    <div
+                        class="min-w-[240px] max-w-[240px] bg-white/90 backdrop-blur-sm rounded-3xl overflow-hidden border border-white shadow-md hover:-translate-y-2 hover:shadow-2xl hover:shadow-yellow-500/20 transition-all duration-300 flex-shrink-0">
+                        <img src="../images/placeholder.jpg" class="w-full h-44 object-cover">
+                        <div class="p-4">
+                            <h4 class="font-bold text-gray-800 truncate">Learning Toys</h4>
+                            <p class="text-emerald-600 font-bold text-sm mt-1">Rs. ---</p>
+                        </div>
+                    </div>
+
                 </div>
             </div>
-
-            <!-- Card 2 -->
-            <div
-                class="min-w-[240px] max-w-[240px] bg-white/90 backdrop-blur-sm rounded-3xl overflow-hidden border border-white shadow-md hover:-translate-y-2 hover:shadow-2xl hover:shadow-yellow-500/20 transition-all duration-300 flex-shrink-0">
-                <img src="../images/placeholder.jpg"
-                    class="w-full h-44 object-cover">
-                <div class="p-4">
-                    <h4 class="font-bold text-gray-800 truncate">Kids Fashion</h4>
-                    <p class="text-emerald-600 font-bold text-sm mt-1">Rs. ---</p>
-                </div>
-            </div>
-
-            <!-- Card 3 -->
-            <div
-                class="min-w-[240px] max-w-[240px] bg-white/90 backdrop-blur-sm rounded-3xl overflow-hidden border border-white shadow-md hover:-translate-y-2 hover:shadow-2xl hover:shadow-yellow-500/20 transition-all duration-300 flex-shrink-0">
-                <img src="../images/placeholder.jpg"
-                    class="w-full h-44 object-cover">
-                <div class="p-4">
-                    <h4 class="font-bold text-gray-800 truncate">School Bags</h4>
-                    <p class="text-emerald-600 font-bold text-sm mt-1">Rs. ---</p>
-                </div>
-            </div>
-
-            <!-- Card 4 -->
-            <div
-                class="min-w-[240px] max-w-[240px] bg-white/90 backdrop-blur-sm rounded-3xl overflow-hidden border border-white shadow-md hover:-translate-y-2 hover:shadow-2xl hover:shadow-yellow-500/20 transition-all duration-300 flex-shrink-0">
-                <img src="../images/placeholder.jpg"
-                    class="w-full h-44 object-cover">
-                <div class="p-4">
-                    <h4 class="font-bold text-gray-800 truncate">Kids Shoes</h4>
-                    <p class="text-emerald-600 font-bold text-sm mt-1">Rs. ---</p>
-                </div>
-            </div>
-
-            <!-- Card 5 -->
-            <div
-                class="min-w-[240px] max-w-[240px] bg-white/90 backdrop-blur-sm rounded-3xl overflow-hidden border border-white shadow-md hover:-translate-y-2 hover:shadow-2xl hover:shadow-yellow-500/20 transition-all duration-300 flex-shrink-0">
-                <img src="../images/placeholder.jpg"
-                    class="w-full h-44 object-cover">
-                <div class="p-4">
-                    <h4 class="font-bold text-gray-800 truncate">Baby Care</h4>
-                    <p class="text-emerald-600 font-bold text-sm mt-1">Rs. ---</p>
-                </div>
-            </div>
-
-            <!-- Card 6 -->
-            <div
-                class="min-w-[240px] max-w-[240px] bg-white/90 backdrop-blur-sm rounded-3xl overflow-hidden border border-white shadow-md hover:-translate-y-2 hover:shadow-2xl hover:shadow-yellow-500/20 transition-all duration-300 flex-shrink-0">
-                <img src="../images/placeholder.jpg"
-                    class="w-full h-44 object-cover">
-                <div class="p-4">
-                    <h4 class="font-bold text-gray-800 truncate">Learning Toys</h4>
-                    <p class="text-emerald-600 font-bold text-sm mt-1">Rs. ---</p>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
+        </section>
 
     </div>
 
@@ -1923,118 +1848,118 @@
             }
         }
     </script>
-	
-	
 
-<!-- SCROLL SCRIPT -->
-<script>
-    document.addEventListener('DOMContentLoaded', async () => {
-        if (typeof DataService !== 'undefined') {
-            try {
-                const allProducts = await DataService.getProducts();
-                
-                // Food Products
-                window.foodProducts = allProducts.filter(p => p.category && p.category.toLowerCase() === 'food');
-                const foodSlider = document.getElementById('foodSlider');
-                const foodFilter = document.getElementById('foodProductFilter');
-                
-                if (foodSlider && window.foodProducts.length > 0) {
-                    // Populate Filter
-                    if (foodFilter) {
-                        const uniqueNames = [...new Set(window.foodProducts.map(p => p.name).filter(n => n))];
-                        uniqueNames.forEach(name => {
-                            const opt = document.createElement('option');
-                            opt.value = name;
-                            opt.textContent = name;
-                            foodFilter.appendChild(opt);
-                        });
-                        
-                        foodFilter.addEventListener('change', () => {
-                            renderFoodSlider();
-                        });
-                    }
-                    const foodSort = document.getElementById('foodPriceSort');
-                    if (foodSort) {
-                        foodSort.addEventListener('change', () => {
-                            renderFoodSlider();
-                        });
-                    }
-                    
-                    renderFoodSlider();
-                }
 
-                // Computer Products
-                window.computerProducts = allProducts.filter(p => p.category && p.category.toLowerCase() === 'computer' && (p.status === 'Publish' || p.prodStatus === 'Publish' || (!p.status && !p.prodStatus)));
-                const computerSlider = document.getElementById('laptopsSlider');
-                const computerFilter = document.getElementById('computerProductFilter');
-                
-                if (computerSlider && window.computerProducts.length > 0) {
-                    // Populate Filter
-                    if (computerFilter) {
-                        const uniqueSubCategories = [...new Set(window.computerProducts.map(p => p.subCategory).filter(s => s))];
-                        uniqueSubCategories.forEach(sub => {
-                            const opt = document.createElement('option');
-                            opt.value = sub;
-                            opt.textContent = sub;
-                            computerFilter.appendChild(opt);
-                        });
-                        
-                        computerFilter.addEventListener('change', () => {
-                            renderComputerSlider();
-                        });
+
+    <!-- SCROLL SCRIPT -->
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            if (typeof DataService !== 'undefined') {
+                try {
+                    const allProducts = await DataService.getProducts();
+
+                    // Food Products
+                    window.foodProducts = allProducts.filter(p => p.category && p.category.toLowerCase() === 'food');
+                    const foodSlider = document.getElementById('foodSlider');
+                    const foodFilter = document.getElementById('foodProductFilter');
+
+                    if (foodSlider && window.foodProducts.length > 0) {
+                        // Populate Filter
+                        if (foodFilter) {
+                            const uniqueNames = [...new Set(window.foodProducts.map(p => p.name).filter(n => n))];
+                            uniqueNames.forEach(name => {
+                                const opt = document.createElement('option');
+                                opt.value = name;
+                                opt.textContent = name;
+                                foodFilter.appendChild(opt);
+                            });
+
+                            foodFilter.addEventListener('change', () => {
+                                renderFoodSlider();
+                            });
+                        }
+                        const foodSort = document.getElementById('foodPriceSort');
+                        if (foodSort) {
+                            foodSort.addEventListener('change', () => {
+                                renderFoodSlider();
+                            });
+                        }
+
+                        renderFoodSlider();
                     }
-                    const computerSort = document.getElementById('computerPriceSort');
-                    if (computerSort) {
-                        computerSort.addEventListener('change', () => {
-                            renderComputerSlider();
-                        });
+
+                    // Computer Products
+                    window.computerProducts = allProducts.filter(p => p.category && (p.category.toLowerCase() === 'computer' || p.category.toLowerCase() === 'computers') && (p.status === 'Publish' || p.prodStatus === 'Publish' || (!p.status && !p.prodStatus)));
+                    const computerSlider = document.getElementById('laptopsSlider');
+                    const computerFilter = document.getElementById('computerProductFilter');
+
+                    if (computerSlider && window.computerProducts.length > 0) {
+                        // Populate Filter
+                        if (computerFilter) {
+                            const uniqueSubCategories = [...new Set(window.computerProducts.map(p => p.subCategory).filter(s => s))];
+                            uniqueSubCategories.forEach(sub => {
+                                const opt = document.createElement('option');
+                                opt.value = sub;
+                                opt.textContent = sub;
+                                computerFilter.appendChild(opt);
+                            });
+
+                            computerFilter.addEventListener('change', () => {
+                                renderComputerSlider();
+                            });
+                        }
+                        const computerSort = document.getElementById('computerPriceSort');
+                        if (computerSort) {
+                            computerSort.addEventListener('change', () => {
+                                renderComputerSlider();
+                            });
+                        }
+
+                        renderComputerSlider();
                     }
-                    
-                    renderComputerSlider();
+                } catch (err) {
+                    console.error("Error loading category products:", err);
                 }
-            } catch (err) {
-                console.error("Error loading category products:", err);
             }
-        }
-    });
+        });
 
-    function renderFoodSlider() {
-        const foodSlider = document.getElementById('foodSlider');
-        if (!foodSlider) return;
-        
-        const filterName = document.getElementById('foodProductFilter')?.value || '';
-        const sortType = document.getElementById('foodPriceSort')?.value || '';
-        
-        let filtered = filterName ? window.foodProducts.filter(p => p.name === filterName) : [...window.foodProducts];
-        
-        if (sortType === 'Lowest Price') {
-            filtered.sort((a, b) => (parseFloat(a.price) || 0) - (parseFloat(b.price) || 0));
-        } else if (sortType === 'Highest Price') {
-            filtered.sort((a, b) => (parseFloat(b.price) || 0) - (parseFloat(a.price) || 0));
-        }
-        
-        foodSlider.innerHTML = filtered.map(p => {
-            const variety = p.variety || p.brand || p.subCategory || p.name || 'Food Item';
-            const price = p.price || '---';
-            const image = p.image || 'https://via.placeholder.com/600x400?text=No+Image';
-            
-            let specs = [];
-            if (p.brand) specs.push(`Brand: ${p.brand}`);
-            if (p.origin) specs.push(`Origin: ${p.origin}`);
-            if (p.weight || p.volume) specs.push(`Size: ${p.weight || p.volume}`);
-            if (p.description || p.details) specs.push(`Details: ${p.description || p.details}`);
-            const descString = specs.length > 0 ? specs.join("\n") : "No details available.";
+        function renderFoodSlider() {
+            const foodSlider = document.getElementById('foodSlider');
+            if (!foodSlider) return;
 
-            const safeName = variety.replace(/'/g, "\\'").replace(/"/g, "&quot;");
-            const safeImage = image.replace(/'/g, "\\'").replace(/"/g, "&quot;");
-            const safeDesc = descString.replace(/'/g, "\\'").replace(/\n/g, "\\n").replace(/"/g, "&quot;");
-            const safePrice = price.toString().replace(/'/g, "\\'").replace(/"/g, "&quot;");
-            const safeOrigPrice = (p.originalPrice || '').toString().replace(/'/g, "\\'").replace(/"/g, "&quot;");
-            const safeCategory = (p.category || '').replace(/'/g, "\\'").replace(/"/g, "&quot;");
-            const safeSubCategory = (p.subCategory || '').replace(/'/g, "\\'").replace(/"/g, "&quot;");
-            const safeWhatsapp = (p.whatsapp || p.contact || '').replace(/'/g, "\\'").replace(/"/g, "&quot;");
-            
-            return `
+            const filterName = document.getElementById('foodProductFilter')?.value || '';
+            const sortType = document.getElementById('foodPriceSort')?.value || '';
+
+            let filtered = filterName ? window.foodProducts.filter(p => p.name === filterName) : [...window.foodProducts];
+
+            if (sortType === 'Lowest Price') {
+                filtered.sort((a, b) => (parseFloat(a.price) || 0) - (parseFloat(b.price) || 0));
+            } else if (sortType === 'Highest Price') {
+                filtered.sort((a, b) => (parseFloat(b.price) || 0) - (parseFloat(a.price) || 0));
+            }
+
+            foodSlider.innerHTML = filtered.map(p => {
+                const variety = p.variety || p.brand || p.subCategory || p.name || 'Food Item';
+                const price = p.price || '---';
+                const image = p.image || 'https://via.placeholder.com/600x400?text=No+Image';
+
+                let specs = [];
+                if (p.brand) specs.push(`Brand: ${p.brand}`);
+                if (p.origin) specs.push(`Origin: ${p.origin}`);
+                if (p.weight || p.volume) specs.push(`Size: ${p.weight || p.volume}`);
+                if (p.description || p.details) specs.push(`Details: ${p.description || p.details}`);
+                const descString = specs.length > 0 ? specs.join("\n") : "No details available.";
+
+                const safeName = variety.replace(/'/g, "\\'").replace(/"/g, "&quot;");
+                const safeImage = image.replace(/'/g, "\\'").replace(/"/g, "&quot;");
+                const safeDesc = descString.replace(/'/g, "\\'").replace(/\n/g, "\\n").replace(/"/g, "&quot;");
+                const safePrice = price.toString().replace(/'/g, "\\'").replace(/"/g, "&quot;");
+                const safeOrigPrice = (p.originalPrice || '').toString().replace(/'/g, "\\'").replace(/"/g, "&quot;");
+                const safeCategory = (p.category || '').replace(/'/g, "\\'").replace(/"/g, "&quot;");
+                const safeSubCategory = (p.subCategory || '').replace(/'/g, "\\'").replace(/"/g, "&quot;");
+                const safeWhatsapp = (p.whatsapp || p.contact || '').replace(/'/g, "\\'").replace(/"/g, "&quot;");
+
+                return `
             <div class="flex-none w-[80vw] min-w-[80vw] md:w-[220px] md:min-w-[220px] lg:w-[calc((100%-5rem)/5)] snap-start snap-always bg-white rounded-3xl overflow-hidden border border-orange-100 shadow-md hover:shadow-2xl transition duration-300 cursor-pointer" onclick="openProductDetailModal('${safeName}', '${safeImage}', '${safeDesc}', '${safePrice}', '${safeOrigPrice}', '${safeCategory}', '${safeSubCategory}', '${safeWhatsapp}')">
                 <img src="${image}" class="w-full h-40 object-cover">
                 <div class="p-4">
@@ -2045,73 +1970,73 @@
                 </div>
             </div>
             `;
-        }).join('');
-    }
-
-    function renderComputerSlider() {
-        const computerSlider = document.getElementById('laptopsSlider');
-        if (!computerSlider) return;
-        
-        const filterSub = document.getElementById('computerProductFilter')?.value || '';
-        const sortType = document.getElementById('computerPriceSort')?.value || '';
-        
-        let filtered = filterSub ? window.computerProducts.filter(p => p.subCategory === filterSub) : [...window.computerProducts];
-        
-        if (sortType === 'Lowest Price') {
-            filtered.sort((a, b) => (parseFloat(a.price) || 0) - (parseFloat(b.price) || 0));
-        } else if (sortType === 'Highest Price') {
-            filtered.sort((a, b) => (parseFloat(b.price) || 0) - (parseFloat(a.price) || 0));
+            }).join('');
         }
-        
-        computerSlider.innerHTML = filtered.map(p => {
-            const variety = p.name || p.variety || p.brand || p.subCategory || 'Computer Item';
-            const price = p.price || '---';
-            const image = p.image || 'https://via.placeholder.com/600x400?text=No+Image';
-            
-            let specs = [];
-            if (p.brand) specs.push(`Brand: ${p.brand}`);
-            if (p.model) specs.push(`Model: ${p.model}`);
-            if (p.generation) specs.push(`Generation: ${p.generation}`);
-            if (p.processor) specs.push(`Processor: ${p.processor}`);
-            if (p.ram) specs.push(`RAM: ${p.ram}`);
-            
-            const storageVal = p.storage || p.hdd;
-            const storageTypeVal = p.storageType || p.hddType || '';
-            if (storageVal) specs.push(`Storage: ${storageVal} ${storageTypeVal}`.trim());
-            
-            const gpuVal = p.graphicsCard || p.gpu;
-            if (gpuVal) specs.push(`GPU: ${gpuVal}`);
-            
-            if (p.screenSize) specs.push(`Screen Size: ${p.screenSize}`);
-            
-            const osVal = p.os || p.operatingSystem;
-            if (osVal) specs.push(`OS: ${osVal}`);
-            
-            if (p.condition) specs.push(`Condition: ${p.condition}`);
-            if (p.warranty) specs.push(`Warranty: ${p.warranty}`);
-            if (p.delivery || p.shipping) specs.push(`Delivery: ${p.delivery || p.shipping}`);
-            if (p.description || p.details) specs.push(`Details: ${p.description || p.details}`);
-            const descString = specs.length > 0 ? specs.join("\n") : "No specifications available.";
 
-            const safeName = variety.replace(/'/g, "\\'").replace(/"/g, "&quot;");
-            const safeImage = image.replace(/'/g, "\\'").replace(/"/g, "&quot;");
-            const safeDesc = descString.replace(/'/g, "\\'").replace(/\n/g, "\\n").replace(/"/g, "&quot;");
-            const safePrice = price.toString().replace(/'/g, "\\'").replace(/"/g, "&quot;");
-            const safeOrigPrice = (p.originalPrice || '').toString().replace(/'/g, "\\'").replace(/"/g, "&quot;");
-            const safeCategory = (p.category || '').replace(/'/g, "\\'").replace(/"/g, "&quot;");
-            const safeSubCategory = (p.subCategory || '').replace(/'/g, "\\'").replace(/"/g, "&quot;");
-            const safeWhatsapp = (p.whatsapp || p.contact || '').replace(/'/g, "\\'").replace(/"/g, "&quot;");
-            const safeModel = (p.model || '').toString().replace(/'/g, "\\'").replace(/"/g, "&quot;");
-            const safeRam = (p.ram || '').toString().replace(/'/g, "\\'").replace(/"/g, "&quot;");
-            const safeStorage = (p.storage || p.hdd || '').toString().replace(/'/g, "\\'").replace(/"/g, "&quot;");
-            const safeBrand = (p.brand || '').toString().replace(/'/g, "\\'").replace(/"/g, "&quot;");
-            const safeSeries = (p.series || '').toString().replace(/'/g, "\\'").replace(/"/g, "&quot;");
-            const safeProcessor = (p.processor || '').toString().replace(/'/g, "\\'").replace(/"/g, "&quot;");
-            const safeAddedBy = (p.addedBy || '').toString().replace(/'/g, "\\'").replace(/"/g, "&quot;");
-            const safeCreatedDate = (p.createdDate || '').toString().replace(/'/g, "\\'").replace(/"/g, "&quot;");
-            const safeCompanyName = (p.companyName || '').toString().replace(/'/g, "\\'").replace(/"/g, "&quot;");
-            
-            return `
+        function renderComputerSlider() {
+            const computerSlider = document.getElementById('laptopsSlider');
+            if (!computerSlider) return;
+
+            const filterSub = document.getElementById('computerProductFilter')?.value || '';
+            const sortType = document.getElementById('computerPriceSort')?.value || '';
+
+            let filtered = filterSub ? window.computerProducts.filter(p => p.subCategory === filterSub) : [...window.computerProducts];
+
+            if (sortType === 'Lowest Price') {
+                filtered.sort((a, b) => (parseFloat(a.price) || 0) - (parseFloat(b.price) || 0));
+            } else if (sortType === 'Highest Price') {
+                filtered.sort((a, b) => (parseFloat(b.price) || 0) - (parseFloat(a.price) || 0));
+            }
+
+            computerSlider.innerHTML = filtered.map(p => {
+                const variety = p.name || p.variety || p.brand || p.subCategory || 'Computer Item';
+                const price = p.price || '---';
+                const image = p.image || 'https://via.placeholder.com/600x400?text=No+Image';
+
+                let specs = [];
+                if (p.brand) specs.push(`Brand: ${p.brand}`);
+                if (p.model) specs.push(`Model: ${p.model}`);
+                if (p.generation) specs.push(`Generation: ${p.generation}`);
+                if (p.processor) specs.push(`Processor: ${p.processor}`);
+                if (p.ram) specs.push(`RAM: ${p.ram}`);
+
+                const storageVal = p.storage || p.hdd;
+                const storageTypeVal = p.storageType || p.hddType || '';
+                if (storageVal) specs.push(`Storage: ${storageVal} ${storageTypeVal}`.trim());
+
+                const gpuVal = p.graphicsCard || p.gpu;
+                if (gpuVal) specs.push(`GPU: ${gpuVal}`);
+
+                if (p.screenSize) specs.push(`Screen Size: ${p.screenSize}`);
+
+                const osVal = p.os || p.operatingSystem;
+                if (osVal) specs.push(`OS: ${osVal}`);
+
+                if (p.condition) specs.push(`Condition: ${p.condition}`);
+                if (p.warranty) specs.push(`Warranty: ${p.warranty}`);
+                if (p.delivery || p.shipping) specs.push(`Delivery: ${p.delivery || p.shipping}`);
+                if (p.description || p.details) specs.push(`Details: ${p.description || p.details}`);
+                const descString = specs.length > 0 ? specs.join("\n") : "No specifications available.";
+
+                const safeName = variety.replace(/'/g, "\\'").replace(/"/g, "&quot;");
+                const safeImage = image.replace(/'/g, "\\'").replace(/"/g, "&quot;");
+                const safeDesc = descString.replace(/'/g, "\\'").replace(/\n/g, "\\n").replace(/"/g, "&quot;");
+                const safePrice = price.toString().replace(/'/g, "\\'").replace(/"/g, "&quot;");
+                const safeOrigPrice = (p.originalPrice || '').toString().replace(/'/g, "\\'").replace(/"/g, "&quot;");
+                const safeCategory = (p.category || '').replace(/'/g, "\\'").replace(/"/g, "&quot;");
+                const safeSubCategory = (p.subCategory || '').replace(/'/g, "\\'").replace(/"/g, "&quot;");
+                const safeWhatsapp = (p.whatsapp || p.contact || '').replace(/'/g, "\\'").replace(/"/g, "&quot;");
+                const safeModel = (p.model || '').toString().replace(/'/g, "\\'").replace(/"/g, "&quot;");
+                const safeRam = (p.ram || '').toString().replace(/'/g, "\\'").replace(/"/g, "&quot;");
+                const safeStorage = (p.storage || p.hdd || '').toString().replace(/'/g, "\\'").replace(/"/g, "&quot;");
+                const safeBrand = (p.brand || '').toString().replace(/'/g, "\\'").replace(/"/g, "&quot;");
+                const safeSeries = (p.series || '').toString().replace(/'/g, "\\'").replace(/"/g, "&quot;");
+                const safeProcessor = (p.processor || '').toString().replace(/'/g, "\\'").replace(/"/g, "&quot;");
+                const safeAddedBy = (p.addedBy || '').toString().replace(/'/g, "\\'").replace(/"/g, "&quot;");
+                const safeCreatedDate = (p.createdDate || '').toString().replace(/'/g, "\\'").replace(/"/g, "&quot;");
+                const safeCompanyName = (p.companyName || '').toString().replace(/'/g, "\\'").replace(/"/g, "&quot;");
+
+                return `
             <div class="flex-none w-[80vw] min-w-[80vw] md:w-[220px] md:min-w-[220px] lg:w-[calc((100%-5rem)/5)] snap-start snap-always bg-white rounded-3xl overflow-hidden border border-teal-100 shadow-md hover:shadow-2xl transition duration-300 cursor-pointer" onclick="openProductDetailModal('${safeName}', '${safeImage}', '${safeDesc}', '${safePrice}', '${safeOrigPrice}', '${safeCategory}', '${safeSubCategory}', '${safeWhatsapp}', '${safeModel}', '${safeRam}', '${safeStorage}', '${safeBrand}', '${safeSeries}', '${safeProcessor}', '${safeAddedBy}', '${safeCreatedDate}', '${safeCompanyName}')">
                 <img src="${image}" class="w-full h-40 object-cover">
                 <div class="p-4">
@@ -2122,95 +2047,95 @@
                 </div>
             </div>
             `;
-        }).join('');
-    }
+            }).join('');
+        }
 
-    function scrollFood(direction) {
-        const slider = document.getElementById('foodSlider');
-        if (!slider || slider.children.length === 0) return;
-        
-        const cardWidth = slider.children[0].offsetWidth;
-        const gap = parseInt(window.getComputedStyle(slider).gap) || 20;
-        const scrollAmount = cardWidth + gap;
+        function scrollFood(direction) {
+            const slider = document.getElementById('foodSlider');
+            if (!slider || slider.children.length === 0) return;
 
-        slider.scrollBy({
-            left: direction * scrollAmount,
-            behavior: 'smooth'
-        });
-    }
-	
-	function scrollGroceries(direction) {
-        const slider = document.getElementById('grocerySlider');
+            const cardWidth = slider.children[0].offsetWidth;
+            const gap = parseInt(window.getComputedStyle(slider).gap) || 20;
+            const scrollAmount = cardWidth + gap;
 
-        slider.scrollBy({
-            left: direction * 320,
-            behavior: 'smooth'
-        });
-    }
-	
-	function scrollElectronics(direction) {
-        const slider = document.getElementById('electronicsSlider');
+            slider.scrollBy({
+                left: direction * scrollAmount,
+                behavior: 'smooth'
+            });
+        }
 
-        slider.scrollBy({
-            left: direction * 320,
-            behavior: 'smooth'
-        });
-    }
-	
-	function scrollMobiles(direction) {
-        const slider = document.getElementById('mobilesSlider');
+        function scrollGroceries(direction) {
+            const slider = document.getElementById('grocerySlider');
 
-        slider.scrollBy({
-            left: direction * 320,
-            behavior: 'smooth'
-        });
-    }
-	
-	function scrollLaptops(direction) {
-        const slider = document.getElementById('laptopsSlider');
+            slider.scrollBy({
+                left: direction * 320,
+                behavior: 'smooth'
+            });
+        }
 
-        slider.scrollBy({
-            left: direction * 320,
-            behavior: 'smooth'
-        });
-    }
-	
-	function scrollProperty(direction) {
-        const slider = document.getElementById('propertySlider');
+        function scrollElectronics(direction) {
+            const slider = document.getElementById('electronicsSlider');
 
-        slider.scrollBy({
-            left: direction * 320,
-            behavior: 'smooth'
-        });
-    }
-	
-	function scrollFashion(direction) {
-        const slider = document.getElementById('fashionSlider');
+            slider.scrollBy({
+                left: direction * 320,
+                behavior: 'smooth'
+            });
+        }
 
-        slider.scrollBy({
-            left: direction * 320,
-            behavior: 'smooth'
-        });
-    }
-	
-	function scrollCosmetics(direction) {
-        const slider = document.getElementById('cosmeticsSlider');
+        function scrollMobiles(direction) {
+            const slider = document.getElementById('mobilesSlider');
 
-        slider.scrollBy({
-            left: direction * 320,
-            behavior: 'smooth'
-        });
-    }
-	
-	function scrollKids(direction) {
-        const slider = document.getElementById('kidsSlider');
+            slider.scrollBy({
+                left: direction * 320,
+                behavior: 'smooth'
+            });
+        }
 
-        slider.scrollBy({
-            left: direction * 320,
-            behavior: 'smooth'
-        });
-    }
-</script>
+        function scrollLaptops(direction) {
+            const slider = document.getElementById('laptopsSlider');
+
+            slider.scrollBy({
+                left: direction * 320,
+                behavior: 'smooth'
+            });
+        }
+
+        function scrollProperty(direction) {
+            const slider = document.getElementById('propertySlider');
+
+            slider.scrollBy({
+                left: direction * 320,
+                behavior: 'smooth'
+            });
+        }
+
+        function scrollFashion(direction) {
+            const slider = document.getElementById('fashionSlider');
+
+            slider.scrollBy({
+                left: direction * 320,
+                behavior: 'smooth'
+            });
+        }
+
+        function scrollCosmetics(direction) {
+            const slider = document.getElementById('cosmeticsSlider');
+
+            slider.scrollBy({
+                left: direction * 320,
+                behavior: 'smooth'
+            });
+        }
+
+        function scrollKids(direction) {
+            const slider = document.getElementById('kidsSlider');
+
+            slider.scrollBy({
+                left: direction * 320,
+                behavior: 'smooth'
+            });
+        }
+    </script>
     <!-- FOOTER -->
     <div class="w-full bg-[#0A3D2A] text-emerald-50 text-center py-4 text-sm mt-auto border-t border-[#052C22]">
         &copy; 2026 StopBuyPk - Smart Price Comparison
@@ -2240,11 +2165,11 @@
             updateLanguageUI(currentLang);
         });
 
-        window.openProductDetailModal = function(name, image, desc, price, originalPrice, category, subCategory, whatsapp, model, ram, storage, brand, series, processor, addedBy, createdDate, companyName) {
+        window.openProductDetailModal = function (name, image, desc, price, originalPrice, category, subCategory, whatsapp, model, ram, storage, brand, series, processor, addedBy, createdDate, companyName) {
             document.getElementById('pm-image').src = image || 'https://via.placeholder.com/150';
             document.getElementById('pm-title').textContent = name;
             document.getElementById('pm-category').textContent = subCategory || category || 'Product';
-            
+
             // Add Post Date
             let dateText = '';
             if (createdDate && createdDate !== 'undefined' && createdDate !== 'null' && createdDate.trim() !== '') {
@@ -2267,7 +2192,12 @@
             // Add Shop Name
             const shopNameEl = document.getElementById('pm-shop-name');
             if (shopNameEl) {
-                const displayShop = (companyName && companyName !== 'undefined' && companyName !== 'null' && companyName.trim() !== '') ? companyName.trim() : ((addedBy && addedBy !== 'undefined' && addedBy !== 'null') ? addedBy.trim() : 'Admin');
+                let displayShop = 'Admin';
+                if (category && (category.toLowerCase() === 'food' || category.toLowerCase() === 'fast food')) {
+                    displayShop = (brand && brand !== 'undefined' && brand !== 'null' && brand.trim() !== '') ? brand.trim() : 'Admin';
+                } else {
+                    displayShop = (companyName && companyName !== 'undefined' && companyName !== 'null' && companyName.trim() !== '') ? companyName.trim() : ((addedBy && addedBy !== 'undefined' && addedBy !== 'null') ? addedBy.trim() : 'Admin');
+                }
                 shopNameEl.textContent = displayShop;
             }
 
@@ -2281,7 +2211,7 @@
                 if (processor && processor !== 'undefined' && processor !== 'null' && processor.trim() !== '') specParts.push(processor.trim());
                 if (ram && ram !== 'undefined' && ram !== 'null' && ram.trim() !== '') specParts.push(ram.trim());
                 if (storage && storage !== 'undefined' && storage !== 'null' && storage.trim() !== '') specParts.push(storage.trim());
-                
+
                 if (specParts.length > 0) {
                     specsSummaryEl.textContent = specParts.join(' + ');
                     specsSummaryEl.classList.remove('hidden');
@@ -2290,9 +2220,9 @@
                     specsSummaryEl.classList.add('hidden');
                 }
             }
-            
+
             document.getElementById('pm-price').textContent = price ? (price.toString().includes('Rs') ? price : `Rs. ${price}`) : 'Rs. -';
-            
+
             const origPriceContainer = document.getElementById('pm-original-price-container');
             if (originalPrice && originalPrice !== 'undefined' && originalPrice !== '') {
                 document.getElementById('pm-original-price').textContent = originalPrice.toString().includes('Rs') ? originalPrice : `Rs. ${originalPrice}`;
@@ -2300,9 +2230,9 @@
             } else {
                 origPriceContainer.classList.add('hidden');
             }
-            
+
             document.getElementById('pm-desc').innerHTML = desc ? desc.replace(/\n/g, '<br>') : 'Compare prices from multiple stores and find the best deals.';
-            
+
             const whatsappBtn = document.getElementById('pm-whatsapp');
             if (whatsapp && whatsapp !== 'undefined' && whatsapp !== '') {
                 whatsappBtn.href = `https://wa.me/${whatsapp.replace(/[^0-9]/g, '')}`;
@@ -2310,10 +2240,10 @@
             } else {
                 whatsappBtn.classList.add('hidden');
             }
-            
+
             const modal = document.getElementById('productDetailModal');
             const content = document.getElementById('productModalContent');
-            
+
             modal.classList.remove('hidden');
             modal.classList.add('flex');
             setTimeout(() => {
@@ -2322,7 +2252,7 @@
             }, 10);
         };
 
-        window.closeProductModal = function() {
+        window.closeProductModal = function () {
             const modal = document.getElementById('productDetailModal');
             const content = document.getElementById('productModalContent');
             modal.classList.add('opacity-0');
@@ -2335,18 +2265,24 @@
     </script>
 
     <!-- Product Detail Modal -->
-    <div id="productDetailModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center z-[999999] opacity-0 transition-opacity duration-300" onclick="closeProductModal()">
-        <div class="bg-white rounded-2xl max-w-[340px] w-full mx-4 shadow-2xl overflow-hidden transform scale-95 transition-transform duration-300" id="productModalContent" onclick="event.stopPropagation()">
+    <div id="productDetailModal"
+        class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center z-[999999] opacity-0 transition-opacity duration-300"
+        onclick="closeProductModal()">
+        <div class="bg-white rounded-2xl max-w-[340px] w-full mx-4 shadow-2xl overflow-hidden transform scale-95 transition-transform duration-300"
+            id="productModalContent" onclick="event.stopPropagation()">
             <!-- Image Header with proper top/bottom space -->
-            <div class="relative h-[155px] w-full bg-slate-50 flex items-center justify-center border-b border-slate-100 p-3">
+            <div
+                class="relative h-[155px] w-full bg-slate-50 flex items-center justify-center border-b border-slate-100 p-3">
                 <img id="pm-image" src="" class="max-w-[90%] max-h-[85%] w-auto h-auto object-contain">
-                <button onclick="closeProductModal()" class="absolute top-2 right-2 w-8 h-8 flex items-center justify-center bg-black/40 hover:bg-black/60 backdrop-blur-md rounded-full text-white transition-all text-lg font-bold">&times;</button>
+                <button onclick="closeProductModal()"
+                    class="absolute top-2 right-2 w-8 h-8 flex items-center justify-center bg-black/40 hover:bg-black/60 backdrop-blur-md rounded-full text-white transition-all text-lg font-bold">&times;</button>
             </div>
             <!-- Body -->
             <div class="p-5 flex flex-col gap-3 text-left">
                 <div>
                     <div class="flex justify-between items-center">
-                        <span id="pm-category" class="bg-emerald-50 text-emerald-700 border border-emerald-200/50 text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">Category</span>
+                        <span id="pm-category"
+                            class="bg-emerald-50 text-emerald-700 border border-emerald-200/50 text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">Category</span>
                         <span id="pm-post-date" class="text-[10px] text-slate-400 font-semibold"></span>
                     </div>
                     <h3 id="pm-title" class="font-bold text-lg text-slate-800 leading-snug mt-1.5">Product Title</h3>
@@ -2360,25 +2296,31 @@
                     </div>
                     <div class="text-center px-1">
                         <div class="text-[9px] text-slate-400 font-semibold uppercase tracking-wider">Shop Name</div>
-                        <div class="text-[11px] font-bold text-slate-700 mt-0.5 truncate max-w-[100px]" id="pm-shop-name">-</div>
+                        <div class="text-[11px] font-bold text-slate-700 mt-0.5 truncate max-w-[100px]"
+                            id="pm-shop-name">-</div>
                     </div>
                     <div id="pm-original-price-container" class="hidden text-right">
-                        <div class="text-[9px] text-slate-400 font-semibold uppercase tracking-wider">Original Price</div>
-                        <div class="text-sm font-medium line-through text-slate-400 mt-0.5" id="pm-original-price">Rs. -</div>
+                        <div class="text-[9px] text-slate-400 font-semibold uppercase tracking-wider">Original Price
+                        </div>
+                        <div class="text-sm font-medium line-through text-slate-400 mt-0.5" id="pm-original-price">Rs. -
+                        </div>
                     </div>
                 </div>
                 <div>
                     <div class="text-[9px] text-slate-400 font-semibold uppercase tracking-wider mb-0.5">Details</div>
-                    <div id="pm-desc" class="text-xs text-slate-600 leading-relaxed max-h-16 overflow-y-auto custom-scrollbar">
+                    <div id="pm-desc"
+                        class="text-xs text-slate-600 leading-relaxed max-h-16 overflow-y-auto custom-scrollbar">
                         Product details description here.
                     </div>
                 </div>
                 <!-- WhatsApp Action / Call Action -->
                 <div class="flex gap-2 mt-1">
-                    <a id="pm-whatsapp" href="#" target="_blank" class="flex-1 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl font-bold text-xs transition-all flex items-center justify-center gap-1.5 shadow-sm text-center">
+                    <a id="pm-whatsapp" href="#" target="_blank"
+                        class="flex-1 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl font-bold text-xs transition-all flex items-center justify-center gap-1.5 shadow-sm text-center">
                         <i class="fab fa-whatsapp text-sm"></i> WhatsApp
                     </a>
-                    <button onclick="closeProductModal()" class="flex-1 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-semibold text-xs transition-all text-center">
+                    <button onclick="closeProductModal()"
+                        class="flex-1 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-semibold text-xs transition-all text-center">
                         Close
                     </button>
                 </div>

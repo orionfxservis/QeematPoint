@@ -1218,7 +1218,7 @@
           const products = await DataService.getProducts();
           allComputers = products.filter(p => 
               p.category && 
-              p.category.toLowerCase() === 'computer' && 
+              (p.category.toLowerCase() === 'computer' || p.category.toLowerCase() === 'computers') && 
               (p.status === 'Publish' || p.prodStatus === 'Publish' || (!p.status && !p.prodStatus))
           );
           
