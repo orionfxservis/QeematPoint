@@ -7539,7 +7539,13 @@ window.saveDynamicGroceryProduct = async function () {
                 continue;
             }
 
-            const hasVal = field.field_type === "multiselect"
+            // Skip validation if select element has no selectable options configured
+            if (input.tagName === 'SELECT' && input.options.length <= 1) {
+                console.log("Skipping validation for select field with no options:", field.field_label);
+                continue;
+            }
+
+            const hasVal = (field.field_type === "multiselect" || input.multiple)
                 ? (Array.from(input.selectedOptions).length > 0)
                 : !!input.value.trim();
             if (!hasVal) {
