@@ -7533,10 +7533,17 @@ window.saveDynamicGroceryProduct = async function () {
         if (!input) continue;
 
         if (field.is_required) {
+            const isVisible = input.offsetWidth > 0 || input.offsetHeight > 0 || input.getClientRects().length > 0;
+            if (!isVisible) {
+                console.log("Skipping validation for hidden field:", field.field_label);
+                continue;
+            }
+
             const hasVal = field.field_type === "multiselect"
                 ? (Array.from(input.selectedOptions).length > 0)
                 : !!input.value.trim();
             if (!hasVal) {
+                console.warn("Validation failed for field:", field.field_label, "ID:", `field_${field.id}`, "Element:", input, "Value:", input.value);
                 alert(`${field.field_label} is required.`);
                 if (input.focus) input.focus();
                 return;
