@@ -3925,9 +3925,9 @@
                             const normRam = (p.ram || '').toLowerCase().trim();
                             const normStorage = (p.storage || p.hdd || '').toLowerCase().trim();
 
-                            if (p.category && p.category.toLowerCase() === 'computer' && (normModel || normRam || normStorage)) {
+                            if (p.category && (p.category.toLowerCase() === 'computer' || p.category.toLowerCase() === 'computers') && (normModel || normRam || normStorage)) {
                                 const matches = (allProducts || []).filter(item => {
-                                    if (!item.category || item.category.toLowerCase() !== 'computer') return false;
+                                    if (!item.category || (item.category.toLowerCase() !== 'computer' && item.category.toLowerCase() !== 'computers')) return false;
                                     const mModel = (item.model || '').toLowerCase().trim();
                                     const mRam = (item.ram || '').toLowerCase().trim();
                                     const mStorage = (item.storage || item.hdd || '').toLowerCase().trim();
@@ -4391,7 +4391,7 @@
                     let highestPrice = 0;
                     let bestPrice = parseFloat(price.toString().replace(/[^0-9.]/g, '')) || 0;
 
-                    const allComputers = (allProducts || []).filter(p => p.category && p.category.toLowerCase() === 'computer');
+                    const allComputers = (allProducts || []).filter(p => p.category && (p.category.toLowerCase() === 'computer' || p.category.toLowerCase() === 'computers'));
 
                     if (normModel || normRam || normStorage) {
                         const matches = allComputers.filter(p => {
