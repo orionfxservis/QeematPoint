@@ -6994,7 +6994,10 @@ function toggleGroceryProductUI() {
 
     if (isGrocery) {
         if (legacyImageGroup) legacyImageGroup.style.display = 'none';
-        if (legacyFields) legacyFields.style.display = 'none';
+        if (legacyFields) {
+            legacyFields.style.display = 'none';
+            legacyFields.querySelectorAll('input, select, textarea').forEach(el => el.disabled = true);
+        }
         if (legacySubmitBtn) legacySubmitBtn.style.display = 'none';
         if (staticStatus) staticStatus.style.display = 'none';
         if (legacySearch) legacySearch.style.display = 'none';
@@ -7002,7 +7005,10 @@ function toggleGroceryProductUI() {
         if (adminProductList) adminProductList.style.display = 'none';
         if (adminProductPagination) adminProductPagination.style.display = 'none';
 
-        if (groceryFields) groceryFields.style.display = 'block';
+        if (groceryFields) {
+            groceryFields.style.display = 'block';
+            groceryFields.querySelectorAll('input, select, textarea').forEach(el => el.disabled = false);
+        }
         if (groceryTable) groceryTable.style.display = 'block';
 
         if (grocerySubCatSelect && grocerySubCatSelect.value) {
@@ -7014,7 +7020,10 @@ function toggleGroceryProductUI() {
         }
     } else {
         if (legacyImageGroup) legacyImageGroup.style.display = 'block';
-        if (legacyFields) legacyFields.style.display = 'block';
+        if (legacyFields) {
+            legacyFields.style.display = 'block';
+            legacyFields.querySelectorAll('input, select, textarea').forEach(el => el.disabled = false);
+        }
         if (legacySubmitBtn) legacySubmitBtn.style.display = 'block';
         if (staticStatus) staticStatus.style.display = 'block';
         if (legacySearch) legacySearch.style.display = 'block';
@@ -7022,7 +7031,10 @@ function toggleGroceryProductUI() {
         if (adminProductList) adminProductList.style.display = 'block';
         if (adminProductPagination) adminProductPagination.style.display = 'flex';
 
-        if (groceryFields) groceryFields.style.display = 'none';
+        if (groceryFields) {
+            groceryFields.style.display = 'none';
+            groceryFields.querySelectorAll('input, select, textarea').forEach(el => el.disabled = true);
+        }
         if (groceryTable) groceryTable.style.display = 'none';
     }
 }
