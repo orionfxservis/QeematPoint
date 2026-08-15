@@ -7058,6 +7058,17 @@ if (multimediaTypeSelect) {
 async function loadMultimediaFields(type) {
     const fields = [...(multimediaFieldConfig[type] || [])];
     
+    // Inject image field next to warranty
+    const warrantyIndex = fields.findIndex(f => f.name === "warranty");
+    if (warrantyIndex !== -1 && !fields.some(f => f.name === "image")) {
+        fields.splice(warrantyIndex + 1, 0, {
+            name: "image",
+            label: "Product Image",
+            type: "image",
+            required: true
+        });
+    }
+
     if (!fields.some(f => f.name === "description")) {
         fields.push({
             name: "description",
@@ -7179,13 +7190,14 @@ function renderGroceryProductForm() {
             `;
         } else if (field.field_type === "image") {
             input = `
-                <div style="display: flex; gap: 10px; width: 100%;">
+                <div style="display: flex; gap: 8px; width: 100%; align-items: center;">
                     <input
                         type="url"
                         id="field_${field.id}"
                         data-field-id="${field.id}"
+                        class="admin-input"
                         placeholder="https://..."
-                        style="flex: 1;"
+                        style="flex: 1; margin-bottom: 0; background: rgba(255,255,255,0.9) !important; color: #0f172a !important; border: 1px solid var(--border-color) !important; border-radius: 10px; height: 30px !important; box-sizing: border-box; padding: 2px 8px !important; font-size: 0.8rem !important;"
                         ${required}
                     >
                     <input
@@ -7198,14 +7210,14 @@ function renderGroceryProductForm() {
                         type="button"
                         class="btn btn-secondary"
                         onclick="document.getElementById('upload_${field.id}').click()"
-                        style="padding: 10px 15px;"
+                        style="padding: 4px 12px; height: 30px; display: flex; align-items: center; justify-content: center; background: #64748b; color: #fff; border-radius: 8px; border: none; cursor: pointer; font-size: 0.8rem; box-sizing: border-box; font-weight: 600; margin-bottom: 8px;"
                     >
                         <i class="fa-solid fa-upload"></i>
                     </button>
                 </div>
                 <span
                     id="status_${field.id}"
-                    style="font-size: 0.8rem; color: var(--accent-color); margin-top: 5px; display: none;"
+                    style="font-size: 0.75rem; color: var(--accent-color); margin-top: 3px; display: none;"
                 >
                     Uploading...
                 </span>
