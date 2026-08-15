@@ -6249,6 +6249,675 @@ const SPECIALIZED_FIELDS_MAP = {
     ]
 };
 
+const multimediaFieldConfig = {
+    speakers: [
+        {
+            name: "item",
+            label: "Item / Product Name",
+            type: "text",
+            required: true
+        },
+        {
+            name: "brand",
+            label: "Brand",
+            type: "select",
+            options: [
+                "Audionic",
+                "Logitech",
+                "F&D",
+                "Microlab",
+                "Edifier",
+                "Creative",
+                "JBL",
+                "HP",
+                "Redragon",
+                "Havit",
+                "Fantech",
+                "Ronin",
+                "Sony",
+                "Altec Lansing",
+                "Xiaomi",
+                "SteelSeries",
+                "Faster",
+                "Generic / No Brand",
+                "Other"
+            ],
+            required: true
+        },
+        {
+            name: "model",
+            label: "Model",
+            type: "text",
+            required: false
+        },
+        {
+            name: "speaker_type",
+            label: "Speaker Type",
+            type: "select",
+            options: [
+                "2.0",
+                "2.1",
+                "5.1",
+                "7.1",
+                "Soundbar",
+                "Portable"
+            ],
+            required: true
+        },
+        {
+            name: "power_output",
+            label: "Power Output",
+            type: "text",
+            required: false
+        },
+        {
+            name: "connection",
+            label: "Connection",
+            type: "multiselect",
+            options: [
+                "USB",
+                "AUX",
+                "Bluetooth",
+                "3.5mm",
+                "Optical"
+            ],
+            required: true
+        },
+        {
+            name: "bluetooth",
+            label: "Bluetooth",
+            type: "select",
+            options: ["Yes", "No"],
+            required: false
+        },
+        {
+            name: "subwoofer",
+            label: "Subwoofer",
+            type: "select",
+            options: ["Yes", "No"],
+            required: false
+        },
+        {
+            name: "rgb",
+            label: "RGB",
+            type: "select",
+            options: ["Yes", "No"],
+            required: false
+        },
+        {
+            name: "condition",
+            label: "Condition",
+            type: "select",
+            options: [
+                "New",
+                "Used",
+                "Refurbished"
+            ],
+            required: true
+        },
+        {
+            name: "price",
+            label: "Price",
+            type: "number",
+            required: true
+        },
+        {
+            name: "stock",
+            label: "Stock Status",
+            type: "select",
+            options: [
+                "In Stock",
+                "Out of Stock",
+                "Pre-Order"
+            ],
+            required: true
+        },
+        {
+            name: "warranty",
+            label: "Warranty",
+            type: "select",
+            options: [
+                "No Warranty",
+                "3 Months",
+                "6 Months",
+                "1 Year",
+                "2 Years",
+                "Seller Warranty",
+                "Brand Warranty"
+            ],
+            required: false
+        }
+    ],
+
+    headphones: [
+        {
+            name: "item",
+            label: "Item / Product Name",
+            type: "text",
+            required: true
+        },
+        {
+            name: "brand",
+            label: "Brand",
+            type: "text",
+            required: true
+        },
+        {
+            name: "model",
+            label: "Model",
+            type: "text",
+            required: false
+        },
+        {
+            name: "headphone_type",
+            label: "Headphone Type",
+            type: "select",
+            options: [
+                "Over-Ear",
+                "On-Ear",
+                "In-Ear",
+                "Gaming",
+                "TWS"
+            ],
+            required: true
+        },
+        {
+            name: "connection",
+            label: "Connection",
+            type: "select",
+            options: [
+                "Wired",
+                "Bluetooth",
+                "Wireless 2.4GHz",
+                "USB"
+            ],
+            required: true
+        },
+        {
+            name: "microphone",
+            label: "Microphone",
+            type: "select",
+            options: ["Yes", "No"],
+            required: false
+        },
+        {
+            name: "noise_cancellation",
+            label: "Noise Cancellation",
+            type: "select",
+            options: ["Yes", "No"],
+            required: false
+        },
+        {
+            name: "battery_life",
+            label: "Battery Life",
+            type: "text",
+            required: false
+        },
+        {
+            name: "condition",
+            label: "Condition",
+            type: "select",
+            options: [
+                "New",
+                "Used",
+                "Refurbished"
+            ],
+            required: true
+        },
+        {
+            name: "price",
+            label: "Price",
+            type: "number",
+            required: true
+        },
+        {
+            name: "stock",
+            label: "Stock Status",
+            type: "select",
+            options: [
+                "In Stock",
+                "Out of Stock",
+                "Pre-Order"
+            ],
+            required: true
+        },
+        {
+            name: "warranty",
+            label: "Warranty",
+            type: "select",
+            options: [
+                "No Warranty",
+                "3 Months",
+                "6 Months",
+                "1 Year",
+                "Seller Warranty",
+                "Brand Warranty"
+            ],
+            required: false
+        }
+    ],
+
+    microphones: [
+        {
+            name: "item",
+            label: "Item / Product Name",
+            type: "text",
+            required: true
+        },
+        {
+            name: "brand",
+            label: "Brand",
+            type: "text",
+            required: true
+        },
+        {
+            name: "model",
+            label: "Model",
+            type: "text",
+            required: false
+        },
+        {
+            name: "microphone_type",
+            label: "Microphone Type",
+            type: "select",
+            options: [
+                "Condenser",
+                "Dynamic",
+                "USB",
+                "Lavalier",
+                "Wireless",
+                "Gaming"
+            ],
+            required: true
+        },
+        {
+            name: "connection",
+            label: "Connection",
+            type: "select",
+            options: [
+                "USB",
+                "XLR",
+                "3.5mm",
+                "Bluetooth",
+                "Wireless"
+            ],
+            required: true
+        },
+        {
+            name: "pickup_pattern",
+            label: "Pickup Pattern",
+            type: "select",
+            options: [
+                "Cardioid",
+                "Omnidirectional",
+                "Bidirectional",
+                "Supercardioid"
+            ],
+            required: false
+        },
+        {
+            name: "noise_cancellation",
+            label: "Noise Cancellation",
+            type: "select",
+            options: ["Yes", "No"],
+            required: false
+        },
+        {
+            name: "condition",
+            label: "Condition",
+            type: "select",
+            options: [
+                "New",
+                "Used",
+                "Refurbished"
+            ],
+            required: true
+        },
+        {
+            name: "price",
+            label: "Price",
+            type: "number",
+            required: true
+        },
+        {
+            name: "stock",
+            label: "Stock Status",
+            type: "select",
+            options: [
+                "In Stock",
+                "Out of Stock",
+                "Pre-Order"
+            ],
+            required: true
+        },
+        {
+            name: "warranty",
+            label: "Warranty",
+            type: "select",
+            options: [
+                "No Warranty",
+                "3 Months",
+                "6 Months",
+                "1 Year",
+                "Seller Warranty",
+                "Brand Warranty"
+            ],
+            required: false
+        }
+    ],
+
+    "data-cables": [
+        {
+            name: "item",
+            label: "Item / Product Name",
+            type: "text",
+            required: true
+        },
+        {
+            name: "brand",
+            label: "Brand",
+            type: "text",
+            required: true
+        },
+        {
+            name: "cable_type",
+            label: "Cable Type",
+            type: "text",
+            required: true
+        },
+        {
+            name: "connector_1",
+            label: "Connector 1",
+            type: "select",
+            options: [
+                "USB-A",
+                "USB-C",
+                "Micro USB",
+                "Lightning"
+            ],
+            required: true
+        },
+        {
+            name: "connector_2",
+            label: "Connector 2",
+            type: "select",
+            options: [
+                "USB-A",
+                "USB-C",
+                "Micro USB",
+                "Lightning"
+            ],
+            required: true
+        },
+        {
+            name: "length",
+            label: "Cable Length",
+            type: "text",
+            required: true
+        },
+        {
+            name: "data_speed",
+            label: "Data Transfer Speed",
+            type: "text",
+            required: false
+        },
+        {
+            name: "charging_power",
+            label: "Charging Power",
+            type: "text",
+            required: false
+        },
+        {
+            name: "condition",
+            label: "Condition",
+            type: "select",
+            options: [
+                "New",
+                "Used",
+                "Refurbished"
+            ],
+            required: true
+        },
+        {
+            name: "price",
+            label: "Price",
+            type: "number",
+            required: true
+        },
+        {
+            name: "stock",
+            label: "Stock Status",
+            type: "select",
+            options: [
+                "In Stock",
+                "Out of Stock",
+                "Pre-Order"
+            ],
+            required: true
+        },
+        {
+            name: "warranty",
+            label: "Warranty",
+            type: "select",
+            options: [
+                "No Warranty",
+                "3 Months",
+                "6 Months",
+                "1 Year",
+                "Seller Warranty",
+                "Brand Warranty"
+            ],
+            required: false
+        }
+    ],
+
+    usb: [
+        {
+            name: "item",
+            label: "Item / Product Name",
+            type: "text",
+            required: true
+        },
+        {
+            name: "brand",
+            label: "Brand",
+            type: "text",
+            required: true
+        },
+        {
+            name: "usb_type",
+            label: "USB Type",
+            type: "select",
+            options: [
+                "USB 2.0",
+                "USB 3.0",
+                "USB 3.2",
+                "USB-C"
+            ],
+            required: true
+        },
+        {
+            name: "capacity",
+            label: "Capacity",
+            type: "select",
+            options: [
+                "8GB",
+                "16GB",
+                "32GB",
+                "64GB",
+                "128GB",
+                "256GB",
+                "512GB"
+            ],
+            required: true
+        },
+        {
+            name: "read_speed",
+            label: "Read Speed",
+            type: "text",
+            required: false
+        },
+        {
+            name: "write_speed",
+            label: "Write Speed",
+            type: "text",
+            required: false
+        },
+        {
+            name: "condition",
+            label: "Condition",
+            type: "select",
+            options: [
+                "New",
+                "Used",
+                "Refurbished"
+            ],
+            required: true
+        },
+        {
+            name: "price",
+            label: "Price",
+            type: "number",
+            required: true
+        },
+        {
+            name: "stock",
+            label: "Stock Status",
+            type: "select",
+            options: [
+                "In Stock",
+                "Out of Stock",
+                "Pre-Order"
+            ],
+            required: true
+        },
+        {
+            name: "warranty",
+            label: "Warranty",
+            type: "select",
+            options: [
+                "No Warranty",
+                "3 Months",
+                "6 Months",
+                "1 Year",
+                "Seller Warranty",
+                "Brand Warranty"
+            ],
+            required: false
+        }
+    ],
+
+    "hdmi-cables": [
+        {
+            name: "item",
+            label: "Item / Product Name",
+            type: "text",
+            required: true
+        },
+        {
+            name: "brand",
+            label: "Brand",
+            type: "text",
+            required: true
+        },
+        {
+            name: "hdmi_version",
+            label: "HDMI Version",
+            type: "select",
+            options: [
+                "HDMI 1.4",
+                "HDMI 2.0",
+                "HDMI 2.1"
+            ],
+            required: true
+        },
+        {
+            name: "length",
+            label: "Cable Length",
+            type: "text",
+            required: true
+        },
+        {
+            name: "resolution",
+            label: "Resolution Support",
+            type: "select",
+            options: [
+                "1080p",
+                "4K",
+                "8K"
+            ],
+            required: true
+        },
+        {
+            name: "refresh_rate",
+            label: "Refresh Rate",
+            type: "select",
+            options: [
+                "60Hz",
+                "120Hz",
+                "144Hz"
+            ],
+            required: false
+        },
+        {
+            name: "hdr",
+            label: "HDR",
+            type: "select",
+            options: ["Yes", "No"],
+            required: false
+        },
+        {
+            name: "arc",
+            label: "ARC / eARC",
+            type: "select",
+            options: ["Yes", "No"],
+            required: false
+        },
+        {
+            name: "condition",
+            label: "Condition",
+            type: "select",
+            options: [
+                "New",
+                "Used",
+                "Refurbished"
+            ],
+            required: true
+        },
+        {
+            name: "price",
+            label: "Price",
+            type: "number",
+            required: true
+        },
+        {
+            name: "stock",
+            label: "Stock Status",
+            type: "select",
+            options: [
+                "In Stock",
+                "Out of Stock",
+                "Pre-Order"
+            ],
+            required: true
+        },
+        {
+            name: "warranty",
+            label: "Warranty",
+            type: "select",
+            options: [
+                "No Warranty",
+                "3 Months",
+                "6 Months",
+                "1 Year",
+                "Seller Warranty",
+                "Brand Warranty"
+            ],
+            required: false
+        }
+    ]
+};
+
 function getFallbackFieldsForSubcategory(subCategoryName) {
     if (subCategoryName === "Laptops" || subCategoryName === "Chromebooks" || subCategoryName === "Printers" || subCategoryName === "Printers & Scanners" || subCategoryName === "Laptop Charger" || subCategoryName === "Keyboard" || subCategoryName === "Mouse") {
         return SPECIALIZED_FIELDS_MAP[subCategoryName];
@@ -6349,17 +7018,72 @@ if (groceryCatSelect) {
 // Hook subcategory selection change
 if (grocerySubCatSelect) {
     grocerySubCatSelect.addEventListener('change', () => {
+        const multimediaType = document.getElementById("multimediaType");
+        const multimediaTypeWrapper = document.getElementById("multimediaTypeWrapper");
+        
+        if (multimediaType) multimediaType.value = "";
+        if (multimediaTypeWrapper) multimediaTypeWrapper.classList.add("hidden");
+        
+        if (groceryFields) groceryFields.innerHTML = "";
+        if (groceryTable) groceryTable.innerHTML = "";
+
         if (groceryCatSelect && isGroceryCategory(groceryCatSelect.value)) {
             const subCategoryName = grocerySubCatSelect.value;
             if (subCategoryName) {
+                if (subCategoryName.toLowerCase() === "multimedia") {
+                    if (multimediaTypeWrapper) multimediaTypeWrapper.classList.remove("hidden");
+                    return;
+                }
                 loadGrocerySubcategoryFields(subCategoryName);
                 loadGroceryProducts(subCategoryName);
-            } else {
-                if (groceryFields) groceryFields.innerHTML = "";
-                if (groceryTable) groceryTable.innerHTML = "";
             }
         }
     });
+}
+
+// Hook multimedia type change
+const multimediaTypeSelect = document.getElementById("multimediaType");
+if (multimediaTypeSelect) {
+    multimediaTypeSelect.addEventListener("change", function () {
+        const type = this.value;
+        if (!type) {
+            if (groceryFields) groceryFields.innerHTML = "";
+            if (groceryTable) groceryTable.innerHTML = "";
+            return;
+        }
+        loadMultimediaFields(type);
+    });
+}
+
+async function loadMultimediaFields(type) {
+    const fields = [...(multimediaFieldConfig[type] || [])];
+    
+    if (!fields.some(f => f.name === "description")) {
+        fields.push({
+            name: "description",
+            label: "Description ( Add a box for Complete details )",
+            type: "textarea",
+            required: false
+        });
+    }
+
+    const adaptedFields = fields.map((f, index) => ({
+        id: f.name,
+        field_name: f.name,
+        field_label: f.label,
+        field_type: f.type,
+        is_required: f.required,
+        field_options: f.options || []
+    }));
+
+    currentGroceryFields = adaptedFields;
+    renderGroceryProductForm();
+
+    await loadProductsByMultimediaType(grocerySubCatSelect.value, type);
+}
+
+async function loadProductsByMultimediaType(subCategoryName, type) {
+    await loadGroceryProducts(subCategoryName);
 }
 
 // Also trigger on initial load check
@@ -6428,13 +7152,16 @@ function renderGroceryProductForm() {
         return;
     }
 
+    const descriptionField = currentGroceryFields.find(f => f.field_name && f.field_name.toLowerCase() === "description");
+    const otherFields = currentGroceryFields.filter(f => !f.field_name || f.field_name.toLowerCase() !== "description");
+
     let html = `
         <div class="form-container text-left" style="margin-top: 20px;">
             <h3>Add Product</h3>
             <div class="form-row">
     `;
 
-    currentGroceryFields.forEach(field => {
+    otherFields.forEach(field => {
         let input = "";
         const required = field.is_required ? "required" : "";
 
@@ -6501,15 +7228,20 @@ function renderGroceryProductForm() {
                     ${required}
                 >
             `;
-        } else if (field.field_name === "description") {
+        } else if (field.field_type === "multiselect") {
+            const optionsHtml = (field.field_options || []).map(opt => `<option value="${opt}" style="background: #1e293b; color: #fff; padding: 4px;">${opt}</option>`).join('');
             input = `
-                <textarea
+                <select
                     id="field_${field.id}"
                     data-field-id="${field.id}"
-                    style="width: 100%; height: 60px; padding: 10px; border-radius: 10px; border: 1px solid rgba(0,0,0,0.1); resize: vertical;"
-                    placeholder="Enter complete details..."
+                    multiple
+                    size="${field.field_options ? field.field_options.length : 5}"
+                    style="height: auto; min-height: 125px; padding: 8px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); border-radius: 6px; color: #fff; width: 100%;"
                     ${required}
-                ></textarea>
+                >
+                    ${optionsHtml}
+                </select>
+                <span style="font-size: 0.75rem; color: #888; margin-top: 2px; display: block;">Hold Ctrl (Cmd) to select multiple</span>
             `;
         } else {
             input = `
@@ -6522,11 +7254,8 @@ function renderGroceryProductForm() {
             `;
         }
 
-        const isDescription = field.field_name === "description";
-        const groupStyle = isDescription ? `style="grid-column: 1 / -1; width: 100%;"` : "";
-
         html += `
-            <div class="input-group" ${groupStyle}>
+            <div class="input-group">
                 <label>
                     ${escapeHtml(field.field_label)}
                     ${field.is_required
@@ -6540,7 +7269,29 @@ function renderGroceryProductForm() {
 
     html += `
             </div>
+    `;
 
+    if (descriptionField) {
+        const required = descriptionField.is_required ? "required" : "";
+        html += `
+            <div class="input-group" style="width: 100%; margin-top: 15px; margin-bottom: 15px; box-sizing: border-box; text-align: left; padding: 0 4px;">
+                <label style="display: block; margin-bottom: 6px; font-size: 0.8rem; color: rgba(255, 255, 255, 0.7);">
+                    ${escapeHtml(descriptionField.field_label)}
+                    ${descriptionField.is_required ? '<span style="color: var(--accent-color);">*</span>' : ''}
+                </label>
+                <textarea
+                    id="field_${descriptionField.id}"
+                    data-field-id="${descriptionField.id}"
+                    class="admin-input"
+                    style="width: 100%; height: 100px; padding: 10px 12px; background: rgba(255,255,255,0.9) !important; color: #0f172a !important; border: 1px solid var(--border-color) !important; border-radius: 10px; resize: vertical; box-sizing: border-box;"
+                    placeholder="Enter complete details..."
+                    ${required}
+                ></textarea>
+            </div>
+        `;
+    }
+
+    html += `
             <!-- Standard Seller's / Shop's Area (Same for all categories) -->
             <h4 class="form-section-title" style="margin-top:25px; margin-bottom:15px; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:5px; font-weight:bold; color:var(--primary-color);">Seller's / Shop's Area</h4>
             <div class="form-row">
@@ -6739,16 +7490,26 @@ window.saveDynamicGroceryProduct = async function() {
         const input = document.getElementById(`field_${field.id}`);
         if (!input) continue;
 
-        if (field.is_required && !input.value.trim()) {
-            alert(`${field.field_label} is required.`);
-            input.focus();
-            return;
+        if (field.is_required) {
+            const hasVal = field.field_type === "multiselect"
+                ? (Array.from(input.selectedOptions).length > 0)
+                : !!input.value.trim();
+            if (!hasVal) {
+                alert(`${field.field_label} is required.`);
+                if (input.focus) input.focus();
+                return;
+            }
         }
 
-        dynamicData[field.field_name] =
-            field.field_type === "number"
-                ? Number(input.value)
-                : input.value.trim();
+        if (field.field_type === "multiselect") {
+            const selectedOptions = Array.from(input.selectedOptions).map(opt => opt.value);
+            dynamicData[field.field_name] = selectedOptions.join(', ');
+        } else {
+            dynamicData[field.field_name] =
+                field.field_type === "number"
+                    ? Number(input.value)
+                    : input.value.trim();
+        }
     }
 
     // Get Seller/Shop fields
@@ -6793,9 +7554,16 @@ window.saveDynamicGroceryProduct = async function() {
         }
     } catch(e) {}
 
+    const multimediaTypeEl = document.getElementById("multimediaType");
+    let multimediaTypeValue = null;
+    if (multimediaTypeEl && !multimediaTypeEl.parentElement.classList.contains("hidden") && multimediaTypeEl.value) {
+        multimediaTypeValue = multimediaTypeEl.options[multimediaTypeEl.selectedIndex]?.text;
+    }
+
     const payload = {
         category: categoryName,
         sub_category: subCategoryName,
+        multimedia_type: multimediaTypeValue,
         image: dynamicData.image || "https://via.placeholder.com/150",
         status: status,
         added_by: userName,
@@ -6845,12 +7613,13 @@ async function loadGroceryProducts(subCategoryName) {
         ? ["Computers", "Computer"]
         : [categoryName];
 
-    const { data, error } = await client
+    let query = client
         .from("products")
         .select(`
             id,
             category,
             sub_category,
+            multimedia_type,
             image,
             status,
             added_by,
@@ -6859,10 +7628,19 @@ async function loadGroceryProducts(subCategoryName) {
             extra_fields
         `)
         .in("category", categoryQueryValue)
-        .eq("sub_category", subCategoryName)
-        .order("created_date", {
-            ascending: false
-        });
+        .eq("sub_category", subCategoryName);
+
+    if (subCategoryName.toLowerCase() === "multimedia") {
+        const multimediaTypeEl = document.getElementById("multimediaType");
+        if (multimediaTypeEl && multimediaTypeEl.value) {
+            const displayType = multimediaTypeEl.options[multimediaTypeEl.selectedIndex]?.text;
+            query = query.eq("multimedia_type", displayType);
+        }
+    }
+
+    const { data, error } = await query.order("created_date", {
+        ascending: false
+    });
 
     if (error) {
         console.error(error);
@@ -6878,6 +7656,7 @@ async function loadGroceryProducts(subCategoryName) {
         id: p.id,
         category: p.category,
         subCategory: p.sub_category,
+        multimediaType: p.multimedia_type,
         image: p.image,
         status: p.status,
         addedBy: p.added_by,
@@ -7110,11 +7889,35 @@ window.editGroceryProduct = async function(productId) {
     const product = currentGroceryProducts.find(p => p.id === productId);
     if (!product) return;
 
-    // Fill dynamic fields
+    if (product.subCategory && product.subCategory.toLowerCase() === "multimedia") {
+        const multimediaTypeEl = document.getElementById("multimediaType");
+        const multimediaTypeWrapper = document.getElementById("multimediaTypeWrapper");
+        if (multimediaTypeWrapper) multimediaTypeWrapper.classList.remove("hidden");
+        
+        if (multimediaTypeEl && product.multimediaType) {
+            for (let i = 0; i < multimediaTypeEl.options.length; i++) {
+                if (multimediaTypeEl.options[i].text.toLowerCase() === product.multimediaType.toLowerCase()) {
+                    multimediaTypeEl.selectedIndex = i;
+                    break;
+                }
+            }
+            await loadMultimediaFields(multimediaTypeEl.value);
+        }
+    }
+
     currentGroceryFields.forEach(field => {
         const input = document.getElementById(`field_${field.id}`);
         if (!input) return;
-        input.value = product.data?.[field.field_name] ?? "";
+        
+        if (field.field_type === "multiselect") {
+            const val = product.data?.[field.field_name] ?? "";
+            const selectedVals = val.split(',').map(s => s.trim());
+            Array.from(input.options).forEach(opt => {
+                opt.selected = selectedVals.includes(opt.value);
+            });
+        } else {
+            input.value = product.data?.[field.field_name] ?? "";
+        }
     });
 
     // Fill Seller/Shop fields
