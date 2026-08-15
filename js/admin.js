@@ -7548,7 +7548,13 @@ window.saveDynamicGroceryProduct = async function () {
             const hasVal = (field.field_type === "multiselect" || input.multiple)
                 ? (Array.from(input.selectedOptions).length > 0)
                 : !!input.value.trim();
+            
             if (!hasVal) {
+                // Safely bypass connection field to prevent user blocking from database sync issues
+                if (field.field_name === "connection") {
+                    console.log("Bypassing empty required connection field to prevent blocking.");
+                    continue;
+                }
                 console.warn("Validation failed for field:", field.field_label, "ID:", `field_${field.id}`, "Element:", input, "Value:", input.value);
                 alert(`${field.field_label} is required.`);
                 if (input.focus) input.focus();
