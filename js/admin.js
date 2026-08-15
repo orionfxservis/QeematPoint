@@ -7589,17 +7589,18 @@ window.saveDynamicGroceryProduct = async function () {
         }
     }
 
-    // Get Seller/Shop fields
-    const sellerType = document.getElementById('prodSeller')?.value || "";
-    const companyName = document.getElementById('prodCompanyName')?.value || "";
-    const address = document.getElementById('prodAddress')?.value || "";
-    const area = document.getElementById('prodArea')?.value || "";
-    const blockNo = document.getElementById('prodBlockNo')?.value || "";
-    const city = document.getElementById('prodCity')?.value || "Karachi";
-    const phone = document.getElementById('prodPhone')?.value || "";
-    const whatsapp = document.getElementById('prodWhatsapp')?.value || "";
-    const website = document.getElementById('prodWebsite')?.value || "";
-    const status = document.getElementById('prodStatus')?.value || "Publish";
+    // Get Seller/Shop fields relative to the grocery fields container to prevent ID collisions
+    const container = document.getElementById('groceryProductFields') || document;
+    const sellerType = container.querySelector('#prodSeller')?.value || "";
+    const companyName = container.querySelector('#prodCompanyName')?.value || "";
+    const address = container.querySelector('#prodAddress')?.value || "";
+    const area = container.querySelector('#prodArea')?.value || "";
+    const blockNo = container.querySelector('#prodBlockNo')?.value || "";
+    const city = container.querySelector('#prodCity')?.value || "Karachi";
+    const phone = container.querySelector('#prodPhone')?.value || "";
+    const whatsapp = container.querySelector('#prodWhatsapp')?.value || "";
+    const website = container.querySelector('#prodWebsite')?.value || "";
+    const status = container.querySelector('#prodStatus')?.value || "Publish";
 
     if (!sellerType || !address || !area || !blockNo || !phone || !whatsapp) {
         alert("Please fill in all required Seller / Shop fields.");
