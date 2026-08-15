@@ -128,6 +128,7 @@ async function initAdmin() {
         renderDeals();
         renderUsers();
         renderSellers();
+        if (typeof populateSellersDatalist === 'function') populateSellersDatalist();
         generateSellerId();
         if (typeof renderBlogs === "function") renderBlogs(); else window.renderBlogs();
         renderTravelPackages(); // New function for travel
@@ -2198,7 +2199,7 @@ function renderDynamicAdminFields() {
                 </div>
                 <div class="input-group" id="laptopCompanyGroup" style="opacity: 0.4; pointer-events: none;">
                     <label>Shop / Office / Company Name</label>
-                    <input type="text" id="prodCompanyName" class="dynamic-admin-field" placeholder="Shop / Office / Company Name" disabled>
+                    <input type="text" id="prodCompanyName" class="dynamic-admin-field" placeholder="Shop / Office / Company Name" list="sellersDatalist" disabled>
                 </div>
             </div>
             ${addressAreaBlockCityHtml}
@@ -2453,7 +2454,7 @@ function renderDynamicAdminFields() {
                 </div>
                 <div class="input-group" id="laptopCompanyGroup" style="opacity: 0.4; pointer-events: none;">
                     <label>Shop / Office / Company Name</label>
-                    <input type="text" id="prodCompanyName" class="dynamic-admin-field" placeholder="Shop / Office / Company Name" disabled>
+                    <input type="text" id="prodCompanyName" class="dynamic-admin-field" placeholder="Shop / Office / Company Name" list="sellersDatalist" disabled>
                 </div>
             </div>
             ${addressAreaBlockCityHtml}
@@ -7329,7 +7330,7 @@ function renderGroceryProductForm() {
                 </div>
                 <div class="input-group" id="laptopCompanyGroup" style="opacity: 0.4; pointer-events: none;">
                     <label>Shop / Office / Company Name <span style="color: var(--accent-color);">*</span></label>
-                    <input type="text" id="prodCompanyName" placeholder="Shop / Office / Company Name" disabled>
+                    <input type="text" id="prodCompanyName" placeholder="Shop / Office / Company Name" list="sellersDatalist" disabled>
                 </div>
             </div>
             
@@ -7998,5 +7999,77 @@ function escapeHtml(value) {
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&#039;");
 }
+
+window.populateSellersDatalist = function() {
+    const datalist = document.getElementById('sellersDatalist');
+    if (datalist) {
+        datalist.innerHTML = '';
+        (sellers || []).forEach(s => {
+            if (s.businessName) {
+                const opt = document.createElement('option');
+                opt.value = s.businessName;
+                datalist.appendChild(opt);
+            }
+        });
+    }
+};
+
+document.addEventListener('input', function(e) {
+    if (e.target && e.target.id === 'prodCompanyName') {
+        const enteredVal = e.target.value.trim().toLowerCase();
+        if (!enteredVal) return;
+
+        const matchedSeller = sellers.find(s => 
+            (s.businessName && s.businessName.toLowerCase() === enteredVal) ||
+            (s.ownerName && s.ownerName.toLowerCase() === enteredVal)
+        );
+
+        if (matchedSeller) {
+            const addrField = document.getElementById('prodAddress');
+            const areaField = document.getElementById('prodArea');
+            const blockField = document.getElementById('prodBlockNo');
+            const cityField = document.getElementById('prodCity');
+            const phoneField = document.getElementById('prodPhone');
+            const whatsappField = document.getElementById('prodWhatsapp');
+            const websiteField = document.getElementById('prodWebsite');
+
+            if (addrField) addrField.value = matchedSeller.address || "";
+
+            if (cityField) {
+                for (let i = 0; i < cityField.options.length; i++) {
+                    if (cityField.options[i].text.toLowerCase() === (matchedSeller.city || "").toLowerCase()) {
+                        cityField.selectedIndex = i;
+                        break;
+                    }
+                }
+            }
+
+            if (areaField) {
+                for (let i = 0; i < areaField.options.length; i++) {
+                    if (areaField.options[i].text.toLowerCase() === (matchedSeller.area || "").toLowerCase()) {
+                        areaField.selectedIndex = i;
+                        areaField.dispatchEvent(new Event('change'));
+                        break;
+                    }
+                }
+            }
+
+            setTimeout(() => {
+                if (blockField) {
+                    for (let i = 0; i < blockField.options.length; i++) {
+                        if (blockField.options[i].text.toLowerCase() === (matchedSeller.blockNo || "").toLowerCase()) {
+                            blockField.selectedIndex = i;
+                            break;
+                        }
+                    }
+                }
+            }, 100);
+
+            if (phoneField) phoneField.value = matchedSeller.mobileNumber || "";
+            if (whatsappField) whatsappField.value = matchedSeller.whatsappNumber || "";
+            if (websiteField) websiteField.value = matchedSeller.website || "";
+        }
+    }
+});
 
 
