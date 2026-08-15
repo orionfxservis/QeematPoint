@@ -1007,47 +1007,64 @@
       return desc.includes(val);
   }
 
-  function matchSubCategory(p, subcategory) {
+  function filterBySubcategory(p, subcategory) {
+      const subCat = String(p.subCategory || '').toLowerCase().trim();
+      const desc = ((p.description || '') + ' ' + (p.details || '') + ' ' + (p.name || '')).toLowerCase();
+
       if (subcategory === 'all') return true;
       
-      const subCat = (p.subCategory || '').toLowerCase();
-      const desc = ((p.description || '') + ' ' + (p.details || '') + ' ' + (p.name || '')).toLowerCase();
-      
+      // Prioritize strict subcategory matching to prevent description leaks
+      if (subCat) {
+          if (subcategory === 'laptops') return subCat === 'laptops' || subCat === 'laptop';
+          if (subcategory === 'chromebooks') return subCat === 'chromebooks' || subCat === 'chromebook';
+          if (subcategory === 'desktop-pcs') return subCat === 'desktop-pcs' || subCat === 'desktop pcs' || subCat === 'pcs' || subCat === 'pc' || subCat === 'workstation';
+          if (subcategory === 'monitors') return subCat === 'monitors' || subCat === 'monitor';
+          if (subcategory === 'printers') return subCat === 'printers' || subCat === 'printer' || subCat === 'printers & scanners';
+          if (subcategory === 'storage-devices') return subCat === 'storage-devices' || subCat === 'storage devices';
+          if (subcategory === 'laptop-charger') return subCat === 'laptop-charger' || subCat === 'laptop charger';
+          if (subcategory === 'laptop-bags') return subCat === 'laptop-bags' || subCat === 'laptop bags';
+          if (subcategory === 'multimedia') return subCat === 'multimedia';
+          if (subcategory === 'keyboard') return subCat === 'keyboard' || subCat === 'keyboards';
+          if (subcategory === 'mouse') return subCat === 'mouse';
+          if (subcategory === 'power-cord') return subCat === 'power-cord' || subCat === 'power cord';
+      }
+
+      // Fallback to description keyword matching ONLY if subCategory is empty
       if (subcategory === 'laptops') {
-          return subCat.includes('laptop') || desc.includes('laptop');
+          return desc.includes('laptop');
       }
       if (subcategory === 'chromebooks') {
-          return subCat.includes('chromebook') || desc.includes('chromebook');
+          return desc.includes('chromebook');
       }
       if (subcategory === 'desktop-pcs') {
-          return subCat.includes('desktop') || subCat.includes('pc') || subCat.includes('workstation') || desc.includes('desktop') || desc.includes(' pc') || desc.includes('personal computer');
+          return desc.includes('desktop') || desc.includes('personal computer');
       }
       if (subcategory === 'monitors') {
-          return subCat.includes('monitor') || subCat.includes('screen') || desc.includes('monitor') || desc.includes('screen');
+          return desc.includes('monitor') || desc.includes('screen');
       }
       if (subcategory === 'printers') {
-          return subCat.includes('printer') || desc.includes('printer');
+          return desc.includes('printer');
       }
       if (subcategory === 'storage-devices') {
-          return subCat.includes('storage') || subCat.includes('ssd') || subCat.includes('hdd') || subCat.includes('usb') || desc.includes('storage') || desc.includes('hard drive') || desc.includes('ssd') || desc.includes('hdd');
+          return desc.includes('hard drive') || desc.includes('ssd') || desc.includes('hdd');
       }
       if (subcategory === 'laptop-charger') {
-          return subCat.includes('charger') || desc.includes('charger') || desc.includes('adapter');
+          return desc.includes('laptop charger') || desc.includes('charger adapter');
       }
       if (subcategory === 'laptop-bags') {
-          return subCat.includes('bag') || subCat.includes('sleeve') || subCat.includes('backpack') || desc.includes('laptop bag') || desc.includes('backpack');
+          return desc.includes('laptop bag') || desc.includes('laptop backpack');
       }
       if (subcategory === 'multimedia') {
-          return subCat.includes('multimedia') || subCat.includes('speaker') || subCat.includes('headphone') || subCat.includes('mic') || desc.includes('multimedia') || desc.includes('speaker') || desc.includes('headphone') || desc.includes('soundbar') || desc.includes('mic');
+          return desc.includes('soundbar') || desc.includes('speaker') || desc.includes('headphone') || desc.includes('microphone');
       }
       if (subcategory === 'keyboard') {
-          return subCat.includes('keyboard') || desc.includes('keyboard');
+          return desc.includes('keyboard');
       }
       if (subcategory === 'mouse') {
-          return subCat.includes('mouse') || desc.includes('mouse');
+          return desc.includes('mouse');
       }
       if (subcategory === 'power-cord') {
-          return subCat.includes('cable') || subCat.includes('cord') || desc.includes('cable') || desc.includes('cord') || desc.includes('power code') || desc.includes('power cord');
+          return desc.includes('power code') || desc.includes('power cord');
       }
       if (subcategory === 'top-rated') {
           return p.rating ? parseFloat(p.rating) >= 4.5 : true;
