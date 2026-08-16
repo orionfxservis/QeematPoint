@@ -1007,7 +1007,7 @@
       return desc.includes(val);
   }
 
-  function filterBySubcategory(p, subcategory) {
+  function matchSubCategory(p, subcategory) {
       const subCat = String(p.subCategory || '').toLowerCase().trim();
       const desc = ((p.description || '') + ' ' + (p.details || '') + ' ' + (p.name || '')).toLowerCase();
 
