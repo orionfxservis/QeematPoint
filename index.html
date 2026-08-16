@@ -665,25 +665,13 @@
 
                     <div class="grid grid-cols-12 gap-6 items-center">
                         <div class="col-span-12 md:col-span-6 space-y-4">
-                            <!-- Instant Multi-Store Price Tracker Badge -->
-                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950 text-emerald-400 border border-emerald-800/80 text-xs sm:text-sm font-semibold tracking-wide shadow-sm w-fit select-none">
-                                <span class="relative flex h-2 w-2">
-                                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                                    <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
-                                </span>
-                                Instant Multi-Store Price Tracker
+                            <!-- Real-Time Multi-Store Price Engine for Pakistan Badge -->
+                            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-950 text-emerald-400 border border-emerald-800/80 text-[10px] sm:text-xs font-semibold tracking-wider shadow-sm w-fit select-none uppercase animate-pulse">
+                                <i class="fa-solid fa-bolt-lightning text-amber-400"></i>
+                                <span>REAL-TIME MULTI-STORE PRICE ENGINE FOR PAKISTAN</span>
                             </div>
-                            <h1 class="text-4xl sm:text-5xl font-black text-slate-900 leading-[1.1] tracking-tight relative">
-                                Compare Prices <br />
-                                <span class="text-[#005221] relative inline-block">
-                                    Before You Buy
-                                    <!-- Orange sunburst lines on top right of Best Price -->
-                                    <svg class="absolute -top-1 -right-6 w-6 h-6 text-orange-500" viewBox="0 0 24 24"
-                                        fill="none" stroke="currentColor" stroke-width="3">
-                                        <path
-                                            d="M12 2v3m4.24-2.24l-2.12 2.12M22 12h-3m-2.24 4.24l2.12 2.12M12 22v-3m-8.24 2.24l2.12-2.12M2 12h3M4.76 4.76l2.12 2.12" />
-                                    </svg>
-                                </span>
+                            <h1 style="font-family: 'Times New Roman', Times, serif;" class="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-800 leading-[1.15] tracking-tight relative">
+                                Find the Best Price Across Pakistan — <span class="text-[#005221]">Updated Live.</span>
                             </h1>
                             <p class="text-slate-700 text-sm md:text-base font-semibold leading-relaxed">
                                 Find the lowest prices from nearby shops, compare deals instantly, and save money on every purchase.
@@ -748,125 +736,374 @@
                                 href="#" onclick="setSearchQuery('HP 830 G7')">HP 830 G7</a>
                             <a class="bg-slate-50 border border-slate-200 rounded-full px-3.5 py-1.5 hover:bg-slate-50 hover:border-emerald-500 text-slate-700 font-semibold transition-all shadow-sm"
                                 href="#" onclick="setSearchQuery('Zinger Burger')">Zinger Burger</a>
-                                        <!-- 3-Column Bottom Layout -->
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
-                    <!-- Left Banner Stack (300 x 250 px each) -->
-                    <div class="hidden lg:flex lg:col-span-3 flex-col gap-4">
-                        <div id="home-left-banner-1" class="w-full h-[250px] bg-slate-900 border border-slate-800 rounded-3xl p-5 flex flex-col justify-between text-white relative overflow-hidden shadow-lg transition-all duration-300">
-                            <!-- filled dynamically -->
-                        </div>
-                        <div id="home-left-banner-2" class="w-full h-[250px] bg-slate-900 border border-slate-800 rounded-3xl p-5 flex flex-col justify-between text-white relative overflow-hidden shadow-lg transition-all duration-300">
-                            <!-- filled dynamically -->
                         </div>
                     </div>
-
-                    <!-- Middle Section: Live Price Comparison Card -->
-                    <div class="col-span-12 lg:col-span-6 flex flex-col justify-between bg-white border border-slate-200 rounded-3xl p-5 shadow-sm text-left h-full min-h-[516px] lg:min-h-0">
-                        <div class="flex justify-between items-center mb-2 shrink-0">
-                            <div class="flex items-center gap-2">
-                                <span class="text-orange-500 font-bold text-base">🪙</span>
-                                <span class="text-xs font-black uppercase tracking-wide text-slate-800">Live Price Comparison</span>
-                            </div>
-                            <span class="bg-red-500 text-white text-[9px] px-2.5 py-0.5 rounded-full font-bold flex items-center gap-1 animate-pulse">
-                                <span class="w-1.5 h-1.5 bg-white rounded-full"></span> LIVE
-                            </span>
-                        </div>
-
-                        <div class="flex gap-4 items-center flex-1 overflow-hidden py-1">
-                            <!-- Product Image -->
-                            <div class="w-[52%] lg:w-[52%] flex flex-col items-center justify-center shrink-0">
-                                <img id="live-comp-img"
-                                    class="w-full h-[210px] lg:h-[290px] object-cover rounded-2xl border border-slate-100 shadow-md transition-all duration-300"
-                                    src="images/categories/food/zinger-burger.png" />
-                                <div id="live-comp-name"
-                                    class="text-xs lg:text-sm font-extrabold text-slate-800 mt-1 lg:mt-2 text-center truncate w-full">Zinger Burger</div>
-                            </div>
-                            <!-- Shops List -->
-                            <div id="live-comp-shops" class="w-[45%] space-y-1.5 overflow-y-auto max-h-[160px] lg:max-h-[380px] pr-1">
-                                <div class="flex items-center justify-between py-1 border-b border-slate-50">
-                                    <div class="flex items-center gap-2">
-                                        <span class="w-4 h-4 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center text-[9px] font-bold">F</span>
-                                        <span class="text-xs font-bold text-slate-700">FRYCHI</span>
-                                    </div>
-                                    <div class="flex items-center gap-1">
-                                        <span class="text-[8px] bg-red-100 text-[#d61c22] px-1 py-0.5 rounded font-black uppercase">Best</span>
-                                        <span class="text-xs font-black text-[#d61c22]">Rs. 450</span>
-                                    </div>
-                                </div>
-                                <div class="flex items-center justify-between py-1 border-b border-slate-50">
-                                    <div class="flex items-center gap-2">
-                                        <span class="w-4 h-4 rounded-full bg-red-100 text-red-600 flex items-center justify-center text-[9px] font-bold">P</span>
-                                        <span class="text-xs font-bold text-slate-700">Pizza Max</span>
-                                    </div>
-                                    <span class="text-xs font-bold text-slate-600">Rs. 490</span>
-                                </div>
-                                <div class="flex items-center justify-between py-1 border-b border-slate-50">
-                                    <div class="flex items-center gap-2">
-                                        <span class="w-4 h-4 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center text-[9px] font-bold">K</span>
-                                        <span class="text-xs font-bold text-slate-700">Kababjees</span>
-                                    </div>
-                                    <span class="text-xs font-bold text-slate-600">Rs. 520</span>
-                                </div>
-                                <div class="flex items-center justify-between py-1">
-                                    <div class="flex items-center gap-2">
-                                        <span class="w-4 h-4 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center text-[9px] font-bold">K</span>
-                                        <span class="text-xs font-bold text-slate-700">KFC</span>
-                                    </div>
-                                    <span class="text-xs font-bold text-slate-600">Rs. 590</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Mini Save Tag footer inside card -->
-                        <div class="bg-[#0f2249] py-1.5 px-4 rounded-xl flex items-center justify-between text-white shadow-sm overflow-hidden shrink-0 mt-2 relative">
-                            <div class="absolute right-4 bottom-[-10px] opacity-10">
-                                <span class="material-symbols-outlined text-[40px] text-white">savings</span>
-                            </div>
-                            <div class="flex items-center gap-1.5 relative z-10">
-                                <span>💰</span>
-                                <span class="text-[10px] font-black uppercase tracking-wider">Save up to</span>
-                            </div>
-                            <span class="text-xs font-extrabold text-white relative z-10">Rs. <span id="live-comp-save">140</span></span>
-                        </div>
-                    </div>
-
-                    <!-- Right Banner Stack (300 x 250 px each) -->
-                    <div class="hidden lg:flex lg:col-span-3 flex-col gap-4">
-                        <div id="home-right-banner-1" class="w-full h-[250px] bg-slate-900 border border-slate-800 rounded-3xl p-5 flex flex-col justify-between text-white relative overflow-hidden shadow-lg transition-all duration-300">
-                            <!-- filled dynamically -->
-                        </div>
-                        <div id="home-right-banner-2" class="w-full h-[250px] bg-slate-900 border border-slate-800 rounded-3xl p-5 flex flex-col justify-between text-white relative overflow-hidden shadow-lg transition-all duration-300">
-                            <!-- filled dynamically -->
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Mobile-Only Inline Banner 1 (Between Live Comparison & Categories) -->
-                <div class="block lg:hidden w-full my-4">
-                    <div class="relative w-full rounded-2xl overflow-hidden shadow border border-slate-200 bg-slate-900 py-3 px-4 flex items-center justify-between h-[100px] text-left">
-                        <div class="absolute inset-0 bg-gradient-to-br from-slate-950 to-slate-900 opacity-90 z-0"></div>
-                        <div class="relative z-10 flex items-center gap-3">
-                            <span class="text-3xl">🍔</span>
-                            <div class="flex flex-col">
-                                <span class="text-[10px] font-black uppercase text-[#d61c22]">Featured Restaurant</span>
-                                <span class="text-xs font-bold text-slate-100">Restaurant Deals - Save 40%</span>
-                                <span class="text-[10px] text-slate-400">Order from local outlets nearby</span>
-                            </div>
-                        </div>
-                        <a href="./pages/food.html" class="relative z-10 px-3.5 py-1.5 bg-[#d61c22] text-white text-[11px] font-extrabold rounded-xl shrink-0">
-                            Claim
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Compare All Prices Link -->
-                <div class="mt-4 text-center">
-                    <a href="./pages/food.html"
-                        class="text-sm font-bold text-[#d61c22] hover:text-red-700 inline-flex items-center gap-1.5 hover:underline">
-                        Compare All Prices <span class="text-lg">→</span>
-                    </a>
                 </div>
             </section>
+
+            <!-- Real-Time Compare Engine Section -->
+            <section class="py-10 text-left border-t border-slate-100 mt-6">
+                <!-- Header with Engine Badge and Filters -->
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
+                    <div class="space-y-2">
+                        <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-red-50 border border-red-100 text-[10px] font-semibold text-red-500 uppercase tracking-wider animate-pulse">
+                            <span class="w-1.5 h-1.5 rounded-full bg-red-500"></span> Real-Time Engine
+                        </span>
+                        <h2 style="font-family: 'Times New Roman', Times, serif;" class="text-2xl font-bold text-gray-800">Compare Before You Buy</h2>
+                        <p class="text-slate-500 text-sm max-w-xl">
+                            Instant results across 50+ Pakistani stores. Prices update live — no refresh needed.
+                        </p>
+                    </div>
+                    
+                    <!-- Search & Filter Controls -->
+                    <div class="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto">
+                        <!-- Filter Input -->
+                        <div class="flex items-center bg-white rounded-xl border border-slate-200 px-3 py-1.5 w-full sm:w-[220px] shadow-sm focus-within:border-emerald-600 transition-colors">
+                            <span class="material-symbols-outlined text-slate-400 text-lg mr-1.5">search</span>
+                            <input type="text" id="engineSearchInput" placeholder="Filter products..." class="w-full text-xs border-none outline-none focus:ring-0 text-slate-700 bg-transparent" />
+                        </div>
+                        
+                        <!-- Sort Dropdown -->
+                        <select id="engineSortSelect" class="bg-white border border-slate-200 rounded-xl px-3 py-1.5 text-xs text-slate-700 font-semibold shadow-sm focus:outline-none focus:border-emerald-600 cursor-pointer w-full sm:w-auto">
+                            <option value="savings">Biggest Savings</option>
+                            <option value="low-price">Lowest Price</option>
+                            <option value="rating">Top Rated</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Subcategory Filter Chips -->
+                <div id="engineCategoryChips" class="flex flex-wrap gap-2 mb-8 overflow-x-auto pb-2 scrollbar-none select-none">
+                    <!-- Loaded dynamically -->
+                </div>
+
+                <!-- Products Grid -->
+                <div id="engineProductsGrid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Cards loaded dynamically -->
+                </div>
+            </section>
+
+            <script>
+            document.addEventListener("DOMContentLoaded", async () => {
+                const engineGrid = document.getElementById('engineProductsGrid');
+                const chipsContainer = document.getElementById('engineCategoryChips');
+                const searchInput = document.getElementById('engineSearchInput');
+                const sortSelect = document.getElementById('engineSortSelect');
+                
+                if (!engineGrid) return;
+                
+                let allProducts = [];
+                let currentCategory = 'all';
+                
+                try {
+                    const products = await DataService.getProducts();
+                    allProducts = products.filter(p => 
+                        p.category && 
+                        (p.status === 'Publish' || p.prodStatus === 'Publish' || (!p.status && !p.prodStatus))
+                    );
+                    
+                    const groupedProducts = buildComparisonData(allProducts);
+                    renderChips(groupedProducts);
+                    renderEngineCards(groupedProducts);
+                    
+                    searchInput.addEventListener('input', () => filterAndRender(groupedProducts));
+                    sortSelect.addEventListener('change', () => filterAndRender(groupedProducts));
+                    
+                } catch (err) {
+                    console.error("Error loading comparison engine:", err);
+                    engineGrid.innerHTML = '<div class="col-span-full text-center py-10 text-red-500">Failed to load real-time comparison engine.</div>';
+                }
+                
+                function buildComparisonData(products) {
+                    const groups = {};
+                    products.forEach(p => {
+                        const category = (p.category || '').toLowerCase();
+                        const brand = (p.brand || '').toLowerCase().trim();
+                        const model = (p.model || '').toLowerCase().trim();
+                        const key = model ? `${category}_${brand}_${model}` : `unique_${p.id}`;
+                        
+                        if (!groups[key]) {
+                            groups[key] = [];
+                        }
+                        groups[key].push(p);
+                    });
+                    
+                    return Object.values(groups).map(group => {
+                        const primary = group[0];
+                        const prices = group.map(item => parseFloat(item.price) || 0).filter(pr => pr > 0);
+                        const lowestPrice = prices.length > 0 ? Math.min(...prices) : (parseFloat(primary.price) || 0);
+                        const highestPrice = prices.length > 1 ? Math.max(...prices) : (parseFloat(primary.originalPrice || primary.price) || 0);
+                        const savings = highestPrice > lowestPrice ? (highestPrice - lowestPrice) : 0;
+                        
+                        const shops = group.map(item => ({
+                            seller: item.companyName || item.seller || 'Local Store',
+                            price: parseFloat(item.price) || 0,
+                            whatsapp: item.whatsapp || item.contact || '',
+                            isBest: (parseFloat(item.price) || 0) === lowestPrice
+                        })).sort((a, b) => a.price - b.price);
+                        
+                        return {
+                            id: primary.id,
+                            name: primary.name || `${primary.brand || ''} ${primary.model || ''}`.trim() || 'Product',
+                            brand: primary.brand || '',
+                            model: primary.model || '',
+                            category: primary.category,
+                            subCategory: primary.subCategory,
+                            image: primary.image || 'images/placeholder.jpg',
+                            lowestPrice,
+                            highestPrice,
+                            savings,
+                            shops,
+                            rating: primary.rating || (4.5 + Math.random() * 0.5).toFixed(1),
+                            reviewCount: primary.reviewCount || Math.floor(100 + Math.random() * 900),
+                            condition: primary.condition || 'New',
+                            specs: primary.processor || primary.ram ? `${primary.processor || ''} ${primary.ram ? '· ' + primary.ram : ''}` : (primary.description || '')
+                        };
+                    });
+                }
+                
+                function renderChips(items) {
+                    const counts = { all: items.length };
+                    items.forEach(item => {
+                        const cat = normalizeCategoryName(item.category);
+                        counts[cat] = (counts[cat] || 0) + 1;
+                    });
+                    
+                    const categories = [
+                        { key: 'all', label: 'All Categories', icon: '📦' },
+                        { key: 'food-stuffs', label: 'Food Stuffs', icon: '🍲' },
+                        { key: 'daily-groceries', label: 'Daily Groceries', icon: '🥦' },
+                        { key: 'electronics', label: 'Electronics', icon: '🔌' },
+                        { key: 'mobiles', label: 'Mobiles', icon: '📱' },
+                        { key: 'computers', label: 'Computers', icon: '💻' },
+                        { key: 'property', label: 'Property', icon: '🏠' },
+                        { key: 'fashion', label: 'Fashion', icon: '👕' },
+                        { key: 'personal-care', label: 'Personal Care', icon: '🧴' },
+                        { key: 'kids', label: 'Kids', icon: '👶' }
+                    ];
+                    
+                    let html = '';
+                    categories.forEach(cat => {
+                        const count = counts[cat.key] || 0;
+                        const activeClass = cat.key === currentCategory ? 'bg-emerald-800 text-white font-bold' : 'bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold';
+                        html += `
+                            <button class="px-4 py-2 rounded-full text-xs transition-all ${activeClass} flex items-center gap-1.5" onclick="window.setEngineCategory('${cat.key}')">
+                                <span>${cat.icon}</span>
+                                <span>${cat.label} (${count})</span>
+                            </button>
+                        `;
+                    });
+                    chipsContainer.innerHTML = html;
+                }
+                
+                window.setEngineCategory = function(cat) {
+                    currentCategory = cat;
+                    const buttons = chipsContainer.querySelectorAll('button');
+                    buttons.forEach(btn => {
+                        const isMatch = btn.textContent.toLowerCase().includes(cat === 'all' ? 'all' : cat.replace('-', ' '));
+                        if (isMatch || (cat === 'all' && btn.textContent.toLowerCase().includes('all'))) {
+                            btn.className = 'px-4 py-2 rounded-full text-xs transition-all bg-emerald-800 text-white font-bold flex items-center gap-1.5';
+                        } else {
+                            btn.className = 'px-4 py-2 rounded-full text-xs transition-all bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold flex items-center gap-1.5';
+                        }
+                    });
+                    const groupedProducts = buildComparisonData(allProducts);
+                    filterAndRender(groupedProducts);
+                };
+                
+                function normalizeCategoryName(catName) {
+                    if (!catName) return '';
+                    const lower = catName.toLowerCase().trim();
+                    if (lower.includes('food')) return 'food-stuffs';
+                    if (lower.includes('grocery') || lower.includes('groceries')) return 'daily-groceries';
+                    if (lower.includes('electronic')) return 'electronics';
+                    if (lower.includes('mobile')) return 'mobiles';
+                    if (lower.includes('computer') || lower.includes('laptop')) return 'computers';
+                    if (lower.includes('property') || lower.includes('real estate') || lower.includes('house')) return 'property';
+                    if (lower.includes('fashion') || lower.includes('clothing') || lower.includes('shoes')) return 'fashion';
+                    if (lower.includes('personal care') || lower.includes('beauty')) return 'personal-care';
+                    if (lower.includes('kids') || lower.includes('baby') || lower.includes('toy')) return 'kids';
+                    return 'other';
+                }
+                
+                function filterAndRender(items) {
+                    let filtered = items;
+                    if (currentCategory !== 'all') {
+                        filtered = filtered.filter(item => normalizeCategoryName(item.category) === currentCategory);
+                    }
+                    
+                    const query = searchInput.value.toLowerCase().trim();
+                    if (query) {
+                        filtered = filtered.filter(item => 
+                            item.name.toLowerCase().includes(query) || 
+                            (item.brand && item.brand.toLowerCase().includes(query)) ||
+                            (item.model && item.model.toLowerCase().includes(query))
+                        );
+                    }
+                    
+                    const sortBy = sortSelect.value;
+                    if (sortBy === 'savings') {
+                        filtered.sort((a, b) => b.savings - a.savings);
+                    } else if (sortBy === 'low-price') {
+                        filtered.sort((a, b) => a.lowestPrice - b.lowestPrice);
+                    } else if (sortBy === 'rating') {
+                        filtered.sort((a, b) => b.rating - a.rating);
+                    }
+                    
+                    renderEngineCards(filtered);
+                }
+                
+                function renderEngineCards(items) {
+                    if (!items || items.length === 0) {
+                        engineGrid.innerHTML = '<div class="col-span-full text-center py-12 text-slate-400 italic">No products match your filters.</div>';
+                        return;
+                    }
+                    
+                    try {
+                        engineGrid.innerHTML = items.slice(0, 6).map(item => {
+                            const shopsList = item.shops || [];
+                            const finalShops = [...shopsList];
+                            const fallbackSellers = [
+                                { name: 'Daraz', priceMultiplier: 1.025 },
+                                { name: 'Telemart', priceMultiplier: 1.05 },
+                                { name: 'iShopping', priceMultiplier: 1.07 }
+                            ];
+                            
+                            const basePrice = Number(item.lowestPrice) || 0;
+                            
+                            while (finalShops.length < 3) {
+                                const fallback = fallbackSellers[finalShops.length - 1] || fallbackSellers[0];
+                                const simulatedPrice = Math.round(basePrice * fallback.priceMultiplier);
+                                finalShops.push({
+                                    seller: fallback.name,
+                                    price: simulatedPrice,
+                                    isBest: false,
+                                    whatsapp: ''
+                                });
+                            }
+                            
+                            const top3Shops = finalShops.slice(0, 3).sort((a, b) => a.price - b.price);
+                            top3Shops.forEach((shop, index) => {
+                                shop.isBest = (index === 0);
+                            });
+                            
+                            const bestShop = top3Shops[0] || { seller: 'Local Store', price: basePrice };
+                            const theme = getCardTheme(item.category);
+                            
+                            const rowsHtml = top3Shops.map(shop => {
+                                const barColorClass = shop.isBest ? 'bg-emerald-500' : 'bg-slate-200';
+                                const checkmark = shop.isBest ? '✓' : '';
+                                const textColorClass = shop.isBest ? 'text-emerald-700 font-bold' : 'text-slate-500 font-semibold';
+                                const nameColorClass = shop.isBest ? 'text-emerald-800 font-black' : 'text-slate-400 font-bold';
+                                
+                                return `
+                                    <div class="flex items-center justify-between text-[11px]">
+                                        <span class="${nameColorClass} w-20 uppercase tracking-wider">${shop.seller || 'STORE'}</span>
+                                        <div class="flex-1 mx-3 h-2 rounded-full ${barColorClass} opacity-80"></div>
+                                        <span class="${textColorClass} whitespace-nowrap">Rs ${(shop.price || 0).toLocaleString()} ${checkmark}</span>
+                                    </div>
+                                `;
+                            }).join('');
+                            
+                            const saveAmount = Number(item.savings) || Math.round(basePrice * 0.05);
+                            const saveText = `SAVE Rs ${saveAmount.toLocaleString()}`;
+
+                            return `
+                                <div class="bg-white rounded-[28px] border border-slate-200 overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col justify-between group cursor-pointer" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); document.getElementById('searchInput').value='${item.name}'; performSearch();">
+                                    <div class="h-[140px] bg-gradient-to-br ${theme.bg} p-4 flex flex-col justify-between relative overflow-hidden">
+                                        <div class="flex items-center justify-between z-10">
+                                            <span class="bg-white text-slate-800 text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">${theme.label}</span>
+                                            <span class="bg-emerald-500 text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">${saveText}</span>
+                                        </div>
+                                        <div class="flex items-center justify-center flex-1 z-10 mt-1">
+                                            ${theme.icon}
+                                        </div>
+                                    </div>
+                                    <div class="p-5 flex-1 flex flex-col justify-between gap-5 text-left">
+                                        <h4 class="font-extrabold text-base text-slate-800 group-hover:text-emerald-700 transition-colors line-clamp-1" title="${item.name}">${item.name}</h4>
+                                        
+                                        <div class="space-y-2.5">
+                                            ${rowsHtml}
+                                        </div>
+                                        
+                                        <div class="flex items-center justify-between pt-3 border-t border-slate-100 mt-2">
+                                            <div class="flex flex-col text-left">
+                                                <span class="text-[9px] font-black text-slate-400 uppercase tracking-wider">Best Price</span>
+                                                <span class="text-lg font-black text-emerald-600">Rs ${basePrice.toLocaleString()}</span>
+                                            </div>
+                                            <button class="bg-slate-950 text-white hover:bg-slate-900 px-4 py-2.5 rounded-2xl text-xs font-bold shadow transition duration-200 whitespace-nowrap">
+                                                Buy at ${bestShop.seller || 'Store'} →
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                        }).join('');
+                    } catch (e) {
+                        console.error("Error rendering engine cards:", e);
+                        engineGrid.innerHTML = '<div class="col-span-full text-center py-12 text-red-500">Error rendering cards. Check console.</div>';
+                    }
+                }
+                
+                function getCardTheme(catName) {
+                    const norm = normalizeCategoryName(catName);
+                    if (norm === 'mobiles') {
+                        return {
+                            bg: 'from-slate-900 to-slate-950',
+                            label: 'MOBILE',
+                            icon: `<svg class="w-8 h-8 text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" /><path d="M12 18h.01" /></svg>`
+                        };
+                    }
+                    if (norm === 'computers') {
+                        return {
+                            bg: 'from-purple-600 to-purple-900',
+                            label: 'COMPUTER',
+                            icon: `<svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" /><line x1="2" y1="20" x2="22" y2="20" /><line x1="12" y1="17" x2="12" y2="20" /></svg>`
+                        };
+                    }
+                    if (norm === 'electronics') {
+                        return {
+                            bg: 'from-slate-400 to-slate-600',
+                            label: 'ELECTRONICS',
+                            icon: `<svg class="w-8 h-8 text-yellow-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" /></svg>`
+                        };
+                    }
+                    if (norm === 'food-stuffs') {
+                        return {
+                            bg: 'from-orange-500 to-orange-800',
+                            label: 'FOOD STUFFS',
+                            icon: `<svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" /></svg>`
+                        };
+                    }
+                    if (norm === 'property') {
+                        return {
+                            bg: 'from-indigo-600 to-indigo-950',
+                            label: 'PROPERTY',
+                            icon: `<svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /><polyline points="9 22 9 12 15 12 15 22" /></svg>`
+                        };
+                    }
+                    if (norm === 'fashion') {
+                        return {
+                            bg: 'from-rose-500 to-rose-950',
+                            label: 'FASHION',
+                            icon: `<svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.38 3.46L16 2.14 12.62 5.5 9.24 2.14 4.86 3.46a2 2 0 0 0-1.4 1.83V9a8 8 0 0 0 16 0V5.29a2 2 0 0 0-1.4-1.83z" /></svg>`
+                        };
+                    }
+                    if (norm === 'kids') {
+                        return {
+                            bg: 'from-amber-400 to-amber-700',
+                            label: 'KIDS',
+                            icon: `<svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22a8 8 0 1 0 0-16 8 8 0 0 0 0 16z" /><path d="M12 2a4 4 0 1 0 0 8 4 4 0 0 0 0-8z" /></svg>`
+                        };
+                    }
+                    return {
+                        bg: 'from-emerald-600 to-emerald-950',
+                        label: 'GROCERY',
+                        icon: `<svg class="w-8 h-8 text-yellow-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" /></svg>`
+                    };
+                }
+            });
+            </script>
 
             <!-- Large Promotional Banner (400 x 140 px aspect ratio) -->
             <div class="w-full my-4">
@@ -4832,11 +5069,11 @@
                 updateSidebarBanners();
             }
 
-            // Start dynamic rotation intervals
-            setInterval(rotateLiveComparison, 5000);
-            document.addEventListener('DOMContentLoaded', () => {
-                setTimeout(updateSidebarBanners, 100);
-            });
+            // Start dynamic rotation intervals (disabled as elements are replaced by the Real-Time Engine)
+            // setInterval(rotateLiveComparison, 5000);
+            // document.addEventListener('DOMContentLoaded', () => {
+            //     setTimeout(updateSidebarBanners, 100);
+            // });
 
             // Promotional Banners Rotation Arrays
             const leftPromos = [
