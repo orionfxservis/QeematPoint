@@ -5681,6 +5681,11 @@ window.renderSellers = function () {
                 <td style="padding: 12px 10px;">
                     <span style="background:#059669; color:#ffffff; font-weight:bold; font-size:12px; padding:3px 10px; border-radius:6px; display:inline-block;">${orderCount}</span>
                 </td>
+                <td style="padding: 12px 10px; text-align: center;">
+                    <button onclick="window.toggleSellerListings(${index})" style="background:${s.listingsHidden ? '#ef4444' : '#10b981'}; color:white; border:none; padding:5px 12px; border-radius:6px; font-weight:bold; cursor:pointer; font-size:11px; min-width:65px; transition: opacity 0.2s;" onmouseover="this.style.opacity=0.8" onmouseout="this.style.opacity=1">
+                        ${s.listingsHidden ? 'Show' : 'Hide'}
+                    </button>
+                </td>
                 <td style="padding: 12px 10px;">
                     ${verifiedBadge}
                 </td>
@@ -5737,6 +5742,14 @@ window.renderSellers = function () {
 window.changeSellerPage = function (page) {
     sellerCurrentPage = page;
     renderSellers();
+};
+
+window.toggleSellerListings = async function(index) {
+    if (sellers[index]) {
+        sellers[index].listingsHidden = !sellers[index].listingsHidden;
+        await DataService.saveSellers(sellers);
+        window.renderSellers();
+    }
 };
 
 window.editSeller = function (index) {

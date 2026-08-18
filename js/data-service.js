@@ -298,6 +298,7 @@ const DataService = {
                 statusActive: s.status_active,
                 statusInactive: s.status_inactive,
                 statusSuspended: s.status_suspended,
+                listingsHidden: !!s.listings_hidden,
                 status: s.status
             }));
             localStorage.setItem("admin_sellers", JSON.stringify(sellers));
@@ -677,6 +678,7 @@ const DataService = {
                 status_active: !!s.statusActive,
                 status_inactive: !!s.statusInactive,
                 status_suspended: !!s.statusSuspended,
+                listings_hidden: !!s.listingsHidden,
                 status: s.status || 'Active'
             }));
             const { error } = await client.from('sellers').upsert(rows, { onConflict: 'seller_id' });
