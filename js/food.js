@@ -235,7 +235,7 @@ function renderFoodList() {
       <article data-id="${f.id}" class="food-item rounded-2xl p-3 sm:p-4 cursor-pointer transition-colors duration-300 flex flex-row gap-3 border backdrop-blur-md ${activeClass}">
         <div class="flex flex-col items-center shrink-0">
           <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-xl overflow-hidden bg-slate-800 shadow-inner">
-            <img src="${f.image}" alt="${f.name}" class="w-full h-full object-cover transition duration-300 hover:scale-105 food-img-filter" />
+            <img src="${f.image}" onerror="this.onerror=null; this.src='https://via.placeholder.com/150';" alt="${f.name}" class="w-full h-full object-cover transition duration-300 hover:scale-105 food-img-filter" />
           </div>
           ${renderStars(f.id)}
         </div>

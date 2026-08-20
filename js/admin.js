@@ -867,6 +867,13 @@ const dealImageInput = document.getElementById('dealImage');
 const uploadStatus = document.getElementById('uploadStatus');
 
 // Free temporary API Key for ImgBB. In a real production app this should be secured.
+const fileToBase64 = (file) => new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+});
+
 const IMGBB_API_KEY = '328874a9e722a65d5a57e520cf0d549c';
 
 if (dealImageUpload) {
@@ -898,9 +905,22 @@ if (dealImageUpload) {
             }
         } catch (error) {
             console.error('Upload Error:', error);
+            let msg = error.message;
+            if (msg === 'Failed to fetch') {
+                console.warn('ImgBB network error, falling back to Base64');
+                try {
+                    const b64 = await fileToBase64(file);
+                    dealImageInput.value = b64;
+                    uploadStatus.textContent = 'Saved locally (Base64)';
+                    uploadStatus.style.color = '#f39c12';
+                    return;
+                } catch(e) {
+                    msg = "Network error and Base64 fallback failed.";
+                }
+            }
             uploadStatus.textContent = 'Upload failed.';
             uploadStatus.style.color = '#e74c3c';
-            alert('Failed to upload image: ' + error.message);
+            alert('Failed to upload image: ' + msg);
         } finally {
             dealImageInput.disabled = false;
             // Clear input so same file can be selected again
@@ -944,9 +964,22 @@ if (prodImageUpload) {
             }
         } catch (error) {
             console.error('Upload Error:', error);
+            let msg = error.message;
+            if (msg === 'Failed to fetch') {
+                console.warn('ImgBB network error, falling back to Base64');
+                try {
+                    const b64 = await fileToBase64(file);
+                    prodImageInput.value = b64;
+                    prodUploadStatus.textContent = 'Saved locally (Base64)';
+                    prodUploadStatus.style.color = '#f39c12';
+                    return;
+                } catch(e) {
+                    msg = "Network error and Base64 fallback failed.";
+                }
+            }
             prodUploadStatus.textContent = 'Upload failed.';
             prodUploadStatus.style.color = '#e74c3c';
-            alert('Failed to upload image: ' + error.message);
+            alert('Failed to upload image: ' + msg);
         } finally {
             prodImageInput.disabled = false;
             this.value = '';
@@ -7516,9 +7549,22 @@ function renderGroceryProductForm() {
                         }
                     } catch (error) {
                         console.error('Upload Error:', error);
+                        let msg = error.message;
+                        if (msg === 'Failed to fetch') {
+                            console.warn('ImgBB network error, falling back to Base64');
+                            try {
+                                const b64 = await fileToBase64(file);
+                                inputEl.value = b64;
+                                statusEl.textContent = 'Saved locally (Base64)';
+                                statusEl.style.color = '#f39c12';
+                                return;
+                            } catch(e) {
+                                msg = "Network error and Base64 fallback failed.";
+                            }
+                        }
                         statusEl.textContent = 'Upload failed.';
                         statusEl.style.color = '#e74c3c';
-                        alert('Failed to upload image: ' + error.message);
+                        alert('Failed to upload image: ' + msg);
                     } finally {
                         setTimeout(() => { statusEl.style.display = 'none'; }, 3000);
                     }
