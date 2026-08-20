@@ -322,7 +322,8 @@ if (searchInput) {
 renderProducts();
 
 // Dynamic year
-document.getElementById('year').textContent = new Date().getFullYear();
+const yearEl = document.getElementById('year');
+if (yearEl) yearEl.textContent = new Date().getFullYear();
 
 // Check User Location on Load
 function checkUserLocation() {
@@ -617,7 +618,7 @@ document.addEventListener('DOMContentLoaded', () => {
               return `
                               <div class="vertical-banner" style="flex-shrink:0; margin-bottom: 10px;">
                                 <a href="${clickTarget}" style="display:block; width:100%; cursor:${cursor}; text-decoration:none;">
-                                  <img src="${b.image}" alt="Vertical Ad" onerror="this.src='https://placehold.co/120x600?text=Vertical+Ad'"/>
+                                  <img src="${b.image}" alt="Vertical Ad" onerror="this.src='https://placehold.co/300x600?text=Vertical+Ad'"/>
                                 </a>
                               </div>
                             `;
@@ -662,12 +663,12 @@ document.addEventListener('DOMContentLoaded', () => {
           const fallbackHTML = `
             <div class="vertical-banner" style="flex-shrink:0; margin-bottom: 10px;">
               <a href="javascript:void(0)" style="display:block; width:100%; cursor:default; text-decoration:none;">
-                <img src="https://placehold.co/120x600?text=Your+Ad+Here" alt="Vertical Ad" />
+                <img src="https://placehold.co/300x600?text=Your+Ad+Here" alt="Vertical Ad" />
               </a>
             </div>
             <div class="vertical-banner" style="flex-shrink:0; margin-bottom: 10px;">
               <a href="javascript:void(0)" style="display:block; width:100%; cursor:default; text-decoration:none;">
-                <img src="https://placehold.co/120x600?text=Vertical+Banner" alt="Vertical Ad" />
+                <img src="https://placehold.co/300x600?text=Vertical+Banner" alt="Vertical Ad" />
               </a>
             </div>
           `;
