@@ -44,7 +44,7 @@ function detectUserLocation(showAlert = false) {
 
                 // Reverse Geocoding API
                 const response = await fetch(
-                    `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`
+                    `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&accept-language=en`
                 );
                 const data = await response.json();
 
