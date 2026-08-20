@@ -43,16 +43,27 @@ function detectUserLocation(showAlert = false) {
                 localStorage.setItem("stopbuy_longitude", lon);
 
                 // Reverse Geocoding API
-                console.log("location.js: fetching from Nominatim");
                 const response = await fetch(
                     `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`
                 );
                 const data = await response.json();
-                console.log("location.js: Nominatim response:", data);
+
+                // Extract more precise location (area/neighborhood + city)
+                const addr = data.address || {};
+                const area = addr.suburb || addr.neighbourhood || addr.residential || addr.city_district || addr.road;
+                const city = addr.city || addr.town || addr.village || addr.state;
                 
-                const city = data.address.city || data.address.town || data.address.village || data.address.state || "Your Location";
-                currentLocationEl.textContent = city;
-                localStorage.setItem("stopbuy_location", city);
+                let displayLocation = "Your Location";
+                if (area && city && area !== city) {
+                    displayLocation = `${area}, ${city}`;
+                } else if (city) {
+                    displayLocation = city;
+                } else if (area) {
+                    displayLocation = area;
+                }
+                
+                currentLocationEl.textContent = displayLocation;
+                localStorage.setItem("stopbuy_location", displayLocation);
 
                 if (showAlert) {
                     alert("Location updated to: " + city);
