@@ -673,9 +673,22 @@
                             <h1 style="font-family: 'Times New Roman', Times, serif;" class="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-800 leading-[1.15] tracking-tight relative">
                                 Find the Best Price Across Pakistan — <span class="text-[#005221]">Updated Live.</span>
                             </h1>
-                            <p class="text-slate-700 text-sm md:text-base font-semibold leading-relaxed">
-                                Find the lowest prices from nearby shops, compare deals instantly, and save money on every purchase.
+                            <p style="font-family: Arial, sans-serif;" class="text-slate-700 text-sm md:text-base font-normal italic leading-relaxed">
+                                Live price comparisons from stores and marketplaces across Pakistan.
                             </p>
+                            <!-- Action Buttons -->
+                            <div class="flex flex-wrap gap-3 pt-2">
+                                <button onclick="const el = document.getElementById('browseCategoriesSection') || document.getElementById('price-comparison-widget') || document.getElementById('engineProductsGrid'); if (el) { el.scrollIntoView({behavior: 'smooth', block: 'start'}); }" 
+                                    class="px-5 py-3 rounded-2xl bg-[#005221] hover:bg-[#003e17] text-white font-bold text-sm transition-all duration-200 flex items-center gap-2 shadow-md">
+                                    <i class="fa-solid fa-bolt-lightning text-yellow-400"></i>
+                                    Explore Live Comparisons
+                                </button>
+                                <button onclick="triggerLiveDropSimulation()" 
+                                    class="px-5 py-3 rounded-2xl bg-white border border-slate-200 hover:border-[#005221] hover:bg-emerald-50 text-slate-700 hover:text-[#005221] font-bold text-sm transition-all duration-200 flex items-center gap-2 shadow-sm">
+                                    <i class="fa-solid fa-rotate text-emerald-600"></i>
+                                    Simulate Live Drop
+                                </button>
+                            </div>
                         </div>
                         <!-- Shopping Cart next to Heading -->
                         <div class="col-span-12 md:col-span-6 flex flex-col items-center justify-center relative py-4">
@@ -749,9 +762,9 @@
                         <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-red-50 border border-red-100 text-[10px] font-semibold text-red-500 uppercase tracking-wider animate-pulse">
                             <span class="w-1.5 h-1.5 rounded-full bg-red-500"></span> Real-Time Engine
                         </span>
-                        <h2 style="font-family: 'Times New Roman', Times, serif;" class="text-2xl font-bold text-gray-800">Compare Before You Buy</h2>
-                        <p class="text-slate-500 text-sm max-w-xl">
-                            Instant results across 50+ Pakistani stores. Prices update live — no refresh needed.
+                        <h2 style="font-family: 'Times New Roman', Times, serif;" class="text-2xl font-bold text-gray-800">LIVE COMPARISONS</h2>
+                        <p style="font-family: Arial, sans-serif;" class="text-slate-500 text-sm max-w-xl font-normal italic">
+                            Prices refresh when sellers update their listings. Green means the best deal right now.
                         </p>
                     </div>
                     
@@ -773,7 +786,7 @@
                 </div>
 
                 <!-- Subcategory Filter Chips -->
-                <div id="engineCategoryChips" class="flex flex-wrap gap-2 mb-8 overflow-x-auto pb-2 scrollbar-none select-none">
+                <div id="engineCategoryChips" class="flex flex-wrap justify-center sm:justify-start gap-2 mb-8 overflow-x-auto pb-2 scrollbar-none select-none">
                     <!-- Loaded dynamically -->
                 </div>
 
@@ -911,6 +924,56 @@
                     filterAndRender(groupedProducts);
                 };
                 
+                window.triggerLiveDropSimulation = function() {
+                    // Create dynamic notification element
+                    const toast = document.createElement('div');
+                    toast.className = 'fixed bottom-5 right-5 bg-slate-900 border-l-4 border-emerald-500 text-white px-5 py-3.5 rounded-2xl shadow-2xl z-50 flex items-center gap-3 transition-all duration-300 transform translate-y-10 opacity-0';
+                    
+                    // Pick a random product from allProducts to simulate drop
+                    const activeProducts = allProducts.filter(p => p.name && parseFloat(p.price) > 0);
+                    if (activeProducts.length === 0) return;
+                    const targetProduct = activeProducts[Math.floor(Math.random() * activeProducts.length)];
+                    const origPrice = parseFloat(targetProduct.price);
+                    const dropAmount = Math.round(origPrice * 0.05);
+                    const newPrice = origPrice - dropAmount;
+                    const sellerName = targetProduct.companyName || targetProduct.seller || 'PriceOye';
+                    
+                    toast.innerHTML = `
+                        <div class="bg-emerald-500/10 p-2 rounded-xl text-emerald-400">
+                            <i class="fa-solid fa-bell animate-bounce"></i>
+                        </div>
+                        <div class="text-left text-xs leading-normal">
+                            <p class="font-black text-[10px] text-emerald-400 uppercase tracking-wider">Live Price Drop Alert</p>
+                            <p class="font-bold text-slate-200 mt-0.5">${sellerName} just dropped the price of <strong>${targetProduct.name}</strong> to Rs ${newPrice.toLocaleString()}!</p>
+                        </div>
+                    `;
+                    document.body.appendChild(toast);
+                    
+                    // Animate in
+                    setTimeout(() => {
+                        toast.classList.remove('translate-y-10', 'opacity-0');
+                    }, 100);
+                    
+                    // Pick the matching card container in grid and flash it
+                    const cards = document.querySelectorAll('#engineProductsGrid > div');
+                    cards.forEach(card => {
+                        const h4 = card.querySelector('h4');
+                        if (h4 && h4.textContent === targetProduct.name) {
+                            card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            card.classList.add('ring-4', 'ring-emerald-500/60', 'scale-[1.03]');
+                            setTimeout(() => {
+                                card.classList.remove('ring-4', 'ring-emerald-500/60', 'scale-[1.03]');
+                            }, 3000);
+                        }
+                    });
+                    
+                    // Remove toast after delay
+                    setTimeout(() => {
+                        toast.classList.add('translate-y-10', 'opacity-0');
+                        setTimeout(() => toast.remove(), 300);
+                    }, 4500);
+                };
+                
                 function normalizeCategoryName(catName) {
                     if (!catName) return '';
                     const lower = catName.toLowerCase().trim();
@@ -964,77 +1027,113 @@
                             const shopsList = item.shops || [];
                             const finalShops = [...shopsList];
                             const fallbackSellers = [
-                                { name: 'Daraz', priceMultiplier: 1.025 },
-                                { name: 'Telemart', priceMultiplier: 1.05 },
-                                { name: 'iShopping', priceMultiplier: 1.07 }
+                                { name: 'PriceOye', priceMultiplier: 1.0, dotColor: 'bg-sky-500' },
+                                { name: 'Daraz Mall', priceMultiplier: 1.025, dotColor: 'bg-orange-500' },
+                                { name: 'Telemart', priceMultiplier: 1.05, dotColor: 'bg-rose-500' },
+                                { name: 'Mega.pk', priceMultiplier: 1.07, dotColor: 'bg-purple-500' }
                             ];
                             
                             const basePrice = Number(item.lowestPrice) || 0;
                             
-                            while (finalShops.length < 3) {
-                                const fallback = fallbackSellers[finalShops.length - 1] || fallbackSellers[0];
+                            while (finalShops.length < 4) {
+                                const fallback = fallbackSellers[finalShops.length] || fallbackSellers[0];
                                 const simulatedPrice = Math.round(basePrice * fallback.priceMultiplier);
                                 finalShops.push({
                                     seller: fallback.name,
                                     price: simulatedPrice,
                                     isBest: false,
+                                    dotColor: fallback.dotColor,
                                     whatsapp: ''
                                 });
                             }
                             
-                            const top3Shops = finalShops.slice(0, 3).sort((a, b) => a.price - b.price);
-                            top3Shops.forEach((shop, index) => {
+                            const top4Shops = finalShops.slice(0, 4).sort((a, b) => a.price - b.price);
+                            top4Shops.forEach((shop, index) => {
                                 shop.isBest = (index === 0);
+                                if (!shop.dotColor) {
+                                    const lowerName = shop.seller.toLowerCase();
+                                    if (lowerName.includes('oye')) shop.dotColor = 'bg-sky-500';
+                                    else if (lowerName.includes('daraz')) shop.dotColor = 'bg-orange-500';
+                                    else if (lowerName.includes('tele')) shop.dotColor = 'bg-rose-500';
+                                    else if (lowerName.includes('mega')) shop.dotColor = 'bg-purple-500';
+                                    else shop.dotColor = 'bg-slate-400';
+                                }
                             });
                             
-                            const bestShop = top3Shops[0] || { seller: 'Local Store', price: basePrice };
-                            const theme = getCardTheme(item.category);
+                            const bestShop = top4Shops[0] || { seller: 'Local Store', price: basePrice };
+                            const maxPrice = top4Shops[top4Shops.length - 1].price;
+                            const minPrice = top4Shops[0].price;
+                            const priceDiff = maxPrice - minPrice;
                             
-                            const rowsHtml = top3Shops.map(shop => {
-                                const barColorClass = shop.isBest ? 'bg-emerald-500' : 'bg-slate-200';
-                                const checkmark = shop.isBest ? '✓' : '';
-                                const textColorClass = shop.isBest ? 'text-emerald-700 font-bold' : 'text-slate-500 font-semibold';
-                                const nameColorClass = shop.isBest ? 'text-emerald-800 font-black' : 'text-slate-400 font-bold';
-                                
-                                return `
-                                    <div class="flex items-center justify-between text-[11px]">
-                                        <span class="${nameColorClass} w-20 uppercase tracking-wider">${shop.seller || 'STORE'}</span>
-                                        <div class="flex-1 mx-3 h-2 rounded-full ${barColorClass} opacity-80"></div>
-                                        <span class="${textColorClass} whitespace-nowrap">Rs ${(shop.price || 0).toLocaleString()} ${checkmark}</span>
-                                    </div>
-                                `;
+                            let warrantyText = 'Official Warranty';
+                            if (item.category && item.category.toLowerCase().includes('mobile')) {
+                                warrantyText = 'PTA Approved Official';
+                            } else if (item.category && (item.category.toLowerCase().includes('computer') || item.category.toLowerCase().includes('laptop'))) {
+                                warrantyText = '1 Year Mercantile Warranty';
+                            }
+                            
+                            const rowsHtml = top4Shops.map(shop => {
+                                if (shop.isBest) {
+                                    return `
+                                        <div class="bg-emerald-950/40 border border-emerald-800/40 rounded-xl px-3 py-1.5 flex items-center justify-between text-xs">
+                                            <div class="flex items-center gap-2">
+                                                <span class="w-2 h-2 rounded-full ${shop.dotColor}"></span>
+                                                <span class="font-extrabold text-white">${shop.seller}</span>
+                                                <span class="bg-emerald-500 text-emerald-950 text-[8px] px-1.5 py-0.5 rounded font-black uppercase">CHEAPEST</span>
+                                            </div>
+                                            <span class="font-black text-emerald-400">Rs. ${shop.price.toLocaleString()}</span>
+                                        </div>
+                                    `;
+                                } else {
+                                    return `
+                                        <div class="px-3 py-1.5 flex items-center justify-between text-xs text-slate-300">
+                                            <div class="flex items-center gap-2">
+                                                <span class="w-2 h-2 rounded-full ${shop.dotColor}"></span>
+                                                <span class="font-medium">${shop.seller}</span>
+                                            </div>
+                                            <span class="font-bold">Rs. ${shop.price.toLocaleString()}</span>
+                                        </div>
+                                    `;
+                                }
                             }).join('');
-                            
-                            const saveAmount = Number(item.savings) || Math.round(basePrice * 0.05);
-                            const saveText = `SAVE Rs ${saveAmount.toLocaleString()}`;
 
                             return `
-                                <div class="bg-white rounded-[28px] border border-slate-200 overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col justify-between group cursor-pointer" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); document.getElementById('searchInput').value='${item.name}'; performSearch();">
-                                    <div class="h-[140px] bg-gradient-to-br ${theme.bg} p-4 flex flex-col justify-between relative overflow-hidden">
-                                        <div class="flex items-center justify-between z-10">
-                                            <span class="bg-white text-slate-800 text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">${theme.label}</span>
-                                            <span class="bg-emerald-500 text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">${saveText}</span>
+                                <div class="bg-[#161f33] rounded-[24px] border border-slate-800 p-5 flex flex-col justify-between hover:border-emerald-500 hover:shadow-[0_0_20px_rgba(16,185,129,0.15)] transition-all duration-300 relative group cursor-pointer text-left" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); document.getElementById('searchInput').value='${item.name}'; performSearch();">
+                                    <div class="flex items-center justify-between mb-4">
+                                        <span class="text-[10px] text-emerald-400 bg-emerald-950/50 px-2.5 py-0.5 rounded-full border border-emerald-800/30 flex items-center gap-1 font-bold">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> ${warrantyText}
+                                        </span>
+                                        <span class="text-[10px] text-slate-400 flex items-center gap-1 font-medium">
+                                            <i class="fa-solid fa-rotate text-emerald-500 text-[9px] animate-spin"></i> Synced Just now
+                                        </span>
+                                    </div>
+                                    
+                                    <div class="flex gap-4 items-start mb-5">
+                                        <div class="w-24 h-24 rounded-2xl bg-slate-950/50 border border-slate-800/60 flex items-center justify-center p-1.5 overflow-hidden shrink-0 shadow-inner">
+                                            <img class="w-full h-full object-contain rounded-xl" src="${item.image}" alt="${item.name}" onerror="this.onerror=null; this.src='https://via.placeholder.com/150'">
                                         </div>
-                                        <div class="flex items-center justify-center flex-1 z-10 mt-1">
-                                            ${theme.icon}
+                                        <div class="space-y-1.5 flex-1 min-w-0 text-left">
+                                            <div class="flex items-center gap-1 text-[11px] text-amber-500 font-bold">
+                                                <span>★ ${item.rating}</span>
+                                                <span class="text-slate-400 font-normal">(${item.reviewCount})</span>
+                                            </div>
+                                            <h4 class="font-extrabold text-sm text-white leading-snug line-clamp-2" title="${item.name}">${item.name}</h4>
+                                            <p class="text-xs text-slate-400 truncate mt-1">Best: <span class="text-emerald-400 font-bold">Rs. ${minPrice.toLocaleString()}</span></p>
                                         </div>
                                     </div>
-                                    <div class="p-5 flex-1 flex flex-col justify-between gap-5 text-left">
-                                        <h4 class="font-extrabold text-base text-slate-800 group-hover:text-emerald-700 transition-colors line-clamp-1" title="${item.name}">${item.name}</h4>
-                                        
-                                        <div class="space-y-2.5">
-                                            ${rowsHtml}
+                                    
+                                    <div class="space-y-2 mb-5">
+                                        ${rowsHtml}
+                                    </div>
+                                    
+                                    <div class="flex items-center justify-between pt-3 border-t border-slate-800 mt-auto">
+                                        <div class="flex flex-col text-left">
+                                            <span class="text-[9px] font-black text-slate-400 uppercase tracking-wider">Diff. between stores:</span>
+                                            <span class="text-sm font-black text-amber-500 mt-0.5">Save Rs. ${priceDiff.toLocaleString()}</span>
                                         </div>
-                                        
-                                        <div class="flex items-center justify-between pt-3 border-t border-slate-100 mt-2">
-                                            <div class="flex flex-col text-left">
-                                                <span class="text-[9px] font-black text-slate-400 uppercase tracking-wider">Best Price</span>
-                                                <span class="text-lg font-black text-emerald-600">Rs ${basePrice.toLocaleString()}</span>
-                                            </div>
-                                            <button class="bg-slate-950 text-white hover:bg-slate-900 px-4 py-2.5 rounded-2xl text-xs font-bold shadow transition duration-200 whitespace-nowrap">
-                                                Buy at ${bestShop.seller || 'Store'} →
-                                            </button>
-                                        </div>
+                                        <button class="border border-slate-700 bg-slate-800/40 text-slate-200 hover:bg-slate-800 hover:text-white px-4 py-2 rounded-xl text-xs font-bold transition duration-200 flex items-center gap-1">
+                                            Compare Stores <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                                        </button>
                                     </div>
                                 </div>
                             `;
@@ -1045,63 +1144,7 @@
                     }
                 }
                 
-                function getCardTheme(catName) {
-                    const norm = normalizeCategoryName(catName);
-                    if (norm === 'mobiles') {
-                        return {
-                            bg: 'from-slate-900 to-slate-950',
-                            label: 'MOBILE',
-                            icon: `<svg class="w-8 h-8 text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" /><path d="M12 18h.01" /></svg>`
-                        };
-                    }
-                    if (norm === 'computers') {
-                        return {
-                            bg: 'from-purple-600 to-purple-900',
-                            label: 'COMPUTER',
-                            icon: `<svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" /><line x1="2" y1="20" x2="22" y2="20" /><line x1="12" y1="17" x2="12" y2="20" /></svg>`
-                        };
-                    }
-                    if (norm === 'electronics') {
-                        return {
-                            bg: 'from-slate-400 to-slate-600',
-                            label: 'ELECTRONICS',
-                            icon: `<svg class="w-8 h-8 text-yellow-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" /></svg>`
-                        };
-                    }
-                    if (norm === 'food-stuffs') {
-                        return {
-                            bg: 'from-orange-500 to-orange-800',
-                            label: 'FOOD STUFFS',
-                            icon: `<svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" /></svg>`
-                        };
-                    }
-                    if (norm === 'property') {
-                        return {
-                            bg: 'from-indigo-600 to-indigo-950',
-                            label: 'PROPERTY',
-                            icon: `<svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /><polyline points="9 22 9 12 15 12 15 22" /></svg>`
-                        };
-                    }
-                    if (norm === 'fashion') {
-                        return {
-                            bg: 'from-rose-500 to-rose-950',
-                            label: 'FASHION',
-                            icon: `<svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.38 3.46L16 2.14 12.62 5.5 9.24 2.14 4.86 3.46a2 2 0 0 0-1.4 1.83V9a8 8 0 0 0 16 0V5.29a2 2 0 0 0-1.4-1.83z" /></svg>`
-                        };
-                    }
-                    if (norm === 'kids') {
-                        return {
-                            bg: 'from-amber-400 to-amber-700',
-                            label: 'KIDS',
-                            icon: `<svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22a8 8 0 1 0 0-16 8 8 0 0 0 0 16z" /><path d="M12 2a4 4 0 1 0 0 8 4 4 0 0 0 0-8z" /></svg>`
-                        };
-                    }
-                    return {
-                        bg: 'from-emerald-600 to-emerald-950',
-                        label: 'GROCERY',
-                        icon: `<svg class="w-8 h-8 text-yellow-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" /></svg>`
-                    };
-                }
+
             });
             </script>
 
@@ -1211,7 +1254,7 @@
                 <div class="flex items-center justify-between mb-8">
                     <div>
                         <h2 style="font-family: 'Times New Roman', Times, serif;"
-                            class="text-2xl font-bold text-gray-800">Browse Categories</h2>
+                            class="text-2xl font-bold text-gray-800">Today's Best Price Battles</h2>
                         <p class="text-xs text-gray-500 mt-1">Find the best prices in your favorite food categories</p>
                     </div>
                     <a class="text-[#005221] font-bold flex items-center gap-1 group text-sm"
@@ -3842,7 +3885,7 @@
                         <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden group shadow-sm hover:shadow-md transition-all cursor-pointer flex flex-col justify-between" onclick="openBlogModal(${index})">
                             <div>
                                 <div class="overflow-hidden">
-                                    <img src="${image}" alt="${titleEn}" class="w-full aspect-video object-cover rounded-t-2xl group-hover:scale-105 transition-transform duration-500" onerror="this.src='images/placeholder.jpg'">
+                                    <img src="${image}" alt="${titleEn}" class="w-full aspect-video object-cover rounded-t-2xl group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null; this.src='https://via.placeholder.com/150'">
                                 </div>
                                 <div class="p-6 space-y-2 text-left">
                                     <span class="text-[10px] text-[#005221] font-bold uppercase tracking-wider lang-en">${catEn}</span>
@@ -4475,7 +4518,7 @@
                             return `
                             <div class="blog-card bg-white rounded-3xl overflow-hidden modern-shadow border border-emerald-100 flex flex-col cursor-pointer" onclick="openBlogModal('${safeObj}')">
                                 <div class="overflow-hidden">
-                                    <img src="${b.image || 'images/placeholder.jpg'}" class="w-full aspect-video object-cover rounded-t-3xl" onerror="this.src='images/placeholder.jpg'">
+                                    <img src="${b.image || 'images/placeholder.jpg'}" class="w-full aspect-video object-cover rounded-t-3xl" onerror="this.onerror=null; this.src='https://via.placeholder.com/150'">
                                 </div>
                                 <div class="p-6 flex-1 flex flex-col justify-between">
                                     <div>
