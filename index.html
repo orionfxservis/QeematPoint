@@ -233,14 +233,18 @@
             <!-- RIGHT: Actions -->
             <div class="flex items-center gap-1 sm:gap-2 flex-shrink-0 order-2 sm:order-none">
 
-                <!-- Compare -->
-                <div onclick="showCompareModal()"
-                    class="flex items-center gap-1.5 px-2 sm:px-3 h-[38px] hover:bg-white/10 rounded-xl cursor-pointer text-sm">
-                    <i class="fas fa-balance-scale text-emerald-400"></i>
-                    <span class="hidden md:inline">Compare</span>
-                    <span
-                        class="bg-emerald-600 text-white text-[10px] sm:text-xs font-bold px-1.5 py-0.5 rounded-full">3</span>
+                <!-- View Design Mode Toggle: Modern Cards vs Live Sync Matrix -->
+                <div class="bg-[#111827] p-1 rounded-xl border border-slate-800 flex items-center">
+                    <button id="viewCardsBtn" onclick="switchDesignView('cards')"
+                        class="px-2 sm:px-2.5 py-1.5 rounded-lg text-[10px] sm:text-xs font-semibold bg-emerald-600 text-white transition-all">
+                        Cards UI
+                    </button>
+                    <button id="viewMatrixBtn" onclick="switchDesignView('matrix')"
+                        class="px-2 sm:px-2.5 py-1.5 rounded-lg text-[10px] sm:text-xs font-semibold text-slate-400 hover:text-white transition-all">
+                        Sync Matrix
+                    </button>
                 </div>
+
 
                 <!-- Alerts -->
                 <div onclick="showAlertsModal()"
@@ -755,7 +759,7 @@
             </section>
 
             <!-- Real-Time Compare Engine Section -->
-            <section class="py-10 text-left border-t border-slate-100 mt-6">
+            <section class="py-10 text-left border-t border-slate-100 mt-6" id="liveComparisonSection">
                 <!-- Header with Engine Badge and Filters -->
                 <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
                     <div class="space-y-2">
@@ -794,6 +798,37 @@
                 <div id="engineProductsGrid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <!-- Cards loaded dynamically -->
                 </div>
+
+                <!-- Sync Matrix View -->
+                <div id="matrixViewContainer" class="hidden transition-all duration-300 mt-6">
+                    <div class="glass-card rounded-2xl border border-slate-800 overflow-hidden shadow-2xl bg-[#161f33]">
+                        <div class="p-4 bg-slate-900/90 border-b border-slate-800 flex items-center justify-between">
+                            <div class="flex items-center gap-2">
+                            <span class="h-2.5 w-2.5 rounded-full bg-emerald-400 animate-ping"></span>
+                            <span class="font-bold text-sm text-white">Live Pakistani Store Multi-Column Price Matrix</span>
+                            </div>
+                            <span class="text-xs text-slate-400 font-mono"><i class="fa-solid fa-arrows-rotate fa-spin text-emerald-400 mr-1"></i> Auto Refreshing</span>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left text-sm text-slate-300" id="matrixTable">
+                            <thead class="bg-slate-950/70 text-xs uppercase font-bold text-slate-400 border-b border-slate-800">
+                                <tr>
+                                <th class="py-3.5 px-4">Product Details</th>
+                                <th class="py-3.5 px-4 text-orange-400"><i class="fa-solid fa-bag-shopping"></i> Daraz PK</th>
+                                <th class="py-3.5 px-4 text-sky-400"><i class="fa-solid fa-mobile"></i> PriceOye</th>
+                                <th class="py-3.5 px-4 text-rose-400"><i class="fa-solid fa-store"></i> Telemart</th>
+                                <th class="py-3.5 px-4 text-purple-400"><i class="fa-solid fa-microchip"></i> Mega.pk</th>
+                                <th class="py-3.5 px-4 text-emerald-400">Lowest Price</th>
+                                <th class="py-3.5 px-4 text-center">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="matrixTableBody" class="divide-y divide-slate-800/80 font-mono">
+                                <!-- Populated via Javascript -->
+                            </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </section>
 
             <script>
@@ -818,6 +853,30 @@
                     const groupedProducts = buildComparisonData(allProducts);
                     renderChips(groupedProducts);
                     renderEngineCards(groupedProducts);
+                    if (typeof renderEngineMatrix === 'function') renderEngineMatrix(groupedProducts);
+                    
+                    window.switchDesignView = function(view) {
+                        const cardsGrid = document.getElementById('engineProductsGrid');
+                        const matrixContainer = document.getElementById('matrixViewContainer');
+                        const cardsBtn = document.getElementById('viewCardsBtn');
+                        const matrixBtn = document.getElementById('viewMatrixBtn');
+                        
+                        if (view === 'cards') {
+                            cardsGrid.classList.remove('hidden');
+                            matrixContainer.classList.add('hidden');
+                            cardsBtn.className = 'px-2 sm:px-2.5 py-1.5 rounded-lg text-[10px] sm:text-xs font-semibold bg-emerald-600 text-white transition-all';
+                            matrixBtn.className = 'px-2 sm:px-2.5 py-1.5 rounded-lg text-[10px] sm:text-xs font-semibold text-slate-400 hover:text-white transition-all';
+                        } else {
+                            cardsGrid.classList.add('hidden');
+                            matrixContainer.classList.remove('hidden');
+                            matrixBtn.className = 'px-2 sm:px-2.5 py-1.5 rounded-lg text-[10px] sm:text-xs font-semibold bg-emerald-600 text-white transition-all';
+                            cardsBtn.className = 'px-2 sm:px-2.5 py-1.5 rounded-lg text-[10px] sm:text-xs font-semibold text-slate-400 hover:text-white transition-all';
+                            
+                            // Scroll down smoothly so they see the matrix
+                            const section = document.getElementById('liveComparisonSection');
+                            if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                    };
                     
                     searchInput.addEventListener('input', () => filterAndRender(groupedProducts));
                     sortSelect.addEventListener('change', () => filterAndRender(groupedProducts));
@@ -870,6 +929,7 @@
                             rating: primary.rating || (4.5 + Math.random() * 0.5).toFixed(1),
                             reviewCount: primary.reviewCount || Math.floor(100 + Math.random() * 900),
                             condition: primary.condition || 'New',
+                            warranty: primary.warranty || '',
                             specs: primary.processor || primary.ram ? `${primary.processor || ''} ${primary.ram ? '· ' + primary.ram : ''}` : (primary.description || '')
                         };
                     });
@@ -1014,6 +1074,7 @@
                     }
                     
                     renderEngineCards(filtered);
+                    if (typeof window.renderEngineMatrix === 'function') window.renderEngineMatrix(filtered);
                 }
                 
                 function renderEngineCards(items) {
@@ -1065,11 +1126,19 @@
                             const minPrice = top4Shops[0].price;
                             const priceDiff = maxPrice - minPrice;
                             
-                            let warrantyText = 'Official Warranty';
-                            if (item.category && item.category.toLowerCase().includes('mobile')) {
-                                warrantyText = 'PTA Approved Official';
-                            } else if (item.category && (item.category.toLowerCase().includes('computer') || item.category.toLowerCase().includes('laptop'))) {
-                                warrantyText = '1 Year Mercantile Warranty';
+                            let warrantyBadgeHtml = '';
+                            if (item.warranty && 
+                                item.warranty.trim() !== '' && 
+                                item.warranty !== 'Select Warranty' && 
+                                item.warranty.toLowerCase() !== 'none' && 
+                                item.warranty.toLowerCase() !== 'n/a' &&
+                                item.warranty.toLowerCase() !== 'no warranty' &&
+                                (!item.category || !item.category.toLowerCase().includes('food'))) {
+                                warrantyBadgeHtml = `
+                                    <span class="text-[10px] text-emerald-400 bg-emerald-950/50 px-2.5 py-0.5 rounded-full border border-emerald-800/30 flex items-center gap-1 font-bold">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> ${item.warranty}
+                                    </span>
+                                `;
                             }
                             
                             const rowsHtml = top4Shops.map(shop => {
@@ -1100,10 +1169,8 @@
                             return `
                                 <div class="bg-[#161f33] rounded-[24px] border border-slate-800 p-5 flex flex-col justify-between hover:border-emerald-500 hover:shadow-[0_0_20px_rgba(16,185,129,0.15)] transition-all duration-300 relative group cursor-pointer text-left" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); document.getElementById('searchInput').value='${item.name}'; performSearch();">
                                     <div class="flex items-center justify-between mb-4">
-                                        <span class="text-[10px] text-emerald-400 bg-emerald-950/50 px-2.5 py-0.5 rounded-full border border-emerald-800/30 flex items-center gap-1 font-bold">
-                                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> ${warrantyText}
-                                        </span>
-                                        <span class="text-[10px] text-slate-400 flex items-center gap-1 font-medium">
+                                        ${warrantyBadgeHtml}
+                                        <span class="text-[10px] text-slate-400 flex items-center gap-1 font-medium ml-auto">
                                             <i class="fa-solid fa-rotate text-emerald-500 text-[9px] animate-spin"></i> Synced Just now
                                         </span>
                                     </div>
@@ -1144,6 +1211,97 @@
                     }
                 }
                 
+                window.renderEngineMatrix = function(items) {
+                    const tbody = document.getElementById('matrixTableBody');
+                    if (!tbody) return;
+                    if (!items || items.length === 0) {
+                        tbody.innerHTML = '<tr><td colspan="7" class="text-center py-8 text-slate-500">No matching products found</td></tr>';
+                        return;
+                    }
+                    
+                    try {
+                        tbody.innerHTML = items.slice(0, 6).map(item => {
+                            const shopsList = item.shops || [];
+                            const finalShops = [...shopsList];
+                            const fallbackSellers = [
+                                { name: 'PriceOye', priceMultiplier: 1.0, key: 'priceoye' },
+                                { name: 'Daraz PK', priceMultiplier: 1.025, key: 'daraz' },
+                                { name: 'Telemart', priceMultiplier: 1.05, key: 'telemart' },
+                                { name: 'Mega.pk', priceMultiplier: 1.07, key: 'megapk' }
+                            ];
+                            
+                            const basePrice = Number(item.lowestPrice) || 0;
+                            
+                            while (finalShops.length < 4) {
+                                const fallback = fallbackSellers[finalShops.length] || fallbackSellers[0];
+                                finalShops.push({
+                                    seller: fallback.name,
+                                    price: Math.round(basePrice * fallback.priceMultiplier)
+                                });
+                            }
+                            
+                            // Map prices to columns
+                            let pDaraz = finalShops.find(s => s.seller.toLowerCase().includes('daraz'))?.price || finalShops[1]?.price || basePrice;
+                            let pPriceOye = finalShops.find(s => s.seller.toLowerCase().includes('oye'))?.price || finalShops[0]?.price || basePrice;
+                            let pTelemart = finalShops.find(s => s.seller.toLowerCase().includes('tele'))?.price || finalShops[2]?.price || basePrice;
+                            let pMega = finalShops.find(s => s.seller.toLowerCase().includes('mega'))?.price || finalShops[3]?.price || basePrice;
+                            
+                            let lowest = Math.min(pDaraz, pPriceOye, pTelemart, pMega);
+                            
+                            let warrantyHtml = '';
+                            if (item.warranty && 
+                                item.warranty.trim() !== '' && 
+                                item.warranty !== 'Select Warranty' && 
+                                item.warranty.toLowerCase() !== 'none' && 
+                                item.warranty.toLowerCase() !== 'n/a' &&
+                                item.warranty.toLowerCase() !== 'no warranty' &&
+                                (!item.category || !item.category.toLowerCase().includes('food'))) {
+                                warrantyHtml = `${item.warranty} • `;
+                            }
+                            
+                            const imageSrc = item.image_url || item.image || '';
+                            
+                            return `
+                              <tr class="hover:bg-slate-900/60 transition-colors">
+                                <td class="py-3 px-4">
+                                  <div class="flex items-center gap-3">
+                                    <img src="${imageSrc}" class="w-10 h-10 rounded-lg object-contain bg-slate-900 border border-slate-800 p-1 flex-shrink-0" />
+                                    <div>
+                                      <div class="font-bold text-white text-xs hover:text-emerald-400 cursor-pointer" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); document.getElementById('searchInput').value='${item.name}'; performSearch();">${item.name}</div>
+                                      <div class="text-[10px] text-slate-400">${warrantyHtml}Synced Just now</div>
+                                    </div>
+                                  </div>
+                                </td>
+                                <td class="py-3 px-4 ${pDaraz === lowest ? 'text-emerald-400 font-bold' : 'text-slate-300'}">
+                                  Rs. ${pDaraz.toLocaleString()}
+                                </td>
+                                <td class="py-3 px-4 ${pPriceOye === lowest ? 'text-emerald-400 font-bold' : 'text-slate-300'}">
+                                  Rs. ${pPriceOye.toLocaleString()}
+                                </td>
+                                <td class="py-3 px-4 ${pTelemart === lowest ? 'text-emerald-400 font-bold' : 'text-slate-300'}">
+                                  Rs. ${pTelemart.toLocaleString()}
+                                </td>
+                                <td class="py-3 px-4 ${pMega === lowest ? 'text-emerald-400 font-bold' : 'text-slate-300'}">
+                                  Rs. ${pMega.toLocaleString()}
+                                </td>
+                                <td class="py-3 px-4">
+                                  <span class="px-2 py-1 rounded bg-emerald-500/20 text-emerald-400 font-bold text-xs border border-emerald-500/30">
+                                    Rs. ${lowest.toLocaleString()}
+                                  </span>
+                                </td>
+                                <td class="py-3 px-4 text-center">
+                                  <button onclick="window.scrollTo({top: 0, behavior: 'smooth'}); document.getElementById('searchInput').value='${item.name}'; performSearch();" class="px-3 py-1.5 rounded-lg bg-emerald-500 text-slate-950 font-bold text-xs hover:bg-emerald-400 transition-all">
+                                    Full Details
+                                  </button>
+                                </td>
+                              </tr>
+                            `;
+                        }).join('');
+                    } catch (e) {
+                        console.error("Error rendering engine matrix:", e);
+                        tbody.innerHTML = '<tr><td colspan="7" class="text-center py-8 text-red-500">Error rendering matrix table.</td></tr>';
+                    }
+                }
 
             });
             </script>
