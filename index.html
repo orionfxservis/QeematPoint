@@ -1127,16 +1127,16 @@
                             const priceDiff = maxPrice - minPrice;
                             
                             let warrantyBadgeHtml = '';
-                            if (item.warranty && 
-                                item.warranty.trim() !== '' && 
-                                item.warranty !== 'Select Warranty' && 
-                                item.warranty.toLowerCase() !== 'none' && 
-                                item.warranty.toLowerCase() !== 'n/a' &&
-                                item.warranty.toLowerCase() !== 'no warranty' &&
-                                (!item.category || !item.category.toLowerCase().includes('food'))) {
+                            const wText = item.warranty ? String(item.warranty).trim() : '';
+                            if (wText && 
+                                wText !== 'Select Warranty' && 
+                                wText.toLowerCase() !== 'none' && 
+                                wText.toLowerCase() !== 'n/a' &&
+                                wText.toLowerCase() !== 'no warranty' &&
+                                (!item.category || !String(item.category).toLowerCase().includes('food'))) {
                                 warrantyBadgeHtml = `
                                     <span class="text-[10px] text-emerald-400 bg-emerald-950/50 px-2.5 py-0.5 rounded-full border border-emerald-800/30 flex items-center gap-1 font-bold">
-                                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> ${item.warranty}
+                                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> ${wText}
                                     </span>
                                 `;
                             }
@@ -1249,14 +1249,14 @@
                             let lowest = Math.min(pDaraz, pPriceOye, pTelemart, pMega);
                             
                             let warrantyHtml = '';
-                            if (item.warranty && 
-                                item.warranty.trim() !== '' && 
-                                item.warranty !== 'Select Warranty' && 
-                                item.warranty.toLowerCase() !== 'none' && 
-                                item.warranty.toLowerCase() !== 'n/a' &&
-                                item.warranty.toLowerCase() !== 'no warranty' &&
-                                (!item.category || !item.category.toLowerCase().includes('food'))) {
-                                warrantyHtml = `${item.warranty} • `;
+                            const wTextMatrix = item.warranty ? String(item.warranty).trim() : '';
+                            if (wTextMatrix && 
+                                wTextMatrix !== 'Select Warranty' && 
+                                wTextMatrix.toLowerCase() !== 'none' && 
+                                wTextMatrix.toLowerCase() !== 'n/a' &&
+                                wTextMatrix.toLowerCase() !== 'no warranty' &&
+                                (!item.category || !String(item.category).toLowerCase().includes('food'))) {
+                                warrantyHtml = `${wTextMatrix} • `;
                             }
                             
                             const imageSrc = item.image_url || item.image || '';
