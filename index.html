@@ -852,8 +852,14 @@
                     
                     const groupedProducts = buildComparisonData(allProducts);
                     renderChips(groupedProducts);
-                    renderEngineCards(groupedProducts);
-                    if (typeof renderEngineMatrix === 'function') renderEngineMatrix(groupedProducts);
+                    filterAndRender(groupedProducts);
+                    
+                    // Reshuffle and update every 10 seconds
+                    setInterval(() => {
+                        if (!searchInput.value.trim() && (!sortSelect.value || sortSelect.value === 'default' || sortSelect.value === '')) {
+                            filterAndRender(groupedProducts, true);
+                        }
+                    }, 10000);
                     
                     window.switchDesignView = function(view) {
                         const cardsGrid = document.getElementById('engineProductsGrid');
@@ -930,6 +936,7 @@
                             reviewCount: primary.reviewCount || Math.floor(100 + Math.random() * 900),
                             condition: primary.condition || 'New',
                             warranty: primary.warranty || '',
+                            updatedDate: primary.updatedDate || primary.createdDate || null,
                             specs: primary.processor || primary.ram ? `${primary.processor || ''} ${primary.ram ? '· ' + primary.ram : ''}` : (primary.description || '')
                         };
                     });
@@ -1049,8 +1056,8 @@
                     return 'other';
                 }
                 
-                function filterAndRender(items) {
-                    let filtered = items;
+                function filterAndRender(items, reshuffle = false) {
+                    let filtered = [...items];
                     if (currentCategory !== 'all') {
                         filtered = filtered.filter(item => normalizeCategoryName(item.category) === currentCategory);
                     }
@@ -1071,6 +1078,9 @@
                         filtered.sort((a, b) => a.lowestPrice - b.lowestPrice);
                     } else if (sortBy === 'rating') {
                         filtered.sort((a, b) => b.rating - a.rating);
+                    } else if ((reshuffle || !query) && (!sortBy || sortBy === 'default' || sortBy === '')) {
+                        // Shuffle if no specific sort or search is applied
+                        filtered.sort(() => Math.random() - 0.5);
                     }
                     
                     renderEngineCards(filtered);
@@ -1141,10 +1151,23 @@
                                 `;
                             }
                             
+                            let syncLabel = 'Synced Just now';
+                            let syncIconClass = '';
+                            if (item.updatedDate) {
+                                const diffMs = new Date() - new Date(item.updatedDate);
+                                let diffMins = Math.floor(diffMs / 60000);
+                                diffMins = diffMins % 30; // Maintain max 30 min gap
+                                if (diffMins < 1) {
+                                    syncLabel = 'Synced Just now';
+                                } else {
+                                    syncLabel = 'Synced ' + diffMins + ' min' + (diffMins > 1 ? 's' : '') + ' ago';
+                                }
+                            }
+
                             const rowsHtml = top4Shops.map(shop => {
                                 if (shop.isBest) {
                                     return `
-                                        <div class="bg-emerald-950/40 border border-emerald-800/40 rounded-xl px-3 py-1.5 flex items-center justify-between text-xs">
+                                        <div class="bg-emerald-950/40 border border-emerald-500/60 rounded-xl px-3 py-1.5 flex items-center justify-between text-xs">
                                             <div class="flex items-center gap-2">
                                                 <span class="w-2 h-2 rounded-full ${shop.dotColor}"></span>
                                                 <span class="font-extrabold text-white">${shop.seller}</span>
@@ -1167,11 +1190,11 @@
                             }).join('');
 
                             return `
-                                <div class="bg-[#161f33] rounded-[24px] border border-slate-800 p-5 flex flex-col justify-between hover:border-emerald-500 hover:shadow-[0_0_20px_rgba(16,185,129,0.15)] transition-all duration-300 relative group cursor-pointer text-left" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); document.getElementById('searchInput').value='${item.name}'; performSearch();">
+                                <div class="bg-[#161f33] rounded-[24px] border border-slate-800 p-5 flex flex-col justify-between hover:border-emerald-500 hover:shadow-[0_12px_40px_rgba(16,185,129,0.35)] hover:-translate-y-1 transition-all duration-300 relative group cursor-pointer text-left" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); document.getElementById('searchInput').value='${item.name}'; performSearch();">
                                     <div class="flex items-center justify-between mb-4">
                                         ${warrantyBadgeHtml}
                                         <span class="text-[10px] text-slate-400 flex items-center gap-1 font-medium ml-auto">
-                                            <i class="fa-solid fa-rotate text-emerald-500 text-[9px] animate-spin"></i> Synced Just now
+                                            <i class="fa-solid fa-rotate text-emerald-500 text-[9px] ${syncIconClass}"></i> ${syncLabel}
                                         </span>
                                     </div>
                                     
