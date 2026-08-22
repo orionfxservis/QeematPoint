@@ -91,6 +91,7 @@ function detectUserLocation(showAlert = false) {
             if (typeof renderFoodList === 'function') {
                 renderFoodList();
             }
-        }
+        },
+        { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
     );
 }
