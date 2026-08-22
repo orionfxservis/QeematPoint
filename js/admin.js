@@ -7711,6 +7711,7 @@ window.saveDynamicGroceryProduct = async function () {
     let resultError;
 
     if (window.currentEditingProductId) {
+        delete payload.added_by; // Prevent overwriting the original author when editing
         const { error } = await client
             .from("products")
             .update(payload)
