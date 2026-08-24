@@ -178,10 +178,10 @@
     <!-- Top Navigation Bar -->
     <nav class="bg-[#0f2249] text-white sticky top-0 z-[99999]">
         <div
-            class="max-w-screen-2xl mx-auto px-4 py-2 sm:py-0 sm:h-[60px] flex flex-wrap sm:flex-nowrap items-center justify-between gap-y-3 gap-x-2 sm:gap-4">
+            class="max-w-screen-2xl mx-auto px-4 py-2 sm:py-0 h-[60px] flex flex-nowrap overflow-x-auto no-scrollbar items-center justify-start sm:justify-between gap-3 sm:gap-4">
 
             <!-- LEFT: Logo -->
-            <div class="flex items-center gap-2 flex-shrink-0 order-1 sm:order-none">
+            <div class="flex items-center gap-2 flex-shrink-0">
 
                 <div class="bg-white p-1 rounded-xl shadow-sm w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center">
                     <img src="./images/logo/stopbuy-logo.png" alt="StopBuy"
@@ -209,9 +209,9 @@
             </div>
 
             <!-- CENTER: Location & Search -->
-            <div class="order-3 sm:order-none w-full sm:w-auto flex items-center gap-3 justify-center sm:flex-1">
+            <div class="flex-shrink-0 sm:w-auto flex items-center gap-3 justify-center sm:flex-1">
                 <!-- Location -->
-                <div class="hidden lg:flex items-center gap-1 text-slate-700 text-sm bg-slate-100 px-3 py-1.5 rounded-full border border-slate-200 cursor-pointer hover:bg-slate-200 transition whitespace-nowrap flex-shrink-0"
+                <div class="flex items-center gap-1 text-slate-700 text-sm bg-slate-100 px-3 py-1.5 rounded-full border border-slate-200 cursor-pointer hover:bg-slate-200 transition whitespace-nowrap flex-shrink-0"
                     onclick="showLocationModal()" id="locationBox">
                     <span>📍</span>
                     <span class="font-medium" id="current-location"><span class="lang-en">Detecting...</span><span
@@ -231,7 +231,7 @@
             </div>
 
             <!-- RIGHT: Actions -->
-            <div class="flex items-center gap-1 sm:gap-2 flex-shrink-0 order-2 sm:order-none">
+            <div class="flex items-center gap-1 sm:gap-2 flex-shrink-0">
 
                 <!-- View Design Mode Toggle: Modern Cards vs Live Sync Matrix -->
                 <div class="bg-[#111827] p-1 rounded-xl border border-slate-800 flex items-center">
@@ -275,7 +275,7 @@
 
                     <!-- DROPDOWN -->
                     <div
-                        class="absolute right-0 rtl:left-0 rtl:right-auto top-full mt-3 w-[320px] max-h-[85vh] overflow-y-auto bg-[#0B1120]/95 backdrop-blur-2xl rounded-3xl shadow-[0_15px_50px_rgba(0,0,0,0.45)] border border-white/10 opacity-0 invisible group-hover:opacity-100 group-hover:visible focus-within:opacity-100 focus-within:visible transition-all duration-300 text-left rtl:text-right z-50 translate-y-2 group-hover:translate-y-0 custom-scrollbar">
+                        class="fixed right-2 top-[50px] sm:absolute sm:right-0 rtl:left-0 rtl:right-auto sm:top-full mt-3 w-[320px] max-h-[85vh] overflow-y-auto bg-[#0B1120]/95 backdrop-blur-2xl rounded-3xl shadow-[0_15px_50px_rgba(0,0,0,0.45)] border border-white/10 opacity-0 invisible group-hover:opacity-100 group-hover:visible focus-within:opacity-100 focus-within:visible transition-all duration-300 text-left rtl:text-right z-50 translate-y-2 group-hover:translate-y-0 custom-scrollbar">
 
                         <!-- TOP HEADER -->
                         <div
@@ -530,7 +530,7 @@
             </div>
 
             <div
-                class="flex items-center gap-x-4 sm:gap-x-6 lg:gap-x-8 text-white flex-1 text-xs xl:text-[13px] whitespace-nowrap overflow-x-auto pb-1">
+                class="flex items-center gap-x-4 sm:gap-x-6 lg:gap-x-8 text-white flex-1 text-xs xl:text-[13px] whitespace-nowrap overflow-x-auto no-scrollbar pb-1">
 
                 <a href="./pages/categories.html"
                     class="px-5 py-1.5 bg-[#d61c22] text-white rounded-full flex items-center shrink-0 hover:bg-red-700 transition">
@@ -586,7 +586,7 @@
             </div>
 
             <!-- Visitor Counter -->
-            <div class="hidden md:flex items-center ml-2 xl:ml-4">
+            <div class="flex items-center ml-2 xl:ml-4">
                 <div class="animated-border-box">
                     <div class="animated-border-content px-2.5 py-1 flex items-center gap-x-1.5 text-white shrink-0">
                         <span class="text-[11px] xl:text-xs text-red-100 whitespace-nowrap">
