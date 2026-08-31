@@ -9,7 +9,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="manifest" href="json/manifest.json">
+    <link rel="manifest" href="/StopBuyPk/json/manifest.json">
     <link rel="icon" type="image/png" href="./favicon.png">
 
     <meta name="theme-color" content="#16a34a">
@@ -178,10 +178,10 @@
     <!-- Top Navigation Bar -->
     <nav class="bg-[#0f2249] text-white sticky top-0 z-[99999]">
         <div
-            class="max-w-screen-2xl mx-auto px-4 py-2 sm:py-0 h-[60px] flex flex-nowrap overflow-x-auto no-scrollbar items-center justify-start sm:justify-between gap-3 sm:gap-4">
+            class="max-w-screen-2xl mx-auto px-4 py-2 sm:py-0 sm:h-[60px] flex flex-wrap sm:flex-nowrap items-center justify-between gap-y-3 gap-x-2 sm:gap-4">
 
             <!-- LEFT: Logo -->
-            <div class="flex items-center gap-2 flex-shrink-0">
+            <div class="flex items-center gap-2 flex-shrink-0 order-1 sm:order-none">
 
                 <div class="bg-white p-1 rounded-xl shadow-sm w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center">
                     <img src="./images/logo/stopbuy-logo.png" alt="StopBuy"
@@ -209,13 +209,12 @@
             </div>
 
             <!-- CENTER: Location & Search -->
-            <div class="flex-shrink-0 sm:w-auto flex items-center gap-3 justify-center sm:flex-1">
+            <div class="order-3 sm:order-none w-full sm:w-auto flex items-center gap-3 justify-center sm:flex-1">
                 <!-- Location -->
-                <div class="flex items-center gap-1 text-slate-700 text-sm bg-slate-100 px-3 py-1.5 rounded-full border border-slate-200 cursor-pointer hover:bg-slate-200 transition whitespace-nowrap flex-shrink-0"
+                                <div class="hidden lg:flex items-center gap-1 text-slate-700 text-sm bg-slate-100 px-3 py-1.5 rounded-full border border-slate-200 cursor-pointer hover:bg-slate-200 transition whitespace-nowrap flex-shrink-0"
                     onclick="showLocationModal()" id="locationBox">
                     <span>📍</span>
-                    <span class="font-medium" id="current-location"><span class="lang-en">Detecting...</span><span
-                            class="lang-ur">تلاش کر رہا ہے...</span></span>
+                    <span class="font-medium" id="current-location"><span class="lang-en">Detecting...</span><span class="lang-ur">پتہ لگایا جا رہا ہے...</span></span>
                     <span class="text-[0.6rem] ml-1">▼</span>
                 </div>
 
@@ -231,20 +230,16 @@
             </div>
 
             <!-- RIGHT: Actions -->
-            <div class="flex items-center gap-1 sm:gap-2 flex-shrink-0">
+            <div class="flex items-center gap-1 sm:gap-2 flex-shrink-0 order-2 sm:order-none">
 
-                <!-- View Design Mode Toggle: Modern Cards vs Live Sync Matrix -->
-                <div class="bg-[#111827] p-1 rounded-xl border border-slate-800 flex items-center">
-                    <button id="viewCardsBtn" onclick="switchDesignView('cards')"
-                        class="px-2 sm:px-2.5 py-1.5 rounded-lg text-[10px] sm:text-xs font-semibold bg-emerald-600 text-white transition-all">
-                        Cards UI
-                    </button>
-                    <button id="viewMatrixBtn" onclick="switchDesignView('matrix')"
-                        class="px-2 sm:px-2.5 py-1.5 rounded-lg text-[10px] sm:text-xs font-semibold text-slate-400 hover:text-white transition-all">
-                        Sync Matrix
-                    </button>
+                <!-- Compare -->
+                <div onclick="showCompareModal()"
+                    class="flex items-center gap-1.5 px-2 sm:px-3 h-[38px] hover:bg-white/10 rounded-xl cursor-pointer text-sm">
+                    <i class="fas fa-balance-scale text-emerald-400"></i>
+                    <span class="hidden md:inline">Compare</span>
+                    <span
+                        class="bg-emerald-600 text-white text-[10px] sm:text-xs font-bold px-1.5 py-0.5 rounded-full">3</span>
                 </div>
-
 
                 <!-- Alerts -->
                 <div onclick="showAlertsModal()"
@@ -275,158 +270,76 @@
 
                     <!-- DROPDOWN -->
                     <div
-                        class="fixed right-2 top-[50px] sm:absolute sm:right-0 rtl:left-0 rtl:right-auto sm:top-full mt-3 w-[320px] max-h-[85vh] overflow-y-auto bg-[#0B1120]/95 backdrop-blur-2xl rounded-3xl shadow-[0_15px_50px_rgba(0,0,0,0.45)] border border-white/10 opacity-0 invisible group-hover:opacity-100 group-hover:visible focus-within:opacity-100 focus-within:visible transition-all duration-300 text-left rtl:text-right z-50 translate-y-2 group-hover:translate-y-0 custom-scrollbar">
+                        class="absolute right-0 rtl:left-0 rtl:right-auto top-full mt-3 w-[320px] bg-[#0B1120]/95 backdrop-blur-2xl rounded-3xl shadow-[0_15px_50px_rgba(0,0,0,0.45)] border border-white/10 opacity-0 invisible group-hover:opacity-100 group-hover:visible focus-within:opacity-100 focus-within:visible transition-all duration-300 overflow-hidden text-left rtl:text-right z-50 translate-y-2 group-hover:translate-y-0">
 
                         <!-- TOP HEADER -->
                         <div
-                            class="px-5 py-3 border-b border-white/10 bg-gradient-to-r from-emerald-500/10 to-cyan-500/10">
+                            class="px-5 py-4 border-b border-white/10 bg-gradient-to-r from-emerald-500/10 to-cyan-500/10">
 
-                        <div class="flex items-center gap-3">
+                            <div class="flex items-center gap-3">
 
-                            <div
-                                class="w-10 h-10 rounded-2xl bg-gradient-to-br from-emerald-400 to-cyan-500 flex items-center justify-center shadow-lg shrink-0">
+                                <div
+                                    class="w-11 h-11 rounded-2xl bg-gradient-to-br from-emerald-400 to-cyan-500 flex items-center justify-center shadow-lg">
 
-                                <i class="fas fa-shield-halved text-gray-900 text-base"></i>
+                                    <i class="fas fa-shield-halved text-gray-900 text-lg"></i>
 
-                            </div>
+                                </div>
 
-                            <div>
-                                <h3 class="text-white text-xs sm:text-sm font-semibold">
-                                    Secure Login
-                                </h3>
+                                <div>
+                                    <h3 class="text-white text-sm font-semibold">
+                                        Secure Login
+                                    </h3>
 
-                                <p class="text-gray-400 text-[10px] sm:text-xs">
-                                    Access your dashboard securely
-                                </p>
+                                    <p class="text-gray-400 text-xs">
+                                        Access your dashboard securely
+                                    </p>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- TABS -->
-                    <div class="grid grid-cols-3 border-b border-white/10">
-                        <!-- USER -->
-                        <button onclick="switchLoginTab('user')" id="tab-user"
-                            class="login-tab active-tab py-2 text-sm font-semibold text-emerald-400 border-b-2 border-emerald-400 transition-all duration-300 hover:bg-white/5">
-                            User
-                        </button>
-
-                        <!-- COMPANY -->
-                        <button onclick="switchLoginTab('company')" id="tab-company"
-                            class="login-tab py-2 text-sm font-semibold text-gray-400 hover:text-white hover:bg-white/5 transition-all duration-300">
-                            Company
-                        </button>
-
-                        <!-- ADMIN -->
-                        <button onclick="switchLoginTab('admin')" id="tab-admin"
-                            class="login-tab py-2 text-sm font-semibold text-gray-400 hover:text-white hover:bg-white/5 transition-all duration-300">
-                            Admin
-                        </button>
-                    </div>
-
-                    <!-- FORM AREA -->
-                    <div class="p-3.5">
-
-                        <!-- USER FORM -->
-                        <div id="form-user" class="space-y-2">
-
-                            <input type="text"
-                                id="user-login-id"
-                                placeholder="User ID"
-                                class="login-input">
-
-                            <input type="password"
-                                id="user-login-password"
-                                placeholder="Password"
-                                class="login-input">
-
-                            <button type="button"
-                                onclick="loginUser()"
-                                class="login-btn">
-                                Login as User
+                        <!-- TABS -->
+                        <div class="grid grid-cols-3 border-b border-white/10">
+                            <!-- USER -->
+                            <button onclick="switchLoginTab('user')" id="tab-user"
+                                class="login-tab active-tab py-3 text-sm font-semibold text-emerald-400 border-b-2 border-emerald-400 transition-all duration-300 hover:bg-white/5">
+                                User
                             </button>
 
-                            <!-- SOCIAL LOGIN -->
-                            <div class="flex items-center gap-2 my-2">
-                                <div class="flex-1 h-px bg-white/10"></div>
-                                <span class="text-gray-500 text-[11px] uppercase">or continue with</span>
-                                <div class="flex-1 h-px bg-white/10"></div>
-                            </div>
-
-                            <button type="button"
-                                onclick="loginWithGoogle('user')"
-                                class="w-full flex items-center justify-center gap-2 py-2 rounded-xl
-                                       bg-white text-gray-800 text-sm font-semibold
-                                       hover:bg-gray-100 transition-all">
-                                <i class="fab fa-google text-red-500"></i>
-                                Continue with Google
+                            <!-- COMPANY -->
+                            <button onclick="switchLoginTab('company')" id="tab-company"
+                                class="login-tab py-3 text-sm font-semibold text-gray-400 hover:text-white hover:bg-white/5 transition-all duration-300">
+                                Company
                             </button>
 
-                            <button type="button"
-                                onclick="loginWithFacebook('user')"
-                                class="w-full flex items-center justify-center gap-2 py-2 rounded-xl
-                                       bg-[#1877F2] text-white text-sm font-semibold
-                                       hover:bg-[#166FE5] transition-all">
-                                <i class="fab fa-facebook-f"></i>
-                                Continue with Facebook
+                            <!-- ADMIN -->
+                            <button onclick="switchLoginTab('admin')" id="tab-admin"
+                                class="login-tab py-3 text-sm font-semibold text-gray-400 hover:text-white hover:bg-white/5 transition-all duration-300">
+                                Admin
                             </button>
-
                         </div>
 
-                        <!-- COMPANY FORM -->
-                        <div id="form-company" class="space-y-2 hidden">
+                        <!-- FORM AREA -->
+                        <div class="p-4">
 
-                            <input type="text"
-                                id="company-user-name"
-                                placeholder="User Name"
-                                class="login-input">
-
-                            <input type="text"
-                                id="company-name"
-                                placeholder="Company Name"
-                                class="login-input">
-
-                            <input type="text"
-                                id="company-login-id"
-                                placeholder="User ID"
-                                class="login-input">
-
-                            <input type="password"
-                                id="company-login-password"
-                                placeholder="Password"
-                                class="login-input">
-
-                            <button type="button"
-                                onclick="loginCompany()"
-                                class="login-btn">
-                                Login as Company
-                            </button>
-
-                            <!-- SOCIAL LOGIN -->
-                            <div class="flex items-center gap-2 my-2">
-                                <div class="flex-1 h-px bg-white/10"></div>
-                                <span class="text-gray-500 text-[11px] uppercase">or continue with</span>
-                                <div class="flex-1 h-px bg-white/10"></div>
+                            <!-- USER FORM -->
+                            <div id="form-user" class="space-y-2.5">
+                                <input type="text" placeholder="User ID" class="login-input">
+                                <input type="password" placeholder="Password" class="login-input">
+                                <button type="button" onclick="loginUser()" class="login-btn">
+                                    Login as User
+                                </button>
                             </div>
 
-                            <button type="button"
-                                onclick="loginWithGoogle('company')"
-                                class="w-full flex items-center justify-center gap-2 py-2 rounded-xl
-                                       bg-white text-gray-800 text-sm font-semibold
-                                       hover:bg-gray-100 transition-all">
-                                <i class="fab fa-google text-red-500"></i>
-                                Continue with Google
-                            </button>
-
-                            <button type="button"
-                                onclick="loginWithFacebook('company')"
-                                class="w-full flex items-center justify-center gap-2 py-2 rounded-xl
-                                       bg-[#1877F2] text-white text-sm font-semibold
-                                       hover:bg-[#166FE5] transition-all">
-                                <i class="fab fa-facebook-f"></i>
-                                Continue with Facebook
-                            </button>
-
-                        </div>
+                            <!-- COMPANY FORM -->
+                            <div id="form-company" class="space-y-2.5 hidden">
+                                <input type="text" placeholder="User Name" class="login-input">
+                                <input type="text" placeholder="Company Name" class="login-input">
+                                <input type="text" placeholder="User ID" class="login-input">
+                                <input type="password" placeholder="Password" class="login-input">
+                                <button type="button" onclick="loginCompany()" class="login-btn">
+                                    Login as Company
+                                </button>
+                            </div>
 
                             <!-- ADMIN FORM -->
                             <div id="form-admin" class="space-y-2.5 hidden">
@@ -491,7 +404,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="./pages/blogs.html"
+                            <a href="#blogs-section"
                                 class="flex items-center gap-2 px-4 py-2 hover:bg-emerald-50 hover:text-emerald-700">
                                 <i class="fas fa-blog text-xs"></i> <span class="lang-en">Blogs</span><span
                                     class="lang-ur">تازہ معلومات اور بلاگز</span>
@@ -530,7 +443,7 @@
             </div>
 
             <div
-                class="flex items-center gap-x-4 sm:gap-x-6 lg:gap-x-8 text-white flex-1 text-xs xl:text-[13px] whitespace-nowrap overflow-x-auto no-scrollbar pb-1">
+                class="flex items-center gap-x-4 sm:gap-x-6 lg:gap-x-8 text-white flex-1 text-xs xl:text-[13px] whitespace-nowrap overflow-x-auto pb-1">
 
                 <a href="./pages/categories.html"
                     class="px-5 py-1.5 bg-[#d61c22] text-white rounded-full flex items-center shrink-0 hover:bg-red-700 transition">
@@ -544,7 +457,7 @@
                     <span class="lang-ur">کھانے پینے کی اشیاء</span>
                 </a>
 
-                <a href="./pages/grocery.html" class="hover:text-red-400 transition font-medium">
+                <a href="javascript:void(0)" class="hover:text-red-400/60 cursor-not-allowed transition font-medium opacity-60">
                     <span class="lang-en">Daily Groceries</span>
                     <span class="lang-ur">روزمرہ کی اشیائے خوردونوش</span>
                 </a>
@@ -586,7 +499,7 @@
             </div>
 
             <!-- Visitor Counter -->
-            <div class="flex items-center ml-2 xl:ml-4">
+            <div class="hidden md:flex items-center ml-2 xl:ml-4">
                 <div class="animated-border-box">
                     <div class="animated-border-content px-2.5 py-1 flex items-center gap-x-1.5 text-white shrink-0">
                         <span class="text-[11px] xl:text-xs text-red-100 whitespace-nowrap">
@@ -595,7 +508,7 @@
 
                         <span id="visitor-count"
                             class="font-bold text-red-400 tracking-wide text-xs xl:text-[13px]">
-                            5,090
+                            Loading...
                         </span>
 
                         <i class="fas fa-eye text-red-400 text-[11px] xl:text-xs"></i>
@@ -662,7 +575,7 @@
             </div>
 
             <!-- 1. Hero Section -->
-            <section class="py-6 space-y-6">
+<section class="py-6 space-y-6">
 
                 <!-- Main Comparison Card (Full Width) -->
                 <div class="bg-white border border-slate-200 rounded-3xl p-5 md:p-6 shadow-sm text-left w-full">
@@ -3029,55 +2942,72 @@
             // LIVE LOCATION DETECTION
             // ================================
 
-            async function detectUserLocation() {
-
-                const locationText = document.getElementById("current-location");
-
+            function detectUserLocation(showAlert = false) {
+                const currentLocationEl = document.getElementById("current-location");
+                if (!currentLocationEl) return;
+            
                 if (!navigator.geolocation) {
-                    locationText.innerText = "Karachi";
+                    currentLocationEl.textContent = "Location Unsupported";
                     return;
                 }
-
+            
+                currentLocationEl.textContent = "Detecting...";
+            
                 navigator.geolocation.getCurrentPosition(
-
                     async (position) => {
-
                         const lat = position.coords.latitude;
                         const lon = position.coords.longitude;
-
                         try {
-
+                            localStorage.setItem("stopbuy_latitude", lat);
+                            localStorage.setItem("stopbuy_longitude", lon);
+            
                             const response = await fetch(
-                                `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}`
+                                `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&accept-language=en`
                             );
-
                             const data = await response.json();
-
-                            const city =
-                                data.address.city ||
-                                data.address.town ||
-                                data.address.village ||
-                                data.address.state ||
-                                "Karachi";
-
-                            locationText.innerText = city;
-
-                        } catch (err) {
-
-                            locationText.innerText = "Karachi";
-
+            
+                            let displayLocation = "Your Location";
+                            if (data.display_name) {
+                                const parts = data.display_name.split(',').map(p => p.trim());
+                                if (parts.length > 2) {
+                                    displayLocation = parts[0] + ', ' + parts[1];
+                                } else if (parts.length > 0) {
+                                    displayLocation = parts[0];
+                                }
+                            } else {
+                                const addr = data.address || {};
+                                const area = addr.suburb || addr.neighbourhood || addr.residential || addr.city_district || addr.road;
+                                const city = addr.city || addr.town || addr.village || addr.state;
+                                
+                                if (area && city && area !== city) {
+                                    displayLocation = `${area}, ${city}`;
+                                } else if (city) {
+                                    displayLocation = city;
+                                } else if (area) {
+                                    displayLocation = area;
+                                }
+                            }
+                            
+                            currentLocationEl.textContent = displayLocation;
+                            localStorage.setItem("stopbuy_location", displayLocation);
+            
+                            if (showAlert) {
+                                alert("Location updated to: " + displayLocation);
+                            }
+                        } catch (error) {
+                            currentLocationEl.textContent = "Karachi";
                         }
-
                     },
-
-                    () => {
-
-                        locationText.innerText = "Karachi";
-
-                    }
-
+                    (error) => {
+                        const savedLocation = localStorage.getItem("stopbuy_location");
+                        if (savedLocation) {
+                            currentLocationEl.textContent = savedLocation;
+                        } else {
+                            currentLocationEl.textContent = "Karachi";
+                        }
+                    },
+                    { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
                 );
-
             }
 
             // ================================
@@ -3192,26 +3122,76 @@
                 }
             });
 
-            // ================================
-            // VISITOR COUNTER
-            // ================================
+            // ========================================
+            // REAL PERSISTENT VISITOR COUNTER
+            // BASE COUNT = 5090
+            // ========================================
 
-            function animateVisitorCounter() {
+            async function animateVisitorCounter() {
 
                 const el = document.getElementById('visitor-count');
 
                 if (!el) return;
 
-                let num = 5076;
+                try {
 
-                setInterval(() => {
+                    // Get Supabase connection
+                    const client = await DataService.ensureSupabase();
 
-                    num += Math.floor(Math.random() * 3) + 1;
+                    // ----------------------------------------
+                    // Get or create persistent visitor ID
+                    // ----------------------------------------
 
-                    el.innerHTML = num.toLocaleString();
+                    let visitorId =
+                        localStorage.getItem('stopbuy_visitor_id');
 
-                }, 4500);
+                    if (!visitorId) {
 
+                        visitorId = crypto.randomUUID();
+
+                        localStorage.setItem(
+                            'stopbuy_visitor_id',
+                            visitorId
+                        );
+                    }
+
+                    // ----------------------------------------
+                    // Register visitor in Supabase
+                    // ----------------------------------------
+
+                    const { data, error } =
+                        await client.rpc(
+                            'register_site_visitor',
+                            {
+                                p_visitor_id: visitorId
+                            }
+                        );
+
+                    if (error) {
+                        throw error;
+                    }
+
+                    // ----------------------------------------
+                    // Display real visitor count
+                    // Starts from 5090
+                    // ----------------------------------------
+
+                    const total =
+                        Number(data || 5090);
+
+                    el.textContent =
+                        total.toLocaleString('en-US');
+
+                } catch (error) {
+
+                    console.error(
+                        'Visitor counter error:',
+                        error
+                    );
+
+                    // Never display 0
+                    el.textContent = '5,090';
+                }
             }
 
             // ================================
