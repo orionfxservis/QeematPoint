@@ -47,7 +47,58 @@
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
         rel="stylesheet" />
 
-    </head>
+    
+    <!-- Mobile Header Reorganization CSS V2 -->
+    <style>
+        @media (max-width: 1023px) {
+            /* TOP NAV */
+            .mobile-nav-1 {
+                display: grid !important;
+                grid-template-columns: auto 1fr;
+                grid-template-rows: auto auto;
+                gap: 16px 8px;
+                width: 100%;
+                align-items: center;
+            }
+            .mobile-logo { grid-column: 1; grid-row: 1; }
+            .mobile-center-wrapper { grid-column: 2; grid-row: 1; justify-self: start; padding-left: 8px; display: flex !important; }
+            .mobile-actions-wrapper { grid-column: 1 / 3; grid-row: 2; display: flex !important; justify-content: space-between; align-items: center; width: 100%; }
+            
+            /* VISITOR COUNTER (Moved to top right visually) */
+            .mobile-visitor {
+                position: fixed !important;
+                top: 14px;
+                right: 14px;
+                z-index: 100000;
+                transform: scale(0.9);
+                transform-origin: right top;
+            }
+            
+            /* BOTTOM NAV */
+            .mobile-nav-2-wrapper { display: block !important; }
+            .mobile-nav-2 {
+                display: grid !important;
+                grid-template-columns: auto 1fr auto;
+                gap: 12px 8px;
+                width: 100%;
+                align-items: center;
+                padding-bottom: 12px;
+            }
+            .mobile-left-wrapper { grid-column: 1; grid-row: 1; display: flex !important; align-items: center; }
+            .mobile-category-link { display: none !important; } /* Hide all categories on mobile */
+            
+            .mobile-right-unwrap { display: contents !important; }
+            .mobile-date { grid-column: 3; grid-row: 1; justify-self: end; }
+            .mobile-news { grid-column: 1 / 4; grid-row: 2; width: 100%; }
+            
+            /* Hide Search on mobile */
+            .mobile-search { display: none !important; }
+            
+            /* Ensure Location is visible */
+            #locationBox { display: flex !important; }
+        }
+    </style>
+</head>
 
 <body class="bg-[#F8FAF9] text-[#1F2937]">
 
@@ -210,7 +261,7 @@
             </div>
 
             <!-- CENTER: Location & Search -->
-            <div class="order-3 sm:order-none w-full sm:w-auto flex items-center gap-3 justify-center sm:flex-1">
+            <div class="order-3 sm:order-none w-full sm:w-auto flex items-center gap-3 justify-center sm:flex-1 mobile-center-wrapper">
                 <!-- Location -->
                                                 <div class="hidden lg:flex items-center gap-1 text-slate-700 text-sm bg-slate-100 px-3 py-1.5 rounded-full border border-slate-200 cursor-pointer hover:bg-slate-200 transition whitespace-nowrap flex-shrink-0"
                     onclick="showLocationModal()" id="locationBox">
@@ -220,7 +271,7 @@
                 </div>
 
                 <!-- Search Bar -->
-                <div class="w-full max-w-md relative hidden sm:block">
+                <div class="w-full max-w-md relative hidden sm:block mobile-search">
                     <input type="text" placeholder="Search for products or categories..."
                         class="w-full bg-white text-gray-800 text-sm px-4 py-2 rounded-full border border-transparent focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-transparent shadow-sm">
                     <button
@@ -231,7 +282,7 @@
             </div>
 
             <!-- RIGHT: Actions -->
-            <div class="flex items-center gap-1 sm:gap-2 flex-shrink-0 order-2 sm:order-none">
+            <div class="flex items-center gap-1 sm:gap-2 flex-shrink-0 order-2 sm:order-none mobile-actions-wrapper">
 
                 <!-- View Design Mode Toggle: Modern Cards vs Live Sync Matrix -->
                 <div class="bg-[#111827] p-1 rounded-xl border border-slate-800 flex items-center">
@@ -280,7 +331,7 @@
                         <div
                             class="px-5 py-4 border-b border-white/10 bg-gradient-to-r from-emerald-500/10 to-cyan-500/10">
 
-                            <div class="flex items-center gap-3">
+                            <div class="flex items-center gap-3 mobile-logo">
 
                                 <div
                                     class="w-11 h-11 rounded-2xl bg-gradient-to-br from-emerald-400 to-cyan-500 flex items-center justify-center shadow-lg">
@@ -387,7 +438,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="./pages/categories.html"
+                            <a href="./pages/categories.html" class="mobile-category-link"
                                 class="flex items-center gap-2 px-4 py-2 hover:bg-emerald-50 hover:text-emerald-700">
                                 <i class="fas fa-layer-group text-xs"></i> <span class="lang-en">Categories</span><span
                                     class="lang-ur">کیٹیگریز</span>
@@ -449,14 +500,14 @@
             <div
                 class="flex items-center gap-x-4 sm:gap-x-6 lg:gap-x-8 text-white flex-1 text-xs xl:text-[13px] whitespace-nowrap overflow-x-auto pb-1">
 
-                <a href="./pages/categories.html"
+                <a href="./pages/categories.html" class="mobile-category-link"
                     class="px-5 py-1.5 bg-[#005221] text-white rounded-full flex items-center shrink-0 hover:bg-[#003e17] transition">
                     <span class="font-semibold tracking-wide">
                         <span class="lang-en">All Categories</span><span class="lang-ur">تمام کیٹیگریز</span>
                     </span>
                 </a>
 
-                <a href="./pages/food.html" class="hover:text-red-400 transition font-medium">
+                <a href="./pages/food.html" class="mobile-category-link" class="hover:text-red-400 transition font-medium">
                     <span class="lang-en">Food Stuffs</span>
                     <span class="lang-ur">کھانے پینے کی اشیاء</span>
                 </a>
@@ -1557,7 +1608,7 @@
                             <span class="text-[10px] text-slate-400">Order verified items online</span>
                         </div>
                     </div>
-                    <a href="./pages/categories.html" class="relative z-10 px-3.5 py-1.5 bg-[#d61c22] text-white text-[11px] font-extrabold rounded-xl shrink-0">
+                    <a href="./pages/categories.html" class="mobile-category-link" class="relative z-10 px-3.5 py-1.5 bg-[#d61c22] text-white text-[11px] font-extrabold rounded-xl shrink-0">
                         Explore
                     </a>
                 </div>
@@ -2569,14 +2620,14 @@
                             <!-- LEFT -->
                             <ul class="space-y-3 text-sm">
                                 <li>
-                                    <a href="./pages/food.html" class="hover:text-emerald-400 transition-colors">
+                                    <a href="./pages/food.html" class="mobile-category-link" class="hover:text-emerald-400 transition-colors">
                                         <span class="lang-en">Foods</span>
                                         <span class="lang-ur">کھانے</span>
                                     </a>
                                 </li>
 
                                 <li>
-                                    <a href="./pages/categories.html" class="hover:text-emerald-400 transition-colors">
+                                    <a href="./pages/categories.html" class="mobile-category-link" class="hover:text-emerald-400 transition-colors">
                                         <span class="lang-en">Groceries</span>
                                         <span class="lang-ur">گروسری</span>
                                     </a>
